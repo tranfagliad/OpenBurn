@@ -1,0 +1,48 @@
+2017-09-10 11:29:50,117 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2017-09-10 11:30:37,534 [Worker-12] ERROR org.eclipse.jgit.util.FS - Caught exception in FS.readPipe()
+java.io.IOException: Cannot run program "git" (in directory "\usr\bin"): CreateProcess error=2, The system cannot find the file specified
+	at java.lang.ProcessBuilder.start(Unknown Source) ~[na:1.8.0_131]
+	at org.eclipse.jgit.util.FS.readPipe(FS.java:491) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.util.FS.readPipe(FS.java:459) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.util.FS.discoverGitSystemConfig(FS.java:592) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.util.FS.getGitSystemConfig(FS.java:621) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.util.SystemReader$Default.openSystemConfig(SystemReader.java:97) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.internal.storage.file.FileRepository.<init>(FileRepository.java:176) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.storage.file.FileRepositoryBuilder.build(FileRepositoryBuilder.java:92) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.storage.file.FileRepositoryBuilder.create(FileRepositoryBuilder.java:111) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.egit.core.RepositoryCache.lookupRepository(RepositoryCache.java:57) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.project.GitProjectData.map(GitProjectData.java:689) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.project.GitProjectData.remapAll(GitProjectData.java:647) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.project.GitProjectData.setRepositoryMappings(GitProjectData.java:456) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.op.ConnectProviderOperation.connectProject(ConnectProviderOperation.java:142) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.op.ConnectProviderOperation.execute(ConnectProviderOperation.java:100) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.internal.job.JobUtil$1.run(JobUtil.java:53) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55) [org.eclipse.core.jobs_3.8.0.v20160509-0411.jar:na]
+Caused by: java.io.IOException: CreateProcess error=2, The system cannot find the file specified
+	at java.lang.ProcessImpl.create(Native Method) ~[na:1.8.0_131]
+	at java.lang.ProcessImpl.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.lang.ProcessImpl.start(Unknown Source) ~[na:1.8.0_131]
+	... 17 common frames omitted
+2017-09-10 11:30:37,616 [Worker-12] ERROR org.eclipse.jgit.util.FS - Caught exception in FS.readPipe()
+java.io.IOException: Cannot run program "git" (in directory "\usr\bin"): CreateProcess error=2, The system cannot find the file specified
+	at java.lang.ProcessBuilder.start(Unknown Source) ~[na:1.8.0_131]
+	at org.eclipse.jgit.util.FS.readPipe(FS.java:491) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.util.FS.discoverGitSystemConfig(FS.java:604) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.util.FS.getGitSystemConfig(FS.java:621) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.util.SystemReader$Default.openSystemConfig(SystemReader.java:97) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.internal.storage.file.FileRepository.<init>(FileRepository.java:176) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.storage.file.FileRepositoryBuilder.build(FileRepositoryBuilder.java:92) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.jgit.storage.file.FileRepositoryBuilder.create(FileRepositoryBuilder.java:111) [org.eclipse.jgit_4.4.1.201607150455-r.jar:4.4.1.201607150455-r]
+	at org.eclipse.egit.core.RepositoryCache.lookupRepository(RepositoryCache.java:57) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.project.GitProjectData.map(GitProjectData.java:689) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.project.GitProjectData.remapAll(GitProjectData.java:647) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.project.GitProjectData.setRepositoryMappings(GitProjectData.java:456) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.op.ConnectProviderOperation.connectProject(ConnectProviderOperation.java:142) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.op.ConnectProviderOperation.execute(ConnectProviderOperation.java:100) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.egit.core.internal.job.JobUtil$1.run(JobUtil.java:53) [org.eclipse.egit.core_4.4.1.201607150455-r.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55) [org.eclipse.core.jobs_3.8.0.v20160509-0411.jar:na]
+Caused by: java.io.IOException: CreateProcess error=2, The system cannot find the file specified
+	at java.lang.ProcessImpl.create(Native Method) ~[na:1.8.0_131]
+	at java.lang.ProcessImpl.<init>(Unknown Source) ~[na:1.8.0_131]
+	at java.lang.ProcessImpl.start(Unknown Source) ~[na:1.8.0_131]
+	... 16 common frames omitted
