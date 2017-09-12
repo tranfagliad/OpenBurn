@@ -1,6 +1,6 @@
 # OpenBurn
 
-**Team Members:** Daniel Tranfaglia, [next person]
+**Team Members:** Daniel Tranfaglia, Andrew Tarr
 
 
 **TODO:**
