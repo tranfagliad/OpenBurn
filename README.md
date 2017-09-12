@@ -1,6 +1,6 @@
 # OpenBurn
 
-**Team Members:** Daniel Tranfaglia, Andrew Tarr, Abhishek Rane
+**Team Members:** Daniel Tranfaglia, Andrew Tarr, Abhishek Rane, Vic Chenzo
 
 
 **TODO:**
