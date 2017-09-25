@@ -13,11 +13,6 @@ public class Result
 	private float lStar;
 	private float systemMass;
 	private float systemCenterOfGravity;
-	
-	public Result()
-	{
-		
-	}
 
 	public float getTime()
 	{
