@@ -11,41 +11,7 @@ public class Grain
 	private float length; // inches
 	private float innerDiameter; // inches
 	private int burningEnds; // 0,1 or 2
-
-	// public method that dose error checking for the constructor because constructors can't return null;
-//	public static Grain getNewGrain(float outerDiameter, float length, float innerDiameter, int burningEnds)
-//	{
-//		if(outerDiameter <= 0)
-//		{
-//			return null;
-//		}
-//		if(innerDiameter <= 0)
-//		{
-//			return null;
-//		}
-//		if(innerDiameter >= outerDiameter)
-//		{
-//			return null;
-//		}
-//		if(length < 0)
-//		{
-//			return null;
-//		}
-//		if(burningEnds < 0 || burningEnds > 2)
-//		{
-//			return null;
-//		}
-//		
-//		return new Grain(outerDiameter, length, innerDiameter, burningEnds);
-//	}
-//	
-//	private Grain(float outDiameter, float lngth, float inDiameter, int burnEnds)
-//	{
-//		outerDiameter = outDiameter;
-//		length = lngth;
-//		innerDiameter = inDiameter;
-//		burningEnds = burnEnds;
-//	}
+	private float burnout;  // the time that this grain burned out
 	
 	public Grain(float outerDiameter, float length, float innerDiameter, int burningEnds)
 	{
@@ -74,6 +40,7 @@ public class Grain
 		this.length = length;
 		this.innerDiameter = innerDiameter;
 		this.burningEnds = burningEnds;
+		setBurnout(0);
 	}
 	
 	public static void setPropelentDensity(float density)
@@ -84,16 +51,6 @@ public class Grain
 		}
 		propellantDensity = density;
 	}
-	
-//	public static boolean setPropelentDensity(float density)
-//	{
-//		if(density <= 0)
-//		{
-//			return false;
-//		}
-//		propellantDensity = density;
-//		return true;
-//	}
 
 	public static float getPropellantDensity()
 	{
@@ -118,5 +75,15 @@ public class Grain
 	public int getBurningEnds()
 	{
 		return burningEnds;
+	}
+
+	public float getBurnout()
+	{
+		return burnout;
+	}
+
+	public void setBurnout(float burnout)
+	{
+		this.burnout = burnout;
 	}
 }
