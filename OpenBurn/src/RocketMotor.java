@@ -15,14 +15,28 @@ public class RocketMotor
 			Result currentTimeStep = new Result();
 			currentTimeStep.setTime(currentTime);
 			
-			// part 1, part 2, ... part 8
+			// parts 1 through 8 in matlab file
+			generateGometry(theGrains, currentTimeStep);
+			regressGrains(theGrains, currentTimeStep, deltaTime);
+			float[] massFlow = generateMassFlow(currentTimeStep);
+			portToThroatRatio(theGrains, currentTimeStep);
+			claculateMoreMassFlow(theGrains, currentTimeStep, massFlow);
+			calculateLstar(theGrains, currentTimeStep);
+			massAndCenterOfGravity(theGrains, currentTimeStep);
+			calculateBurnout(theGrains, currentTime);
 			
 			output.addLast(currentTimeStep);
 			
-			// if (some stuff)
-			// {
-			//  run = false
-			// }
+			float sumOfDiferences = 0;
+			for(int i = 0; i < theGrains.length; i++)
+			{
+				sumOfDiferences += (theGrains[i].getOuterDiameter() - theGrains[i].getInnerDiameter());
+			}
+			
+			 if (sumOfDiferences == 0)
+			 {
+			  run = false;
+			 }
 		}
 		
 		return output;
