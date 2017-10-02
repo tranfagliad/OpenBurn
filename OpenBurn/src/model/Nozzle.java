@@ -10,7 +10,7 @@ public class Nozzle
 	private int entranceId;
 	private int throatId;
 	
-	public Nozzle(float throatDiameter, float entranceDiameter, float exitDiameter, float cf, int numberOfGrains)
+	public Nozzle (double throatDiameter, double entranceDiameter, double exitDiameter, double cf, int numberOfGrains)
 	{
 		this.throatDiameter = throatDiameter;
 		this.throatArea = Math.PI * (throatDiameter/2) * (throatDiameter/2);

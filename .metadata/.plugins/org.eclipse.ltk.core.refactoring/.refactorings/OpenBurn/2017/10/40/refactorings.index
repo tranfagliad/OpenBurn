@@ -6,3 +6,4 @@
 1506921391663	Move compilation unit
 1506928488587	Rename local variable 'burningEnds'
 1506930170470	Rename local variable 'newBurnRate'
+1506937160657	Rename field 'SCANNER_ERROR_MSG'

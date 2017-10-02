@@ -1,11 +1,8 @@
 package controller;
 
-import java.util.*;
-
-/* hold the main method
- * reads input from the user
- * 
- */
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.List;
 
 import model.Grain;
 import model.Nozzle;
@@ -22,12 +19,31 @@ import model.RocketMotor;
 
 public class CMDLineInterface
 {
-	// Private string constants
-	private static final String GRAIN_PROMPT = "Enter number of grains (Must enter at least 1): ";
+	private static final String START_MSG = "OpenBurn: Iteration #1\n";
+	private static final String GRAIN_NUM = "Grain number: ";
 	
-	private static final String NULL_SCANNER_MSG  = "Null scanner for input.\n";
-	private static final String SCANNER_ERROR_MSG = "\nERROR: Invalid input.\n";
+	// General prompts
+	private static final String GRAIN_PROMPT   = "Enter number of grains (Must enter at least 1): ";
+	private static final String DENSITY_PROMPT = "Enter propellant density (Must be positive): ";
 	
+	// Grain prompts
+	private static final String OUTER_DIAMETER_PROMPT = "Enter grain outer diameter (Must be positive): ";
+	private static final String INNER_DIAMETER_PROMPT = "Enter grain inner diameter (Must be positive): ";
+	private static final String LENGTH_PROMPT         = "Enter grain length (Must be positive): ";
+	private static final String BURNING_ENDS_PROMPT   = "Enter grain number of burning ends (Must be 0, 1, or 2): ";
+	
+	// Nozzle prompts
+	private static final String THROAT_DIAMETER_PROMPT   = "Enter nozzle throat diameter (Must be positive): ";
+	private static final String ENTRANCE_DIAMETER_PROMPT = "Enter nozzle entrance diameter (Must be positive): ";
+	private static final String EXIT_DIAMETER_PROMPT     = "Enter nozzle exit diameter (Must be positive): ";
+	private static final String CF_PROMPT                = "Enter nozzle CF (Must be positive): ";
+	
+	// Time Delta prompt
+	private static final String TIME_DELTA_PROMPT = "Enter change in time (Must be positive): ";
+	
+	// Error Messages
+	private static final String NULL_SCANNER_MSG = "\nERROR: Null scanner for input!\n";
+	private static final String INPUT_ERROR_MSG  = "\nERROR: Invalid input!\n";
 	
 	// Error status
 	private static final int ERROR_OCCURRED = 1;
@@ -47,248 +63,160 @@ public class CMDLineInterface
 	
 	public static void main (String[] args)
 	{
+		System.out.println(START_MSG);
+		
 		// Scanner for keyboard input
 		Scanner input = new Scanner(System.in);
 		
+		// Prompt user for number of grains
+		// Prompt user for propellant density
+		int numberOfGrains = promptInt(input, GRAIN_PROMPT);
+		double density = promptDouble(input, DENSITY_PROMPT);
+		Grain.setPropellantDensity(density);
 		
-		int numberOfGrains = getNumGrains(input);
-		
-		
-		/*
-		float density = -1; //initialize the while loop
-		while(density <= 0) // guarantees that density makes sense
+		// Continuously prompt the user for input and create a list of Grains
+		// Current implementation of the list is: LinkedList
+		List<Grain> listOfGrains = new LinkedList<Grain>();
+		for (int grainNum = 0; grainNum < numberOfGrains; grainNum++)
 		{
-			System.out.print("What is the propelant density? must be positive.  ");
-			if(input.hasNextFloat() == false)
-			{
-				System.err.println("\nERROR: Something went wrong with scanner.");
-			}
-			else
-			{
-				density = input.nextFloat();
-			}
-		}
-		Grain.setPropelentDensity(density);
-		
-		
-		
-		
-		Grain[] listOfGrains = new Grain[numberOfGrains];
-		for(int i = 0; i < listOfGrains.length; i++)
-		{
-			System.out.println("Grain number: " + i);
-			listOfGrains[i] = getCMDinput(input); // ask input for each grain will ask more questions
+			System.out.println(GRAIN_NUM + grainNum);
+			listOfGrains.add(createGrain(input));
 		}
 		
-		Nozzle noz = getCMDnizzel(input, numberOfGrains);
+		// Prompt the user for input to create a nozzle
+		Nozzle nozzle = createNozzle(input, numberOfGrains);
 		
-		float deltaTime = -1;
-		while(deltaTime <= 0)
-		{
-			System.out.print("What time step do you want to use? must be positive.  ");
-			if(input.hasNextInt() == false)
-			{
-				System.err.println("\nERROR: Something went wrong with scanner.");
-			}
-			else
-			{
-				deltaTime = input.nextInt();
-			}
-		}
+		// Prompt user for change in time
+		double deltaTime = promptDouble(input, TIME_DELTA_PROMPT);
 		
-		LinkedList<Result> theResults = RocketMotor.simulate(listOfGrains, deltaTime, noz);
-		
+		List<Result> theResults = RocketMotor.simulate(listOfGrains, deltaTime, nozzle);
 		
 		// more stuff here eventually
 		
-		
-		*/
-		input.close();
+		input.close();   // Close keyboard input
 	} // main()
 	
 	
 	
 	/**
-	 * getNumGrains()
 	 * 
-	 * Purpose: Prompts the user for a number of motor grains, then
-	 * 		returns the answer.
-	 * 
-	 * Arguments:
-	 * 		Scanner input -- User input, preferrably keyboard input.
-	 * 
-	 * Returns: int. The number of grains given by the user.
 	**/
 	
-	private static int getNumGrains (Scanner input)
+	private static int promptInt (Scanner input, String promptMessage)
 	{
 		// Check for null scanner
 		if (input == null)
 			throw new IllegalArgumentException(NULL_SCANNER_MSG);
 		
 		// Prompt the user for input until a positive number or error
-		int numberOfGrains = -1;
-		while (numberOfGrains < 1)
+		int desiredInt = -1;
+		while (desiredInt < 1)
 		{
-			System.out.print(GRAIN_PROMPT);   // Prompt message
+			System.out.print(promptMessage);
 			
 			// Response was not an integer, error
 			if (input.hasNextInt() == false)
 			{
-				System.err.println(SCANNER_ERROR_MSG);
+				System.err.println(INPUT_ERROR_MSG);
 				System.exit(ERROR_OCCURRED);
 			}
 			
 			// Valid input
 			else
-				numberOfGrains = input.nextInt();
+				desiredInt = input.nextInt();
 		}
 		
-		return numberOfGrains;
-	} // getNumGrains()
+		return desiredInt;
+	} // promptInt()
 	
 	
 	
+	/**
+	 * 
+	**/
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	private static Nozzle getCMDnizzel(Scanner input, int numberOfGrains)
+	private static double promptDouble (Scanner input, String promptMessage)
 	{
+		// Check for null scanner
+		if (input == null)
+			throw new IllegalArgumentException(NULL_SCANNER_MSG);
 		
-		float throatDiameter = -1;
-		float entranceDiameter = -1;
-		float exitDiameter = -1;
-		float cf = -1;
-		
-		while(throatDiameter <= 0)
+		// Prompt the user for input until a positive number or error
+		double desiredDouble = -1.0;
+		while (desiredDouble <= 0.0)
 		{
-			System.out.print("What is the Nozzle's throat Diameter? must be positive.  ");
-			if(input.hasNextInt() == false)
+			System.out.print(promptMessage);
+			
+			// Response was not a double, error
+			if (input.hasNextDouble() == false)
 			{
-				System.err.println("\nERROR: Something went wrong with scanner.");
-			}
-			else
-			{
-				throatDiameter = input.nextInt();
-			}
-		}
-		
-		while(entranceDiameter <= 0)
-		{
-			System.out.print("What is the Nozzle's entrance Diameter? must be positive.  ");
-			if(input.hasNextInt() == false)
-			{
-				System.err.println("\nERROR: Something went wrong with scanner.");
-			}
-			else
-			{
-				entranceDiameter = input.nextInt();
-			}
-		}
-		while(exitDiameter <= 0)
-		{
-			System.out.print("What is the Nozzle's exit Diameter? must be positive.  ");
-			if(input.hasNextInt() == false)
-			{
-				System.err.println("\nERROR: Something went wrong with scanner.");
-			}
-			else
-			{
-				exitDiameter = input.nextInt();
-			}
-		}
-		while(cf <= 0)
-		{
-			System.out.print("What is the Nozzle's cf? must be positive.  ");
-			if(input.hasNextInt() == false)
-			{
-				System.err.println("\nERROR: Something went wrong with scanner.");
-			}
-			else
-			{
-				cf = input.nextInt();
-			}
-		}
-		
-		return new Nozzle(throatDiameter, entranceDiameter, exitDiameter, cf, numberOfGrains);
-	}
-	*/
-	
-	
-	/*
-	private static Grain getCMDinput(Scanner input)
-	{
-		float outerDiameter = -1;
-		float length = -1; 
-		float innerDiameter = -1;
-		int burningEnds = -1; 
-		
-		while(innerDiameter >= outerDiameter)
-		{
-			outerDiameter = -1;
-			innerDiameter = -1;
-			while(outerDiameter <= 0)
-			{
-				System.out.print("What is the outer diameter? must be positive.  ");
-				if(input.hasNextFloat() == false)
-				{
-					System.err.println("\nERROR: Something went wrong with scanner.");
-				}
-				else
-				{
-					outerDiameter = input.nextFloat();
-				}
+				System.err.println(INPUT_ERROR_MSG);
+				System.exit(ERROR_OCCURRED);
 			}
 			
-			while(innerDiameter <= 0)
-			{
-				System.out.print("What is the inner diameter? must be positive.  ");
-				if(input.hasNextFloat() == false)
-				{
-					System.err.println("\nERROR: Something went wrong with scanner.");
-				}
-				else
-				{
-					innerDiameter = input.nextFloat();
-				}
-			}
-		}
-		
-		while(length <= 0 )
-		{
-			System.out.print("What is the length? must be positive.  ");
-			if(input.hasNextFloat() == false)
-			{
-				System.err.println("\nERROR: Something went wrong with scanner.");
-			}
+			// Valid input
 			else
-			{
-				length = input.nextFloat();
-			}
+				desiredDouble = input.nextDouble();
 		}
 		
-		while(burningEnds < 0 || burningEnds > 2)
+		return desiredDouble;
+	} // desiredDouble()
+	
+	
+	
+	/**
+	 * createGrain()
+	 * 
+	 * Purpose: Creates and returns a Grain object by prompting the
+	 * 		user for input. It is recommended that the input is
+	 * 		given by keyboard.
+	 * 
+	 * Parameters:
+	 * 		Scanner input -- User input, preferably keyboard input.
+	 * 
+	 * Returns: Grain. A new Grain object with data from user input.
+	**/
+	
+	private static Grain createGrain (Scanner input)
+	{
+		// Initialize all dimensions for loops
+		double outerDiameter = -1.0;
+		double innerDiameter = -1.0;
+		
+		// Prompt the user for inner and outer diameters until the outer
+		// diameter is greater than the inner diameter.
+		while (innerDiameter >= outerDiameter)
 		{
-			System.out.print("How many burning ends are there? must be positive.  ");
-			if(input.hasNextInt() == false)
-			{
-				System.err.println("\nERROR: Something went wrong with scanner.");
-			}
-			else
-			{
-				burningEnds = input.nextInt();
-			}
+			outerDiameter = promptDouble(input, OUTER_DIAMETER_PROMPT);
+			innerDiameter = promptDouble(input, INNER_DIAMETER_PROMPT);
 		}
 		
-		return new Grain(outerDiameter, length, innerDiameter, burningEnds);
-//		return Grain.getNewGrain(outerDiameter, length, innerDiameter, burningEnds);
+		// Prompt user for a length
+		double length = promptDouble(input, LENGTH_PROMPT);
+		
+		// Prompt user for the number of burning ends
+		int numBurningEnds = promptInt(input, BURNING_ENDS_PROMPT);
+		
+		// Use new data to create and return a Grain
+		return (new Grain(length, outerDiameter, innerDiameter, numBurningEnds));
+	} // createGrain()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	private static Nozzle createNozzle (Scanner input, int numberOfGrains)
+	{
+		//
+		double throatDiameter   = promptDouble(input, THROAT_DIAMETER_PROMPT);
+		double entranceDiameter = promptDouble(input, ENTRANCE_DIAMETER_PROMPT);
+		double exitDiameter     = promptDouble(input, EXIT_DIAMETER_PROMPT);
+		double cf               = promptDouble(input, CF_PROMPT);
+		
+		//
+		return (new Nozzle(throatDiameter, entranceDiameter, exitDiameter, cf, numberOfGrains));
 	}
-	*/
-} // class Main
+	
+} // class CMDLineInterface
