@@ -14,11 +14,8 @@ import java.io.IOException;
 public class CSVConverter
 {
 	// Error messages
-	private static final String CSV_ERROR_MSG = "ERROR: File must have .csv extension!\n";
-	private static final String ARR_ERROR_MSG = "ERROR: Given array is null!\n";
-	
-	// Other strings
-	private static final String CSV_EXTENSION = ".csv";
+	private static final String CSV_ERROR_MSG = "File must have .csv extension!\n";
+	private static final String ARR_ERROR_MSG = "Given array is null!\n";
 	
 	
 	
@@ -79,7 +76,7 @@ public class CSVConverter
 	 * 
 	 * Returns:
 	**/
-	public void writeIntArr (int[] arr, String filename)
+	public void writeIntArr (int [] arr, String filename)
 	{
 		// Check if given arguments are valid
 		errorCheckArgs(arr, filename);
@@ -128,7 +125,7 @@ public class CSVConverter
 	private static void errorCheckArgs (Object arr, String filename)
 	{
 		// Error check that the file to write to is a CSV file
-		if (!filename.endsWith(CSV_EXTENSION))
+		if (!filename.endsWith(".csv"))
 			throw new IllegalArgumentException(CSV_ERROR_MSG);
 						
 		// Error check that the given array is not null

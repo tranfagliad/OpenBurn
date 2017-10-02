@@ -10,22 +10,13 @@ package model;
 
 public class Grain
 {
-	// Error messages
-	private static final String OUTER_DIAMETER_ERR_MSG  = "ERROR: Outer diameter must be positive!\n";
-	private static final String INNER_DIAMETER_ERR_MSG  = "ERROR: Inner diameter must be positive!\n";
-	private static final String OUTER_INNER_ERR_MSG     = "ERROR: Outer diameter must be greater than inner diameter.\n";
-	private static final String LENGTH_ERR_MSG          = "ERROR: Length must be positive.\n";
-	private static final String BURNING_ENDS_ERR_MSG    = "ERROR: Burning ends must be 0, 1, or 2.\n";
-	private static final String PROP_DENSITY_ERR_MSG    = "ERROR: Propellant density must be positive!\n";
-	private static final String NEGATIVE_VOLUME_ERR_MSG = "ERROR: Negative volume change occurred!\n";
-	
-	// Propellant density is the same for all Grains
 	private static double propellantDensity;   // pounds per distance^3
 
+
 	// Private fields
-	private double length;          // Inches
-	private double outerDiameter;   // Inches
-	private double innerDiameter;   // Inches
+	private double length;
+	private double outerDiameter;
+	private double innerDiameter;
 	
 	private int numBurningEnds;     // Must be 0, 1 or 2
 	
@@ -54,15 +45,15 @@ public class Grain
 	{
 		// Error check all inputs
 		if (outerDiameter <= 0)
-			throw new IllegalArgumentException(OUTER_DIAMETER_ERR_MSG);
+			throw new IllegalArgumentException("Outer diameter must be positive.\n");
 		if (innerDiameter <= 0)
-			throw new IllegalArgumentException(INNER_DIAMETER_ERR_MSG);
+			throw new IllegalArgumentException("Inner diameter must be positive.\n");
 		if (innerDiameter >= outerDiameter)
-			throw new IllegalArgumentException(OUTER_INNER_ERR_MSG);
+			throw new IllegalArgumentException("Outer diameter must be greater than inner diameter.\n");
 		if (length < 0)
-			throw new IllegalArgumentException(LENGTH_ERR_MSG);
+			throw new IllegalArgumentException("Length must be positive.\n");
 		if (numBurningEnds < 0 || numBurningEnds > 2)
-			throw new IllegalArgumentException(BURNING_ENDS_ERR_MSG);
+			throw new IllegalArgumentException("Burning ends must be 0, 1, or 2.\n");
 		
 		// Set fields
 		this.outerDiameter  = outerDiameter;
@@ -111,7 +102,7 @@ public class Grain
 	{
 		// Density must not be negative
 		if (density <= 0.0)
-			throw new IllegalArgumentException(PROP_DENSITY_ERR_MSG);
+			throw new IllegalArgumentException("Propellant density must be positive!\n");
 		
 		// Set density
 		propellantDensity = density;
@@ -309,7 +300,7 @@ public class Grain
 		
 		// Error check for negative volume change, volume should expand
 		if (newVolume > initialVolume)
-			throw new ArithmeticException(NEGATIVE_VOLUME_ERR_MSG);
+			throw new ArithmeticException("Negative volume change occurred!\n");
 		
 		// Return the change in volume
 		return (initialVolume - newVolume);

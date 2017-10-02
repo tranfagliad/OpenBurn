@@ -14,8 +14,8 @@ import java.io.IOException;
 public class CSVConverter
 {
 	// Error messages
-	private static final String CSV_ERROR_MSG = "ERROR: File must have .csv extension!\n";
-	private static final String ARR_ERROR_MSG = "ERROR: Given array is null!\n";
+	private static final String CSV_ERROR_MSG = "File must have .csv extension!\n";
+	private static final String ARR_ERROR_MSG = "Given array is null!\n";
 	
 	// Other strings
 	private static final String CSV_EXTENSION = ".csv";

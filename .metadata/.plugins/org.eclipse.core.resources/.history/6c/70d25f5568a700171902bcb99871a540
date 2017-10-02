@@ -9,9 +9,9 @@ import java.util.List;
 
 public class RocketMotor
 {
-	public static List<SimulationResults> simulate(List<Grain> grainList, double deltaTime, Nozzle theNozzle)
+	public static List<Result> simulate(List<Grain> grainList, double deltaTime, Nozzle theNozzle)
 	{
-		LinkedList<SimulationResults> output = new LinkedList<SimulationResults>();
+		LinkedList<Result> output = new LinkedList<Result>();
 		float currentTime = 0;
 		boolean run = true;
 		
@@ -19,7 +19,7 @@ public class RocketMotor
 		{
 			currentTime += deltaTime;
 			
-			SimulationResults currentTimeStep = new SimulationResults();
+			Result currentTimeStep = new Result();
 			currentTimeStep.setTime(currentTime);
 			
 			// parts 1 through 8 in matlab file
@@ -51,28 +51,28 @@ public class RocketMotor
 	
 	// Generate and save current geometry based data
 	// based off of Part 1 in motor_internal_balistics.m
-	public static void generateGeometry(List<Grain> theGrains, SimulationResults current)
+	public static void generateGeometry(List<Grain> theGrains, Result current)
 	{
 		
 	}
 	
 	// Regress grains and calculate the mass flow. Save said data and update the sim state
 	// based off of Part 2 in motor_internal_balistics.m
-	public static void regressGrains(List<Grain> theGrains, SimulationResults current, double deltaTime)
+	public static void regressGrains(List<Grain> theGrains, Result current, double deltaTime)
 	{
 		
 	}
 	
 	// Generate the mass flowing per each grain
 	// based off of Part 3 in motor_internal_balistics.m
-	public static float[] generateMassFlow(SimulationResults current)
+	public static float[] generateMassFlow(Result current)
 	{
 		return null;
 	}
 	
 	// Calculate the port to throat ratio
 	// based off of Part 4 in motor_internal_balistics.m
-	public static void portToThroatRatio(List<Grain> theGrains, SimulationResults current)
+	public static void portToThroatRatio(List<Grain> theGrains, Result current)
 	{
 		
 	}
@@ -80,21 +80,21 @@ public class RocketMotor
 	// Calculate the mass flow over area at various locations in the motor
 	// based off of Part 5 in motor_internal_balistics.m
 	// the last parameter is the return value form generateMassFlow()
-	public static void calculateMoreMassFlow(List<Grain> theGrains, SimulationResults current, float[] massFlow)
+	public static void calculateMoreMassFlow(List<Grain> theGrains, Result current, float[] massFlow)
 	{
 		
 	}
 	
 	// Calculate the l star at the current point in the sim
 	// based off of Part 6 in motor_internal_balistics.m
-	public static void calculateLstar(List<Grain> theGrains, SimulationResults current)
+	public static void calculateLstar(List<Grain> theGrains, Result current)
 	{
 		
 	}
 	
 	// Calculate the current mass and center of gravity for rocksim
 	// based off of Part 7 in motor_internal_balistics.m
-	public static void massAndCenterOfGravity(List<Grain> theGrains, SimulationResults current)
+	public static void massAndCenterOfGravity(List<Grain> theGrains, Result current)
 	{
 		
 	}
@@ -111,7 +111,7 @@ public class RocketMotor
 	// motor_internal_balistics.m line 53
 	public static double pressureFromKn(double kn)
 	{
-		return ((double)(2.725060 * kn - 236.099212));
+		return (double)(2.725060 * kn - 236.099212);
 	}
 
 	// converts kn to burn rate

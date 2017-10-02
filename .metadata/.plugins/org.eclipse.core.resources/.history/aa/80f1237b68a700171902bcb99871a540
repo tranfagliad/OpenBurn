@@ -6,7 +6,7 @@ import java.util.List;
 
 import model.Grain;
 import model.Nozzle;
-import model.SimulationResults;
+import model.Result;
 import model.RocketMotor;
 
 /**
@@ -94,7 +94,7 @@ public class CMDLineInterface
 		// Prompt user for change in time
 		double deltaTime = promptDouble(input, TIME_DELTA_PROMPT);
 		
-		List<SimulationResults> theResults = RocketMotor.simulate(listOfGrains, deltaTime, nozzle);
+		List<Result> theResults = RocketMotor.simulate(listOfGrains, deltaTime, nozzle);
 		
 		// more stuff here eventually
 		
