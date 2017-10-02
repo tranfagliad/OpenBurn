@@ -14,7 +14,7 @@ public class RocketMotor
 		float currentTime = 0;
 		boolean run = true;
 		
-		while(run)
+		while (run)
 		{
 			currentTime += deltaTime;
 			
@@ -22,11 +22,11 @@ public class RocketMotor
 			currentTimeStep.setTime(currentTime);
 			
 			// parts 1 through 8 in matlab file
-			generateGometry(theGrains, currentTimeStep);
+			generateGeometry(theGrains, currentTimeStep);
 			regressGrains(theGrains, currentTimeStep, deltaTime);
 			float[] massFlow = generateMassFlow(currentTimeStep);
 			portToThroatRatio(theGrains, currentTimeStep);
-			claculateMoreMassFlow(theGrains, currentTimeStep, massFlow);
+			calculateMoreMassFlow(theGrains, currentTimeStep, massFlow);
 			calculateLstar(theGrains, currentTimeStep);
 			massAndCenterOfGravity(theGrains, currentTimeStep);
 			calculateBurnout(theGrains, currentTime);
@@ -50,7 +50,7 @@ public class RocketMotor
 	
 	// Generate and save current geometry based data
 	// based off of Part 1 in motor_internal_balistics.m
-	public static void generateGometry(Grain[] theGrains, Result current)
+	public static void generateGeometry(Grain[] theGrains, Result current)
 	{
 		
 	}
@@ -79,7 +79,7 @@ public class RocketMotor
 	// Calculate the mass flow over area at various locations in the motor
 	// based off of Part 5 in motor_internal_balistics.m
 	// the last parameter is the return value form generateMassFlow()
-	public static void claculateMoreMassFlow(Grain[] theGrains, Result current, float[] massFlow)
+	public static void calculateMoreMassFlow(Grain[] theGrains, Result current, float[] massFlow)
 	{
 		
 	}
@@ -120,4 +120,5 @@ public class RocketMotor
 	{
 		return 0.000366*kn + 0.083967;
 	}
-}
+	
+} // class RocketMotor

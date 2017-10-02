@@ -1,133 +1,309 @@
 package model;
-/* Holds data about the individual grain
+
+/**
+ * Grain.java
  * 
- * 
- * 
- */
+ * Contains data for an individual grain for a rocket motor.
+ * Crucial to graph calculations. Includes methods that allow the
+ * grain to change over time.
+**/
+
 public class Grain
 {
-	private static float propellantDensity; // pounds per inches^3
+	private static double propellantDensity;   // pounds per distance^3
 
-	private float outerDiameter; // inches
-	private float length; // inches
-	private float innerDiameter; // inches
-	private int burningEnds; // 0,1 or 2
-	private float burnout;  // the time that this grain burned out
+
+	// Private fields
+	private double length;
+	private double outerDiameter;
+	private double innerDiameter;
 	
-	public Grain(float outerDiameter, float length, float innerDiameter, int burningEnds)
+	private int numBurningEnds;     // Must be 0, 1 or 2
+	
+	private double burnoutTime;     // Time that the grain burned out
+	
+	
+	
+	/**
+	 * Grain Constructor
+	 * 
+	 * Purpose: Creates and initializes a Grain object using the given
+	 * 		values for outer diameter, inner diameter, and the number of
+	 * 		burning ends. Burnout time is initialized to 0 seconds.
+	 * 
+	 * 		Requirements:
+	 * 		- Outer and inner diameters MUST be positive.
+	 * 		- Outer diameter MUST be greater than inner diameter.
+	 * 		- Length MUST be positive.
+	 * 		- Number of burning ends must be 0, 1, or 2.
+	 * 
+	 * 		NOTE: Propellant density is not set here, user must call
+	 * 			setPropellantDensity() to set it.
+	**/
+	
+	public Grain (double length, double outerDiameter, double innerDiameter, int numBurningEnds)
 	{
-		if(outerDiameter <= 0)
-		{
-			throw new IllegalArgumentException("outer diameter must be positive");
-		}
-		if(innerDiameter <= 0)
-		{
-			throw new IllegalArgumentException("inner diameter must be positive");
-		}
-		if(innerDiameter >= outerDiameter)
-		{
-			throw new IllegalArgumentException("outer diameter must be greater than inner diameter");
-		}
-		if(length < 0)
-		{
-			throw new IllegalArgumentException("length must be positive");
-		}
-		if(burningEnds < 0 || burningEnds > 2)
-		{
-			throw new IllegalArgumentException("burning ends must be 0, 1, or 2");
-		}
+		// Error check all inputs
+		if (outerDiameter <= 0)
+			throw new IllegalArgumentException("Outer diameter must be positive.\n");
+		if (innerDiameter <= 0)
+			throw new IllegalArgumentException("Inner diameter must be positive.\n");
+		if (innerDiameter >= outerDiameter)
+			throw new IllegalArgumentException("Outer diameter must be greater than inner diameter.\n");
+		if (length < 0)
+			throw new IllegalArgumentException("Length must be positive.\n");
+		if (numBurningEnds < 0 || numBurningEnds > 2)
+			throw new IllegalArgumentException("Burning ends must be 0, 1, or 2.\n");
 		
-		this.outerDiameter = outerDiameter;
-		this.length = length;
-		this.innerDiameter = innerDiameter;
-		this.burningEnds = burningEnds;
-		setBurnout(0);
-	}
+		// Set fields
+		this.outerDiameter  = outerDiameter;
+		this.length         = length;
+		this.innerDiameter  = innerDiameter;
+		this.numBurningEnds = numBurningEnds;
+		
+		// Initialize burnout time to 0 seconds
+		setBurnoutTime(0.0);
+	} // Grain Constructor
 	
-	public static void setPropelentDensity(float density)
-	{
-		if(density <= 0)
-		{
-			throw new IllegalArgumentException("propellent density must be positive");
-		}
-		propellantDensity = density;
-	}
-
-	public static float getPropellantDensity()
+	
+	
+	/**
+	 * getPropellantDensity()
+	 * 
+	 * Purpose: Returns the current value for propellant density.
+	 * 
+	 * Arguments: None.
+	 * 
+	 * Returns: double. Propellant density value.
+	**/
+	
+	public static double getPropellantDensity ()
 	{
 		return propellantDensity;
-	}
-
-	public float getOuterDiameter()
-	{
-		return outerDiameter;
-	}
+	} // getPropellantDensity()
 	
-	public float getLength()
+	
+	
+	/**
+	 * setPropellantDensity()
+	 * 
+	 * Purpose: Change the propellant density to a new value.
+	 * 
+	 * 		Throws an IllegalArgumentException if the new value
+	 * 		is negative.
+	 * 
+	 * Arguments:
+	 * 		double density -- New value for propellant density.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public static void setPropellantDensity (double density)
+	{
+		// Density must not be negative
+		if (density <= 0.0)
+			throw new IllegalArgumentException("Propellant density must be positive!\n");
+		
+		// Set density
+		propellantDensity = density;
+	} // setPropellantDensity()
+
+	
+	
+	/**
+	 * getLength()
+	 * 
+	 * Purpose: Returns the current value for length.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The current value for length.
+	**/
+	
+	public double getLength ()
 	{
 		return length;
-	}
+	} // getLength()
 	
-	public float getInnerDiameter()
+	
+	
+	/**
+	 * getOuterDiameter()
+	 * 
+	 * Purpose: Returns the current value for outer diameter.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The current value for outer diameter.
+	**/
+	
+	public double getOuterDiameter ()
+	{
+		return outerDiameter;
+	} // getOuterDiameter()
+	
+	
+	
+	/**
+	 * getInnerDiameter()
+	 * 
+	 * Purpose: Returns the current value for inner diameter.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The current value for inner diameter.
+	**/
+	
+	public double getInnerDiameter()
 	{
 		return innerDiameter;
-	}
+	} // getInnerDiameter()
 	
-	public int getBurningEnds()
-	{
-		return burningEnds;
-	}
-
-	public float getBurnout()
-	{
-		return burnout;
-	}
-
-	public void setBurnout(float burnout)
-	{
-		this.burnout = burnout;
-	}
 	
-	// returns the volume of the grain
-	// based off of cylindrical_grain_volume.m
-	public double getVolume()
+	
+	/**
+	 * getNumBurningEnds()
+	 * 
+	 * Purpose: Returns the number of burning ends.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: int. The number of burning ends.
+	**/
+	
+	public int getNumBurningEnds()
 	{
-		float innerRadius = innerDiameter/2;
-		float outerRadius = outerDiameter/2;
+		return numBurningEnds;
+	} // getBurningEnds()
+
+	
+	
+	/**
+	 * getBurnoutTime()
+	 * 
+	 * Purpose: Returns the burnout time, in seconds.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The burnout time, in seconds.
+	**/
+	
+	public double getBurnoutTime ()
+	{
+		return burnoutTime;
+	} // getBurnoutTime()
+
+	
+	
+	/**
+	 * setBurnoutTime()
+	 * 
+	 * Purpose: Changes the burnout time to a new value.
+	 * 
+	 * Parameters:
+	 * 		double burnoutTime -- The new value for the burnout time.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setBurnoutTime (double burnoutTime)
+	{
+		this.burnoutTime = burnoutTime;
+	} // setBurnoutTime()
+	
+	
+	
+	/*
+	 * getVolume()
+	 * 
+	 * Purpose: Uses the current values of the grain properties to calculate
+	 * 		and return the volume of the grain. All calculations are based on
+	 * 		those performed in cylindrical_grain_volume.m.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The volume of the grain.
+	 */
+	
+	public double getVolume ()
+	{
+		// Use radius instead of diameter for volume calculation
+		double innerRadius = innerDiameter / 2;
+		double outerRadius = outerDiameter / 2;
 		
+		// Calculate and return the volume of the grain using inner properties
 		return Math.PI * length * (outerRadius * outerRadius - innerRadius * innerRadius );
-	}
+	} // getVolume()
 	
-	// returns the burnable surface area for the grain
-	// based off of cylindrical_grain_burn_area.m
-	public double getBurnArea()
+	
+	
+	/**
+	 * getBurnArea()
+	 * 
+	 * Purpose: Uses the current values of the grain properties to calculate
+	 * 		and return the burnable surface area of the grain. All calculations
+	 * 		are based on those performed in cylindrical_grain_burn_area.m.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The burnable surface area of the grain.
+	**/
+	
+	public double getBurnArea ()
 	{
-		float innerRadius = innerDiameter/2;
-		float outerRadius = outerDiameter/2;
+		double innerRadius = innerDiameter / 2;
+		double outerRadius = outerDiameter / 2;
 		
-		double face = Math.PI * burningEnds * (outerRadius * outerRadius - innerRadius * innerRadius );
+		double face = Math.PI * numBurningEnds * (outerRadius * outerRadius - innerRadius * innerRadius );
 		double innerBurnArea = 2 * Math.PI * innerRadius * length;
 		double surfaceArea = face + innerBurnArea;
-		return Math.max(surfaceArea, 0); // guarantees we never have negative surface area.
-										 // based off of motor_internal_balistics.m line 136
-	}
+		
+		// Guarantees we never have negative surface area.
+		// Based on motor_internal_balistics.m, line 136
+		return Math.max(surfaceArea, 0); 					 
+	} // getBurnArea()
 	
-	// take in burn rate and delta time
-	// updates the grain's geometry
-	// return the change in volume
-	// based off of cylindrical_grain_geomtetry_update.m
-	public double updateGeometry(float burnRate, float deltaTime)
+	
+	
+	/**
+	 * updateGeometry()
+	 * 
+	 * Purpose: Updates the Grain object using calculations based on
+	 * 		those performed in cylindrical_grain_geomtetry_update.m,
+	 * 		using the given burn rate and change in time (seconds).
+	 * 		
+	 * 		The overall change in volume is returned.
+	 * 
+	 * Parameters:
+	 * 		double burnRate -- Burn rate affecting the grain.
+	 * 		double deltaTime -- Change in time.
+	 * 
+	 * Returns: double. The change in volume after calculations.
+	**/
+	
+	public double updateGeometry (double burnRate, double deltaTime)
 	{
+		// Get current volume for initial value
 		double initialVolume = getVolume();
-		length = length - burningEnds * burnRate * deltaTime;
-		innerDiameter = innerDiameter + 2*burnRate*deltaTime;
+		
+		// Calculate new value for length, ensure it never becomes negative
+		length = length - numBurningEnds * burnRate * deltaTime;
 		length = Math.max(length, 0);
+		
+		// Calculate new value for inner diameter, take the smallest diameter
+		// of the inner and outer diameter
+		innerDiameter = innerDiameter + 2 * burnRate * deltaTime;
 		innerDiameter = Math.min(innerDiameter, outerDiameter);
+		
+		// Get new value for the volume after calculations are complete
 		double newVolume = getVolume();
-		if(newVolume > initialVolume)
-		{
-			throw new ArithmeticException("Negative Volume change occured");
-		}
-		return initialVolume - newVolume;
-	}
-}
+		
+		// Error check for negative volume change, volume should expand
+		if (newVolume > initialVolume)
+			throw new ArithmeticException("Negative volume change occurred!\n");
+		
+		// Return the change in volume
+		return (initialVolume - newVolume);
+	} // updateGeometry()
+	
+} // class Grain
