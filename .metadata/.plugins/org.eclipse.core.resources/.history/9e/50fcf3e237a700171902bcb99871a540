@@ -1,0 +1,116 @@
+package model;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+/**
+ * CSVConverter.java
+ * 
+ * The CSVConverter class can be used to convert data 
+ * in an array into a csv file. There are two methods, one for writing 
+ * objects, the other for primitive ints.
+**/
+
+public class CSVConverter
+{
+	/**
+	 * writeObjArr()
+	 * 
+	 * Purpose: This method takes an array of Objects and writes them to the 
+	 * 		specified file in the second parameter in the form of a CSV file.
+	 * 
+	 * 		Throws an IllegalArgumentException if the given array is null or
+	 * 		the filename does not end with .csv.
+	 *     
+	 * Parameters:
+	 * 		Object[] arr -- The array of objects to write to the CSV file.
+	 * 		String filename -- Name of the file to write to. Must end with .csv.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public static void writeObjArr (Object[] arr, String filename)
+	{
+		errorCheckParams(arr, filename);
+		
+		// Create the file writer
+		BufferedWriter fileWriter = null;
+		try {
+			fileWriter = new BufferedWriter(new FileWriter(filename));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		// Go through entire array and build the string to write to file
+		StringBuilder sb = new StringBuilder();
+		for (Object element : arr)
+		{
+			sb.append(element.toString());
+			sb.append(",");   // Append a comma to separate into different cells
+		}
+
+		// Write the built up string to the CSV file, and close the file
+		try {
+			fileWriter.write(sb.toString());
+			fileWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+	} // writeObjArr()
+	
+	
+	
+	/**
+	 * 
+	 * Purpose: This method takes an array of ints and writes them to the 
+	 * 		specified file in the second parameter in the form of a csv file.
+	 * 
+	 * Parameters:
+	 * 
+	 * Returns:
+	**/
+	public void writeIntArr (int [] arr, String filename)
+	{
+		// Check if given arguments are valid
+		errorCheckParams(arr, filename);
+		
+		//
+		BufferedWriter br = null;
+		try {
+			br = new BufferedWriter(new FileWriter(filename));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		StringBuilder sb = new StringBuilder();
+		for (int element : arr) {
+		 sb.append(element);
+		 sb.append(",");
+		}
+
+		try {
+			br.write(sb.toString());
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	} // writeIntArr()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	private static void errorCheckParams (Object arr, String filename)
+	{
+		// Error check that the file to write to is a CSV file
+		if (!filename.endsWith(".csv"))
+			throw new IllegalArgumentException("File must have .csv extension!\n");
+						
+		// Error check that the given array is not null
+		if (arr == null)
+			throw new IllegalArgumentException("Given array is null!\n");
+	}
+	
+} // class CSVConverter
