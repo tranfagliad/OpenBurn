@@ -41,7 +41,7 @@ public class CMDLineInterface
 	// Time Delta prompt
 	private static final String TIME_DELTA_PROMPT = "Enter change in time (Must be positive): ";
 	
-	// Error messages
+	// Error Messages
 	private static final String NULL_SCANNER_MSG = "\nERROR: Null scanner for input!\n";
 	private static final String INPUT_ERROR_MSG  = "\nERROR: Invalid input!\n";
 	

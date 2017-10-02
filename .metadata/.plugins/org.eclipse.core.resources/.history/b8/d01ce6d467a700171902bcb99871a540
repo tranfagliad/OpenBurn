@@ -13,9 +13,7 @@ import java.io.IOException;
 
 public class CSVConverter
 {
-	// Error messages
 	private static final String CSV_ERROR_MSG = "File must have .csv extension!\n";
-	private static final String ARR_ERROR_MSG = "Given array is null!\n";
 	
 	
 	
@@ -126,11 +124,11 @@ public class CSVConverter
 	{
 		// Error check that the file to write to is a CSV file
 		if (!filename.endsWith(".csv"))
-			throw new IllegalArgumentException(CSV_ERROR_MSG);
+			throw new IllegalArgumentException("File must have .csv extension!\n");
 						
 		// Error check that the given array is not null
 		if (arr == null)
-			throw new IllegalArgumentException(ARR_ERROR_MSG);
+			throw new IllegalArgumentException("Given array is null!\n");
 	} // errorCheckArgs()
 	
 } // class CSVConverter
