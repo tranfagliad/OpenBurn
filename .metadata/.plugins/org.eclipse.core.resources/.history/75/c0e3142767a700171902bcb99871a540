@@ -53,13 +53,8 @@ public class CMDLineInterface
 	/**
 	 * main()
 	 * 
-	 * Purpose: Runs the command-line version of OpenBurn for iteration #1.
-	 * 		Continuously prompts the user for data regarding the grains
-	 * 		and the nozzle, then creates objects for both.
+	 * Purpose:
 	 * 
-	 * 		Finally, simulated results are calculated and displayed to
-	 * 		the user.
-	 * 		
 	 * Parameters:
 	 * 		String[] args -- Command-line arguments. Not needed here.
 	 * 
@@ -249,6 +244,6 @@ public class CMDLineInterface
 		
 		// Use new data to create and return a Nozzle
 		return (new Nozzle(throatDiameter, entranceDiameter, exitDiameter, cf, numberOfGrains));
-	} // createNozzle()
+	}
 	
 } // class CMDLineInterface

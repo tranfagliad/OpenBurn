@@ -53,13 +53,8 @@ public class CMDLineInterface
 	/**
 	 * main()
 	 * 
-	 * Purpose: Runs the command-line version of OpenBurn for iteration #1.
-	 * 		Continuously prompts the user for data regarding the grains
-	 * 		and the nozzle, then creates objects for both.
+	 * Purpose:
 	 * 
-	 * 		Finally, simulated results are calculated and displayed to
-	 * 		the user.
-	 * 		
 	 * Parameters:
 	 * 		String[] args -- Command-line arguments. Not needed here.
 	 * 
@@ -104,16 +99,7 @@ public class CMDLineInterface
 	
 	
 	/**
-	 * promptInt()
 	 * 
-	 * Purpose: Prompts the user for integer input until a positive number
-	 * 		is entered.
-	 * 
-	 * Parameters:
-	 * 		Scanner input -- Input for data, preferably keyboard input.
-	 * 		String promptMessage -- Prompt message to specify request.
-	 * 
-	 * Returns: int. A positive integer.
 	**/
 	
 	private static int promptInt (Scanner input, String promptMessage)
@@ -146,16 +132,7 @@ public class CMDLineInterface
 	
 	
 	/**
-	 * promptDouble()
 	 * 
-	 * Purpose: Prompts the user for double input until a positive number
-	 * 		is entered.
-	 * 
-	 * Parameters:
-	 * 		Scanner input -- Input for data, preferably keyboard input.
-	 * 		String promptMessage -- Prompt message to specify request.
-	 * 
-	 * Returns: double. A positive double.
 	**/
 	
 	private static double promptDouble (Scanner input, String promptMessage)
@@ -183,7 +160,7 @@ public class CMDLineInterface
 		}
 		
 		return desiredDouble;
-	} // promptDouble()
+	} // desiredDouble()
 	
 	
 	
@@ -227,28 +204,19 @@ public class CMDLineInterface
 	
 	
 	/**
-	 * createNozzle()
 	 * 
-	 * Purpose: Creates and returns a Nozzle object by prompting the
-	 * 		user for input. It is recommended that the input is
-	 * 		given by keyboard.
-	 * 
-	 * Parameters:
-	 * 		Scanner input -- User input, preferably keyboard input.
-	 * 
-	 * Returns: Nozzle. A new Nozzle object with data from user input.
 	**/
 	
 	private static Nozzle createNozzle (Scanner input, int numberOfGrains)
 	{
-		// Prompt user for throat diameter, entrance diameter, exit diameter, and cf
+		//
 		double throatDiameter   = promptDouble(input, THROAT_DIAMETER_PROMPT);
 		double entranceDiameter = promptDouble(input, ENTRANCE_DIAMETER_PROMPT);
 		double exitDiameter     = promptDouble(input, EXIT_DIAMETER_PROMPT);
 		double cf               = promptDouble(input, CF_PROMPT);
 		
-		// Use new data to create and return a Nozzle
+		//
 		return (new Nozzle(throatDiameter, entranceDiameter, exitDiameter, cf, numberOfGrains));
-	} // createNozzle()
+	}
 	
 } // class CMDLineInterface
