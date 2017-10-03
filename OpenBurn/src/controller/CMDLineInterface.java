@@ -19,7 +19,7 @@ public class CMDLineInterface
 	// General prompts
 	private static final String GRAIN_PROMPT   = "Enter number of grains (Must enter at least 1): ";
 	private static final String DENSITY_PROMPT = "Enter propellant density (Must be positive): ";
-	private static final String FILE_PROMPT    = "Enter the desired name of the CSV file.  (don't include \".csv\"";
+	private static final String FILE_PROMPT    = "Enter the desired name of the CSV file.  (don't include \".csv\")";
 	
 	// Grain prompts
 	private static final String OUTER_DIAMETER_PROMPT = "Enter grain outer diameter (Must be positive): ";

@@ -15,6 +15,12 @@ public class SimulationResults
 	private double systemMass;
 	private double systemCenterOfGravity;
 
+	@Override
+	public String toString()
+	{
+		return time + "," + chamberPressure;
+	}
+	
 	public double getTime()
 	{
 		return time;

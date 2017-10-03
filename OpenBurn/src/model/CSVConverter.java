@@ -54,7 +54,7 @@ public class CSVConverter
 		for (Object element : theResults)
 		{
 			sb.append(element.toString());
-			sb.append(",");   // Append a comma to separate into different cells
+			sb.append("\n");   // Append a comma to separate into different cells
 		}
 
 		// Write the built up string to the CSV file, and close the file
