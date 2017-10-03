@@ -3,134 +3,134 @@ package model;
 public class SimulationResults
 {
 	private double time;
-	private float massGeneratedOverall;
-	private float massGeneratedPerGrain[];
-	private float portToThroat[];
-	private float massFlowPerAreaGrain[];
-	private float burnArea;
-	private float burnRate;
-	private float chamberPressure;
-	private float kn;
-	private float lStar;
-	private float systemMass;
-	private float systemCenterOfGravity;
+	private double massGeneratedOverall;
+	private double massGeneratedPerGrain[];
+	private double portToThroat[];
+	private double massFlowPerAreaGrain[];
+	private double burnArea;
+	private double burnRate;
+	private double chamberPressure;
+	private double kn;
+	private double lStar;
+	private double systemMass;
+	private double systemCenterOfGravity;
 
 	public double getTime()
 	{
 		return time;
 	}
 
-	public void setTime(float time)
+	public void setTime(double time)
 	{
 		this.time = time;
 	}
 
-	public float getMassGeneratedOverall()
+	public double getMassGeneratedOverall()
 	{
 		return massGeneratedOverall;
 	}
 
-	public void setMassGeneratedOverall(float massGeneratedOverall)
+	public void setMassGeneratedOverall(double massGeneratedOverall)
 	{
 		this.massGeneratedOverall = massGeneratedOverall;
 	}
 
-	public float[] getMassGeneratedPerGrain()
+	public double[] getMassGeneratedPerGrain()
 	{
 		return massGeneratedPerGrain;
 	}
 
-	public void setMassGeneratedPerGrain(float massGeneratedPerGrain[])
+	public void setMassGeneratedPerGrain(double massGeneratedPerGrain[])
 	{
 		this.massGeneratedPerGrain = massGeneratedPerGrain;
 	}
 
-	public float[] getPortToThroat()
+	public double[] getPortToThroat()
 	{
 		return portToThroat;
 	}
 
-	public void setPortToThroat(float portToThroat[])
+	public void setPortToThroat(double portToThroat[])
 	{
 		this.portToThroat = portToThroat;
 	}
 
-	public float[] getMassFlowPerAreaGrain()
+	public double[] getMassFlowPerAreaGrain()
 	{
 		return massFlowPerAreaGrain;
 	}
 
-	public void setMassFlowPerAreaGrain(float massFlowPerAreaGrain[])
+	public void setMassFlowPerAreaGrain(double massFlowPerAreaGrain[])
 	{
 		this.massFlowPerAreaGrain = massFlowPerAreaGrain;
 	}
 
-	public float getBurnArea()
+	public double getBurnArea()
 	{
 		return burnArea;
 	}
 
-	public void setBurnArea(float burnArea)
+	public void setBurnArea(double motorAvailabeArea)
 	{
-		this.burnArea = burnArea;
+		this.burnArea = motorAvailabeArea;
 	}
 
-	public float getBurnRate()
+	public double getBurnRate()
 	{
 		return burnRate;
 	}
 
-	public void setBurnRate(float burnRate)
+	public void setBurnRate(double burnRate)
 	{
 		this.burnRate = burnRate;
 	}
 
-	public float getChamberPressure()
+	public double getChamberPressure()
 	{
 		return chamberPressure;
 	}
 
-	public void setChamberPressure(float chamberPressure)
+	public void setChamberPressure(double chamberPressure)
 	{
 		this.chamberPressure = chamberPressure;
 	}
 
-	public float getKn()
+	public double getKn()
 	{
 		return kn;
 	}
 
-	public void setKn(float kn)
+	public void setKn(double kn)
 	{
 		this.kn = kn;
 	}
 
-	public float getlStar()
+	public double getlStar()
 	{
 		return lStar;
 	}
 
-	public void setlStar(float lStar)
+	public void setlStar(double lStar)
 	{
 		this.lStar = lStar;
 	}
 
-	public float getSystemMass()
+	public double getSystemMass()
 	{
 		return systemMass;
 	}
 
-	public void setSystemMass(float systemMass)
+	public void setSystemMass(double systemMass)
 	{
 		this.systemMass = systemMass;
 	}
 
-	public float getSystemCenterOfGravity()
+	public double getSystemCenterOfGravity()
 	{
 		return systemCenterOfGravity;
 	}
 
-	public void setSystemCenterOfGravity(float systemCenterOfGravity)
+	public void setSystemCenterOfGravity(double systemCenterOfGravity)
 	{
 		this.systemCenterOfGravity = systemCenterOfGravity;
 	}
