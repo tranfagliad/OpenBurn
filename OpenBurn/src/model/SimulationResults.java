@@ -1,5 +1,12 @@
 package model;
 
+/**
+ * SimulationResults.java
+ * 
+ * 
+ * 
+**/
+
 public class SimulationResults
 {
 	private double time;
