@@ -1,9 +1,11 @@
-package model;
+package view;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
+import model.SimulationResults;
 
 /**
  * CSVConverter.java
@@ -30,7 +32,8 @@ public class CSVConverter
 	 * 		specified file in the second parameter in the form of a CSV file.
 	 *     
 	 * Parameters:
-	 * 		Object[] arr -- The array of objects to write to the CSV file.
+	 * 		List<SimulationResults> theResults -- List of simulation results to
+	 * 			write to the CSV file.
 	 * 		String filename -- Name of the file to write to. Must end with .csv.
 	 * 
 	 * Returns: void.
