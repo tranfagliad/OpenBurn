@@ -7,7 +7,7 @@ import java.util.List;
  * 
  */
 
-public class RocketMotor
+public class RocketMath
 {
 	public static List<SimulationResults> simulate(List<Grain> grainList, double deltaTime, Nozzle theNozzle)
 	{
@@ -35,9 +35,9 @@ public class RocketMotor
 			output.addLast(currentTimeStep);
 			
 			float sumOfDiferences = 0;
-			for(int i = 0; i < grainList.size(); i++)
+			for(Grain oneGrain: grainList)
 			{
-				sumOfDiferences += (grainList.get(i).getOuterDiameter() - grainList.get(i).getInnerDiameter());
+				sumOfDiferences += (oneGrain.getOuterDiameter() - oneGrain.getInnerDiameter());
 			}
 			
 			 if (sumOfDiferences == 0)

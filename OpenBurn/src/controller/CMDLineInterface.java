@@ -1,13 +1,7 @@
 package controller;
 
-import java.util.Scanner;
-import java.util.LinkedList;
-import java.util.List;
-
-import model.Grain;
-import model.Nozzle;
-import model.SimulationResults;
-import model.RocketMotor;
+import java.util.*;
+import model.*;
 
 /**
  * CMDLineInterface.java
@@ -25,6 +19,7 @@ public class CMDLineInterface
 	// General prompts
 	private static final String GRAIN_PROMPT   = "Enter number of grains (Must enter at least 1): ";
 	private static final String DENSITY_PROMPT = "Enter propellant density (Must be positive): ";
+	private static final String FILE_PROMPT    = "Enter the desired name of the CSV file.  (don't include \".csv\"";
 	
 	// Grain prompts
 	private static final String OUTER_DIAMETER_PROMPT = "Enter grain outer diameter (Must be positive): ";
@@ -94,9 +89,17 @@ public class CMDLineInterface
 		// Prompt user for change in time
 		double deltaTime = promptDouble(input, TIME_DELTA_PROMPT);
 		
-		List<SimulationResults> theResults = RocketMotor.simulate(listOfGrains, deltaTime, nozzle);
+		List<SimulationResults> theResults = RocketMath.simulate(listOfGrains, deltaTime, nozzle);
 		
-		// more stuff here eventually
+		System.out.println(FILE_PROMPT);
+		if (input.hasNext() == false)
+		{
+			System.err.println(INPUT_ERROR_MSG);
+			System.exit(ERROR_OCCURRED);
+		}
+		String fileName = input.next() + ".csv";
+		
+		CSVConverter.writeObjArr(theResults, fileName);
 		
 		input.close();   // Close keyboard input
 	} // main()

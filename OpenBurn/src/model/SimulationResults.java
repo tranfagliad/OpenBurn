@@ -15,7 +15,7 @@ public class SimulationResults
 	private float systemMass;
 	private float systemCenterOfGravity;
 
-	public float getTime()
+	public double getTime()
 	{
 		return time;
 	}

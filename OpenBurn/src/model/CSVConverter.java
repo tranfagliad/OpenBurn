@@ -3,6 +3,7 @@ package model;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * CSVConverter.java
@@ -35,10 +36,10 @@ public class CSVConverter
 	 * Returns: void.
 	**/
 	
-	public static void writeObjArr (Object[] arr, String filename)
+	public static void writeObjArr (List<SimulationResults> theResults, String filename)
 	{
 		// Check if given arguments are valid
-		errorCheckArgs(arr, filename);
+		errorCheckArgs(theResults, filename);
 		
 		// Create the file writer
 		BufferedWriter fileWriter = null;
@@ -50,7 +51,7 @@ public class CSVConverter
 		
 		// Go through entire array and build the string to write to file
 		StringBuilder sb = new StringBuilder();
-		for (Object element : arr)
+		for (Object element : theResults)
 		{
 			sb.append(element.toString());
 			sb.append(",");   // Append a comma to separate into different cells
