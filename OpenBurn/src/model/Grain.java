@@ -222,7 +222,7 @@ public class Grain
 	
 	
 	
-	/*
+	/**
 	 * getVolume()
 	 * 
 	 * Purpose: Uses the current values of the grain properties to calculate
@@ -232,7 +232,7 @@ public class Grain
 	 * Parameters: None.
 	 * 
 	 * Returns: double. The volume of the grain.
-	 */
+	**/
 	
 	public double getVolume ()
 	{

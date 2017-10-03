@@ -7,7 +7,7 @@ import java.util.List;
  * 
  */
 
-public class RocketMotor
+public class RocketMath
 {
 	public static List<SimulationResults> simulate(List<Grain> grainList, double deltaTime, Nozzle theNozzle)
 	{
@@ -23,7 +23,7 @@ public class RocketMotor
 			currentTimeStep.setTime(currentTime);
 			
 			// parts 1 through 8 in matlab file
-			generateGeometry(grainList, currentTimeStep);
+			generateGeometry(grainList, currentTimeStep, theNozzle);
 			regressGrains(grainList, currentTimeStep, deltaTime);
 			float[] massFlow = generateMassFlow(currentTimeStep);
 			portToThroatRatio(grainList, currentTimeStep);
@@ -35,9 +35,9 @@ public class RocketMotor
 			output.addLast(currentTimeStep);
 			
 			float sumOfDiferences = 0;
-			for(int i = 0; i < grainList.size(); i++)
+			for(Grain oneGrain: grainList)
 			{
-				sumOfDiferences += (grainList.get(i).getOuterDiameter() - grainList.get(i).getInnerDiameter());
+				sumOfDiferences += (oneGrain.getOuterDiameter() - oneGrain.getInnerDiameter());
 			}
 			
 			 if (sumOfDiferences == 0)
@@ -51,16 +51,32 @@ public class RocketMotor
 	
 	// Generate and save current geometry based data
 	// based off of Part 1 in motor_internal_balistics.m
-	public static void generateGeometry(List<Grain> theGrains, SimulationResults current)
+	public static void generateGeometry(List<Grain> theGrains, SimulationResults currentResult, Nozzle theNozzle)
 	{
-		
+		double motorAvailabeArea = 0;
+		for(Grain oneGrain: theGrains)
+		{
+			motorAvailabeArea += oneGrain.getBurnArea();
+		}
+		double currentKn = motorAvailabeArea / theNozzle.getThroatArea();
+		double currentPressure = pressureFromKn(currentKn);
+		double currentBurnRate = burnRateFromKn(currentKn);
+		currentResult.setBurnArea(motorAvailabeArea);
+		currentResult.setChamberPressure(currentPressure);
+		currentResult.setBurnRate(currentBurnRate);
 	}
 	
 	// Regress grains and calculate the mass flow. Save said data and update the sim state
 	// based off of Part 2 in motor_internal_balistics.m
 	public static void regressGrains(List<Grain> theGrains, SimulationResults current, double deltaTime)
 	{
-		
+		double massGenerated[] = new double[theGrains.size()];
+		for(int i = 0; i < theGrains.size(); i++)
+		{
+			double volumeChange = theGrains.get(i).updateGeometry(current.getBurnRate(), deltaTime);
+			massGenerated[i] = volumeChange * Grain.getPropellantDensity();
+		}
+		current.setMassFlowPerAreaGrain(massGenerated);
 	}
 	
 	// Generate the mass flowing per each grain

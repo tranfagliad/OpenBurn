@@ -3,41 +3,15 @@
 **Team Members:** Daniel Tranfaglia, Andrew Tarr, Abhishek Rane, Vic Chenzo
 
 
-**TODO:**
+**Roles:**
 
-* Abhishek:
+* Abhishek: Product Manager
 
-* Daniel:
+* Daniel: QA Engineer
 
-* Andrew:
+* Andrew: Back-End Developer
 
-* Isaac:
+* Isaac: Front-End Developer
 
-* Vicente:
-
-
-**FIXME:**
-
-* Abhishek:
-
-* Daniel:
-
-* Andrew:
-
-* Isaac:
-
-* Vicente:
-
-
-**ADDME:**
-
-* Abhishek:
-
-* Daniel:
-
-* Andrew:
-
-* Isaac:
-
-* Vicente:
+* Vicente: Team Coordinator
 
