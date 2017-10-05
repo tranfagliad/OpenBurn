@@ -11,7 +11,7 @@ import model.SimulationResults;
  * CSVConverter.java
  * 
  * The CSVConverter class can be used to convert data in an array into a csv file.
- * There are two methods, one for writing objects, the other for primitive ints.
+ * There are two methods, one for writing SimulationResults, the other for primitive ints.
 **/
 
 public class CSVConverter
