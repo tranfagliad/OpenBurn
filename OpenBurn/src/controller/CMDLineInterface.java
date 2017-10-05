@@ -9,7 +9,8 @@ import view.CSVConverter;
  * 
  * This class runs the command-line interface for iteration 1 of OpenBurn.
  * The goal is to be able to run and produce accurate results before the
- * GUI is in place.
+ * GUI is in place. 
+ * 
 **/
 
 public class CMDLineInterface
