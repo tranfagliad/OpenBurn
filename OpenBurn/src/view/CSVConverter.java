@@ -81,8 +81,9 @@ public class CSVConverter
 	 * 		int[] arr -- The array of integers to write to the CSV file.
 	 * 		String filename -- Name of the file to write to. Must end with .csv.
 	 * 
-	 * Returns:
+	 * Returns: void
 	**/
+	
 	public void writeIntArr (int[] arr, String filename)
 	{
 		// Check if given arguments are valid
