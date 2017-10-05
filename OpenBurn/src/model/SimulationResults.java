@@ -58,14 +58,25 @@ public class SimulationResults
 	public double getTime ()
 	{
 		return time;
-	}
+	} // getTime()
 	
 	
 	
-	public void setTime(double time)
+	/**
+	 * setTime()
+	 * 
+	 * Purpose: Changes the time of the results to a new value.
+	 * 
+	 * Parameters:
+	 * 		double newTime -- New value to set the time.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setTime (double newTime)
 	{
-		this.time = time;
-	}
+		this.time = newTime;
+	} // setTime()
 	
 	
 	
@@ -86,10 +97,22 @@ public class SimulationResults
 	
 	
 	
-	public void setMassGeneratedOverall(double massGeneratedOverall)
+	/**
+	 * setMassGeneratedOverall()
+	 * 
+	 * Purpose: Changes the mass generated overall to a new value.
+	 * 
+	 * Parameters:
+	 * 		double newMassGeneratedOverall -- New value to set the
+	 * 			mass generated overall.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setMassGeneratedOverall (double newMassGeneratedOverall)
 	{
-		this.massGeneratedOverall = massGeneratedOverall;
-	}
+		this.massGeneratedOverall = newMassGeneratedOverall;
+	} // setMassGeneratedOverall()
 	
 	
 	
@@ -111,10 +134,23 @@ public class SimulationResults
 	
 	
 	
-	public void setMassGeneratedPerGrain(double[] massGeneratedPerGrain)
+	/**
+	 * setMassGeneratedPerGrain()
+	 * 
+	 * Purpose: Changes the mass generated per grain for each grain to
+	 * 		new values.
+	 * 
+	 * Parameters:
+	 * 		double[] newMassGeneratedPerGrain -- New value to set the
+	 * 			mass generated per grain, for each grain.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setMassGeneratedPerGrain (double[] newMassGeneratedPerGrain)
 	{
-		this.massGeneratedPerGrain = massGeneratedPerGrain;
-	}
+		this.massGeneratedPerGrain = newMassGeneratedPerGrain;
+	} // setMassGeneratedPerGrain()
 	
 	
 	
@@ -135,10 +171,23 @@ public class SimulationResults
 	
 	
 	
-	public void setPortToThroat(double portToThroat[])
+	/**
+	 * setPortToThroat()
+	 * 
+	 * Purpose: Changes the port to throat values for each grain
+	 * 		in a simulation to new values.
+	 * 
+	 * Parameters:
+	 * 		double[] newPortToThroat -- New values to set the port-
+	 * 			to-throat for each grain.
+	 * 
+	 * Returns: void.
+	 **/
+	
+	public void setPortToThroat (double[] newPortToThroat)
 	{
-		this.portToThroat = portToThroat;
-	}
+		this.portToThroat = newPortToThroat;
+	} // setPortToThroat()
 	
 	
 	
@@ -154,17 +203,30 @@ public class SimulationResults
 	 * 		grain for each grain in a simulation.
 	**/
 	
-	public double[] getMassFlowPerAreaGrain()
+	public double[] getMassFlowPerAreaGrain ()
 	{
 		return massFlowPerAreaGrain;
 	} // getMassFlowPerAreaGrain()
 	
 	
 	
-	public void setMassFlowPerAreaGrain(double massFlowPerAreaGrain[])
+	/**
+	 * setMassFlowPerAreaGrain()
+	 * 
+	 * Purpose: Changes the mass flow per area grain for each grain to
+	 * 		new values.
+	 * 
+	 * Parameters:
+	 * 		double[] newMassPerAreaGrain -- New values to set the mass flow
+	 * 			per area grain for each grain.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setMassFlowPerAreaGrain (double[] newMassFlowPerAreaGrain)
 	{
-		this.massFlowPerAreaGrain = massFlowPerAreaGrain;
-	}
+		this.massFlowPerAreaGrain = newMassFlowPerAreaGrain;
+	} // setMassFlowPerAreaGrain()
 	
 	
 	
@@ -185,10 +247,23 @@ public class SimulationResults
 	
 	
 	
-	public void setBurnArea(double motorAvailabeArea)
+	/**
+	 * setBurnArea()
+	 * 
+	 * Purpose: Changes the motor available area of results to
+	 * 		a new value.
+	 * 
+	 * Parameters:
+	 * 		double newMotorAvailableArea -- New value to set
+	 * 			the motor available area.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setBurnArea (double newMotorAvailableArea)
 	{
-		this.burnArea = motorAvailabeArea;
-	}
+		this.burnArea = newMotorAvailableArea;
+	} // setBurnArea()
 	
 	
 	
@@ -209,10 +284,21 @@ public class SimulationResults
 	
 	
 	
-	public void setBurnRate(double burnRate)
+	/**
+	 * setBurnRate()
+	 * 
+	 * Purpose: Changes the burn rate of the results to a new value.
+	 * 
+	 * Parameters:
+	 * 		double newBurnRate -- New value to set the burn rate.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setBurnRate (double newBurnRate)
 	{
-		this.burnRate = burnRate;
-	}
+		this.burnRate = newBurnRate;
+	} // setBurnRate()
 	
 	
 	
@@ -233,10 +319,23 @@ public class SimulationResults
 	
 	
 	
-	public void setChamberPressure(double chamberPressure)
+	/**
+	 * setChamberPressure()
+	 * 
+	 * Purpose: Changes the chamber pressure of the results
+	 * 		to a new value.
+	 * 
+	 * Parameters:
+	 * 		double newChamberPressure -- New value to set the
+	 * 			chamber pressure.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setChamberPressure (double newChamberPressure)
 	{
-		this.chamberPressure = chamberPressure;
-	}
+		this.chamberPressure = newChamberPressure;
+	} // setChamberPressure()
 	
 	
 	
@@ -259,10 +358,21 @@ public class SimulationResults
 	
 	
 	
-	public void setKn(double kn)
+	/**
+	 * setKn()
+	 * 
+	 * Purpose: Changes the kn of the results to a new value.
+	 * 
+	 * Parameters:
+	 * 		double newKn -- New value to set the kn.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setKn (double newKn)
 	{
-		this.kn = kn;
-	}
+		this.kn = newKn;
+	} // setKn()
 
 	
 	
@@ -280,14 +390,26 @@ public class SimulationResults
 	{
 		return lStar;
 	} // getLStar()
-
 	
 	
-	public void setlStar(double lStar)
+	
+	/**
+	 * setLStar()
+	 * 
+	 * Purpose: Changes the characteristic length (L*) of the results
+	 * 		to a new value.
+	 * 
+	 * Parameters:
+	 * 		newLStar -- New value to set the characteristic length (L*).
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setLStar (double newLStar)
 	{
-		this.lStar = lStar;
-	}
-
+		this.lStar = newLStar;
+	} // setLStar()
+	
 	
 	
 	/**
@@ -307,10 +429,21 @@ public class SimulationResults
 	
 	
 	
-	public void setSystemMass(double systemMass)
+	/**
+	 * setSystemMass()
+	 * 
+	 * Purpose: Changes the system mass to a new value.
+	 * 
+	 * Parameters:
+	 * 		double newSystemMass -- New value to set the system mass.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setSystemMass (double newSystemMass)
 	{
-		this.systemMass = systemMass;
-	}
+		this.systemMass = newSystemMass;
+	} // setSystemMass()
 
 	
 	
@@ -331,9 +464,21 @@ public class SimulationResults
 
 	
 	
-	public void setSystemCenterOfGravity(double systemCenterOfGravity)
+	/**
+	 * setSystemCenterOfGravity()
+	 * 
+	 * Purpose: Changes the system center of gravity to a new value.
+	 * 
+	 * Parameters:
+	 * 		double newSystemCenterOfGravity -- New value to set the system
+	 * 			center of gravity.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setSystemCenterOfGravity (double newSystemCenterOfGravity)
 	{
-		this.systemCenterOfGravity = systemCenterOfGravity;
-	}
+		this.systemCenterOfGravity = newSystemCenterOfGravity;
+	} // setSystemCenterOfGravity()
 
 } // class SimulationResults
