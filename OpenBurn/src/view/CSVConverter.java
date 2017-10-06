@@ -29,7 +29,7 @@ public class CSVConverter
 	
 	
 	/**
-	 * writeObjArr()
+	 * writeResultsArr()
 	 * 
 	 * Purpose: This method takes an array of Objects and writes them to the 
 	 * 		specified file in the second parameter in the form of a CSV file.
@@ -42,7 +42,7 @@ public class CSVConverter
 	 * Returns: void.
 	**/
 	
-	public static void writeObjArr (List<SimulationResults> theResults, String filename)
+	public static void writeResultsArr (List<SimulationResults> theResults, String filename)
 	{
 		// Check if given arguments are valid
 		errorCheckArgs(theResults, filename);
@@ -77,7 +77,7 @@ public class CSVConverter
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
-	} // writeObjArr()
+	} // writeResultsArr()
 	
 	
 	

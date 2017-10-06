@@ -10,7 +10,6 @@ import view.CSVConverter;
  * This class runs the command-line interface for iteration 1 of OpenBurn.
  * The goal is to be able to run and produce accurate results before the
  * GUI is in place. 
- * 
 **/
 
 public class CMDLineInterface
@@ -106,7 +105,7 @@ public class CMDLineInterface
 		}
 		String fileName = input.next() + CSV_EXTENSION;
 		
-		CSVConverter.writeObjArr(theResults, fileName);
+		CSVConverter.writeResultsArr(theResults, fileName);
 		
 		input.close();   // Close keyboard input
 		System.out.println(SIM_OVER);
