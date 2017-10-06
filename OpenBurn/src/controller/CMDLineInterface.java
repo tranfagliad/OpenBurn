@@ -198,6 +198,48 @@ public class CMDLineInterface
 	
 	
 	/**
+	 * promptBurningEnds()
+	 * 
+	 * Purpose: Special case prompting method that prompts the user
+	 * 		to enter a number of burning ends. The only acceptable
+	 * 		answers are 0, 1, or 2.
+	 * 
+	 * Parameters:
+	 * 		Scanner input -- Input for data, preferably keyboard input.
+	 * 
+	 * Returns: int. 0, 1, or 2.
+	**/
+	
+	private static int promptBurningEnds (Scanner input)
+	{
+		// Check for null scanner
+		if (input == null)
+			throw new IllegalArgumentException(NULL_SCANNER_MSG);
+				
+		// Prompt the user for input until 0, 1, 2, or error
+		int desiredInt = -1;
+		while (desiredInt < 0 && desiredInt > 2)
+		{
+			System.out.print(BURNING_ENDS_PROMPT);
+			
+			// Response was not an integer, error
+			if (input.hasNextInt() == false)
+			{
+				System.err.println(INPUT_ERROR_MSG);
+				System.exit(ERROR_OCCURRED);
+			}
+			
+			// Valid input
+			else
+				desiredInt = input.nextInt();
+		}
+		
+		return desiredInt;
+	} // promptBurningEnds()
+	
+	
+	
+	/**
 	 * createGrain()
 	 * 
 	 * Purpose: Creates and returns a Grain object by prompting the
@@ -228,8 +270,9 @@ public class CMDLineInterface
 		double length = promptDouble(input, LENGTH_PROMPT);
 		
 		// Prompt user for the number of burning ends
-		int numBurningEnds = promptInt(input, BURNING_ENDS_PROMPT);
-		
+		// Allow 0, 1, or 2
+		int numBurningEnds = promptBurningEnds(input);
+				
 		// Use new data to create and return a Grain
 		return (new Grain(length, outerDiameter, innerDiameter, numBurningEnds));
 	} // createGrain()
