@@ -16,12 +16,15 @@ import view.CSVConverter;
 public class CMDLineInterface
 {
 	private static final String START_MSG = "OpenBurn: Iteration #1\n";
-	private static final String GRAIN_NUM = "Grain number: ";
+	private static final String GRAIN_NUM = "\nGrain number: ";
+	private static final String SIM_OVER  = "\nSimulation Complete";
+	
+	private static final String CSV_EXTENSION = ".csv";
 	
 	// General prompts
 	private static final String GRAIN_PROMPT   = "Enter number of grains (Must enter at least 1): ";
 	private static final String DENSITY_PROMPT = "Enter propellant density (Must be positive): ";
-	private static final String FILE_PROMPT    = "Enter the desired name of the CSV file.  (don't include \".csv\")";
+	private static final String FILE_PROMPT    = "\nEnter the desired name of the CSV file (Don't include \".csv\"): ";
 	
 	// Grain prompts
 	private static final String OUTER_DIAMETER_PROMPT = "Enter grain outer diameter (Must be positive): ";
@@ -30,7 +33,7 @@ public class CMDLineInterface
 	private static final String BURNING_ENDS_PROMPT   = "Enter grain number of burning ends (Must be 0, 1, or 2): ";
 	
 	// Nozzle prompts
-	private static final String THROAT_DIAMETER_PROMPT   = "Enter nozzle throat diameter (Must be positive): ";
+	private static final String THROAT_DIAMETER_PROMPT   = "\nEnter nozzle throat diameter (Must be positive): ";
 	private static final String ENTRANCE_DIAMETER_PROMPT = "Enter nozzle entrance diameter (Must be positive): ";
 	private static final String EXIT_DIAMETER_PROMPT     = "Enter nozzle exit diameter (Must be positive): ";
 	private static final String CF_PROMPT                = "Enter nozzle CF (Must be positive): ";
@@ -91,19 +94,22 @@ public class CMDLineInterface
 		// Prompt user for change in time
 		double deltaTime = promptDouble(input, TIME_DELTA_PROMPT);
 		
+		// Simulate the rocket motor using the given data
 		List<SimulationResults> theResults = RocketMath.simulate(listOfGrains, deltaTime, nozzle);
 		
+		// Prompt for CSV file name to send data
 		System.out.println(FILE_PROMPT);
 		if (input.hasNext() == false)
 		{
 			System.err.println(INPUT_ERROR_MSG);
 			System.exit(ERROR_OCCURRED);
 		}
-		String fileName = input.next() + ".csv";
+		String fileName = input.next() + CSV_EXTENSION;
 		
 		CSVConverter.writeObjArr(theResults, fileName);
 		
 		input.close();   // Close keyboard input
+		System.out.println(SIM_OVER);
 	} // main()
 	
 	
