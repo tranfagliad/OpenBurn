@@ -27,11 +27,14 @@ public class Grain
 	private double outerDiameter;   // Inches
 	private double innerDiameter;   // Inches
 	
+	private final double initialLength; // Inches
+	
+	
 	private int numBurningEnds;     // Must be 0, 1 or 2
 	
 	private double burnoutTime;     // Time that the grain burned out
-	
-	
+
+	private boolean isBurning;
 	
 	/**
 	 * Grain Constructor
@@ -69,6 +72,8 @@ public class Grain
 		this.length         = length;
 		this.innerDiameter  = innerDiameter;
 		this.numBurningEnds = numBurningEnds;
+		this.initialLength = length;
+		this.isBurning = true;
 		
 		// Initialize burnout time to 0 seconds
 		setBurnoutTime(0.0);
@@ -310,9 +315,29 @@ public class Grain
 		// Error check for negative volume change, volume should expand
 		if (newVolume > initialVolume)
 			throw new ArithmeticException(NEGATIVE_VOLUME_ERR_MSG);
-		
+		if (innerDiameter == outerDiameter)
+		{
+			this.isBurning = false;
+		}
 		// Return the change in volume
 		return (initialVolume - newVolume);
 	} // updateGeometry()
+	
+	
+	public double getCurrentInnerFlowArea(){
+		return Math.PI * Math.pow(this.innerDiameter/2, 2); // Area = pi*(d/2)^2
+	}
+	
+	public double getCurrentInnerFlowVolume(){
+		return this.getCurrentInnerFlowArea()*this.length;
+	}
+	
+	public double getlengthDifference(){
+		return this.initialLength - this.length;
+	}
+	
+	public boolean isBurning(){
+		return this.isBurning;
+	}
 	
 } // class Grain

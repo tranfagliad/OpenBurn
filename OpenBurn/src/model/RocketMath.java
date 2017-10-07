@@ -47,25 +47,23 @@ public class RocketMath
 			// Parts 1 through 8 in matlab file
 			generateGeometry(grainList, currentTimeStep, theNozzle);
 			regressGrains(grainList, currentTimeStep, deltaTime);
-			double[] massFlow = generateMassFlow(currentTimeStep);
-			portToThroatRatio(grainList, currentTimeStep);
-			calculateMoreMassFlow(grainList, currentTimeStep, massFlow);
-			calculateLStar(grainList, currentTimeStep);
+			double[] massFlow = generateMassFlow(grainList, currentTimeStep);
+			portToThroatRatio(grainList, currentTimeStep, theNozzle);
+			calculateMassFlowPerArea(grainList, currentTimeStep, massFlow);
+			calculateLStar(grainList, currentTimeStep, theNozzle);
 			massAndCenterOfGravity(grainList, currentTimeStep);
 			calculateBurnout(grainList, currentTime);
 			
 			// Add final results to the result set
 			output.add(currentTimeStep);
 			
-			// Determine the sum of differences 
-			double sumOfDiferences = 0;
-			for(Grain oneGrain: grainList)
-				sumOfDiferences += (oneGrain.getOuterDiameter() - oneGrain.getInnerDiameter());
 			
 			// End simulation if the sum of differences of the outer diameter and inner
 			// diameter becomes zero
-			if (sumOfDiferences == 0.0)
-				simRunning = false;
+			simRunning = false;
+			for (int i = 0; i < grainList.size(); i++){
+				simRunning |= grainList.get(i).isBurning();
+			}
 		} // End simulation loop
 		
 		return output;
@@ -101,25 +99,52 @@ public class RocketMath
 			double volumeChange = theGrains.get(i).updateGeometry(current.getBurnRate(), deltaTime);
 			massGenerated[i] = volumeChange * Grain.getPropellantDensity();
 		}
-		current.setMassFlowPerAreaGrain(massGenerated);
+		current.setMassGeneratedPerGrain(massGenerated);
 	} // regressGrains()
 	
 	
 	
 	// Generate the mass flowing per each grain
 	// based off of Part 3 in motor_internal_balistics.m
-	public static double[] generateMassFlow (SimulationResults current)
+	public static double[] generateMassFlow (List<Grain> theGrains, SimulationResults current)
 	{
-		return null;
+		double massFlow[] =new double[theGrains.size()];
+		for (int i = 0; i < theGrains.size(); i++)
+		{
+			if (i == 0)// Mass flow depends only on it
+			{
+				massFlow[i] = current.getMassGeneratedPerGrain()[i];
+			}else // Mass flow includes all the mass generated in grains above it 
+			{
+				massFlow[i] = massFlow[i-1] + current.getMassGeneratedPerGrain()[i];
+			}
+		}
+		return massFlow;
 	} // generateMassFlow()
 	
 	
 	
 	// Calculate the port to throat ratio
 	// based off of Part 4 in motor_internal_balistics.m
-	public static void portToThroatRatio (List<Grain> theGrains, SimulationResults current)
+	public static void portToThroatRatio (List<Grain> theGrains, SimulationResults current, Nozzle theNozzle)
 	{
-		
+		/*
+		 * TODO: 
+		 * Remove cylindrical grain geometry
+		 */
+		double portToThroat[] = new double[theGrains.size()];
+		for (int i =  0; i < theGrains.size(); i++)
+		{
+			if (i < theGrains.size() - 1)
+			{
+			portToThroat[i] = theGrains.get(i).getCurrentInnerFlowArea()/theGrains.get(i+1).getCurrentInnerFlowArea();
+			}
+			else
+			{
+				portToThroat[i] = theGrains.get(i).getCurrentInnerFlowArea()/theNozzle.getThroatArea();
+			}
+		}
+		current.setPortToThroat(portToThroat);
 	} // portToThroatRatio()
 	
 	
@@ -127,8 +152,14 @@ public class RocketMath
 	// Calculate the mass flow over area at various locations in the motor
 	// based off of Part 5 in motor_internal_balistics.m
 	// the last parameter is the return value form generateMassFlow()
-	public static void calculateMoreMassFlow (List<Grain> theGrains, SimulationResults current, double[] massFlow)
+	public static void calculateMassFlowPerArea (List<Grain> theGrains, SimulationResults current, double[] massFlow)
 	{
+		double massFlowPerArea[] = new double[theGrains.size() + 2];
+		int i;
+		for(i = 0; i < theGrains.size(); i++)
+		{
+			massFlowPerArea[i] = massFlow[i]/theGrains.get(i).getCurrentInnerFlowArea();
+		}
 		
 	} // calculateMoreMassFlow()
 	
@@ -136,9 +167,18 @@ public class RocketMath
 	
 	// Calculate the l star at the current point in the sim
 	// based off of Part 6 in motor_internal_balistics.m
-	public static void calculateLStar (List<Grain> theGrains, SimulationResults current)
+	public static void calculateLStar (List<Grain> theGrains, SimulationResults current, Nozzle theNozzle)
 	{
-		
+		double currentFreeVolume = 0.0;
+		double currentFreeLength = 0.0;
+		for(int i = 0; i < theGrains.size(); i++)
+		{
+			currentFreeVolume += theGrains.get(i).getCurrentInnerFlowVolume();
+			currentFreeLength += theGrains.get(i).getlengthDifference();
+		}
+		currentFreeVolume += Math.PI * Math.pow(theGrains.get(0).getOuterDiameter()/2, 2) * currentFreeLength;
+		double lstar = currentFreeVolume / theNozzle.getThroatArea();
+		current.setLStar(lstar);
 	} // calculateLStar()
 	
 	
@@ -147,7 +187,7 @@ public class RocketMath
 	// based off of Part 7 in motor_internal_balistics.m
 	public static void massAndCenterOfGravity (List<Grain> theGrains, SimulationResults current)
 	{
-		
+		// Need some more info for this one. This will be done after grain refactoring.
 	} // massAndCenterOfGravity()
 	
 	
@@ -156,6 +196,12 @@ public class RocketMath
 	// based off of Part 8 in motor_internal_balistics.m
 	public static void calculateBurnout (List<Grain> theGrains, double currentTime)
 	{
+		for (int i = 0; i < theGrains.size(); i++){
+			if(!theGrains.get(i).isBurning() && theGrains.get(i).getBurnoutTime() == 0.0)
+			{
+				theGrains.get(i).setBurnoutTime(currentTime);
+			}
+		}
 		
 	} // calculateBurnout()
 	

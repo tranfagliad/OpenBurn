@@ -19,7 +19,6 @@ public class Nozzle
 	private int throatID;
 	
 	
-	
 	/**
 	 * Nozzle Constructor
 	 * 
