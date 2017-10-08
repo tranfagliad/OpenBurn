@@ -76,7 +76,6 @@ public class CMDLineInterface
 		// Prompt user for propellant density
 		int numberOfGrains = promptInt(input, GRAIN_PROMPT);
 		double density = promptDouble(input, DENSITY_PROMPT);
-		Grain.setPropellantDensity(density);
 		
 		// Continuously prompt the user for input and create a list of Grains
 		// Current implementation of the list is: LinkedList
@@ -85,6 +84,11 @@ public class CMDLineInterface
 		{
 			System.out.println(GRAIN_NUM + grainNum);
 			listOfGrains.add(createGrain(input));
+		}
+		
+		// TEMP fix
+		for (int i = 0; i < listOfGrains.size(); i++){
+			listOfGrains.get(i).setPropellantDensity(density);
 		}
 		
 		// Prompt the user for input to create a nozzle
@@ -274,7 +278,7 @@ public class CMDLineInterface
 		int numBurningEnds = promptBurningEnds(input);
 				
 		// Use new data to create and return a Grain
-		return (new Grain(length, outerDiameter, innerDiameter, numBurningEnds));
+		return (new CylindricalGrain(length, outerDiameter, innerDiameter, numBurningEnds));
 	} // createGrain()
 	
 	

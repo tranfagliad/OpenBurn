@@ -56,10 +56,7 @@ public class RocketMath
 			
 			// Add final results to the result set
 			output.add(currentTimeStep);
-			
-			
-			// End simulation if the sum of differences of the outer diameter and inner
-			// diameter becomes zero
+
 			simRunning = false;
 			for (int i = 0; i < grainList.size(); i++){
 				simRunning |= grainList.get(i).isBurning();
@@ -97,7 +94,7 @@ public class RocketMath
 		for(int i = 0; i < theGrains.size(); i++)
 		{
 			double volumeChange = theGrains.get(i).updateGeometry(current.getBurnRate(), deltaTime);
-			massGenerated[i] = volumeChange * Grain.getPropellantDensity();
+			massGenerated[i] = volumeChange * theGrains.get(i).getPropellantDensity();
 		}
 		current.setMassGeneratedPerGrain(massGenerated);
 	} // regressGrains()
