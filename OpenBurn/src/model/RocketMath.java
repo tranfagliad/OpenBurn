@@ -160,7 +160,7 @@ public class RocketMath
 		{
 			massFlowPerArea[i] = massFlow[i]/theGrains.get(i).getCurrentInnerFlowArea();
 		}
-		
+		current.setMassFlowPerAreaGrain(massFlowPerArea);
 	} // calculateMoreMassFlow()
 	
 	

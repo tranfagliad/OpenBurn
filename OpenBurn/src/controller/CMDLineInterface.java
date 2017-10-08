@@ -218,7 +218,7 @@ public class CMDLineInterface
 				
 		// Prompt the user for input until 0, 1, 2, or error
 		int desiredInt = -1;
-		while (desiredInt < 0 && desiredInt > 2)
+		while (desiredInt < 0 || desiredInt > 2)
 		{
 			System.out.print(BURNING_ENDS_PROMPT);
 			

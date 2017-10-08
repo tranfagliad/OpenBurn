@@ -64,6 +64,7 @@ public class CSVConverter
 		
 		// Go through entire array and build the string to write to file
 		StringBuilder sb = new StringBuilder();
+		sb.append(theResults.get(0).getLabels());
 		for (Object element : theResults)
 		{
 			sb.append(element.toString());
