@@ -79,6 +79,7 @@ public class RocketMath
 		double currentKn = motorAvailabeArea / theNozzle.getThroatArea();
 		double currentPressure = pressureFromKn(currentKn);
 		double currentBurnRate = burnRateFromKn(currentKn);
+		currentResult.setKn(currentKn);
 		currentResult.setBurnArea(motorAvailabeArea);
 		currentResult.setChamberPressure(currentPressure);
 		currentResult.setBurnRate(currentBurnRate);
@@ -91,11 +92,14 @@ public class RocketMath
 	public static void regressGrains (List<Grain> theGrains, SimulationResults current, double deltaTime)
 	{
 		double massGenerated[] = new double[theGrains.size()];
+		double overalGenerated = 0;
 		for(int i = 0; i < theGrains.size(); i++)
 		{
 			double volumeChange = theGrains.get(i).updateGeometry(current.getBurnRate(), deltaTime);
 			massGenerated[i] = volumeChange * theGrains.get(i).getPropellantDensity();
+			overalGenerated += massGenerated[i];
 		}
+		current.setMassGeneratedOverall(overalGenerated);
 		current.setMassGeneratedPerGrain(massGenerated);
 	} // regressGrains()
 	
