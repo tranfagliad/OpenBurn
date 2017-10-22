@@ -3,6 +3,7 @@ package model;
 public class ImpulseClassifier {
 	private String classification;
 	private double ISP;
+	private double massFrac;
 	
 	
 	public String getClassification(){
@@ -11,6 +12,10 @@ public class ImpulseClassifier {
 	
 	public double ISP(){
 		return ISP;
+	}
+	
+	public double getMassFrac(){
+		return massFrac;
 	}
 	
 }
