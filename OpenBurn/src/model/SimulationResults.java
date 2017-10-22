@@ -15,7 +15,7 @@ public class SimulationResults
 	private static final String PORT_TO_THROAT = "Port to Throat by port: ";
 	private static final String MASS_FLOW_PER_GRAIN = "Mass Flow per grain: ";
 	private static final String BURN_AREA = "Burn Area (in^2)";
-	private static final String BURN_RATE = "Burn Rate (iin /sec)";
+	private static final String BURN_RATE = "Burn Rate (in /sec)";
 	private static final String PRESSURE = "Pressure (psi)";
 	private static final String KN = "KN ()";
 	private static final String L_STAR = "L Star (in)";

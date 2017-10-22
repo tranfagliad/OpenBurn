@@ -49,7 +49,7 @@ public class RocketMath
 			regressGrains(grainList, currentTimeStep, deltaTime);
 			double[] massFlow = generateMassFlow(grainList, currentTimeStep);
 			portToThroatRatio(grainList, currentTimeStep, theNozzle);
-			calculateMassFlowPerArea(grainList, currentTimeStep, massFlow);
+			calculateMassFlowPerArea(grainList, currentTimeStep, massFlow, theNozzle);
 			calculateLStar(grainList, currentTimeStep, theNozzle);
 			massAndCenterOfGravity(grainList, currentTimeStep);
 			calculateBurnout(grainList, currentTime);
@@ -153,7 +153,7 @@ public class RocketMath
 	// Calculate the mass flow over area at various locations in the motor
 	// based off of Part 5 in motor_internal_balistics.m
 	// the last parameter is the return value form generateMassFlow()
-	public static void calculateMassFlowPerArea (List<Grain> theGrains, SimulationResults current, double[] massFlow)
+	public static void calculateMassFlowPerArea (List<Grain> theGrains, SimulationResults current, double[] massFlow, Nozzle theNozzle)
 	{
 		double massFlowPerArea[] = new double[theGrains.size() + 2];
 		int i;
@@ -161,6 +161,10 @@ public class RocketMath
 		{
 			massFlowPerArea[i] = massFlow[i]/theGrains.get(i).getCurrentInnerFlowArea();
 		}
+		
+		massFlowPerArea[massFlowPerArea.length - 2] = massFlow[massFlow.length-1] / theNozzle.getEntranceArea();
+		massFlowPerArea[massFlowPerArea.length - 1] = massFlow[massFlow.length-1] / theNozzle.getThroatArea();
+
 		current.setMassFlowPerAreaGrain(massFlowPerArea);
 	} // calculateMoreMassFlow()
 	
