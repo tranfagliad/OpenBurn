@@ -204,13 +204,48 @@ abstract public class Grain
 	
 	abstract public double updateGeometry (double burnRate, double deltaTime);
 	
-	
+	/**
+	 * getCurrentInnerFlowArea()
+	 * 
+	 * Purpose: Uses the current geometry state to get the inner flow
+	 * 		area of the motor. This is provided in the grains standard unit.
+	 * 		This is used for mass flow per area and port to throat ratio
+	 * 		calculations.
+	 * 
+	 * @return: double. The inner flow area of the motor
+	 */
 	abstract public double getCurrentInnerFlowArea();
 	
+	/**
+	 * getCurrentInnerFlowVolume()
+	 * 
+	 * Purpose: Uses the current geometry state to get the inner flow
+	 * 		volume of the motor. This is provided in the grains standard unit.
+	 * 		This is used for l* calculations.
+	 * 
+	 * @return double. THe inner flow volume of the motor.
+	 */
 	abstract public double getCurrentInnerFlowVolume();
 	
+	/**
+	 * getlengthDifference()
+	 * 
+	 * Purpose: Compares the current length of the motor with the its
+	 * 		initial length and returns the difference. Used in l* calculation
+	 * 
+	 * @return double. The difference between the initial and current 
+	 * 		grain length.
+	 */
 	abstract public double getlengthDifference();
 	
+	/**
+	 * isBurning()
+	 * 
+	 * Purpose: Getter for the isBurning boolean. This is set initially as
+	 * 			true. The update geometry method is responsible for setting
+	 * 			this to false.
+	 * @return
+	 */
 	abstract public boolean isBurning();
 	
 } // class Grain
