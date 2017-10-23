@@ -1,3 +1,11 @@
+/*
+ *  Metric units: cm, g, N, Pa
+ * ImperialUnits: in, lbm, lbf, psi
+ * 
+ * Area and density are in appropriate combinations of the above units
+ * 
+ */
+
 package model;
 
 public class UnitConverter
