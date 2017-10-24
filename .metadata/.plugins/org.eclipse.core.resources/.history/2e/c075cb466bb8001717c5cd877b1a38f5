@@ -1,0 +1,75 @@
+package view;
+import java.util.List;
+
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.chart.Axis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
+import model.SimulationResults;
+
+/**
+ * 
+ * 
+ * 
+ * 
+**/
+
+public class GraphView
+{
+	// Private fields
+	private ScatterChart chart;
+	
+	
+	
+	/**
+	 * 
+	 * 
+	 * 
+	**/
+	
+	public GraphView (String chartName, String xAxisName, String yAxisName)
+	{
+		NumberAxis xAxis = new NumberAxis();
+		xAxis.setLabel(xAxisName);
+		
+		NumberAxis yAxis = new NumberAxis();
+		yAxis.setLabel(yAxisName);
+		
+		this.chart = new ScatterChart(xAxis, yAxis);
+	    chart.setTitle(chartName);
+	} // GraphView Constructor (String, String, String)
+
+	
+	
+	/**
+	 * 
+	**/
+	
+	public ScatterChart getChart ()
+	{
+		return chart;
+	} // getChart()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public void addDataSet (String legendName, List<SimulationResults> results)
+	{
+		ObservableList<XYChart.Series<Double, Double>> data = FXCollections.observableArrayList();
+		
+		Series<Double, Double> dataSeries = new Series<>();
+		dataSeries.setName(legendName);
+		
+		
+		data.addAll(dataSeries);
+	}
+	
+} // class ResultsScatterPlot

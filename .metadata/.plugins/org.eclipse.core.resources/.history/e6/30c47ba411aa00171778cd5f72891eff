@@ -1,0 +1,144 @@
+package model;
+
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * RocketMath.java
+ * 
+ * Contains methods to calculate simulation results for rocket motor
+ * burning over time.
+**/
+
+public class RocketMath
+{
+	public static List<SimulationResults> simulate(List<Grain> grainList, double deltaTime, Nozzle theNozzle)
+	{
+		LinkedList<SimulationResults> output = new LinkedList<SimulationResults>();
+		float currentTime = 0;
+		boolean run = true;
+		
+		while (run)
+		{
+			currentTime += deltaTime;
+			
+			SimulationResults currentTimeStep = new SimulationResults();
+			currentTimeStep.setTime(currentTime);
+			
+			// parts 1 through 8 in matlab file
+			generateGeometry(grainList, currentTimeStep, theNozzle);
+			regressGrains(grainList, currentTimeStep, deltaTime);
+			float[] massFlow = generateMassFlow(currentTimeStep);
+			portToThroatRatio(grainList, currentTimeStep);
+			calculateMoreMassFlow(grainList, currentTimeStep, massFlow);
+			calculateLstar(grainList, currentTimeStep);
+			massAndCenterOfGravity(grainList, currentTimeStep);
+			calculateBurnout(grainList, currentTime);
+			
+			output.addLast(currentTimeStep);
+			
+			float sumOfDiferences = 0;
+			for(Grain oneGrain: grainList)
+			{
+				sumOfDiferences += (oneGrain.getOuterDiameter() - oneGrain.getInnerDiameter());
+			}
+			
+			 if (sumOfDiferences == 0)
+			 {
+			  run = false;
+			 }
+		}
+		
+		return output;
+	}
+	
+	// Generate and save current geometry based data
+	// based off of Part 1 in motor_internal_balistics.m
+	public static void generateGeometry(List<Grain> theGrains, SimulationResults currentResult, Nozzle theNozzle)
+	{
+		double motorAvailabeArea = 0;
+		for(Grain oneGrain: theGrains)
+		{
+			motorAvailabeArea += oneGrain.getBurnArea();
+		}
+		double currentKn = motorAvailabeArea / theNozzle.getThroatArea();
+		double currentPressure = pressureFromKn(currentKn);
+		double currentBurnRate = burnRateFromKn(currentKn);
+		currentResult.setBurnArea(motorAvailabeArea);
+		currentResult.setChamberPressure(currentPressure);
+		currentResult.setBurnRate(currentBurnRate);
+	}
+	
+	// Regress grains and calculate the mass flow. Save said data and update the sim state
+	// based off of Part 2 in motor_internal_balistics.m
+	public static void regressGrains(List<Grain> theGrains, SimulationResults current, double deltaTime)
+	{
+		double massGenerated[] = new double[theGrains.size()];
+		for(int i = 0; i < theGrains.size(); i++)
+		{
+			double volumeChange = theGrains.get(i).updateGeometry(current.getBurnRate(), deltaTime);
+			massGenerated[i] = volumeChange * Grain.getPropellantDensity();
+		}
+		current.setMassFlowPerAreaGrain(massGenerated);
+	}
+	
+	// Generate the mass flowing per each grain
+	// based off of Part 3 in motor_internal_balistics.m
+	public static float[] generateMassFlow(SimulationResults current)
+	{
+		return null;
+	}
+	
+	// Calculate the port to throat ratio
+	// based off of Part 4 in motor_internal_balistics.m
+	public static void portToThroatRatio(List<Grain> theGrains, SimulationResults current)
+	{
+		
+	}
+	
+	// Calculate the mass flow over area at various locations in the motor
+	// based off of Part 5 in motor_internal_balistics.m
+	// the last parameter is the return value form generateMassFlow()
+	public static void calculateMoreMassFlow(List<Grain> theGrains, SimulationResults current, float[] massFlow)
+	{
+		
+	}
+	
+	// Calculate the l star at the current point in the sim
+	// based off of Part 6 in motor_internal_balistics.m
+	public static void calculateLstar(List<Grain> theGrains, SimulationResults current)
+	{
+		
+	}
+	
+	// Calculate the current mass and center of gravity for rocksim
+	// based off of Part 7 in motor_internal_balistics.m
+	public static void massAndCenterOfGravity(List<Grain> theGrains, SimulationResults current)
+	{
+		
+	}
+	
+	// Calculate burnout locations
+	// based off of Part 8 in motor_internal_balistics.m
+	public static void calculateBurnout(List<Grain> theGrains, float currentTime)
+	{
+		
+	}
+	
+	// converts kn to pressure
+	// based on Pc_via_kn
+	// motor_internal_balistics.m line 53
+	public static double pressureFromKn(double kn)
+	{
+		return ((double)(2.725060 * kn - 236.099212));
+	}
+
+	// converts kn to burn rate
+	// based on Br_via_kn
+	// motor_internal_balistics.m line 54
+	public static double burnRateFromKn(double kn)
+	{
+		return 0.000366*kn + 0.083967;
+	}
+	
+} // class RocketMath

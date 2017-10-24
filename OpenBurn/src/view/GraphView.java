@@ -13,7 +13,6 @@ import model.SimulationResults;
 
 /**
  * GraphView.java
- * Author: Daniel Tranfaglia
  * 
  * Purpose: A wrapper class for the ScatterChart used in the application.
  * 		This class will allow the user to more easily create an empty

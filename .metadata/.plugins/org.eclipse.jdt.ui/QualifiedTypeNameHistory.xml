@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javafx.event.ActionEvent"/>
+<fullyQualifiedTypeName name="javafx.scene.chart.CategoryAxis"/>
+<fullyQualifiedTypeName name="javafx.scene.chart.NumberAxis"/>
+<fullyQualifiedTypeName name="javafx.scene.chart.ScatterChart"/>
+<fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
+<fullyQualifiedTypeName name="javafx.scene.chart.XYChart.Series"/>
+<fullyQualifiedTypeName name="javafx.scene.chart.XYChart"/>
+<fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,22 @@
+
+/**
+ * 
+ * 
+ * 
+ * 
+**/
+
+public class ResultsScatterPlot
+{
+	
+	public ResultsScatterPlot (String plotName, String xAxisName, String yAxisName, )
+	{
+		
+	}
+	
+	
+	
+	
+	
+	
+} // class ResultsScatterPlot

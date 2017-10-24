@@ -1,0 +1,23 @@
+import javafx.scene.chart.ScatterChart;
+
+/**
+ * 
+ * 
+ * 
+ * 
+**/
+
+public class ResultsScatterPlot extends ScatterChart
+{
+	
+	public ResultsScatterPlot (String plotName, String xAxisName, String yAxisName, List<SimulationResults> data)
+	{
+		
+	}
+	
+	
+	
+	
+	
+	
+} // class ResultsScatterPlot

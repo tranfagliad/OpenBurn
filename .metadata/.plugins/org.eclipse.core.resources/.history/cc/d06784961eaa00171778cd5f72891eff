@@ -1,0 +1,112 @@
+package model;
+
+/**
+ * 
+**/
+
+public class Nozzle
+{
+	// Private fields for the Nozzle
+	private double throatDiameter;
+	private double throatArea;
+	private double entranceArea;
+	private double exitDiameter;
+	private double cf;
+	private int entranceID;
+	private int throatID;
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public Nozzle (double throatDiameter, double entranceDiameter, double exitDiameter, double cf, int numberOfGrains)
+	{
+		this.throatDiameter = throatDiameter;
+		this.throatArea = Math.PI * (throatDiameter/2) * (throatDiameter/2);
+		this.entranceArea = Math.PI * (entranceDiameter/2) * (entranceDiameter/2);
+		this.cf = cf;
+		this.exitDiameter = exitDiameter;
+		this.entranceID = numberOfGrains + 1;
+		this.throatID = numberOfGrains + 2;
+	} // Nozzle Constructor
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public double getThroatDiameter()
+	{
+		return throatDiameter;
+	}
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public double getExitDiameter ()
+	{
+		return exitDiameter;
+	} // getExitDiameter()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public double getCf ()
+	{
+		return cf;
+	} // getCf()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public int getEntranceID ()
+	{
+		return entranceID;
+	} // getEntranceID()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public int getThroatID ()
+	{
+		return throatID;
+	} // getThroatID()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public double getThroatArea ()
+	{
+		return throatArea;
+	} // getThroat()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public double getEntranceArea ()
+	{
+		return entranceArea;
+	} // getEntranceArea()
+	
+} // class Nozzle
