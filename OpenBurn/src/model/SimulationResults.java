@@ -8,6 +8,7 @@ package model;
 
 public class SimulationResults
 {
+	// Constant string labels
 	private static final String COMMA = ",";
 	private static final String TIME = "Time (seconds)";
 	private static final String MASS_OVERALL = "Mass Generated Overall (lbm)";
@@ -22,8 +23,9 @@ public class SimulationResults
 	private static final String SYSTEM_MASS = "Mass of the System (lbm)";
 	private static final String SYSTEM_CENTER_GRAVITY = "Center of Gravity (inches)";
 	
+	
+	
 	// Private fields for the results
-	// ADDME: comments stating the units for each field
 	private double time;
 	private double massGeneratedOverall;
 	private double massGeneratedPerGrain[];
@@ -40,15 +42,13 @@ public class SimulationResults
 	
 	
 	/**
-	 * toString()
+	 * getLabels()
 	 * 
-	 * Purpose: Returns a textual representation of the results, which
-	 * 		only includes the time and the chamber pressure.
+	 * Purpose: Returns a string with all the labels, separated by commas.
 	 * 
 	 * Parameters: None.
 	 * 
-	 * Returns: String. A textual representation of the results, which
-	 * 		only includes the time and the chamber pressure.
+	 * Returns: String. All the labels separated by commas.
 	**/
 	
 	public String getLabels()
@@ -60,28 +60,33 @@ public class SimulationResults
 		output.append(MASS_OVERALL + COMMA);
 		
 		for(int i = 0; i < massGeneratedPerGrain.length; i++)
-		{
 			output.append(MASS_PER_GRAIN + i + COMMA);
-		}
 		for(int i = 0; i < portToThroat.length; i++)
-		{
 			output.append(PORT_TO_THROAT + i + COMMA);
-		}
 		for(int i = 0; i < massFlowPerAreaGrain.length; i++)
-		{
 			output.append(MASS_FLOW_PER_GRAIN + i + COMMA);
-		}
 		
 		output.append(BURN_AREA + COMMA);
 		output.append(BURN_RATE + COMMA);
 		output.append(KN + COMMA);
 		output.append(L_STAR + COMMA);
 		output.append(SYSTEM_MASS + COMMA);
-		output.append(SYSTEM_CENTER_GRAVITY + "\n"); // no comma because it's the end of the line
+		output.append(SYSTEM_CENTER_GRAVITY + "\n");   // no comma because it's the end of the line
 		
 		return output.toString();
-		
-	}
+	} // getLabels()
+	
+	
+	
+	/**
+	 * toString()
+	 * 
+	 * Purpose: Returns the string representation of the simulation results.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: String. The string representation of the simulation results.
+	**/
 	
 	@Override
 	public String toString ()
@@ -93,17 +98,11 @@ public class SimulationResults
 		output.append(massGeneratedOverall + COMMA);
 		
 		for(int i = 0; i < massGeneratedPerGrain.length; i++)
-		{
 			output.append(massGeneratedPerGrain[i] + COMMA);
-		}
 		for(int i = 0; i < portToThroat.length; i++)
-		{
 			output.append(portToThroat[i] + COMMA);
-		}
 		for(int i = 0; i < massFlowPerAreaGrain.length; i++)
-		{
 			output.append(massFlowPerAreaGrain[i] + COMMA);
-		}
 		
 		output.append(burnArea + COMMA);
 		output.append(burnRate + COMMA);

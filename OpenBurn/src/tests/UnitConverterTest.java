@@ -20,9 +20,9 @@ public class UnitConverterTest
 	@Test
 	public void testConvertLenghtMtoI ()
 	{
-		assertEquals(0.0, UnitConverter.convertLenghtMtoI(0), TOLERANCE);
-		assertEquals(0.393701, UnitConverter.convertLenghtMtoI(1), TOLERANCE);
-		assertEquals(1.0, UnitConverter.convertLenghtMtoI(2.54), TOLERANCE);
+		assertEquals(0.0, UnitConverter.convertLengthMtoI(0), TOLERANCE);
+		assertEquals(0.393701, UnitConverter.convertLengthMtoI(1), TOLERANCE);
+		assertEquals(1.0, UnitConverter.convertLengthMtoI(2.54), TOLERANCE);
 	} // testConvertLenghtMtoI()
 	
 	
@@ -30,9 +30,9 @@ public class UnitConverterTest
 	@Test
 	public void testConvertLenghtItoM ()
 	{
-		assertEquals(0.0, UnitConverter.convertLenghtItoM(0), TOLERANCE);
-		assertEquals(1.0, UnitConverter.convertLenghtItoM(0.393701), TOLERANCE);
-		assertEquals(2.54, UnitConverter.convertLenghtItoM(1.0), TOLERANCE);
+		assertEquals(0.0, UnitConverter.convertLengthItoM(0), TOLERANCE);
+		assertEquals(1.0, UnitConverter.convertLengthItoM(0.393701), TOLERANCE);
+		assertEquals(2.54, UnitConverter.convertLengthItoM(1.0), TOLERANCE);
 	} // testConvertLenghtItoM()
 	
 	

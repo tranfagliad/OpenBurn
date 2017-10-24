@@ -1,16 +1,24 @@
 package model;
 
 /**
+ * Case.java
  * 
+ * Purpose: Represents the casing of a rocket during simulations.
 **/
 
 public class Case
 {
-	
+	// Private fields
 	private double caseMass;
 	private double diameter;
 	private double length;
-
+	
+	
+	
+	/**
+	 * 
+	**/
+	
 	public Case (double caseMass, double diameter, double length)
 	{
 		this.caseMass = caseMass;

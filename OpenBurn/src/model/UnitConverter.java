@@ -54,63 +54,134 @@ public class UnitConverter
 	/**
 	 * convertForceMtoI()
 	 * 
-	 * Purpose:
+	 * Purpose: Converts force from Metric to Imperial units.
 	 * 
 	 * Parameters:
+	 * 		double newton -- Force in Metric units.
 	 * 
-	 * Returns: double. 
+	 * Returns: double. Force in Imperial units.
 	**/
 	
 	public static double convertForceMtoI (double newton)
 	{
 		return ((double)(newton * 0.224809));
-	} // 
-	
-	
-	
-	
-	public static double convertDensityMtoI(double gramsPerCmCubed)
-	{
-		gramsPerCmCubed = convertMassMtoI(gramsPerCmCubed);
-		
-		gramsPerCmCubed *= 2.54; // double division is multiplication
-		gramsPerCmCubed *= 2.54;
-		gramsPerCmCubed *= 2.54;
-		
-		return gramsPerCmCubed;
-	}
-	
-	public static double convertAreaMtoI(double centmeterSquared)
-	{
-		centmeterSquared = convertLengthMtoI(centmeterSquared);
-		centmeterSquared = convertLengthMtoI(centmeterSquared);
-		return centmeterSquared;
-	}
-	
-	public static double convertPressureMtoI(double pascal)
-	{
-		return pascal * 0.000145038;
-	}
-	
-	public static double convertLengthItoM(double inches)
-	{
-		return inches * 2.54;
-	}
-	
-	public static double convertMassItoM(double lbm)
-	{
-		return lbm / 0.00220462;		
-	}
+	} // convertForceMtoI()
 	
 	
 	
 	/**
+	 * convertDensityMtoI()
 	 * 
+	 * Purpose: Converts and returns the density from Metric to Imperial units.
+	 * 
+	 * Parameters:
+	 * 		double gramsPerCmCubed -- Density in Metric units.
+	 * 
+	 * Returns: double. Density in Imperial units.
 	**/
 	
-	public static double convertForceItoM(double lbf)
+	public static double convertDensityMtoI (double gramsPerCmCubed)
 	{
-		return lbf / 0.224809;
+		gramsPerCmCubed = convertMassMtoI(gramsPerCmCubed);
+		
+		gramsPerCmCubed *= 2.54;   // double division is multiplication
+		gramsPerCmCubed *= 2.54;
+		gramsPerCmCubed *= 2.54;
+		
+		return gramsPerCmCubed;
+	} // convertDesityMtoI()
+	
+	
+	
+	/**
+	 * convertAreaMtoI()
+	 * 
+	 * Purpose: Converts and returns area from Metric to Imperial units.
+	 * 
+	 * Parameters:
+	 * 		double centimeterSquared -- Area in Metric units.
+	 * 
+	 * Returns: double. Area in Imperial units.
+	**/
+	
+	public static double convertAreaMtoI (double centimeterSquared)
+	{
+		centimeterSquared = convertLengthMtoI(centimeterSquared);
+		centimeterSquared = convertLengthMtoI(centimeterSquared);
+		
+		return centimeterSquared;
+	} // convertAreaMtoI()
+	
+	
+	
+	/**
+	 * convertPressureMtoI()
+	 * 
+	 * Purpose: Converts and returns the pressure from Metric to Imperial units.
+	 * 
+	 * Parameters:
+	 * 		double pascal -- Pressure in Metric units.
+	 * 
+	 * Returns: double. Pressure in Imperial units.
+	**/
+	
+	public static double convertPressureMtoI (double pascal)
+	{
+		return ((double)(pascal * 0.000145038));
+	} // convertPressureMtoI()
+	
+	
+	
+	/**
+	 * convertLengthItoM()
+	 * 
+	 * Purpose: Converts and returns length from Imperial to Metric units.
+	 * 
+	 * Parameters:
+	 * 		double inches -- Length in Imperial units.
+	 * 
+	 * Returns: double. Length in Imperial units.
+	**/
+	
+	public static double convertLengthItoM (double inches)
+	{
+		return ((double)(inches * 2.54));
+	} // convertLengthItoM()
+	
+	
+	
+	/**
+	 * convertMassItoM()
+	 * 
+	 * Purpose: Converts and returns mass from Imperial to Metric units.
+	 * 
+	 * Parameters:
+	 * 		double lbm -- Mass in Imperial units.
+	 * 
+	 * Returns: double. Mass in Metric units.
+	**/
+	
+	public static double convertMassItoM (double lbm)
+	{
+		return ((double)(lbm / 0.00220462));		
+	} // convertMassItoM()
+	
+	
+	
+	/**
+	 * convertForceItoM()
+	 * 
+	 * Purpose: Converts and returns force from Imperial to Metric units.
+	 * 
+	 * Parameters:
+	 * 		double lbf -- Force in Imperial units.
+	 * 
+	 * Returns: double. Force in Imperial units.
+	**/
+	
+	public static double convertForceItoM (double lbf)
+	{
+		return ((double)(lbf / 0.224809));
 	} // convertForceItoM()
 	
 	

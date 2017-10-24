@@ -1,21 +1,71 @@
 package model;
 
-public class ImpulseClassifier {
+/**
+ * ImpulseClassifier.java
+ * 
+ * Purpose: 
+**/
+
+public class ImpulseClassifier
+{
+	// Private fields
 	private String classification;
 	private double ISP;
 	private double massFrac;
 	
 	
-	public String getClassification(){
+	
+	// ADDME: Constructor?
+	
+	
+	
+	/**
+	 * getClassification()
+	 * 
+	 * Purpose:
+	 * 
+	 * Parameters:
+	 * 
+	 * Returns:
+	**/
+	
+	public String getClassification ()
+	{
 		return classification;
-	}
+	} // getClassification()
 	
-	public double ISP(){
+	
+	
+	/**
+	 * ISP()
+	 * 
+	 * Purpose:
+	 * 
+	 * Parameters:
+	 * 
+	 * Returns:
+	**/
+	
+	public double ISP ()
+	{
 		return ISP;
-	}
+	} // ISP()
 	
-	public double getMassFrac(){
+	
+	
+	/**
+	 * getMassFrac()
+	 * 
+	 * Purpose:
+	 * 
+	 * Parameters:
+	 * 
+	 * Returns:
+	**/
+	
+	public double getMassFrac ()
+	{
 		return massFrac;
-	}
+	} // getMassFrac()
 	
-}
+} // class ImpulseClassifier
