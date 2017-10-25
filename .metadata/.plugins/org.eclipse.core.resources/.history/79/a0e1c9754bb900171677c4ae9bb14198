@@ -67,15 +67,12 @@ public class NozzleTest
 	@Test
 	public void testGetThroatArea ()
 	{
+		//System.out.println(test1.getThroatArea());
 		assertEquals(test1.getThroatArea(), 3.141592653589793, TOLERANCE);
 	} // testGetThroatID()
 	
 	
 	
-	@Test
-	public void testGetEntranceArea ()
-	{
-		assertEquals(test1.getEntranceArea(), 0.7853981633974483, TOLERANCE);
-	} // testGetThroatID()
+	
 	
 } // test NozzleTest
