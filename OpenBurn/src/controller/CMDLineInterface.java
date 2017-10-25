@@ -2,6 +2,10 @@ package controller;
 
 import java.util.*;
 import model.*;
+import model.calculations.RocketMath;
+import model.calculations.SimulationResults;
+import model.grains.CylindricalGrain;
+import model.grains.Grain;
 import view.CSVConverter;
 
 /**

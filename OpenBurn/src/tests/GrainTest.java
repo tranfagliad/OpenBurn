@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import model.*;
+import model.components.grains.CylindricalGrain;
+import model.components.grains.Grain;
 
 /**
  * GrainTest.java

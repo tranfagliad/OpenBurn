@@ -16,7 +16,10 @@ public class Case
 	
 	
 	/**
+	 * Case Constructor
 	 * 
+	 * Purpose: Creates and initializes a case for the rocket during
+	 * 		the simulation.
 	**/
 	
 	public Case (double caseMass, double diameter, double length)
@@ -24,21 +27,57 @@ public class Case
 		this.caseMass = caseMass;
 		this.diameter = diameter;
 		this.length = length;
-	}
+	} // Case Constructor
+	
+	
+	
+	/**
+	 * getCaseMass()
+	 * 
+	 * Purpose: Returns the mass of the case.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The mass of the case.
+	**/
 	
 	public double getCaseMass ()
 	{
 		return caseMass;
-	}
+	} // getCaseMass()
+	
+	
+	
+	/**
+	 * getDiameter()
+	 * 
+	 * Purpose: Returns the diameter of the case.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The diameter of the case.
+	**/
 	
 	public double getDiameter ()
 	{
 		return diameter;
-	}
+	} // getDiameter()
+	
+	
+	
+	/**
+	 * getLength()
+	 * 
+	 * Purpose: Returns the length of the case.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The length of the case.
+	**/
 	
 	public double getLength ()
 	{
 		return length;
-	}
+	} // getLength()
 	
 } // class Case

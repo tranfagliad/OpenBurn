@@ -2,10 +2,16 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javafx.event.ActionEvent"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.CategoryAxis"/>
-<fullyQualifiedTypeName name="javafx.scene.chart.NumberAxis"/>
-<fullyQualifiedTypeName name="javafx.scene.chart.ScatterChart"/>
 <fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.XYChart.Series"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.XYChart"/>
 <fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
+<fullyQualifiedTypeName name="javafx.scene.chart.ScatterChart"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="javafx.scene.chart.NumberAxis"/>
+<fullyQualifiedTypeName name="javafx.scene.chart.Axis"/>
+<fullyQualifiedTypeName name="javafx.scene.input.ScrollEvent"/>
+<fullyQualifiedTypeName name="javafx.scene.layout.StackPane"/>
+<fullyQualifiedTypeName name="javafx.scene.Node"/>
+<fullyQualifiedTypeName name="model.SimulationResults"/>
 </qualifiedTypeNameHistroy>
