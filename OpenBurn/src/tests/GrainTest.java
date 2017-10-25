@@ -3,10 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
-import model.*;
-import model.components.grains.CylindricalGrain;
-import model.components.grains.Grain;
+import model.grains.*;
 
 /**
  * GrainTest.java
@@ -15,11 +12,7 @@ import model.components.grains.Grain;
 **/
 
 public class GrainTest
-{
-	
-	
-	
-	
+{	
 	@Test (expected = IllegalArgumentException.class)
 	public void testInnerDiameterConstructorException ()
 	{

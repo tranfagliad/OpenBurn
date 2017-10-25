@@ -69,73 +69,126 @@ abstract public class Grain
 		this.length         = length;
 		this.innerDiameter  = innerDiameter;
 		this.numBurningEnds = numBurningEnds;
-		this.initialLength = length;
-		this.isBurning = true;
-				
+		this.initialLength  = length;
+		this.isBurning      = true;
+		
 		// Initialize burnout time to 0 seconds
 		setBurnoutTime(0.0);
 	} // Grain Constructor
 	
 	
 	
+	/**
+	 * getPropellantDensity()
+	 * 
+	 * Purpose: Returns the propellant density.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The propellant density.
+	**/
+	
+	abstract public double getPropellantDensity ();
 	
 	
-	public double getPropellantDensity() 
-	{
-		return this.propellantDensity;
-	}
+	
+	/**
+	 * setPropellantDensity()
+	 * 
+	 * Purpose: Changes the propellant density to a new value.
+	 * 
+	 * Parameters:
+	 * 		double density -- New value to set the propellant density.
+	 * 
+	 * Returns: void.
+	**/
+	
+	abstract public void setPropellantDensity (double density);
 
 	
 	
 	/**
+	 * getLength()
 	 * 
+	 * Purpose: Returns the length of the grain.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The length of the grain.
 	**/
 	
-	public void setPropellantDensity(double density)
-	{
-		// Density must not be negative
-		if (density <= 0.0)
-			throw new IllegalArgumentException(PROP_DENSITY_ERR_MSG);
-		
-		// Set density
-		propellantDensity = density;
-	}
-
+	abstract public double getLength ();
 	
-	public double getLength() 
-	{
-		return this.length;
-	}
-
 	
-	public double getOuterDiameter() 
-	{
-		return this.outerDiameter;
-	}
-
 	
-	public double getInnerDiameter() 
-	{
-			return innerDiameter;
-	}
-
+	/**
+	 * getOuterDiameter()
+	 * 
+	 * Purpose: Returns the outer diameter of the grain.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The outer diameter of the grain.
+	**/
 	
-	public int getNumBurningEnds() 
-	{
-		return numBurningEnds;
-	}
-
+	abstract public double getOuterDiameter ();
 	
-	public double getBurnoutTime() 
-	{
-		return burnoutTime;
-	}
-
 	
-	public void setBurnoutTime(double burnoutTime) 
-	{
-		this.burnoutTime = burnoutTime;
-	} //
+	
+	/**
+	 * getInnerDiameter()
+	 * 
+	 * Purpose: Returns the inner diameter of the grain.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The inner diameter of the grain.
+	**/
+	
+	abstract public double getInnerDiameter ();
+	
+	
+	
+	/**
+	 * getNumBurningEnds()
+	 * 
+	 * Purpose: Returns the number of burning ends.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: int. The number of burning ends.
+	**/
+	
+	abstract public int getNumBurningEnds ();
+	
+	
+	
+	/**
+	 * getBurnoutTime()
+	 * 
+	 * Purpose: Returns the burnout time.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The burnout time.
+	**/
+	
+	abstract public double getBurnoutTime ();
+	
+	
+	
+	/**
+	 * setBurnoutTime()
+	 * 
+	 * Purpose: Changes the burnout time to a new value.
+	 * 
+	 * Parameters:
+	 * 		double burnoutTime -- New value to set the burnout time.
+	 * 
+	 * Returns: void.
+	**/
+	
+	abstract public void setBurnoutTime (double newBurnoutTime);
 	
 	
 	
@@ -143,35 +196,15 @@ abstract public class Grain
 	 * isBurning()
 	 * 
 	 * Purpose: Getter for the isBurning boolean. This is set initially as
-	 * 			true. The update geometry method is responsible for setting
-	 * 			this to false.
+	 * 		true. The update geometry method is responsible for setting
+	 * 		this to false.
 	 * 
 	 * Parameters: None.
 	 * 
 	 * Returns: boolean. The status on if the grain is burning or not.
 	**/
 	
-	public boolean isBurning() 
-	{
-		return this.isBurning;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	abstract public boolean isBurning ();
 	
 	
 	
@@ -237,7 +270,8 @@ abstract public class Grain
 	 * Parameters: None.
 	 * 
 	 * Returns: double. The inner flow area of the motor
-	 */
+	**/
+	
 	abstract public double getCurrentInnerFlowArea();
 	
 	
@@ -252,7 +286,8 @@ abstract public class Grain
 	 * Parameters: None.
 	 * 
 	 * Returns: double. The inner flow volume of the motor.
-	 */
+	**/
+	
 	abstract public double getCurrentInnerFlowVolume();
 	
 	
@@ -267,7 +302,8 @@ abstract public class Grain
 	 * 
 	 * Returns: double. The difference between the initial and current 
 	 * 		grain length.
-	 */
+	**/
+	
 	abstract public double getLengthDifference();
 	
 } // abstract class Grain
