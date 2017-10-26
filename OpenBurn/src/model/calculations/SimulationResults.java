@@ -38,6 +38,7 @@ public class SimulationResults
 	private double lStar;
 	private double systemMass;
 	private double systemCenterOfGravity;
+	private double thrust;
 	
 	
 	
@@ -552,4 +553,37 @@ public class SimulationResults
 		this.systemCenterOfGravity = newSystemCenterOfGravity;
 	} // setSystemCenterOfGravity()
 
+	
+	/**
+	 * getThrust()
+	 * 
+	 * Purpose: Returns the system thrust for the results.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The system thrust for the results.
+	**/
+	
+	public double getThrust ()
+	{
+		return thrust;
+	} // getThrust()
+
+	
+	/**
+	 * setThrust()
+	 * 
+	 * Purpose: Changes the system thrust to a new value.
+	 * 
+	 * Parameters:
+	 * 		double thrust -- New value to set the system thrust
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setThrust (double thrust)
+	{
+		this.thrust = thrust;
+	} // setThrust()
+	
 } // class SimulationResults
