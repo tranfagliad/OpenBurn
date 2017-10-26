@@ -250,7 +250,7 @@ public class RocketMath
 	 * Parameters:
 	 * 		List<Grain> theGrains -- List of grains during a simulation.
 	 * 		SimulationResults current -- Current results for a simulation.
-	 * 		Nozzle theNozzle -- Nozzle for a ricket during a simulation.
+	 * 		Nozzle theNozzle -- Nozzle for a rocket during a simulation.
 	 * 
 	 * Returns: void.
 	**/
@@ -334,7 +334,25 @@ public class RocketMath
 		}
 	} // calculateBurnout()
 	
-	
+	/**
+	 * calculateThrust()
+	 * 
+	 * Purpose: Calculates the thrust given the current chamber pressure and nozzle for
+	 * 		a simulation. Based on the matlab file motor_internal_balistics.m.
+	 * 
+	 * Parameters:
+	 * 		SimulationResults current -- Current results during a simulation.
+	 * 		double currentTime -- Current time in the simulation.
+	 * 		Nozzle theNozzle -- Nozzle for a rocket during a simulation.
+	 * 
+	 * Returns: void.
+	**/
+	public static void calculateThrust(SimulationResults current, Nozzle theNozzle)
+	{
+		// Using thrust = Pc*At*Cf
+		double thrust = current.getChamberPressure()*theNozzle.getThroatArea()*theNozzle.getCf();
+		current.setThrust(thrust);
+	}
 	
 	/**
 	 * pressureFromKn (double kn)
