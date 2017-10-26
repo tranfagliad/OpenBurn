@@ -2,10 +2,8 @@ package controller;
 
 import java.util.*;
 import model.*;
-import model.calculations.RocketMath;
-import model.calculations.SimulationResults;
-import model.grains.CylindricalGrain;
-import model.grains.Grain;
+import model.calculations.*;
+import model.grains.*;
 import view.CSVConverter;
 
 /**
@@ -43,6 +41,11 @@ public class CMDLineInterface
 	
 	// Time Delta prompt
 	private static final String TIME_DELTA_PROMPT = "Enter change in time (Must be positive): ";
+	
+	//Case Prompts
+	private static final String CASE_MASS_PROMPT = "Enter mass of the case (Must be positive): ";
+	private static final String CASE_DIAMETER_PROMPT = "Enter diameter of the case (Must be positive): ";
+	private static final String CASE_LENGTH_PROMPT = "Enter length of the case (Must be positive): ";
 	
 	// Error messages
 	private static final String NULL_SCANNER_MSG = "\nERROR: Null scanner for input!\n";
@@ -101,8 +104,14 @@ public class CMDLineInterface
 		// Prompt user for change in time
 		double deltaTime = promptDouble(input, TIME_DELTA_PROMPT);
 		
+		double caseMass = promptDouble(input, CASE_MASS_PROMPT);
+		double caseDiameter = promptDouble(input, CASE_DIAMETER_PROMPT);
+		double caseLength = promptDouble(input, CASE_LENGTH_PROMPT);
+		
+		Case theCase = new Case(caseMass, caseDiameter, caseLength);
+		
 		// Simulate the rocket motor using the given data
-		List<SimulationResults> theResults = RocketMath.simulate(listOfGrains, deltaTime, nozzle);
+		List<SimulationResults> theResults = RocketMath.simulate(listOfGrains, deltaTime, nozzle, theCase);
 		
 		// Prompt for CSV file name to send data
 		System.out.println(FILE_PROMPT);

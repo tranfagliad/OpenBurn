@@ -1,10 +1,9 @@
 package model.calculations;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-import model.Nozzle;
-import model.grains.Grain;
+import model.*;
+import model.grains.*;
 
 /**
  * RocketMath.java
@@ -30,7 +29,7 @@ public class RocketMath
 	 * Returns: List<SimulationResults>. A list of results from the burn simulation.
 	**/
 	
-	public static List<SimulationResults> simulate (List<Grain> grainList, double deltaTime, Nozzle theNozzle)
+	public static List<SimulationResults> simulate (List<Grain> grainList, double deltaTime, Nozzle theNozzle, Case theCase)
 	{
 		// Initialize a list for results, and the time at zero
 		List<SimulationResults> output = new LinkedList<SimulationResults>();
@@ -54,7 +53,7 @@ public class RocketMath
 			portToThroatRatio(grainList, currentTimeStep, theNozzle);
 			calculateMassFlowPerArea(grainList, currentTimeStep, massFlow, theNozzle);
 			calculateLStar(grainList, currentTimeStep, theNozzle);
-			massAndCenterOfGravity(grainList, currentTimeStep);
+			massAndCenterOfGravity(grainList, currentTimeStep, theCase);
 			calculateBurnout(grainList, currentTime);
 			
 			// Add final results to the result set
@@ -292,9 +291,21 @@ public class RocketMath
 	 * Returns: void.
 	**/
 	
-	public static void massAndCenterOfGravity (List<Grain> theGrains, SimulationResults current)
+	public static void massAndCenterOfGravity (List<Grain> theGrains, SimulationResults current, Case theCase)
 	{
-		// Need some more info for this one. This will be done after grain refactoring.
+		double grainMass = 0;
+		double grainCg = 0;
+		for(int i = 0; i < theGrains.size(); i++)
+		{
+			Grain aGrain = theGrains.get(i);
+			grainMass += aGrain.getVolume() * aGrain.getPropellantDensity(); //line 166 in matlab
+			double centerpoint = (aGrain.getLength() * i) - (aGrain.getLength()/2); //line 38 in matLab
+			centerpoint += 1.9685; //line 41 in matlab.  TODO: make a variable, based off nozzle length?
+			grainCg += grainMass * centerpoint; //line 224 in matlab
+		}
+		double systemMass = grainMass + theCase.getCaseMass();
+		current.setSystemMass(systemMass);
+		current.setSystemCenterOfGravity(grainCg / systemMass);
 	} // massAndCenterOfGravity()
 	
 	
