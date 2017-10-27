@@ -23,7 +23,6 @@ public class GraphView
 {
 	// Private fields
 	private ScatterChart chart;
-	private int numSeries;
 	
 	
 	
@@ -47,8 +46,6 @@ public class GraphView
 		// Create and name the ScatterChart
 		this.chart = new ScatterChart(xAxis, yAxis);
 	    chart.setTitle(chartName);
-	    
-	    this.numSeries = 0;
 	} // GraphView Constructor (String, String, String)
 
 	
@@ -95,11 +92,10 @@ public class GraphView
 		Series<Double, Double> dataSeries = new Series<Double, Double>();
 		dataSeries.setName(legendName);
 		
-		// Adds thrust vs. time data from the simulation results to the data series
-		for (SimulationResults currentResults: results)
-			dataSeries.getData().add(new XYChart.Data(currentResults.getTime(), currentResults.getThrust()));
 		
-		// Add the data series to the chart
+		// ADDME: Loop through results to add to the dataSeries list.
+		
+		
 		data.addAll(dataSeries);
 	} // addDataSet()
 	

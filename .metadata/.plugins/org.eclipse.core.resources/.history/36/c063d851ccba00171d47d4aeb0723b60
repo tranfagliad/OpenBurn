@@ -90,7 +90,7 @@ public class GraphView
 	
 	public void addThrustVsTimeDataSet (String legendName, List<SimulationResults> results)
 	{
-		ObservableList<XYChart.Series<Double, Double>> data = FXCollections.observableArrayList();
+		Series data = FXCollections.observableArrayList();
 		
 		Series<Double, Double> dataSeries = new Series<Double, Double>();
 		dataSeries.setName(legendName);

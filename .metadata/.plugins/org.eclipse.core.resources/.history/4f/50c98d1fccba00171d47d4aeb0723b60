@@ -23,7 +23,6 @@ public class GraphView
 {
 	// Private fields
 	private ScatterChart chart;
-	private int numSeries;
 	
 	
 	
@@ -47,8 +46,6 @@ public class GraphView
 		// Create and name the ScatterChart
 		this.chart = new ScatterChart(xAxis, yAxis);
 	    chart.setTitle(chartName);
-	    
-	    this.numSeries = 0;
 	} // GraphView Constructor (String, String, String)
 
 	

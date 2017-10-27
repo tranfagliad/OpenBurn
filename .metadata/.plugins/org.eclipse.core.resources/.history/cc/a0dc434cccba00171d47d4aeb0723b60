@@ -100,7 +100,9 @@ public class GraphView
 			dataSeries.getData().add(new XYChart.Data(currentResults.getTime(), currentResults.getThrust()));
 		
 		// Add the data series to the chart
-		data.addAll(dataSeries);
+		chart.addAll(dataSeries);
+		
+	
 	} // addDataSet()
 	
 } // class GraphView
