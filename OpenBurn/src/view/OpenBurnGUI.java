@@ -1,9 +1,12 @@
 package view;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -33,8 +36,11 @@ public class OpenBurnGUI extends Application
 	
 	
 	// 
-	private Text propDensityText;
-	private TextField propDensityTextField;
+	
+	
+	//private Text propDensityText;
+	//private TextField propDensityTextField;
+	
 	private GrainInputView grainInputs;
 	
 	
@@ -63,19 +69,7 @@ public class OpenBurnGUI extends Application
 		grid.setHgap(5);
 
 		scene.setRoot(grid);
-		
-		
-		
-		propDensityText = new Text(DENSITY_PROMPT);
-		GridPane.setConstraints(propDensityText, 0, 0);
-		grid.getChildren().add(propDensityText);
-		
-		propDensityTextField = new TextField();
-		propDensityTextField.setPrefColumnCount(10);
-		GridPane.setConstraints(propDensityTextField, 0, 1);
-		grid.getChildren().add(propDensityTextField);
-		
-		
+
 		
 		grainInputs = new GrainInputView();
 		GridPane.setConstraints(grainInputs, 0, 3);
@@ -83,6 +77,79 @@ public class OpenBurnGUI extends Application
 		
 		// Adding a sample input
 		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		
+		Button addButton = new Button(ADD);
+		grid.getChildren().add(addButton);
+		Button editButton = new Button(EDIT);
+		//grid.getChildren().add(editButton);
+		Button remButton = new Button(REMOVE);
+		//grid.getChildren().add(remButton);
+		
+		addButton.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	Stage s = new Stage();
+		    	
+		    	StackPane r = new StackPane();
+		        Scene stage = new Scene(r,500,500);
+		        GridPane grid = new GridPane();
+		    	stage.setRoot(grid);
+		    	s.setScene(stage);
+		    	
+		    	final Text propDensityText = new Text(DENSITY_PROMPT);
+		    	final TextField propDensityTextField = new TextField();
+				GridPane.setConstraints(propDensityText, 0, 0);
+				grid.getChildren().add(propDensityText);
+				propDensityTextField.setPrefColumnCount(10);
+				GridPane.setConstraints(propDensityTextField, 0, 5);
+				grid.getChildren().add(propDensityTextField);
+				
+				final Text throatDiamText = new Text(THROAT_DIAMETER_PROMPT);
+				final TextField throatDiamTField = new TextField();
+				GridPane.setConstraints(throatDiamText, 0, 10);
+				throatDiamTField.setPrefColumnCount(20);
+				GridPane.setConstraints(throatDiamTField, 0, 15);
+				grid.getChildren().add(throatDiamText);
+				grid.getChildren().add(throatDiamTField);
+				
+				final Text entrenceDiamText = new Text(ENTRANCE_DIAMETER_PROMPT);
+				final TextField entrenceDiamTField = new TextField();
+				GridPane.setConstraints(entrenceDiamText, 0, 25);
+				entrenceDiamTField.setPrefColumnCount(20);
+				GridPane.setConstraints(entrenceDiamTField, 0, 35);
+				grid.getChildren().add(entrenceDiamText);
+				grid.getChildren().add(entrenceDiamTField);
+				
+				final Text exitDiamText = new Text(EXIT_DIAMETER_PROMPT);
+				final TextField exitDiamTField = new TextField();
+				GridPane.setConstraints(exitDiamText, 0, 45);
+				exitDiamTField.setPrefColumnCount(20);
+				GridPane.setConstraints(exitDiamTField, 0, 55);
+				grid.getChildren().add(exitDiamText);
+				grid.getChildren().add(exitDiamTField);
+				
+				final Text cftext = new Text(CF_PROMPT);
+				final TextField cftextField = new TextField();
+				GridPane.setConstraints(cftext, 0, 65);
+				exitDiamTField.setPrefColumnCount(20);
+				GridPane.setConstraints(cftextField, 0, 75);
+				grid.getChildren().add(cftext);
+				grid.getChildren().add(cftextField);
+				
+				final Text tdeltText = new Text(TIME_DELTA_PROMPT);
+				final TextField tdeltTField = new TextField();
+				GridPane.setConstraints(tdeltText, 0, 85);
+				tdeltTField.setPrefColumnCount(20);
+				GridPane.setConstraints(tdeltTField, 0, 95);
+				grid.getChildren().add(tdeltText);
+				grid.getChildren().add(tdeltTField);
+				
+
+				
+				
+		        s.show();
+		        
+		    }
+		});
 		
 		/*
 		final TextField field8 = new TextField();
