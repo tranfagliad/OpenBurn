@@ -1,0 +1,169 @@
+package view;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
+import model.grains.Grain;
+
+/**
+ * 
+**/
+
+public class GrainInputView extends GridPane
+{
+	// GUI Labels
+	private static final String GRAINS         = "Grains";
+	private static final String GRAIN_NUMBER   = "#";
+	private static final String LENGTH         = "Length";
+	private static final String OUTER_DIAMETER = "Outer Diameter";
+	private static final String INNER_DIAMETER = "Inner Diameter";
+	private static final String BURNING_ENDS   = "Burning Ends";
+	
+	private static final String OUTER_DIAMETER_PROMPT = "Enter grain outer diameter (Must be positive): ";
+	private static final String INNER_DIAMETER_PROMPT = "Enter grain inner diameter (Must be positive): ";
+	private static final String LENGTH_PROMPT         = "Enter grain length (Must be positive): ";
+	private static final String BURNING_ENDS_PROMPT   = "Enter grain number of burning ends (Must be 0, 1, or 2): ";
+	
+	
+	
+	// GUI Components
+	private Text grainText;
+	private TableView<GrainRow> table;
+	private ObservableList<GrainRow> grainList;
+	
+	
+	
+	// Private fields
+	int grainAmount;
+	
+	
+	
+	/**
+	 * GrainInputView Constructor
+	 * 
+	 * Purpose:
+	**/
+	
+	@SuppressWarnings("unchecked")
+	public GrainInputView ()
+	{
+		// Create the GridPane
+		super();
+		
+		// Initialize empty list
+		grainList = FXCollections.observableArrayList();
+		grainAmount = 0;
+		
+		// Add title text
+		grainText = new Text(GRAINS);
+		GridPane.setConstraints(grainText, 0, 0);
+		this.getChildren().add(grainText);
+		
+		// Configure table
+		table = new TableView<GrainRow>();
+		table.setEditable(false);
+		GridPane.setConstraints(table, 0, 1);
+		this.getChildren().add(table);
+		
+		// Add all columns
+		TableColumn<GrainRow, String> numberCol = new TableColumn<GrainRow, String>(GRAIN_NUMBER);
+		numberCol.setResizable(false);
+        numberCol.setCellValueFactory(new PropertyValueFactory<GrainRow, String>("Number"));
+
+        TableColumn<GrainRow, String> lengthCol = new TableColumn<GrainRow, String>(LENGTH);
+        lengthCol.setResizable(false);
+        lengthCol.setCellValueFactory(new PropertyValueFactory<GrainRow,String>("Length"));
+		
+        TableColumn<GrainRow, String> outerDCol = new TableColumn<GrainRow, String>(OUTER_DIAMETER);
+        outerDCol.setResizable(false);
+        outerDCol.setCellValueFactory(new PropertyValueFactory<GrainRow,String>("OuterDiameter"));
+        
+        TableColumn<GrainRow, String> innerDCol = new TableColumn<GrainRow, String>(INNER_DIAMETER);
+        innerDCol.setResizable(false);
+        innerDCol.setCellValueFactory(new PropertyValueFactory<GrainRow,String>("InnerDiameter"));
+        
+        TableColumn<GrainRow, String> burningEndsCol = new TableColumn<GrainRow, String>(BURNING_ENDS);
+        burningEndsCol.setResizable(false);
+        burningEndsCol.setCellValueFactory(new PropertyValueFactory<GrainRow,String>("BurningEnds"));
+        
+        // Add columns to the table
+        table.getColumns().addAll(numberCol, lengthCol, outerDCol, innerDCol, burningEndsCol);
+	} // GrainInputView Constructor
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public void addRow (Grain newGrain)
+	{
+		table.getItems().add(new GrainRow(grainAmount+1, newGrain));
+	} // addRow()
+	
+	
+	
+	
+	
+	public class GrainRow
+	{
+		private int number;
+		private double length;
+		private double outerDiameter;
+		private double innerDiameter;
+		private int numBurningEnds;
+		
+		
+		public GrainRow (int grainNumber, Grain grain)
+		{
+			this.number = grainNumber;
+			this.length = grain.getLength();
+			this.outerDiameter = grain.getOuterDiameter();
+			this.innerDiameter = grain.getInnerDiameter();
+			this.numBurningEnds = grain.getNumBurningEnds();
+		}
+		
+		
+		
+		/**
+		 * 
+		**/
+		
+		public int getNumber ()
+		{
+			return number;
+		}
+		
+		
+		public double getLength ()
+		{
+			return length;
+		}
+		
+		
+		public double getOuterDiameter ()
+		{
+			return outerDiameter;
+		}
+		
+		
+		public double getInnerDiameter ()
+		{
+			return innerDiameter;
+		}
+		
+		public int getBurningEnds ()
+		{
+			return numBurningEnds;
+		}
+		
+	}
+	
+	
+	
+} // class GrainInputView

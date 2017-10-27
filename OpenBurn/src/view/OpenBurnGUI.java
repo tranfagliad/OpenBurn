@@ -7,33 +7,36 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.grains.CylindricalGrain;
+import model.grains.Grain;
 
 
 
 public class OpenBurnGUI extends Application
 {
-	// General prompts
-	private static final String GRAIN_PROMPT   = "Enter number of grains (Must enter at least 1): ";
-	private static final String DENSITY_PROMPT = "Enter propellant density (Must be positive): ";
-	private static final String FILE_PROMPT    = "\nEnter the desired name of the CSV file (Don't include \".csv\"): ";
+	// GUI Labels
+	private static final String DENSITY_PROMPT           = "Enter propellant density (Must be positive): ";
+	private static final String FILE_PROMPT              = "\nEnter the desired name of the CSV file (Don't include \".csv\"): ";
 	
-	// Grain prompts
-	private static final String OUTER_DIAMETER_PROMPT = "Enter grain outer diameter (Must be positive): ";
-	private static final String INNER_DIAMETER_PROMPT = "Enter grain inner diameter (Must be positive): ";
-	private static final String LENGTH_PROMPT         = "Enter grain length (Must be positive): ";
-	private static final String BURNING_ENDS_PROMPT   = "Enter grain number of burning ends (Must be 0, 1, or 2): ";
-	
-	// Nozzle prompts
 	private static final String THROAT_DIAMETER_PROMPT   = "\nEnter nozzle throat diameter (Must be positive): ";
 	private static final String ENTRANCE_DIAMETER_PROMPT = "Enter nozzle entrance diameter (Must be positive): ";
 	private static final String EXIT_DIAMETER_PROMPT     = "Enter nozzle exit diameter (Must be positive): ";
 	private static final String CF_PROMPT                = "Enter nozzle CF (Must be positive): ";
+	private static final String TIME_DELTA_PROMPT        = "Enter change in time (Must be positive): ";
+	private static final String SIMULATE                 = "Simulate";
+	private static final String ADD                      = "Add";
+	private static final String REMOVE                   = "Remove";
+	private static final String EDIT                     = "Edit";
 	
 	
 	
-	// Time Delta prompt
-	private static final String TIME_DELTA_PROMPT = "Enter change in time (Must be positive): ";
+	// 
+	private Text propDensityText;
+	private TextField propDensityTextField;
+	private GrainInputView grainInputs;
+	
 	
 	
 	
@@ -44,13 +47,15 @@ public class OpenBurnGUI extends Application
 	}
 	
 	
+	
 	@Override
 	public void start(Stage stage)
 	{
 		StackPane root = new StackPane();
-		Scene scene = new Scene(root, 900, 650);
+		Scene scene = new Scene(root, 1200, 750);
 		stage.setScene(scene);
 		stage.setTitle("OpenBurn");
+		stage.setResizable(false);
 
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets(10, 10, 10, 10));
@@ -58,55 +63,28 @@ public class OpenBurnGUI extends Application
 		grid.setHgap(5);
 
 		scene.setRoot(grid);
-
-		final TextField name = new TextField();
-		name.setPromptText(GRAIN_PROMPT);
-		name.setPrefColumnCount(10);
-		GridPane.setConstraints(name, 0, 0);
-		grid.getChildren().add(name);
 		
-		final TextField field2 = new TextField();
-		field2.setPromptText(DENSITY_PROMPT);
-		field2.setPrefColumnCount(10);
-		field2.getText();
-		GridPane.setConstraints(field2, 0, 3);
-		grid.getChildren().add(field2);
 		
-		final TextField field3 = new TextField();
-		field3.setPromptText(FILE_PROMPT);
-		field3.setPrefColumnCount(10);
-		field3.getText();
-		GridPane.setConstraints(field3, 0, 6);
-		grid.getChildren().add(field3);
 		
-		final TextField field4 = new TextField();
-		field4.setPromptText(OUTER_DIAMETER_PROMPT);
-		field4.setPrefColumnCount(10);
-		field4.getText();
-		GridPane.setConstraints(field4, 0, 9);
-		grid.getChildren().add(field4);
+		propDensityText = new Text(DENSITY_PROMPT);
+		GridPane.setConstraints(propDensityText, 0, 0);
+		grid.getChildren().add(propDensityText);
 		
-		final TextField field5 = new TextField();
-		field5.setPromptText(INNER_DIAMETER_PROMPT);
-		field5.setPrefColumnCount(10);
-		field5.getText();
-		GridPane.setConstraints(field5, 0, 12);
-		grid.getChildren().add(field5);
+		propDensityTextField = new TextField();
+		propDensityTextField.setPrefColumnCount(10);
+		GridPane.setConstraints(propDensityTextField, 0, 1);
+		grid.getChildren().add(propDensityTextField);
 		
-		final TextField field6 = new TextField();
-		field6.setPromptText(LENGTH_PROMPT);
-		field6.setPrefColumnCount(10);
-		field6.getText();
-		GridPane.setConstraints(field6, 0, 15);
-		grid.getChildren().add(field6);
 		
-		final TextField field7 = new TextField();
-		field7.setPromptText(BURNING_ENDS_PROMPT);
-		field7.setPrefColumnCount(10);
-		field7.getText();
-		GridPane.setConstraints(field7, 3, 0);
-		grid.getChildren().add(field7);
 		
+		grainInputs = new GrainInputView();
+		GridPane.setConstraints(grainInputs, 0, 3);
+		grid.getChildren().add(grainInputs);
+		
+		// Adding a sample input
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		
+		/*
 		final TextField field8 = new TextField();
 		field8.setPromptText(THROAT_DIAMETER_PROMPT);
 		field8.setPrefColumnCount(10);
@@ -142,9 +120,9 @@ public class OpenBurnGUI extends Application
 		field12.getText();
 		GridPane.setConstraints(field12, 3, 15);
 		grid.getChildren().add(field12);
+		*/
 		
-		
-		grid.getChildren().add(new GraphView("Pressure vs. Time", "Time", "Pressure").getChart());
+		//grid.getChildren().add(new GraphView("Pressure vs. Time", "Time", "Pressure").getChart());
 		
     	
 		stage.show();

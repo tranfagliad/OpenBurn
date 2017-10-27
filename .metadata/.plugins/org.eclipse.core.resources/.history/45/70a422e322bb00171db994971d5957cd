@@ -1,0 +1,55 @@
+package view;
+
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import model.grains.Grain;
+
+/**
+ * 
+**/
+
+public class GrainInputView extends GridPane
+{
+	// GUI Labels
+	private static final String OUTER_DIAMETER_PROMPT = "Enter grain outer diameter (Must be positive): ";
+	private static final String INNER_DIAMETER_PROMPT = "Enter grain inner diameter (Must be positive): ";
+	private static final String LENGTH_PROMPT         = "Enter grain length (Must be positive): ";
+	private static final String BURNING_ENDS_PROMPT   = "Enter grain number of burning ends (Must be 0, 1, or 2): ";
+	
+	private static final String GRAIN_NUMBER = "#";
+	private static final String LENGTH       = "Length";
+	
+	
+	
+	// GUI Components
+	private TableView<Grain> table;
+	
+	
+	
+	public GrainInputView ()
+	{
+		super();
+		
+		table = new TableView<Grain>();
+		GridPane.setConstraints(table, 0, 0);
+		this.getChildren().add(table);
+		
+		TableColumn<Grain, String> numberCol = new TableColumn<Grain, String>(GRAIN_NUMBER);
+        numberCol.setCellValueFactory(new PropertyValueFactory<Grain,String>("grainNumber"));
+
+        TableColumn<Grain, String> lengthCol = new TableColumn<Grain, String>(LENGTH);
+        lengthCol.setCellValueFactory(new PropertyValueFactory<Grain,String>("length"));
+		
+        table.getColumns().addAll(numberCol, lengthCol);
+        
+	}
+	
+	
+	
+	
+	
+	
+	
+} // class GrainInputView

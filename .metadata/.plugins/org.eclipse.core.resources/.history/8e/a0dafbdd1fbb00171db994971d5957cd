@@ -1,0 +1,19 @@
+package view;
+
+import javafx.scene.layout.GridPane;
+
+/**
+ * 
+**/
+
+public class GrainInputView extends GridPane
+{
+	// GUI Labels
+	private static final String OUTER_DIAMETER_PROMPT    = "Enter grain outer diameter (Must be positive): ";
+	private static final String INNER_DIAMETER_PROMPT    = "Enter grain inner diameter (Must be positive): ";
+	private static final String LENGTH_PROMPT            = "Enter grain length (Must be positive): ";
+	private static final String BURNING_ENDS_PROMPT      = "Enter grain number of burning ends (Must be 0, 1, or 2): ";
+	
+	
+	
+}
