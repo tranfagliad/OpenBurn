@@ -16,4 +16,5 @@
 <fullyQualifiedTypeName name="model.Grain"/>
 <fullyQualifiedTypeName name="model.SimulationResults"/>
 <fullyQualifiedTypeName name="model.Nozzle"/>
+<fullyQualifiedTypeName name="javafx.scene.chart.XYChart.Data"/>
 </qualifiedTypeNameHistroy>
