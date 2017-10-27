@@ -1,0 +1,32 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import model.grains.*;
+
+/**
+ * GrainTest.java
+ * 
+ * Contains unit testing for the methods in Grain.java.
+**/
+
+public class GrainTest
+{	
+	// Tolerance constant for double testing
+	private static final double TOLERANCE = 0.01;
+	
+	
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void testInnerDiameterConstructorException_Cylindrical ()
+	{
+		@SuppressWarnings("unused")
+		Grain errorTest = new CylindricalGrain(1.0, 2.0, 1.0, 1);
+	} // testInnerDiameterConstructorException()
+
+	
+	
+	
+	
+} // test GrainTest

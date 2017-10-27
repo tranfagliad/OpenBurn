@@ -13,5 +13,7 @@
 <fullyQualifiedTypeName name="javafx.scene.input.ScrollEvent"/>
 <fullyQualifiedTypeName name="javafx.scene.layout.StackPane"/>
 <fullyQualifiedTypeName name="javafx.scene.Node"/>
+<fullyQualifiedTypeName name="model.Grain"/>
 <fullyQualifiedTypeName name="model.SimulationResults"/>
+<fullyQualifiedTypeName name="model.Nozzle"/>
 </qualifiedTypeNameHistroy>

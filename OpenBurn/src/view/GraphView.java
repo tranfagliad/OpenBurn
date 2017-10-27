@@ -87,7 +87,7 @@ public class GraphView
 	{
 		ObservableList<XYChart.Series<Double, Double>> data = FXCollections.observableArrayList();
 		
-		Series<Double, Double> dataSeries = new Series<>();
+		Series<Double, Double> dataSeries = new Series<Double, Double>();
 		dataSeries.setName(legendName);
 		
 		

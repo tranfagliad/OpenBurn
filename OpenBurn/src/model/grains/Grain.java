@@ -39,7 +39,7 @@ abstract public class Grain
 	 * Purpose: Creates and initializes a Grain object using the given
 	 * 		values for outer diameter, inner diameter, and the number of
 	 * 		burning ends. Burnout time is initialized to 0 seconds.
-	 * 
+	 * 		
 	 * 		Requirements:
 	 * 		- Outer and inner diameters MUST be positive.
 	 * 		- Outer diameter MUST be greater than inner diameter.
@@ -48,19 +48,21 @@ abstract public class Grain
 	 * 
 	 * 		NOTE: Propellant density is not set here, user must call
 	 * 			setPropellantDensity() to set it.
+	 * 
+	 * 		NOTE: Grain is initialized to currently burning.
 	**/
 	
 	public Grain (double length, double outerDiameter, double innerDiameter, int numBurningEnds)
 	{
 		// Error check all inputs
+		if (length <= 0)
+			throw new IllegalArgumentException(LENGTH_ERR_MSG);
 		if (outerDiameter <= 0)
 			throw new IllegalArgumentException(OUTER_DIAMETER_ERR_MSG);
 		if (innerDiameter <= 0)
 			throw new IllegalArgumentException(INNER_DIAMETER_ERR_MSG);
 		if (innerDiameter >= outerDiameter)
 			throw new IllegalArgumentException(OUTER_INNER_ERR_MSG);
-		if (length < 0)
-			throw new IllegalArgumentException(LENGTH_ERR_MSG);
 		if (numBurningEnds < 0 || numBurningEnds > 2)
 			throw new IllegalArgumentException(BURNING_ENDS_ERR_MSG);
 		
@@ -88,7 +90,10 @@ abstract public class Grain
 	 * Returns: double. The propellant density.
 	**/
 	
-	abstract public double getPropellantDensity ();
+	public double getPropellantDensity ()
+	{
+		return propellantDensity;
+	} // getPropellantDensity()
 	
 	
 	
@@ -103,7 +108,15 @@ abstract public class Grain
 	 * Returns: void.
 	**/
 	
-	abstract public void setPropellantDensity (double density);
+	public void setPropellantDensity (double density)
+	{
+		// Density must not be negative
+		if (density <= 0.0)
+			throw new IllegalArgumentException(PROP_DENSITY_ERR_MSG);
+				
+		// Set density
+		propellantDensity = density;
+	} // setPropellantDensity()
 
 	
 	
@@ -117,7 +130,10 @@ abstract public class Grain
 	 * Returns: double. The length of the grain.
 	**/
 	
-	abstract public double getLength ();
+	public double getLength ()
+	{
+		return length;
+	} // getLength()
 	
 	
 	
@@ -131,7 +147,10 @@ abstract public class Grain
 	 * Returns: double. The outer diameter of the grain.
 	**/
 	
-	abstract public double getOuterDiameter ();
+	public double getOuterDiameter ()
+	{
+		return outerDiameter;
+	} // getOuterDiameter()
 	
 	
 	
@@ -145,7 +164,10 @@ abstract public class Grain
 	 * Returns: double. The inner diameter of the grain.
 	**/
 	
-	abstract public double getInnerDiameter ();
+	public double getInnerDiameter ()
+	{
+		return innerDiameter;
+	} // getInnerDiameter()
 	
 	
 	
@@ -159,7 +181,10 @@ abstract public class Grain
 	 * Returns: int. The number of burning ends.
 	**/
 	
-	abstract public int getNumBurningEnds ();
+	public int getNumBurningEnds ()
+	{
+		return numBurningEnds;
+	} // getNumBurningEnds()
 	
 	
 	
@@ -173,7 +198,10 @@ abstract public class Grain
 	 * Returns: double. The burnout time.
 	**/
 	
-	abstract public double getBurnoutTime ();
+	public double getBurnoutTime ()
+	{
+		return burnoutTime;
+	} // getBurnoutTime()
 	
 	
 	
@@ -188,7 +216,10 @@ abstract public class Grain
 	 * Returns: void.
 	**/
 	
-	abstract public void setBurnoutTime (double newBurnoutTime);
+	public void setBurnoutTime (double newBurnoutTime)
+	{
+		this.burnoutTime = newBurnoutTime;
+	} // setBurnoutTime()
 	
 	
 	
@@ -204,7 +235,29 @@ abstract public class Grain
 	 * Returns: boolean. The status on if the grain is burning or not.
 	**/
 	
-	abstract public boolean isBurning ();
+	public boolean isBurning ()
+	{
+		return isBurning;
+	} // isBurning()
+	
+	
+	
+	/**
+	 * setIsBurning()
+	 * 
+	 * Purpose: Changes the burning status of the Grain to a
+	 * 		new value.
+	 * 
+	 * Parameters:
+	 * 		boolean isBurning -- New value to set burn status.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setIsBurning (boolean isBurning)
+	{
+		this.isBurning = isBurning;
+	} // setIsBurning()
 	
 	
 	
@@ -213,6 +266,8 @@ abstract public class Grain
 	 * 
 	 * Purpose: Uses the current values of the grain properties to calculate
 	 * 		and return the volume of the grain.
+	 * 
+	 * 		NOTE: Implementation depends on shape.
 	 * 
 	 * Parameters: None.
 	 * 
@@ -230,6 +285,8 @@ abstract public class Grain
 	 * 		and return the burnable surface area of the grain. All calculations
 	 * 		are based on those performed in cylindrical_grain_burn_area.m.
 	 * 
+	 * 		NOTE: Implementation depends on shape.
+	 * 
 	 * Parameters: None.
 	 * 
 	 * Returns: double. The burnable surface area of the grain.
@@ -245,8 +302,9 @@ abstract public class Grain
 	 * Purpose: Updates the Grain object using calculations based on
 	 * 		those performed in cylindrical_grain_geomtetry_update.m,
 	 * 		using the given burn rate and change in time (seconds).
-	 * 		
 	 * 		The overall change in volume is returned.
+	 * 
+	 * 		NOTE: Implementation depends on shape.
 	 * 
 	 * Parameters:
 	 * 		double burnRate -- Burn rate affecting the grain.
@@ -267,6 +325,8 @@ abstract public class Grain
 	 * 		This is used for mass flow per area and port to throat ratio
 	 * 		calculations.
 	 * 
+	 * 		NOTE: Implementation depends on shape.
+	 * 
 	 * Parameters: None.
 	 * 
 	 * Returns: double. The inner flow area of the motor
@@ -283,6 +343,8 @@ abstract public class Grain
 	 * 		volume of the motor. This is provided in the grains standard unit.
 	 * 		This is used for l* calculations.
 	 * 
+	 * 		NOTE: Implementation depends on shape.
+	 * 
 	 * Parameters: None.
 	 * 
 	 * Returns: double. The inner flow volume of the motor.
@@ -296,7 +358,7 @@ abstract public class Grain
 	 * getLengthDifference()
 	 * 
 	 * Purpose: Compares the current length of the motor with the its
-	 * 		initial length and returns the difference. Used in l* calculation
+	 * 		initial length and returns the difference. Used in l* calculation.
 	 * 
 	 * Parameters: None.
 	 * 
@@ -304,6 +366,9 @@ abstract public class Grain
 	 * 		grain length.
 	**/
 	
-	abstract public double getLengthDifference();
+	public double getLengthDifference()
+	{
+		return (initialLength - length);
+	} // getLengthDifference()
 	
 } // abstract class Grain

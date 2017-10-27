@@ -24,177 +24,6 @@ public class CylindricalGrain extends Grain
 	
 	
 	/**
-	 * getPropellantDensity()
-	 * 
-	 * Purpose: Returns the propellant density.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: double. The propellant density.
-	**/
-	
-	@Override
-	public double getPropellantDensity () 
-	{
-		return this.propellantDensity;
-	} // getPropellantDensity()
-	
-	
-	
-	/**
-	 * setPropellantDensity()
-	 * 
-	 * Purpose: Changes the propellant density to a new value.
-	 * 
-	 * Parameters:
-	 * 		double density -- New value to set the propellant density.
-	 * 
-	 * Returns: void.
-	**/
-	
-	@Override
-	public void setPropellantDensity (double density)
-	{
-		// Density must not be negative
-		if (density <= 0.0)
-			throw new IllegalArgumentException(PROP_DENSITY_ERR_MSG);
-		
-		// Set density
-		propellantDensity = density;
-	}
-	
-	
-	
-	/**
-	 * getLength()
-	 * 
-	 * Purpose: Returns the length of the grain.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: double. The length of the grain.
-	**/
-	
-	@Override
-	public double getLength () 
-	{
-		return this.length;
-	}
-	
-	
-	
-	/**
-	 * getOuterDiameter()
-	 * 
-	 * Purpose: Returns the outer diameter of the grain.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: double. The outer diameter of the grain.
-	**/
-	
-	@Override
-	public double getOuterDiameter () 
-	{
-		return this.outerDiameter;
-	}
-	
-	
-	
-	/**
-	 * getInnerDiameter()
-	 * 
-	 * Purpose: Returns the inner diameter of the grain.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: double. The inner diameter of the grain.
-	**/
-	
-	@Override
-	public double getInnerDiameter () 
-	{
-			return innerDiameter;
-	}
-	
-	
-	
-	/**
-	 * getNumBurningEnds()
-	 * 
-	 * Purpose: Returns the number of burning ends.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: int. The number of burning ends.
-	**/
-	
-	@Override
-	public int getNumBurningEnds () 
-	{
-		return numBurningEnds;
-	}
-	
-	
-	
-	/**
-	 * getBurnoutTime()
-	 * 
-	 * Purpose: Returns the burnout time.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: double. The burnout time.
-	**/
-	
-	@Override
-	public double getBurnoutTime () 
-	{
-		return burnoutTime;
-	}
-	
-	
-	
-	/**
-	 * setBurnoutTime()
-	 * 
-	 * Purpose: Changes the burnout time to a new value.
-	 * 
-	 * Parameters:
-	 * 		double burnoutTime -- New value to set the burnout time.
-	 * 
-	 * Returns: void.
-	**/
-	
-	@Override
-	public void setBurnoutTime (double burnoutTime) 
-	{
-		this.burnoutTime = burnoutTime;
-	} //
-	
-	
-	
-	/**
-	 * isBurning()
-	 * 
-	 * Purpose: Getter for the isBurning boolean. This is set initially as
-	 * 		true. The update geometry method is responsible for setting
-	 * 		this to false.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: boolean. The status on if the grain is burning or not.
-	**/
-	
-	@Override
-	public boolean isBurning ()
-	{
-		return isBurning;
-	}
-	
-	
-	
-	/**
 	 * getVolume()
 	 * 
 	 * Purpose: Uses the current values of the grain properties to calculate
@@ -243,7 +72,7 @@ public class CylindricalGrain extends Grain
 		// Guarantees we never have negative surface area.
 		// Based on motor_internal_balistics.m, line 136
 		return Math.max(surfaceArea, 0); 					 
-	}
+	} // getBurnArea()
 	
 	
 	
@@ -311,7 +140,7 @@ public class CylindricalGrain extends Grain
 	public double getCurrentInnerFlowArea () 
 	{
 		return Math.PI * Math.pow(this.innerDiameter / 2, 2);   // Area = pi*(d/2)^2
-	}
+	} // getCurrentInnerFlowArea()
 	
 	
 	
@@ -331,26 +160,6 @@ public class CylindricalGrain extends Grain
 	public double getCurrentInnerFlowVolume () 
 	{
 		return this.getCurrentInnerFlowArea() * this.length;
-	}
-	
-	
-	
-	/**
-	 * getLengthDifference()
-	 * 
-	 * Purpose: Compares the current length of the motor with the its
-	 * 		initial length and returns the difference. Used in l* calculation
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: double. The difference between the initial and current 
-	 * 		grain length.
-	**/
-	
-	@Override
-	public double getLengthDifference ()
-	{
-		return this.initialLength - this.length;
-	}
+	} // getCurrentInnerFlowVolume()
 	
 } // class CylindricalGrain
