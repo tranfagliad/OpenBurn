@@ -21,7 +21,13 @@ abstract public class Grain
 	
 	
 	
-	// Propellant density is the same for all Grains
+	// Grain current ID
+	private static int currentGrainID = 0;
+	
+	
+	
+	// Fields
+	protected int grainID;
 	protected double propellantDensity;
 	protected double length;
 	protected double outerDiameter;
@@ -67,6 +73,7 @@ abstract public class Grain
 			throw new IllegalArgumentException(BURNING_ENDS_ERR_MSG);
 		
 		// Set fields
+		this.grainID        = ++currentGrainID;
 		this.outerDiameter  = outerDiameter;
 		this.length         = length;
 		this.innerDiameter  = innerDiameter;
@@ -77,6 +84,23 @@ abstract public class Grain
 		// Initialize burnout time to 0 seconds
 		setBurnoutTime(0.0);
 	} // Grain Constructor
+	
+	
+	
+	/**
+	 * getGrainID()
+	 * 
+	 * Purpose: Returns the ID of the grain.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: int. The ID of the grain.
+	**/
+	
+	public int getGrainID ()
+	{
+		return grainID;
+	} // getGrainID()
 	
 	
 	

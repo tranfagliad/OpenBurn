@@ -18,13 +18,12 @@ public class EditGrainWindow extends Stage
 {
 	// Labels
 	private static final String EDIT_GRAIN_TITLE = "Edit a Grain";
-	
 	private static final String LENGTH_PROMPT         = "Enter Length";
 	private static final String OUTER_DIAMETER_PROMPT = "Enter Outer Diameter";
 	private static final String INNER_DIAMETER_PROMPT = "Enter Inner Diameter";
 	private static final String BURNING_ENDS_PROMPT   = "Enter Number of Burning Ends";
-	
 	private static final String SUBMIT_BUTTON_TEXT = "Submit";
+	private static final String EMPTY = "";
 	
 	
 	
@@ -80,6 +79,9 @@ public class EditGrainWindow extends Stage
     	lengthTextField.setTranslateY(50);
 		editPane.getChildren().add(lengthTextField);
 		
+		BooleanBinding lengthTextFieldNotValid = Bindings.createBooleanBinding(() -> {
+    	    return lengthTextField.getText().equals(EMPTY);
+    	}, lengthTextField.textProperty());
 		
 		
 		
@@ -95,7 +97,9 @@ public class EditGrainWindow extends Stage
     	outerDiameterTextField.setTranslateY(140);
 		editPane.getChildren().add(outerDiameterTextField);
 		
-		
+		BooleanBinding outerDiameterTextFieldNotValid = Bindings.createBooleanBinding(() -> {
+    	    return outerDiameterTextField.getText().equals(EMPTY);
+    	}, outerDiameterTextField.textProperty());
 		
 		
 		
@@ -111,7 +115,9 @@ public class EditGrainWindow extends Stage
     	burningEndsTextField.setTranslateY(50);
 		editPane.getChildren().add(burningEndsTextField);
 		
-		
+		BooleanBinding burningEndsTextFieldNotValid = Bindings.createBooleanBinding(() -> {
+    	    return burningEndsTextField.getText().equals(EMPTY);
+    	}, burningEndsTextField.textProperty());
 		
 		
 		
@@ -128,7 +134,9 @@ public class EditGrainWindow extends Stage
     	innerDiameterTextField.setTranslateY(140);
 		editPane.getChildren().add(innerDiameterTextField);
 		
-		
+		BooleanBinding innerDiameterTextFieldNotValid = Bindings.createBooleanBinding(() -> {
+    	    return innerDiameterTextField.getText().equals(EMPTY);
+    	}, innerDiameterTextField.textProperty());
 		
 		
 		
@@ -141,6 +149,8 @@ public class EditGrainWindow extends Stage
     	submitButton.setPrefWidth(130);
     	submitButton.setPrefHeight(35);
     	editPane.getChildren().add(submitButton);
+    	
+    	submitButton.disableProperty().bind((lengthTextFieldNotValid.or(outerDiameterTextFieldNotValid).or(burningEndsTextFieldNotValid).or(innerDiameterTextFieldNotValid)));
     	
 	}
 	

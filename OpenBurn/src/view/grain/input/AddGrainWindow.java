@@ -77,7 +77,7 @@ public class AddGrainWindow extends Stage
     	lengthTextField.setTranslateY(50);
 		addPane.getChildren().add(lengthTextField);
 		
-		BooleanBinding lengthTextFieldValid = Bindings.createBooleanBinding(() -> {
+		BooleanBinding lengthTextFieldNotValid = Bindings.createBooleanBinding(() -> {
     	    if (lengthTextField.getText().equals(EMPTY))
     	    	return true;
     	    else
@@ -97,7 +97,7 @@ public class AddGrainWindow extends Stage
     	outerDiameterTextField.setTranslateY(140);
 		addPane.getChildren().add(outerDiameterTextField);
 		
-		BooleanBinding outerDiameterTextFieldValid = Bindings.createBooleanBinding(() -> {
+		BooleanBinding outerDiameterTextFieldNotValid = Bindings.createBooleanBinding(() -> {
     	    if (outerDiameterTextField.getText().equals(EMPTY))
     	    	return true;
     	    else
@@ -118,11 +118,9 @@ public class AddGrainWindow extends Stage
     	burningEndsTextField.setTranslateY(50);
 		addPane.getChildren().add(burningEndsTextField);
 		
-		BooleanBinding burningEndsTextFieldValid = Bindings.createBooleanBinding(() -> {
-    	    if (burningEndsTextField.getText().equals(EMPTY))
-    	    	return true;
-    	    else
-    	    	return false;
+		BooleanBinding burningEndsTextFieldNotValid = Bindings.createBooleanBinding(() ->
+		{
+    	    return burningEndsTextField.getText().equals(EMPTY);
     	}, burningEndsTextField.textProperty());
 		
 		
@@ -140,11 +138,9 @@ public class AddGrainWindow extends Stage
     	innerDiameterTextField.setTranslateY(140);
 		addPane.getChildren().add(innerDiameterTextField);
 		
-		BooleanBinding innerDiameterTextFieldValid = Bindings.createBooleanBinding(() -> {
-    	    if (innerDiameterTextField.getText().equals(EMPTY))
-    	    	return true;
-    	    else
-    	    	return false;
+		BooleanBinding innerDiameterTextFieldNotValid = Bindings.createBooleanBinding(() ->
+		{
+    	    return innerDiameterTextField.getText().equals(EMPTY);
     	}, innerDiameterTextField.textProperty());
 		
 		
@@ -159,7 +155,7 @@ public class AddGrainWindow extends Stage
     	submitButton.setPrefHeight(35);
     	addPane.getChildren().add(submitButton);
     	
-    	submitButton.disableProperty().bind((lengthTextFieldValid.or(outerDiameterTextFieldValid).or(burningEndsTextFieldValid).or(innerDiameterTextFieldValid)));
+    	submitButton.disableProperty().bind((lengthTextFieldNotValid.or(outerDiameterTextFieldNotValid).or(burningEndsTextFieldNotValid).or(innerDiameterTextFieldNotValid)));
     	
 		
 	}

@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.grains.CylindricalGrain;
 import view.CaseInputView;
 import view.GraphView;
 import view.NozzleInputView;
@@ -202,12 +201,14 @@ public class OpenBurnGUI extends Application
 		frame.getChildren().add(grainInputs);
 		
 		// TEMPORARY: Adding a sample input
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		/*
+		grainInputs.addRow(2.0, 3.0, 2.0, 2);
+		grainInputs.addRow(5.0, 2.0, 1.0, 0);
+		grainInputs.addRow(2.0, 3.0, 2.0, 2);
+		grainInputs.addRow(5.0, 2.0, 1.0, 0);
+		grainInputs.addRow(2.0, 3.0, 2.0, 2);
+		grainInputs.addRow(5.0, 2.0, 1.0, 0);
+		*/
 	} // addGrainTable()
 	
 	
@@ -340,6 +341,10 @@ public class OpenBurnGUI extends Application
 		rseButton.setPrefWidth(130);
 		rseButton.setDisable(false);
 		frame.getChildren().add(rseButton);
+		
+		//TEMPORARY: Disable buttons
+		csvButton.setDisable(true);
+		rseButton.setDisable(true);
 	} // addExportButtons()
 	
 } // class OpenBurnGUI
