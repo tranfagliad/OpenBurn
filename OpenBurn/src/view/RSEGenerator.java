@@ -2,7 +2,7 @@
 package view;
 
 import model.Case;
-import model.ImpulseClassifier;
+import model.calculations.ImpulseClassifier;
 import model.calculations.SimulationResults;
 
 /**
