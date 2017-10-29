@@ -17,7 +17,7 @@ import model.calculations.SimulationResults;
 
 public class GraphView
 {
-	// Labels for chart and each axis
+	// Labels
 	public static final String TIME_LABEL     = "Time";
 	public static final String THRUST_LABEL   = "Thrust";
 	public static final String PRESSURE_LABEL = "Pressure";
