@@ -17,6 +17,7 @@ import model.Nozzle;
 import model.calculations.RocketMath;
 import model.calculations.SimulationResults;
 import model.grains.Grain;
+import view.CSVConverter;
 import view.CaseInputView;
 import view.GraphView;
 import view.NozzleInputView;
@@ -361,6 +362,14 @@ public class OpenBurnGUI extends Application
 		csvButton.setPrefWidth(130);
 		csvButton.setDisable(false);
 		frame.getChildren().add(csvButton);
+		
+		csvButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+		    @Override public void handle (ActionEvent e)
+		    {
+		    	CSVConverter.writeResultsArr(simResults, TEMP_LEGEND_NAME + ".csv");
+		    }
+		});
 				
 		// Export to RSE button
 		rseButton = new Button(EXPORT_RSE);
@@ -372,7 +381,6 @@ public class OpenBurnGUI extends Application
 		frame.getChildren().add(rseButton);
 		
 		//TEMPORARY: Disable buttons
-		csvButton.setDisable(true);
 		rseButton.setDisable(true);
 	} // addExportButtons()
 	
