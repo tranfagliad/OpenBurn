@@ -10,9 +10,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.grains.CylindricalGrain;
 import view.CaseInputView;
-import view.GrainInputView;
 import view.GraphView;
 import view.NozzleInputView;
+import view.grain.input.GrainInputView;
 
 /**
  * OpenBurnGUI.java
@@ -51,16 +51,13 @@ public class OpenBurnGUI extends Application
 	
 	// Components
 	private Text propDensityText;
-	private TextField propDensityTextField;
-	
 	private Text timeDeltaText;
+	private TextField propDensityTextField;
 	private TextField timeDeltaTextField;
-	
 	private GrainInputView grainInputs;
 	private NozzleInputView nozzleInputs;
 	private CaseInputView caseInputs;
 	private GraphView outputGraph;
-	
 	private Button simButton;
 	private Button csvButton;
 	private Button rseButton;
@@ -100,100 +97,25 @@ public class OpenBurnGUI extends Application
 	@Override
 	public void start (Stage stage)
 	{
-		// Add window icon
-		stage.getIcons().add(new Image(this.getClass().getResourceAsStream(ICON_FILE_PATH)));
-		
 		// Initialize primary window
 		Pane root = new Pane();
 		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 		stage.setScene(scene);
 		stage.setTitle(WINDOW_TITLE);
+		stage.getIcons().add(new Image(this.getClass().getResourceAsStream(ICON_FILE_PATH)));
 		stage.setResizable(false);
 		Pane frame = new Pane();
 		scene.setRoot(frame);
 		
-		// Propellant Density input
+		// Initialize and set components
 		addPropDensityInput(frame);
-		
-		// Change in Time input
 		addTimeDeltaInput(frame);
-		
-		// Grain input table
-		grainInputs = new GrainInputView();
-		grainInputs.setTranslateX(GRAIN_INPUT_X);
-		grainInputs.setTranslateY(GRAIN_INPUT_Y);
-		frame.getChildren().add(grainInputs);
-		
-		// TEMPORARY: Adding a sample input
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
-		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
-		
-		// Nozzle Input fields
-		nozzleInputs = new NozzleInputView();
-		nozzleInputs.setTranslateX(NOZZLE_INPUT_X);
-		nozzleInputs.setTranslateY(NOZZLE_INPUT_Y);
-		frame.getChildren().add(nozzleInputs);
-		
-		// Case Input fields
-		caseInputs = new CaseInputView();
-		caseInputs.setTranslateX(CASE_INPUT_X);
-		caseInputs.setTranslateY(CASE_INPUT_Y);
-		frame.getChildren().add(caseInputs);
-		
-		// Graph, initially Thrust vs. Time
-		outputGraph = new GraphView(GraphView.THRUST_LABEL + GraphView.VERSUS_LABEL + GraphView.TIME_LABEL,
-				 					GraphView.TIME_LABEL,
-				 					GraphView.THRUST_LABEL);
-		outputGraph.getChart().setTranslateX(GRAPH_X);
-		outputGraph.getChart().setTranslateY(GRAPH_Y);
-		outputGraph.getChart().setPrefWidth(GRAPH_WIDTH);
-		outputGraph.getChart().setPrefHeight(GRAPH_HEIGHT);
-		frame.getChildren().add(outputGraph.getChart());
-		
-		// Simulate Button
-		simButton = new Button(SIMULATE);
-		simButton.setTranslateX(20);
-		simButton.setTranslateY(850);
-		simButton.setPrefHeight(35);
-		simButton.setPrefWidth(100);
-		simButton.setDisable(false);
-		frame.getChildren().add(simButton);
-		
-		// Export to CSV button
-		csvButton = new Button(EXPORT_CSV);
-		csvButton.setTranslateX(200);
-		csvButton.setTranslateY(850);
-		csvButton.setPrefHeight(35);
-		csvButton.setPrefWidth(130);
-		csvButton.setDisable(false);
-		frame.getChildren().add(csvButton);
-		
-		// Export to RSE button
-		rseButton = new Button(EXPORT_RSE);
-		rseButton.setTranslateX(340);
-		rseButton.setTranslateY(850);
-		rseButton.setPrefHeight(35);
-		rseButton.setPrefWidth(130);
-		rseButton.setDisable(false);
-		frame.getChildren().add(rseButton);
+		addGrainTable(frame);
+		addNozzleInputs(frame);
+		addCaseInputs(frame);
+		addGraph(frame);            // Initially Thrust vs. Time
+		addSimulateButton(frame);
+		addExportButtons(frame);    // CSV and RSE
 		
 		// Display window
 		stage.show();
@@ -208,7 +130,7 @@ public class OpenBurnGUI extends Application
 	 * 		to the given Pane.
 	 * 
 	 * Parameters:
-	 * 		Pane frame -- The frame to add to.
+	 * 		Pane frame -- The Pane to add to.
 	 * 
 	 * Returns: void.
 	**/
@@ -233,9 +155,11 @@ public class OpenBurnGUI extends Application
 	/**
 	 * addTimeDeltaInput()
 	 * 
-	 * Purpose:
+	 * Purpose: Adds the change in time input fields to
+	 * 		to the given Pane.
 	 * 
 	 * Parameters:
+	 * 		Pane frame -- The Pane to add to.
 	 * 
 	 * Returns: void.
 	**/
@@ -257,9 +181,166 @@ public class OpenBurnGUI extends Application
 	
 	
 	
+	/**
+	 * addGrainTable()
+	 * 
+	 * Purpose: Adds the grain input table and buttons
+	 * 		to the given Pane.
+	 * 
+	 * Parameters:
+	 * 		Pane pane -- The Pane to add to.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addGrainTable (Pane frame)
+	{
+		// Initialize table
+		grainInputs = new GrainInputView();
+		grainInputs.setTranslateX(GRAIN_INPUT_X);
+		grainInputs.setTranslateY(GRAIN_INPUT_Y);
+		frame.getChildren().add(grainInputs);
+		
+		// TEMPORARY: Adding a sample input
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+	} // addGrainTable()
 	
 	
 	
+	/**
+	 * addNozzleInputs()
+	 * 
+	 * Purpose: Adds the nozzle input fields to
+	 * 		the given Pane.
+	 * 
+	 * Parameters:
+	 * 		Pane frame -- The Pane to add to.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addNozzleInputs (Pane frame)
+	{
+		// Initialize nozzle input view
+		nozzleInputs = new NozzleInputView();
+		nozzleInputs.setTranslateX(NOZZLE_INPUT_X);
+		nozzleInputs.setTranslateY(NOZZLE_INPUT_Y);
+		frame.getChildren().add(nozzleInputs);
+	} // addNozzleInputs()
+	
+	
+	
+	/**
+	 * addCaseInputs()
+	 * 
+	 * Purpose: Adds the case input fields to
+	 * 		the given Pane.
+	 * 
+	 * Parameters:
+	 * 		Pane frame -- The Pane the add to.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addCaseInputs (Pane frame)
+	{
+		// Initialize case input view
+		caseInputs = new CaseInputView();
+		caseInputs.setTranslateX(CASE_INPUT_X);
+		caseInputs.setTranslateY(CASE_INPUT_Y);
+		frame.getChildren().add(caseInputs);
+	} // addCaseInputs()
+	
+	
+	
+	/**
+	 * addGraph()
+	 * 
+	 * Purpose: Adds the graph (ScatterChart) to the given Pane.
+	 * 
+	 * Parameters:
+	 * 		Pane frame -- The Pane to add to.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addGraph (Pane frame)
+	{
+		// Initialize graph, with Thrust vs. Time labels
+		outputGraph = new GraphView(GraphView.THRUST_LABEL + GraphView.VERSUS_LABEL + GraphView.TIME_LABEL,
+									GraphView.TIME_LABEL,
+									GraphView.THRUST_LABEL);
+		outputGraph.getChart().setTranslateX(GRAPH_X);
+		outputGraph.getChart().setTranslateY(GRAPH_Y);
+		outputGraph.getChart().setPrefWidth(GRAPH_WIDTH);
+		outputGraph.getChart().setPrefHeight(GRAPH_HEIGHT);
+		frame.getChildren().add(outputGraph.getChart());
+	} // addGraph()
+	
+	
+	
+	/**
+	 * addSimulateButton()
+	 * 
+	 * Purpose: Adds the simulate button to the given Pane.
+	 * 
+	 * Parameters:
+	 * 		Pane frame -- The Pane to add to.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addSimulateButton (Pane frame)
+	{
+		// Initialize simulate button
+		simButton = new Button(SIMULATE);
+		simButton.setTranslateX(20);
+		simButton.setTranslateY(850);
+		simButton.setPrefHeight(35);
+		simButton.setPrefWidth(100);
+		simButton.setDisable(false);
+		frame.getChildren().add(simButton);
+	} // addSimulateButton()
+	
+	
+	
+	/**
+	 * addExportButtons()
+	 * 
+	 * Purpose: Adds the export buttons to the given Pane.
+	 * 		Currently handles CSV and RSE.
+	 * 
+	 * Parameters:
+	 * 		Pane frame -- The Pane to add to.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addExportButtons (Pane frame)
+	{
+		// Export to CSV button
+		csvButton = new Button(EXPORT_CSV);
+		csvButton.setTranslateX(200);
+		csvButton.setTranslateY(850);
+		csvButton.setPrefHeight(35);
+		csvButton.setPrefWidth(130);
+		csvButton.setDisable(false);
+		frame.getChildren().add(csvButton);
+				
+		// Export to RSE button
+		rseButton = new Button(EXPORT_RSE);
+		rseButton.setTranslateX(340);
+		rseButton.setTranslateY(850);
+		rseButton.setPrefHeight(35);
+		rseButton.setPrefWidth(130);
+		rseButton.setDisable(false);
+		frame.getChildren().add(rseButton);
+	} // addExportButtons()
 	
 } // class OpenBurnGUI
 
