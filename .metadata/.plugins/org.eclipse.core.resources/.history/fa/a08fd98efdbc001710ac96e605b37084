@@ -331,7 +331,7 @@ public class OpenBurnGUI extends Application
 		    							caseInputs.getLengthInput());
 		    	simResults = RocketMath.simulate(grainList, deltaTime, theNozzle, theCase);
 		    	
-		    	outputGraph.addThrustVsTimeDataSet(TEMP_LEGEND_NAME, simResults);
+		    	outputGraph.addThrustVsTimeDataSet();
 		    }
 		});
 	} // addSimulateButton()

@@ -128,38 +128,4 @@ public class CaseInputView extends Pane
 		this.getChildren().add(lengthTextField);
 	} // addLengthInput()
 	
-	
-	
-	/**
-	 * 
-	**/
-	
-	public double getMassInput ()
-	{
-		return Double.parseDouble(massTextField.getText().toString());
-	}
-	
-	
-	
-	/**
-	 * 
-	**/
-	
-	public double getDiameterInput ()
-	{
-		return Double.parseDouble(diameterTextField.getText().toString());
-	}
-	
-	
-	
-	/*
-	 * 
-	 */
-	
-	public double getLengthInput ()
-	{
-		return Double.parseDouble(lengthTextField.getText().toString());
-	}
-	
-	
 } // class CaseInputView

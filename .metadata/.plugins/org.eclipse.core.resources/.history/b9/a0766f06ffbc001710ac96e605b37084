@@ -102,7 +102,7 @@ public class GraphView
 		for (SimulationResults currentResults: results)
 		{
 			System.out.println(currentResults.getThrust());
-			dataSeries.getData().add(new XYChart.Data(currentResults.getTime(), currentResults.getChamberPressure()));
+			dataSeries.getData().add(new XYChart.Data(currentResults.getTime(), currentResults.getThrust()));
 		}
 		
 		// Add the data series to the chart
