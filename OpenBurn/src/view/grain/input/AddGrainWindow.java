@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -52,10 +51,10 @@ public class AddGrainWindow extends Stage
 	
 	
 	// Fields
-	BooleanBinding lengthTextFieldNotValid;
-	BooleanBinding outerDiameterTextFieldNotValid;
-	BooleanBinding burningEndsTextFieldNotValid;
-	BooleanBinding innerDiameterTextFieldNotValid;
+	private BooleanBinding lengthTextFieldNotValid;
+	private BooleanBinding outerDiameterTextFieldNotValid;
+	private BooleanBinding burningEndsTextFieldNotValid;
+	private BooleanBinding innerDiameterTextFieldNotValid;
 	
 	
 	

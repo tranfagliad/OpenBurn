@@ -1,10 +1,6 @@
 package view;
-import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.chart.Axis;
+import java.util.List;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -30,8 +26,8 @@ public class GraphView
 	
 	
 	// Private fields
+	@SuppressWarnings("rawtypes")
 	private ScatterChart chart;
-	private int numSeries;
 	
 	
 	
@@ -42,6 +38,7 @@ public class GraphView
 	 * 		creates an empty ScatterChart that the user can access.
 	**/
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public GraphView (String chartName, String xAxisName, String yAxisName)
 	{
 		// Create and name the x-axis
@@ -55,8 +52,6 @@ public class GraphView
 		// Create and name the ScatterChart
 		this.chart = new ScatterChart(xAxis, yAxis);
 	    chart.setTitle(chartName);
-	    
-	    this.numSeries = 0;
 	} // GraphView Constructor (String, String, String)
 
 	
@@ -71,6 +66,7 @@ public class GraphView
 	 * Returns: ScatterChart. The chart contained within this wrapper.
 	**/
 	
+	@SuppressWarnings("rawtypes")
 	public ScatterChart getChart ()
 	{
 		return chart;
@@ -96,10 +92,9 @@ public class GraphView
 	 * Returns: void.
 	**/
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addThrustVsTimeDataSet (String legendName, List<SimulationResults> results)
 	{
-		ObservableList<XYChart.Series<Double, Double>> data = FXCollections.observableArrayList();
-		
 		Series<Double, Double> dataSeries = new Series<Double, Double>();
 		dataSeries.setName(legendName);
 		

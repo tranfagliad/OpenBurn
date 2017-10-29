@@ -1,6 +1,5 @@
 package view.grain.input;
 
-import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -296,6 +295,7 @@ public class GrainInputView extends Pane
 		});
 		
 		// Disable the button when the table is empty
+		/*
 		BooleanBinding tableSizeIsZero = new BooleanBinding()
 		{
 			@Override
@@ -305,6 +305,7 @@ public class GrainInputView extends Pane
 			}
 		};
 		removeButton.disableProperty().bind(tableSizeIsZero);
+		*/
 	} // addRemoveButton()
 	
 	
@@ -344,6 +345,7 @@ public class GrainInputView extends Pane
 		});
 		
 		// Disable the button when the table is empty
+		/*
 		BooleanBinding tableSizeIsZero = new BooleanBinding()
 		{
 			@Override
@@ -353,6 +355,7 @@ public class GrainInputView extends Pane
 			}
 		};
 		editButton.disableProperty().bind(tableSizeIsZero);
+		*/
 	} // addEditButton()
 	
 } // class GrainInputView
