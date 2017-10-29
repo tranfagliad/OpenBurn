@@ -39,17 +39,19 @@ public class GrainInputView extends Pane
 	
 	
 	// Constants
-	private static final int TITLE_X          = 235;
-	private static final int TITLE_Y          = 20;
-	private static final int TABLE_Y          = 30;
-	private static final int TABLE_HEIGHT     = 230;
-	private static final int ID_COL_WIDTH     = 30;
-	private static final int LENGTH_COL_WIDTH = 80;
-	//private static final int
-	//private static final int
-	//private static final int
-	private static final int BUTTON_WIDTH  = 150;
-	private static final int BUTTON_HEIGHT = 35;
+	private static final int TITLE_X                = 235;
+	private static final int TITLE_Y                = 20;
+	private static final int TABLE_Y                = 30;
+	private static final int TABLE_HEIGHT           = 230;
+	private static final int ID_COL_WIDTH           = 30;
+	private static final int LENGTH_COL_WIDTH       = 80;
+	private static final int DIAMETER_COL_WIDTH     = 140;
+	private static final int BURNING_ENDS_COL_WIDTH = 120;
+	private static final int BUTTON_WIDTH           = 150;
+	private static final int BUTTON_HEIGHT          = 35;
+	private static final int BUTTON_Y               = 270;
+	private static final int REMOVE_BUTTON_X        = 181;
+	private static final int EDIT_BUTTON_X          = 362;
 	
 	
 	
@@ -202,21 +204,21 @@ public class GrainInputView extends Pane
         TableColumn<Grain, String> outerDCol = new TableColumn<Grain, String>(OUTER_DIAMETER);
         outerDCol.setResizable(false);
         outerDCol.setCellValueFactory(new PropertyValueFactory<Grain,String>("OuterDiameter"));
-        outerDCol.setPrefWidth(140);
+        outerDCol.setPrefWidth(DIAMETER_COL_WIDTH);
         outerDCol.setStyle(CENTER_ALIGN);
         
         // Inner Diameter column
         TableColumn<Grain, String> innerDCol = new TableColumn<Grain, String>(INNER_DIAMETER);
         innerDCol.setResizable(false);
         innerDCol.setCellValueFactory(new PropertyValueFactory<Grain,String>("InnerDiameter"));
-        innerDCol.setPrefWidth(140);
+        innerDCol.setPrefWidth(DIAMETER_COL_WIDTH);
         innerDCol.setStyle(CENTER_ALIGN);
         
         // Number of Burning Ends column
         TableColumn<Grain, String> burningEndsCol = new TableColumn<Grain, String>(BURNING_ENDS);
         burningEndsCol.setResizable(false);
         burningEndsCol.setCellValueFactory(new PropertyValueFactory<Grain,String>("NumBurningEnds"));
-        burningEndsCol.setPrefWidth(120);
+        burningEndsCol.setPrefWidth(BURNING_ENDS_COL_WIDTH);
         burningEndsCol.setStyle(CENTER_ALIGN);
         
         // Add columns to the table
@@ -240,7 +242,7 @@ public class GrainInputView extends Pane
 	{
 		// Initialize add button
 		addButton = new Button(ADD);
-		addButton.setTranslateY(270);
+		addButton.setTranslateY(BUTTON_Y);
 		addButton.setPrefHeight(BUTTON_HEIGHT);
 		addButton.setPrefWidth(BUTTON_WIDTH);
 		addButton.setDisable(false);
@@ -275,8 +277,8 @@ public class GrainInputView extends Pane
 	{
 		// Initialize remove button
 		removeButton = new Button(REMOVE);
-		removeButton.setTranslateX(181);
-		removeButton.setTranslateY(270);
+		removeButton.setTranslateX(REMOVE_BUTTON_X);
+		removeButton.setTranslateY(BUTTON_Y);
 		removeButton.setPrefHeight(BUTTON_HEIGHT);
 		removeButton.setPrefWidth(BUTTON_WIDTH);
 		removeButton.setDisable(false);
@@ -323,8 +325,8 @@ public class GrainInputView extends Pane
 	{
 		// Initialize edit button
 		editButton = new Button(EDIT);
-		editButton.setTranslateX(362);
-		editButton.setTranslateY(270);
+		editButton.setTranslateX(EDIT_BUTTON_X);
+		editButton.setTranslateY(BUTTON_Y);
 		editButton.setPrefHeight(BUTTON_HEIGHT);
 		editButton.setPrefWidth(BUTTON_WIDTH);
 		editButton.setDisable(false);
