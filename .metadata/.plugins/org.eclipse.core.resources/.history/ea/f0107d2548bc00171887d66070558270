@@ -1,4 +1,4 @@
-package controller;
+package view;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -14,7 +14,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.grains.CylindricalGrain;
 import model.grains.Grain;
-import view.GrainInputView;
 
 
 
