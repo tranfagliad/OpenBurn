@@ -202,4 +202,7 @@ public class NozzleInputView extends Pane
 		return Double.parseDouble(cfTextField.getText().toString());
 	}
 	
+	
+	
+	
 } // class NozzleInputView

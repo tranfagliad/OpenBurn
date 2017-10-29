@@ -100,10 +100,7 @@ public class GraphView
 		
 		// Adds thrust vs. time data from the simulation results to the data series
 		for (SimulationResults currentResults: results)
-		{
-			System.out.println(currentResults.getThrust());
-			dataSeries.getData().add(new XYChart.Data(currentResults.getTime(), currentResults.getChamberPressure()));
-		}
+			dataSeries.getData().add(new XYChart.Data(currentResults.getTime(), currentResults.getThrust()));
 		
 		// Add the data series to the chart
 		chart.getData().addAll(dataSeries);

@@ -14,7 +14,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Case;
 import model.Nozzle;
-import model.calculations.RocketMath;
 import model.calculations.SimulationResults;
 import model.grains.Grain;
 import view.CaseInputView;
@@ -329,9 +328,7 @@ public class OpenBurnGUI extends Application
 		    	Case theCase = new Case(caseInputs.getMassInput(),
 		    							caseInputs.getDiameterInput(),
 		    							caseInputs.getLengthInput());
-		    	simResults = RocketMath.simulate(grainList, deltaTime, theNozzle, theCase);
 		    	
-		    	outputGraph.addThrustVsTimeDataSet(TEMP_LEGEND_NAME, simResults);
 		    }
 		});
 	} // addSimulateButton()

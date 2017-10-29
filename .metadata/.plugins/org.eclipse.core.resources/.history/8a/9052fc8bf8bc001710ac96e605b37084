@@ -96,23 +96,6 @@ public class GrainInputView extends Pane
 	
 	
 	/**
-	 * getTable()
-	 * 
-	 * Purpose: Returns the table of the input view.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: TableView<Grain>. The table of the input view.
-	**/
-	
-	public TableView<Grain> getTable ()
-	{
-		return table;
-	} // getTable()
-	
-	
-	
-	/**
 	 * addRow()
 	 * 
 	 * Purpose: Adds the specified grain to the grain table.

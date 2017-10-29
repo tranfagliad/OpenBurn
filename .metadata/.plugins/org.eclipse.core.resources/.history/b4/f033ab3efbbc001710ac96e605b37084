@@ -182,24 +182,7 @@ public class NozzleInputView extends Pane
 	
 	
 	
-	/**
-	 * 
-	**/
-	
-	public double getExitDiameterInput ()
-	{
-		return Double.parseDouble(exitDiameterTextField.getText().toString());
-	}
 	
 	
-	
-	/**
-	 * 
-	**/
-	
-	public double getCfInput ()
-	{
-		return Double.parseDouble(cfTextField.getText().toString());
-	}
 	
 } // class NozzleInputView

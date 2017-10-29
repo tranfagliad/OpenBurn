@@ -14,9 +14,11 @@ import model.calculations.UnitConverter;
 public class UnitConverterTest
 {
 	// Tolerance constant for double testing
-	private static final double TOLERANCE = 0.01;
+	private static final double TOLERANCE = 0.0000001;
 	
-	
+	// used in for loops to test metric to imperial to metric
+	private static final double INTERVAL = 0.1;
+	private static final double MAX = 20;
 	
 	@Test
 	public void testConvertLenghtMtoI ()
@@ -36,6 +38,16 @@ public class UnitConverterTest
 		assertEquals(2.54, UnitConverter.convertLengthItoM(1.0), TOLERANCE);
 	} // testConvertLenghtItoM()
 	
+	@Test
+	public void testConvertLengthMtoItoM()
+	{
+		for(double i = 0; i < MAX; i += INTERVAL)
+		{
+			double input = i;
+			double output = UnitConverter.convertLengthMtoI(input);
+			assertEquals(input, UnitConverter.convertLengthItoM(output), TOLERANCE);
+		}
+	}
 	
 	
 	@Test
@@ -56,7 +68,16 @@ public class UnitConverterTest
 		assertEquals(1, UnitConverter.convertMassItoM(0.00220462), TOLERANCE);
 	} // testConvertMassItoM()
 	
-	
+	@Test
+	public void testConvertMassMtoItoM()
+	{
+		for(double i = 0; i < MAX; i += INTERVAL)
+		{
+			double input = i;
+			double output = UnitConverter.convertMassMtoI(input);
+			assertEquals(input, UnitConverter.convertMassItoM(output), TOLERANCE);
+		}
+	}
 	
 	@Test
 	public void testConvertForceMtoI ()
@@ -76,7 +97,16 @@ public class UnitConverterTest
 		assertEquals(4.44822, UnitConverter.convertForceItoM(1), TOLERANCE);
 	} // testConvertForceItoM()
 	
-	
+	@Test
+	public void testConvertForceMtoItoM()
+	{
+		for(double i = 0; i < MAX; i += INTERVAL)
+		{
+			double input = i;
+			double output = UnitConverter.convertForceMtoI(input);
+			assertEquals(input, UnitConverter.convertForceItoM(output), TOLERANCE);
+		}
+	}
 	
 	@Test
 	public void testConvertDensityMtoI ()
@@ -96,7 +126,16 @@ public class UnitConverterTest
 		assertEquals(1, UnitConverter.convertDensityItoM(0.0361273), TOLERANCE);
 	} // testConvertDensityItoM()
 	
-	
+	@Test
+	public void testConvertDensityMtoItoM()
+	{
+		for(double i = 0; i < MAX; i += INTERVAL)
+		{
+			double input = i;
+			double output = UnitConverter.convertDensityMtoI(input);
+			assertEquals(input, UnitConverter.convertDensityItoM(output), TOLERANCE);
+		}
+	}
 	
 	@Test
 	public void testConvertAreaMtoI ()
@@ -116,7 +155,16 @@ public class UnitConverterTest
 		assertEquals(1, UnitConverter.convertAreaItoM(0.155), TOLERANCE);
 	} // testConvertAreaItoM()
 	
-	
+	@Test
+	public void testConvertAreaMtoItoM()
+	{
+		for(double i = 0; i < MAX; i += INTERVAL)
+		{
+			double input = i;
+			double output = UnitConverter.convertAreaMtoI(input);
+			assertEquals(input, UnitConverter.convertAreaItoM(output), TOLERANCE);
+		}
+	}
 	
 	@Test
 	public void testConvertPressureMtoI ()
@@ -135,5 +183,17 @@ public class UnitConverterTest
 		assertEquals(6894.74, UnitConverter.convertPressureItoM(1), TOLERANCE);
 		assertEquals(1, UnitConverter.convertPressureItoM(0.000145038), TOLERANCE);
 	} // testConvertPressureItoM()
+	
+	
+	@Test
+	public void testConvertPressureMtoItoM()
+	{
+		for(double i = 0; i < MAX; i += INTERVAL)
+		{
+			double input = i;
+			double output = UnitConverter.convertPressureMtoI(input);
+			assertEquals(input, UnitConverter.convertPressureItoM(output), TOLERANCE);
+		}
+	}
 	
 } // test UnitConverterTest

@@ -161,45 +161,16 @@ public class NozzleInputView extends Pane
 	
 	
 	
-	/**
-	 * 
-	**/
-	
-	public double getThroatDiameterInput ()
-	{
-		return Double.parseDouble(throatDiameterTextField.getText().toString());
-	}
-	
-	
-	/**
-	 * 
-	**/
-	
-	public double getEntranceDiameterInput ()
-	{
-		return Double.parseDouble(entranceDiameterTextField.getText().toString());
-	}
 	
 	
 	
-	/**
-	 * 
-	**/
-	
-	public double getExitDiameterInput ()
-	{
-		return Double.parseDouble(exitDiameterTextField.getText().toString());
-	}
 	
 	
 	
-	/**
-	 * 
-	**/
 	
-	public double getCfInput ()
-	{
-		return Double.parseDouble(cfTextField.getText().toString());
-	}
+	
+	
+	
+	
 	
 } // class NozzleInputView

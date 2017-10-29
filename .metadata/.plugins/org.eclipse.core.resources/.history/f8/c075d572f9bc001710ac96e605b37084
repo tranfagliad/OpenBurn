@@ -12,10 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Case;
-import model.Nozzle;
-import model.calculations.RocketMath;
-import model.calculations.SimulationResults;
 import model.grains.Grain;
 import view.CaseInputView;
 import view.GraphView;
@@ -71,11 +67,6 @@ public class OpenBurnGUI extends Application
 	private Button simButton;
 	private Button csvButton;
 	private Button rseButton;
-	
-	
-	
-	// Fields
-	private List<SimulationResults> simResults;
 	
 	
 	
@@ -320,18 +311,8 @@ public class OpenBurnGUI extends Application
 		    {
 		    	List<Grain> grainList = grainInputs.getTable().getItems();
 		    	double propDensity = Double.parseDouble(propDensityTextField.getText().toString());
-		    	double deltaTime = Double.parseDouble(timeDeltaTextField.getText().toString());
-		    	Nozzle theNozzle = new Nozzle(nozzleInputs.getThroatDiameterInput(),
-		    							   nozzleInputs.getEntranceDiameterInput(),
-		    							   nozzleInputs.getExitDiameterInput(),
-		    							   nozzleInputs.getCfInput(),
-		    							   grainInputs.getTable().getItems().size());
-		    	Case theCase = new Case(caseInputs.getMassInput(),
-		    							caseInputs.getDiameterInput(),
-		    							caseInputs.getLengthInput());
-		    	simResults = RocketMath.simulate(grainList, deltaTime, theNozzle, theCase);
+		    	Nozzle nozzle = new Nozzle(throatInputs);
 		    	
-		    	outputGraph.addThrustVsTimeDataSet(TEMP_LEGEND_NAME, simResults);
 		    }
 		});
 	} // addSimulateButton()
