@@ -21,6 +21,14 @@ import model.calculations.SimulationResults;
 
 public class GraphView
 {
+	// Labels for chart and each axis
+	public static final String TIME_LABEL     = "Time";
+	public static final String THRUST_LABEL   = "Thrust";
+	public static final String PRESSURE_LABEL = "Pressure";
+	public static final String VERSUS_LABEL   = " vs. ";
+	
+	
+	
 	// Private fields
 	private ScatterChart chart;
 	private int numSeries;
