@@ -1,0 +1,19 @@
+package controller;
+
+/**
+ * 
+**/
+
+public class GrainHandler
+{
+	private static GrainHandler instance = null;
+	
+	
+	private GrainHandler ()
+	{
+		
+	}
+	
+	
+	
+}

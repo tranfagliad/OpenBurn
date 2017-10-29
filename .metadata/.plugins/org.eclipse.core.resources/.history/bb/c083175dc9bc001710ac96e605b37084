@@ -1,0 +1,23 @@
+package controller;
+
+import javafx.stage.Stage;
+import view.grain.input.GrainInputView;
+
+public class GrainTableHandle
+{
+	
+	
+	
+	private GrainInputView inputView;
+	private Stage modeWindow;
+	
+	
+	
+	public GrainTableHandle (GrainInputView inputView)
+	{
+		this.inputView = inputView;
+		this.modeWindow = null;
+	}
+	
+	
+}

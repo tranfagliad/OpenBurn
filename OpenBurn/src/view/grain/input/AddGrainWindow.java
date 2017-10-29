@@ -1,7 +1,10 @@
 package view.grain.input;
 
+import controller.GrainTableHandle;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -9,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.grains.CylindricalGrain;
 
 /**
  * AddGrainWindow.java
@@ -51,6 +55,7 @@ public class AddGrainWindow extends Stage
 	
 	
 	// Fields
+	private GrainTableHandle handle;
 	private BooleanBinding lengthTextFieldNotValid;
 	private BooleanBinding outerDiameterTextFieldNotValid;
 	private BooleanBinding burningEndsTextFieldNotValid;
@@ -64,10 +69,13 @@ public class AddGrainWindow extends Stage
 	 * Purpose: Creates and initializes the grain adding window.
 	**/
 	
-	public AddGrainWindow ()
+	public AddGrainWindow (GrainTableHandle handle)
 	{
 		// Invoke Pane super constructor
 		super();
+		
+		// Set handle
+		this.handle = handle;
 		
 		// Initialize window
 		this.getIcons().add(new Image(this.getClass().getResourceAsStream(ICON_FILE_PATH)));
@@ -255,6 +263,40 @@ public class AddGrainWindow extends Stage
     	
     	// Set button binding rules
     	submitButton.disableProperty().bind((lengthTextFieldNotValid.or(outerDiameterTextFieldNotValid).or(burningEndsTextFieldNotValid).or(innerDiameterTextFieldNotValid)));	
+    	
+    	// Add new grain to table on click
+    	submitButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+		    @Override public void handle (ActionEvent e)
+		    {
+		    	// Gather grain data from input fields
+		    	double length = Double.parseDouble(lengthTextField.getText());
+		    	double outerDiameter = Double.parseDouble(outerDiameterTextField.getText());
+		    	double innerDiameter = Double.parseDouble(innerDiameterTextField.getText());
+		    	int numBurningEnds = Integer.parseInt(burningEndsTextField.getText());
+		    	
+		    	// Create grain, add it to the table, close the window
+		    	handle.addGrainToTable(new CylindricalGrain(length, outerDiameter, innerDiameter, numBurningEnds));
+		    	closeWindow();
+		    }
+		});
 	} // addSubmitButton()
+	
+	
+	
+	/**
+	 * closeWindow()
+	 * 
+	 * Purpose: Closes this window.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void closeWindow ()
+	{
+		this.close();
+	} // closeWindow()
 	
 } // class AddGrainWindow

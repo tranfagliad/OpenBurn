@@ -1,6 +1,8 @@
 package view.grain.input;
 
-import javafx.beans.binding.BooleanBinding;
+import controller.GrainTableHandle;
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -11,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.grains.CylindricalGrain;
 import model.grains.Grain;
 
 /**
@@ -52,15 +53,21 @@ public class GrainInputView extends Pane
 	private static final int BUTTON_Y               = 270;
 	private static final int REMOVE_BUTTON_X        = 181;
 	private static final int EDIT_BUTTON_X          = 362;
+	private static final int EMPTY                  = 0;
 	
 	
 	
-	// GUI Components
+	// Components
 	private Text grainText;
-	public TableView<Grain> table;
+	private TableView<Grain> table;
 	private Button addButton;
 	private Button removeButton;
 	private Button editButton;
+	
+	
+	
+	// Fields
+	private GrainTableHandle tableHandle;
 	
 	
 	
@@ -76,6 +83,9 @@ public class GrainInputView extends Pane
 		// Invoke Pane super constructor
 		super();
 		
+		// Create the table handle
+		this.tableHandle = new GrainTableHandle(this);
+		
 		// Add components
 		addTableTitle();
 		configureTable();
@@ -89,23 +99,17 @@ public class GrainInputView extends Pane
 	/**
 	 * addRow()
 	 * 
-	 * Purpose: Uses the given inputs to create a Grain and inserts it
-	 * 		to the Grain table as a new row.
+	 * Purpose: Adds the specified grain to the grain table.
 	 * 
 	 * Parameters:
-	 * 		double grainLength -- Length of a grain.
-	 * 		double grainOuterDiameter -- Outer diameter of a grain.
-	 * 		double grainInnerDiameter -- Inner diameter of a grain.
-	 * 		int grainBurningEnds -- Number of burning ends of a grain.
+	 * 		Grain newGrain -- New grain to add to the table.
 	 * 
 	 * Returns: void.
 	**/
 	
-	public void addRow (double grainLength, double grainOuterDiameter,
-						double grainInnerDiameter, int grainBurningEnds)
+	public void addRow (Grain newGrain)
 	{
-		table.getItems().add(new CylindricalGrain(grainLength, grainOuterDiameter,
-												  grainInnerDiameter, grainBurningEnds));
+		table.getItems().add(newGrain);
 	} // addRow()
 	
 	
@@ -253,7 +257,8 @@ public class GrainInputView extends Pane
 		{
 		    @Override public void handle (ActionEvent e)
 		    {
-		    	Stage addGrain = new AddGrainWindow();
+		    	AddGrainWindow addGrain = new AddGrainWindow(tableHandle);
+		    	tableHandle.setToAdd(addGrain);
 		    	addGrain.show();
 		    }
 		});
@@ -295,16 +300,9 @@ public class GrainInputView extends Pane
 			}
 		});
 		
-		// Disable the button when the table is empty
-		BooleanBinding tableSizeIsZero = new BooleanBinding()
-		{
-			@Override
-			protected boolean computeValue()
-			{
-				return table.getItems().isEmpty();
-			}
-		};
-		removeButton.disableProperty().bind(tableSizeIsZero);
+		// Disable the button when the table is empty or no item selected
+		removeButton.disableProperty().bind(Bindings.size(table.getItems()).isEqualTo(EMPTY).or(
+										    Bindings.isEmpty(table.getSelectionModel().getSelectedItems())));
 	} // addRemoveButton()
 	
 	
@@ -344,15 +342,8 @@ public class GrainInputView extends Pane
 		});
 		
 		// Disable the button when the table is empty
-		BooleanBinding tableSizeIsZero = new BooleanBinding()
-		{
-			@Override
-			protected boolean computeValue()
-			{
-				return table.getItems().isEmpty();
-			}
-		};
-		editButton.disableProperty().bind(tableSizeIsZero);
+		editButton.disableProperty().bind(Bindings.size(table.getItems()).isEqualTo(EMPTY).or(
+										  Bindings.isEmpty(table.getSelectionModel().getSelectedItems())));
 	} // addEditButton()
 	
 } // class GrainInputView

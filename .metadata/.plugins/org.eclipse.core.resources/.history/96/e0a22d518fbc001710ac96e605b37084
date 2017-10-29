@@ -1,0 +1,35 @@
+package controller;
+
+import view.grain.input.GrainInputView;
+
+/**
+ * 
+**/
+
+public class GrainHandler
+{
+	private GrainInputView grainView;
+	
+	
+	private static GrainHandler instance = null;
+	
+	
+	
+	
+	private GrainHandler (GrainInputView grainView)
+	{
+		
+	}
+	
+	
+	public GrainHandler getInstance ()
+	{
+		if (instance == null)
+			return new GrainHandler();
+		else
+			return instance;
+	}
+	
+	
+	
+}

@@ -1,0 +1,73 @@
+package controller;
+
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import view.grain.input.AddGrainWindow;
+import view.grain.input.EditGrainWindow;
+import view.grain.input.GrainInputView;
+import view.grain.input.RemoveGrainWindow;
+
+/**
+ * 
+**/
+
+public class GrainHandler
+{
+	private GrainInputView grainView;
+	private Stage mode;
+	
+	
+	
+	
+	public GrainHandler (GrainInputView grainView)
+	{
+		this.grainView = grainView;
+		this.mode = null;
+	}
+	
+	
+	
+	public void setToAdd (AddGrainWindow addWindow)
+	{
+		mode = addWindow;
+	}
+	
+	
+	
+	public void setToRemove (RemoveGrainWindow removeWindow)
+	{
+		mode = removeWindow;
+	}
+	
+	
+	
+	public void setToEdit (EditGrainWindow editWindow)
+	{
+		mode = editWindow;
+	}
+	
+	
+	
+	public Stage getMode ()
+	{
+		return mode;
+	}
+	
+	
+	
+	public Pane getGrainView ()
+	{
+		return grainView;
+	}
+	
+	
+	
+	
+	public static addToTable ()
+	{
+		
+	}
+	
+	
+	
+}

@@ -1,5 +1,7 @@
 package view.grain.input;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -132,6 +134,27 @@ public class RemoveGrainWindow extends Stage
     	noButton.setPrefHeight(35);
     	noButton.setPrefWidth(120);
     	frame.getChildren().add(noButton);
+    	
+    	// Close window on click
+    	noButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+			@Override
+			public void handle (ActionEvent e)
+			{
+				closeWindow();
+			}
+		});
 	} // addNoButton()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	private void closeWindow ()
+	{
+		this.close();
+	}
 	
 } // class RemoveGrainWindow
