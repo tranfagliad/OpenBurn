@@ -105,6 +105,24 @@ abstract public class Grain
 	
 	
 	/**
+	 * setGrainID()
+	 * 
+	 * Purpose: Changes the ID of the grain to a new value.
+	 * 
+	 * Parameters:
+	 * 		int newID -- The ID value to set.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setGrainID (int newID)
+	{
+		this.grainID = newID;
+	} // setGrainID()
+	
+	
+	
+	/**
 	 * getPropellantDensity()
 	 * 
 	 * Purpose: Returns the propellant density.
@@ -162,6 +180,24 @@ abstract public class Grain
 	
 	
 	/**
+	 * setLength()
+	 * 
+	 * Purpose: Changes the length of the grain to a new value.
+	 * 
+	 * Parameters:
+	 * 		double newLength -- New length value to set.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setLength (double newLength)
+	{
+		length = newLength;
+	} // setLength()
+	
+	
+	
+	/**
 	 * getOuterDiameter()
 	 * 
 	 * Purpose: Returns the outer diameter of the grain.
@@ -175,6 +211,24 @@ abstract public class Grain
 	{
 		return outerDiameter;
 	} // getOuterDiameter()
+	
+	
+	
+	/**
+	 * setOuterDiameter()
+	 * 
+	 * Purpose: Changes the outer diameter of the grain to a new value.
+	 * 
+	 * Parameters:
+	 * 		double newOuterDiameter -- New outer diameter value to set.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setOuterDiameter (double newOuterDiameter)
+	{
+		outerDiameter = newOuterDiameter;
+	} // setOuterDiameter()
 	
 	
 	
@@ -196,6 +250,24 @@ abstract public class Grain
 	
 	
 	/**
+	 * setInnerDiameter()
+	 * 
+	 * Purpose: Changes the inner diameter of the grain to a new value.
+	 * 
+	 * Parameters:
+	 * 		double newInnerDiameter -- New inner diameter value to set.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setInnerDiameter (double newInnerDiameter)
+	{
+		innerDiameter = newInnerDiameter;
+	} // setInnerDiameter()
+	
+	
+	
+	/**
 	 * getNumBurningEnds()
 	 * 
 	 * Purpose: Returns the number of burning ends.
@@ -209,6 +281,26 @@ abstract public class Grain
 	{
 		return numBurningEnds;
 	} // getNumBurningEnds()
+	
+	
+	
+	/**
+	 * setNumBurningEnds()
+	 * 
+	 * Purpose: Changes the amount of burning ends to
+	 * 		a new value.
+	 * 
+	 * Parameters:
+	 * 		int newNumBurningEnds -- New amount
+	 * 			of burning ends to set.
+	 * 
+	 * Returns: void.
+	**/
+	
+	public void setNumBurningEnds (int newNumBurningEnds)
+	{
+		numBurningEnds = newNumBurningEnds;
+	} // setNumBurningEnds()
 	
 	
 	

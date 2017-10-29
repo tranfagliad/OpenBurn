@@ -2,7 +2,6 @@ package view.grain.input;
 
 import controller.GrainTableHandle;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -34,7 +33,7 @@ public class GrainInputView extends Pane
 	private static final String ADD            = "Add";
 	private static final String REMOVE         = "Remove";
 	private static final String EDIT           = "Edit";
-	private static final String EMPTY_TEXT     = "No Grains Added Yet";
+	private static final String EMPTY_TEXT     = "No Grains";
 	private static final String CENTER_ALIGN   = "-fx-alignment: CENTER";
 	
 	
@@ -129,6 +128,18 @@ public class GrainInputView extends Pane
 	{
 		table.getItems().remove(row);
 	} // removeRow()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public void editRow (int row, Grain newGrain)
+	{
+		newGrain.setGrainID(table.getItems().get(row).getGrainID());
+		table.getItems().set(row, newGrain);
+	} // 
 	
 	
 	
@@ -295,7 +306,9 @@ public class GrainInputView extends Pane
 			@Override
 			public void handle (ActionEvent e)
 			{
-				Stage removeGrain = new RemoveGrainWindow();
+				int row = table.getItems().indexOf(table.getSelectionModel().getSelectedItem());
+				RemoveGrainWindow removeGrain = new RemoveGrainWindow(tableHandle, row);
+				tableHandle.setToRemove(removeGrain);
 				removeGrain.show();
 			}
 		});
@@ -336,12 +349,14 @@ public class GrainInputView extends Pane
 			@Override
 			public void handle (ActionEvent e)
 			{
-				Stage editGrain = new EditGrainWindow();
+				int row = table.getItems().indexOf(table.getSelectionModel().getSelectedItem());
+				EditGrainWindow editGrain = new EditGrainWindow(tableHandle, row);
+				tableHandle.setToEdit(editGrain);
 				editGrain.show();
 			}
 		});
 		
-		// Disable the button when the table is empty
+		// Disable the button when the table is empty or no item selected
 		editButton.disableProperty().bind(Bindings.size(table.getItems()).isEqualTo(EMPTY).or(
 										  Bindings.isEmpty(table.getSelectionModel().getSelectedItems())));
 	} // addEditButton()

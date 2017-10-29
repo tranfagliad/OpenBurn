@@ -55,7 +55,7 @@ public class AddGrainWindow extends Stage
 	
 	
 	// Fields
-	private GrainTableHandle handle;
+	private GrainTableHandle tableHandle;
 	private BooleanBinding lengthTextFieldNotValid;
 	private BooleanBinding outerDiameterTextFieldNotValid;
 	private BooleanBinding burningEndsTextFieldNotValid;
@@ -69,13 +69,13 @@ public class AddGrainWindow extends Stage
 	 * Purpose: Creates and initializes the grain adding window.
 	**/
 	
-	public AddGrainWindow (GrainTableHandle handle)
+	public AddGrainWindow (GrainTableHandle tableHandle)
 	{
 		// Invoke Pane super constructor
 		super();
 		
 		// Set handle
-		this.handle = handle;
+		this.tableHandle = tableHandle;
 		
 		// Initialize window
 		this.getIcons().add(new Image(this.getClass().getResourceAsStream(ICON_FILE_PATH)));
@@ -276,7 +276,7 @@ public class AddGrainWindow extends Stage
 		    	int numBurningEnds = Integer.parseInt(burningEndsTextField.getText());
 		    	
 		    	// Create grain, add it to the table, close the window
-		    	handle.addGrainToTable(new CylindricalGrain(length, outerDiameter, innerDiameter, numBurningEnds));
+		    	tableHandle.addGrainToTable(new CylindricalGrain(length, outerDiameter, innerDiameter, numBurningEnds));
 		    	closeWindow();
 		    }
 		});

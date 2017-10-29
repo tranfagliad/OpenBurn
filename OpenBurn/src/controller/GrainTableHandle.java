@@ -92,4 +92,14 @@ public class GrainTableHandle
 	
 	
 	
+	/*
+	 * 
+	 */
+	
+	public void editGrainInTable (int row, Grain newGrain)
+	{
+		if (modeWindow instanceof EditGrainWindow)
+			inputView.editRow(row, newGrain);
+	}
+	
 }

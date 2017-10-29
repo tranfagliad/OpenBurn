@@ -1,5 +1,6 @@
 package view.grain.input;
 
+import controller.GrainTableHandle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 public class RemoveGrainWindow extends Stage
 {
 	// Labels
-	private static final String REMOVE_GRAIN_TITLE  = "Remove a Grain";
+	private static final String REMOVE_GRAIN_TITLE  = "Remove Grain #";
 	private static final String REMOVE_GRAIN_PROMPT = "Are you sure you want to remove this grain?";
 	private static final String YES                 = "Yes";
 	private static final String NO                  = "No";
@@ -40,20 +41,30 @@ public class RemoveGrainWindow extends Stage
 	
 	
 	
+	// Fields
+	private GrainTableHandle tableHandle;
+	private int row;
+	
+	
+	
 	/**
 	 * RemoveGrainWindow Constructor
 	 * 
 	 * Purpose: Creates and initializes the grain removing window.
 	**/
 	
-	public RemoveGrainWindow ()
+	public RemoveGrainWindow (GrainTableHandle tableHandle, int row)
 	{
 		// Invoke Pane super constructor
 		super();
 		
+		// Set fields
+		this.tableHandle = tableHandle;
+		this.row = row;
+		
 		// Initialize window
 		this.getIcons().add(new Image(this.getClass().getResourceAsStream(ICON_FILE_PATH)));
-		this.setTitle(REMOVE_GRAIN_TITLE);
+		this.setTitle(REMOVE_GRAIN_TITLE + (row+1));
 		this.setResizable(false);
 		Pane removePane = new Pane();
         Scene removeScene = new Scene(removePane, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -110,6 +121,17 @@ public class RemoveGrainWindow extends Stage
     	yesButton.setPrefHeight(35);
     	yesButton.setPrefWidth(120);
     	frame.getChildren().add(yesButton);
+    	
+    	// Remove grain from table on click
+    	yesButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+			@Override
+			public void handle (ActionEvent e)
+			{
+				tableHandle.removeGrainFromTable(row);
+				closeWindow();
+			}
+		});
 	} // addYesButton()
 	
 	
@@ -149,12 +171,18 @@ public class RemoveGrainWindow extends Stage
 	
 	
 	/**
+	 * closeWindow()
 	 * 
+	 * Purpose: Closes this window.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
 	**/
 	
 	private void closeWindow ()
 	{
 		this.close();
-	}
+	} // closeWindow()
 	
 } // class RemoveGrainWindow

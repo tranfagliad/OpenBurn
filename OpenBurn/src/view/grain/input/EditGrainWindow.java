@@ -1,7 +1,10 @@
 package view.grain.input;
 
+import controller.GrainTableHandle;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -9,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.grains.CylindricalGrain;
 
 /**
  * EditGrainWindow.java
@@ -20,7 +24,7 @@ import javafx.stage.Stage;
 public class EditGrainWindow extends Stage
 {
 	// Labels
-	private static final String EDIT_GRAIN_TITLE      = "Edit a Grain";
+	private static final String EDIT_GRAIN_TITLE      = "Edit Grain #";
 	private static final String LENGTH_PROMPT         = "Enter Length";
 	private static final String OUTER_DIAMETER_PROMPT = "Enter Outer Diameter";
 	private static final String INNER_DIAMETER_PROMPT = "Enter Inner Diameter";
@@ -51,6 +55,8 @@ public class EditGrainWindow extends Stage
 	
 	
 	// Fields
+	private GrainTableHandle tableHandle;
+	private int row;
 	private BooleanBinding lengthTextFieldNotValid;
 	private BooleanBinding outerDiameterTextFieldNotValid;
 	private BooleanBinding burningEndsTextFieldNotValid;
@@ -64,14 +70,18 @@ public class EditGrainWindow extends Stage
 	 * Purpose: Creates and initializes the grain removing window.
 	**/
 	
-	public EditGrainWindow ()
+	public EditGrainWindow (GrainTableHandle tableHandle, int row)
 	{
 		// Invoke Pane super constructor
 		super();
 		
+		// Set fields
+		this.tableHandle = tableHandle;
+		this.row = row;
+		
 		// Initialize window
 		this.getIcons().add(new Image(this.getClass().getResourceAsStream(ICON_FILE_PATH)));
-		this.setTitle(EDIT_GRAIN_TITLE);
+		this.setTitle(EDIT_GRAIN_TITLE + (row+1));
 		this.setResizable(false);
 		Pane editPane = new Pane();
         Scene editScene = new Scene(editPane, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -246,8 +256,43 @@ public class EditGrainWindow extends Stage
     	submitButton.setPrefHeight(35);
     	frame.getChildren().add(submitButton);
     	
+    	
+    	// Add new grain to table on click
+    	submitButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+		    @Override public void handle (ActionEvent e)
+		    {
+		    	// Gather grain data from input fields
+		    	double length = Double.parseDouble(lengthTextField.getText());
+		    	double outerDiameter = Double.parseDouble(outerDiameterTextField.getText());
+		    	double innerDiameter = Double.parseDouble(innerDiameterTextField.getText());
+		    	int numBurningEnds = Integer.parseInt(burningEndsTextField.getText());
+		    	
+		    	// Create grain, add it to the table, close the window
+		    	tableHandle.editGrainInTable(row, new CylindricalGrain(length, outerDiameter, innerDiameter, numBurningEnds));
+		    	closeWindow();
+		    }
+		});
+    	
     	// Set button binding rules
     	submitButton.disableProperty().bind((lengthTextFieldNotValid.or(outerDiameterTextFieldNotValid).or(burningEndsTextFieldNotValid).or(innerDiameterTextFieldNotValid)));
 	} // addSubmitButton()
+	
+	
+	
+	/**
+	 * closeWindow()
+	 * 
+	 * Purpose: Closes this window.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void closeWindow ()
+	{
+		this.close();
+	} // closeWindow()
 	
 } // class EditGrainWindow
