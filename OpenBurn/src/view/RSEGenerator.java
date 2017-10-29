@@ -1,7 +1,13 @@
 
 package view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.List;
+
 import model.Case;
+import model.Nozzle;
 import model.calculations.ImpulseClassifier;
 import model.calculations.SimulationResults;
 
@@ -19,60 +25,76 @@ public class RSEGenerator
 	 * Purpose: 
 	**/
 	
-	public RSEGenerator( String teamName, SimulationResults results, Case c, ImpulseClassifier classifier)
+	public RSEGenerator( String teamName, List <SimulationResults> results, Case c, ImpulseClassifier classifier, Nozzle no)
 	{
 		// list simresults object: mass, thrust, cg, time; nozzel object,case object: casemass, diameter, length, Classiferier: clasification, isp, mass_frac. string team name	
 		String classification = classifier.getClassification(); 
 		double isp = classifier.ISP();
-		double mass_frac = classifier.getMassFrac();
+		double massFrac = classifier.getMassFrac();
 		double diameter = c.getDiameter();
-		double [] mass = results.getMassFlowPerAreaGrain();
-		double time = results.getTime();
-		/*
-		rse_file_name = sprintf("%s.rse",classification);
-		rse_file_name = strrep(rse_file_name," ","_");
-		fid = fopen(rse_file_name,"wt");
+		double  mass = results.get(0).getSystemMass();
+		double time = results.get(0).getTime();
+		double throatDiameter = no.getThroatDiameter();
+		double thrust = results.get(0).getThrust();
+		double exitDiameter = no.getExitDiameter();
+		double caseMass = c.getCaseMass();
+		double length = c.getLength();
+	//	rse_file_name = sprintf("%s.rse",classification);
+	//	rse_file_name = strrep(rse_file_name," ","_");
+	//	fid = fopen(rse_file_name,"wt");
+		File file = new File("C:/Users/EVHfa/Desktop/436workspace/GitHub/OpenBurn/OpenBurn_results/results.rse");
+		file.getParentFile().mkdirs();
 
+		try {
+			PrintWriter printWriter = new PrintWriter(file);
+		
 		//%Header stuff
-		System.out.println(fid+"<engine-database>");
-		System.out.println(fid+"  <engine-list>");
+		
+		printWriter.println("<engine-database>");
+		printWriter.println("  <engine-list>");
 
 		//%Engine data
-		System.out.print(fid+"    <engine  mfg='UAWR' ");
-		System.out.print(fid+"code="+classification+" ");
-		System.out.print(fid+"Type="+reloadable+" ");
-		System.out.print(fid+"dia="+diameter+" ");
-		System.out.println(fid+"len="+motor_length);
-		System.out.print(fid+"initWt="+mass(1)+" ");
-		System.out.print(fid+"propWt="+mass(1) - case_weight+" ");
-		System.out.println(fid+"delays="1000" auto-calc-mass='1'");
-		System.out.print(fid+"auto-calc-cg='1' ");
-		System.out.print(fid+"avgThrust="+mean(thrust)+" ");
-		System.out.print(fid+"peakThrust="+max(thrust)+" ");
-		System.out.println(fid+"throatDia="+throat_diameter);
-		System.out.print(fid+"exitDia="+exit_diameter+" ");
-		System.out.print(fid+"Itot="impulse+" ");
-		System.out.print(fid+"burn-time="+time(length(time))+" ");
-		System.out.print(fid+"massFrac="+mass_frac+" ");
-		System.out.println(fid+"Isp="isp);
-		System.out.println(fid+"tDiv='20' tStep='-1.' tFix='1' FDiv='20' FStep='-1.' FFix='1' mDiv='10'");
-		System.out.print(fid+"mStep='-1.' mFix='1' cgDiv='10' cgStep='-1.' cgFix='1'>");
-		System.out.println(fid+"    <data>");
+		printWriter.print("    <engine  mfg='UAWR' ");
+		printWriter.print("code="+classification+" ");
+		//printWriter.print("Type="+reloadable+" "); //?
+		printWriter.print("dia="+diameter+" ");
+		printWriter.println("len="+length); // case length? motor_length
+		printWriter.print("initWt="+mass+" "); // mass at i?
+		printWriter.print("propWt="+(mass - caseMass)+" ");
+		printWriter.println("delays="+1000+" auto-calc-mass='1'");
+		printWriter.print("auto-calc-cg='1' ");
+		printWriter.print("avgThrust="+thrust+" "); //mean
+		printWriter.print("peakThrust="+thrust+" "); //max
+		printWriter.println("throatDia="+throatDiameter);
+		printWriter.print("exitDia="+exitDiameter+" ");
+		//printWriter.print("Itot="impulse+" "); //?
+		//printWriter.print("burn-time="+time(length(time))+" "); //?
+		printWriter.print("massFrac="+massFrac+" ");
+		printWriter.println("Isp="+isp);
+		printWriter.println("tDiv='20' tStep='-1.' tFix='1' FDiv='20' FStep='-1.' FFix='1' mDiv='10'");
+		printWriter.print("mStep='-1.' mFix='1' cgDiv='10' cgStep='-1.' cgFix='1'>");
+		printWriter.println("    <data>");
 
 		//%Need to remove the case mass to get the propellant mass
-		mass = mass-case_weight;
+		mass = mass-caseMass;
 
 		//%Time dependant data
-		for (i = 1; i < length(time);i++){
-		    System.out.print(fid+"      <eng-data  ");
-		    System.out.print(fid+"t="+time(i)+" ");
-		    System.out.print(fid+"f="+thrust(i)+" ");
-		    System.out.print(fid+"m="+mass(i)+" ");
-		    System.out.println(fid+"cg="+cg(i)+"/>");
+		for (int i = 1; i < time;i++){ // length(time)
+		    printWriter.print("      <eng-data  ");
+		    printWriter.print("t="+results.get(i).getTime()+" ");
+		    printWriter.print("f="+results.get(i).getThrust()+" ");
+		    printWriter.print("m="+results.get(i).getSystemMass()+" ");
+		    //printWriter.println("cg="+cg(i)+"/>"); //?
 		}
-*/
+		}
+catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+
+
 		//%File close and cleanup
-		//System.out.print(fid","    </data>\n  </engine>\n</engine-list>\n</engine-database>\n");
+		//printWriter.print(fid","    </data>\n  </engine>\n</engine-list>\n</engine-database>\n");
 	} // RSEGenerator Constructor
 
 } // class RSEGenerator
