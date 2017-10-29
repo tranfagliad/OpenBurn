@@ -5,8 +5,10 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -54,6 +56,8 @@ public class AddGrainWindow extends Stage
 	{
 		super();
 		
+		this.getIcons().add(new Image(this.getClass().getResourceAsStream("./../images/OpenBurnLogo_1.png")));
+		
 		this.setTitle(ADD_GRAIN_TITLE);
 		this.setResizable(false);
 		
@@ -62,8 +66,6 @@ public class AddGrainWindow extends Stage
         addScene.setRoot(addPane);
         
         this.setScene(addScene);
-        
-        
         
         lengthText = new Text(LENGTH_PROMPT);
     	lengthText.setTranslateX(25);

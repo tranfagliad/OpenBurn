@@ -2,6 +2,7 @@ package view;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -34,6 +35,9 @@ public class RemoveGrainWindow extends Stage
 	public RemoveGrainWindow ()
 	{
 		super();
+		
+		this.getIcons().add(new Image(this.getClass().getResourceAsStream("./../images/OpenBurnLogo_1.png")));
+		
 		
 		this.setTitle(REMOVE_GRAIN_TITLE);
 		this.setResizable(false);
