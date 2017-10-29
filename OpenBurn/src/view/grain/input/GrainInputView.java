@@ -1,8 +1,6 @@
 package view.grain.input;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.binding.IntegerBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -41,7 +39,17 @@ public class GrainInputView extends Pane
 	
 	
 	// Constants
-	
+	private static final int TITLE_X          = 235;
+	private static final int TITLE_Y          = 20;
+	private static final int TABLE_Y          = 30;
+	private static final int TABLE_HEIGHT     = 230;
+	private static final int ID_COL_WIDTH     = 30;
+	private static final int LENGTH_COL_WIDTH = 80;
+	//private static final int
+	//private static final int
+	//private static final int
+	private static final int BUTTON_WIDTH  = 150;
+	private static final int BUTTON_HEIGHT = 35;
 	
 	
 	
@@ -57,7 +65,8 @@ public class GrainInputView extends Pane
 	/**
 	 * GrainInputView Constructor
 	 * 
-	 * Purpose:
+	 * Purpose: Creates and initializes the grain input table, along
+	 * 		with Add, Remove, and Edit buttons underneath.
 	**/
 	
 	public GrainInputView ()
@@ -78,13 +87,14 @@ public class GrainInputView extends Pane
 	/**
 	 * addRow()
 	 * 
-	 * Purpose: Uses the given inputs 
+	 * Purpose: Uses the given inputs to create a Grain and inserts it
+	 * 		to the Grain table as a new row.
 	 * 
 	 * Parameters:
-	 * 		double grainLength -- 
-	 * 		double grainOuterDiameter -- 
-	 * 		double grainInnerDiameter -- 
-	 * 		int grainBurningEnds -- 
+	 * 		double grainLength -- Length of a grain.
+	 * 		double grainOuterDiameter -- Outer diameter of a grain.
+	 * 		double grainInnerDiameter -- Inner diameter of a grain.
+	 * 		int grainBurningEnds -- Number of burning ends of a grain.
 	 * 
 	 * Returns: void.
 	**/
@@ -99,50 +109,76 @@ public class GrainInputView extends Pane
 	
 	
 	/**
+	 * removeRow()
 	 * 
+	 * Purpose: Removes the specified grain row from the table.
+	 * 
+	 * Parameters:
+	 * 		int row -- The grain row to remove.
+	 * 
+	 * Returns: void.
 	**/
 	
-	public void removeRow (int index)
+	public void removeRow (int row)
 	{
-		table.getItems().remove(index);
+		table.getItems().remove(row);
 	} // removeRow()
 	
 	
 	
-	/*
+	/**
+	 * addTableTitle()
 	 * 
-	 */
+	 * Purpose: Adds the table title to the Pane.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
 	
 	private void addTableTitle ()
 	{
 		grainText = new Text(GRAINS);
-		grainText.setTranslateX(235);
-		grainText.setTranslateY(20);
+		grainText.setTranslateX(TITLE_X);
+		grainText.setTranslateY(TITLE_Y);
 		this.getChildren().add(grainText);
-	}
+	} // addTableTitle()
 	
 	
 	
-	/*
+	/**
+	 * configureTable()
 	 * 
-	 */
+	 * Purpose: Initializes the details of the grain input table
+	 * 		and adds it to the Pane.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
 	
 	private void configureTable ()
 	{
 		table = new TableView<Grain>();
 		table.setPlaceholder(new Label(EMPTY_TEXT));
 		table.setEditable(false);
-		table.setTranslateX(0);
-		table.setTranslateY(30);
-		table.setPrefHeight(230);
+		table.setTranslateY(TABLE_Y);
+		table.setPrefHeight(TABLE_HEIGHT);
 		this.getChildren().add(table);
 		setTableColumns();
-	}
+	} // configureTable()
 	
 	
 	
 	/**
+	 * setTableColumns()
 	 * 
+	 * Purpose: Creates and configures the columns for the
+	 * 		grain input table, then adds them to the table.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
 	**/
 	
 	@SuppressWarnings("unchecked")
@@ -152,14 +188,14 @@ public class GrainInputView extends Pane
 		TableColumn<Grain, String> grainIDCol = new TableColumn<Grain, String>(GRAIN_ID);
 		grainIDCol.setResizable(false);
         grainIDCol.setCellValueFactory(new PropertyValueFactory<Grain, String>("GrainID"));
-        grainIDCol.setPrefWidth(30);
+        grainIDCol.setPrefWidth(ID_COL_WIDTH);
         grainIDCol.setStyle(CENTER_ALIGN);
         
         // Length column
         TableColumn<Grain, String> lengthCol = new TableColumn<Grain, String>(LENGTH);
         lengthCol.setResizable(false);
         lengthCol.setCellValueFactory(new PropertyValueFactory<Grain,String>("Length"));
-        lengthCol.setPrefWidth(80);
+        lengthCol.setPrefWidth(LENGTH_COL_WIDTH);
         lengthCol.setStyle(CENTER_ALIGN);
 		
         // Outer Diameter column
@@ -192,7 +228,8 @@ public class GrainInputView extends Pane
 	/**
 	 * addAddButton()
 	 * 
-	 * Purpose:
+	 * Purpose: Adds the Add button to the Pane. Sets the event
+	 * 		handler for when the button is clicked.
 	 * 
 	 * Parameters: None.
 	 * 
@@ -203,10 +240,9 @@ public class GrainInputView extends Pane
 	{
 		// Initialize add button
 		addButton = new Button(ADD);
-    	addButton.setTranslateX(0);
 		addButton.setTranslateY(270);
-		addButton.setPrefHeight(35);
-		addButton.setPrefWidth(150);
+		addButton.setPrefHeight(BUTTON_HEIGHT);
+		addButton.setPrefWidth(BUTTON_WIDTH);
 		addButton.setDisable(false);
 		this.getChildren().add(addButton);
 		
@@ -224,7 +260,15 @@ public class GrainInputView extends Pane
 	
 	
 	/**
+	 * addRemoveButton()
 	 * 
+	 * Purpose: Adds the Add button to the Pane. Sets the event
+	 * 		handler for when the button is clicked. Sets the
+	 * 		binding for when to disable the button.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
 	**/
 	
 	private void addRemoveButton ()
@@ -233,8 +277,8 @@ public class GrainInputView extends Pane
 		removeButton = new Button(REMOVE);
 		removeButton.setTranslateX(181);
 		removeButton.setTranslateY(270);
-		removeButton.setPrefHeight(35);
-		removeButton.setPrefWidth(150);
+		removeButton.setPrefHeight(BUTTON_HEIGHT);
+		removeButton.setPrefWidth(BUTTON_WIDTH);
 		removeButton.setDisable(false);
 		this.getChildren().add(removeButton);
 		
@@ -249,7 +293,7 @@ public class GrainInputView extends Pane
 			}
 		});
 		
-		//
+		// Disable the button when the table is empty
 		BooleanBinding tableSizeIsZero = new BooleanBinding()
 		{
 			@Override
@@ -258,26 +302,35 @@ public class GrainInputView extends Pane
 				return table.getItems().isEmpty();
 			}
 		};
-		
 		removeButton.disableProperty().bind(tableSizeIsZero);
 	} // addRemoveButton()
 	
 	
 	
 	/**
+	 * addEditButton()
 	 * 
+	 * Purpose: Adds the Edit button to the Pane. Sets the event
+	 * 		handler for when the button is clicked. Sets the
+	 * 		binding for when to disable the button.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
 	**/
 	
 	private void addEditButton ()
 	{
+		// Initialize edit button
 		editButton = new Button(EDIT);
 		editButton.setTranslateX(362);
 		editButton.setTranslateY(270);
-		editButton.setPrefHeight(35);
-		editButton.setPrefWidth(150);
+		editButton.setPrefHeight(BUTTON_HEIGHT);
+		editButton.setPrefWidth(BUTTON_WIDTH);
 		editButton.setDisable(false);
 		this.getChildren().add(editButton);
 		
+		// Open new window on click
 		editButton.setOnAction(new EventHandler<ActionEvent> ()
 		{
 			@Override
@@ -288,6 +341,7 @@ public class GrainInputView extends Pane
 			}
 		});
 		
+		// Disable the button when the table is empty
 		BooleanBinding tableSizeIsZero = new BooleanBinding()
 		{
 			@Override
@@ -296,7 +350,6 @@ public class GrainInputView extends Pane
 				return table.getItems().isEmpty();
 			}
 		};
-		
 		editButton.disableProperty().bind(tableSizeIsZero);
 	} // addEditButton()
 	

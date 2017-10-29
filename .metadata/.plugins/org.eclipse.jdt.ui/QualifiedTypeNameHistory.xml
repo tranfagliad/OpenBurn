@@ -18,4 +18,7 @@
 <fullyQualifiedTypeName name="model.Nozzle"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.XYChart.Data"/>
 <fullyQualifiedTypeName name="view.GrainInputView"/>
+<fullyQualifiedTypeName name="javafx.stage.Modality"/>
+<fullyQualifiedTypeName name="model.grains.CylindricalGrain"/>
+<fullyQualifiedTypeName name="javafx.beans.binding.IntegerBinding"/>
 </qualifiedTypeNameHistroy>
