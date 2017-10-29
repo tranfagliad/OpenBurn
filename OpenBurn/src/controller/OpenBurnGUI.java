@@ -1,48 +1,72 @@
 package controller;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.grains.CylindricalGrain;
 import model.grains.Grain;
+import view.CaseInputView;
 import view.GrainInputView;
+import view.GraphView;
+import view.NozzleInputView;
 
 
 
 public class OpenBurnGUI extends Application
 {
 	// GUI Labels
-	private static final String DENSITY_PROMPT           = "Enter propellant density (Must be positive): ";
-	private static final String FILE_PROMPT              = "\nEnter the desired name of the CSV file (Don't include \".csv\"): ";
+	private static final String WINDOW_TITLE = "OpenBurn: Iteration 2";
 	
-	private static final String THROAT_DIAMETER_PROMPT   = "\nEnter nozzle throat diameter (Must be positive): ";
-	private static final String ENTRANCE_DIAMETER_PROMPT = "Enter nozzle entrance diameter (Must be positive): ";
-	private static final String EXIT_DIAMETER_PROMPT     = "Enter nozzle exit diameter (Must be positive): ";
-	private static final String CF_PROMPT                = "Enter nozzle CF (Must be positive): ";
-	private static final String TIME_DELTA_PROMPT        = "Enter change in time (Must be positive): ";
-	private static final String SIMULATE                 = "Simulate";
-	private static final String ADD                      = "Add";
-	private static final String REMOVE                   = "Remove";
-	private static final String EDIT                     = "Edit";
+	private static final String DENSITY_PROMPT = "Enter propellant density";
+	private static final String FILE_PROMPT    = "Enter the desired name of the CSV file (Don't include \".csv\"): ";
 	
+	private static final String TIME_DELTA_PROMPT = "Enter change in time";
+	
+	private static final String SIMULATE = "Simulate";
+
+	private static final String EXPORT_CSV = "Export to CSV";
+	private static final String EXPORT_RSE = "Export to RSE";
+	
+	
+	
+	// Constants
+	private static final int WINDOW_WIDTH  = 1200;
+	private static final int WINDOW_HEIGHT = 900;
+	private static final int GRAIN_INPUT_X = 230;
+	private static final int GRAIN_INPUT_Y = 10;
+	private static final int NOZZLE_INPUT_X = 755;
+	private static final int NOZZLE_INPUT_Y = 10;
+	private static final int CASE_INPUT_X = 975;
+	private static final int CASE_INPUT_Y = 10;
+	private static final int GRAPH_WIDTH = 1150;
+	private static final int GRAPH_HEIGHT = 450;
+	private static final int GRAPH_X = 20;
+	private static final int GRAPH_Y = 380;
 	
 	
 	// 
+	private Text propDensityText;
+	private TextField propDensityTextField;
 	
-	
-	//private Text propDensityText;
-	//private TextField propDensityTextField;
+	private Text timeDeltaText;
+	private TextField timeDeltaTextField;
 	
 	private GrainInputView grainInputs;
+	private NozzleInputView nozzleInputs;
+	private CaseInputView caseInputs;
+	private GraphView outputGraph;
+	
+	private Button simButton;
+	private Button csvButton;
+	private Button rseButton;
 	
 	
 	
@@ -58,141 +82,106 @@ public class OpenBurnGUI extends Application
 	@Override
 	public void start(Stage stage)
 	{
-		StackPane root = new StackPane();
-		Scene scene = new Scene(root, 1200, 750);
+		Pane root = new Pane();
+		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 		stage.setScene(scene);
-		stage.setTitle("OpenBurn");
+		stage.setTitle(WINDOW_TITLE);
 		stage.setResizable(false);
 
-		GridPane grid = new GridPane();
-		grid.setPadding(new Insets(10, 10, 10, 10));
-		grid.setVgap(5);
-		grid.setHgap(5);
-
-		scene.setRoot(grid);
-
+		Pane frame = new Pane();
+		scene.setRoot(frame);
+		
+		propDensityText = new Text(DENSITY_PROMPT);
+		propDensityText.setTranslateX(20);
+		propDensityText.setTranslateY(30);
+		frame.getChildren().add(propDensityText);
+		
+		propDensityTextField = new TextField();
+		propDensityTextField.setTranslateX(20);
+		propDensityTextField.setTranslateY(40);
+		frame.getChildren().add(propDensityTextField);
+		
+		
+		timeDeltaText = new Text(TIME_DELTA_PROMPT);
+		timeDeltaText.setTranslateX(20);
+		timeDeltaText.setTranslateY(110);
+		frame.getChildren().add(timeDeltaText);
+		
+		timeDeltaTextField = new TextField();
+		timeDeltaTextField.setTranslateX(20);
+		timeDeltaTextField.setTranslateY(120);
+		frame.getChildren().add(timeDeltaTextField);
 		
 		grainInputs = new GrainInputView();
-		GridPane.setConstraints(grainInputs, 0, 3);
-		grid.getChildren().add(grainInputs);
+		grainInputs.setTranslateX(GRAIN_INPUT_X);
+		grainInputs.setTranslateY(GRAIN_INPUT_Y);
+		frame.getChildren().add(grainInputs);
 		
 		// Adding a sample input
 		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
+		grainInputs.addRow(new CylindricalGrain(2.0, 3.0, 2.0, 2));
+		grainInputs.addRow(new CylindricalGrain(5.0, 2.0, 1.0, 0));
 		
-		Button addButton = new Button(ADD);
-		grid.getChildren().add(addButton);
-		Button editButton = new Button(EDIT);
-		//grid.getChildren().add(editButton);
-		Button remButton = new Button(REMOVE);
-		//grid.getChildren().add(remButton);
+		nozzleInputs = new NozzleInputView();
+		nozzleInputs.setTranslateX(NOZZLE_INPUT_X);
+		nozzleInputs.setTranslateY(NOZZLE_INPUT_Y);
+		frame.getChildren().add(nozzleInputs);
 		
-		addButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	Stage s = new Stage();
-		    	
-		    	StackPane r = new StackPane();
-		        Scene stage = new Scene(r,500,500);
-		        GridPane grid = new GridPane();
-		    	stage.setRoot(grid);
-		    	s.setScene(stage);
-		    	
-		    	final Text propDensityText = new Text(DENSITY_PROMPT);
-		    	final TextField propDensityTextField = new TextField();
-				GridPane.setConstraints(propDensityText, 0, 0);
-				grid.getChildren().add(propDensityText);
-				propDensityTextField.setPrefColumnCount(10);
-				GridPane.setConstraints(propDensityTextField, 0, 5);
-				grid.getChildren().add(propDensityTextField);
-				
-				final Text throatDiamText = new Text(THROAT_DIAMETER_PROMPT);
-				final TextField throatDiamTField = new TextField();
-				GridPane.setConstraints(throatDiamText, 0, 10);
-				throatDiamTField.setPrefColumnCount(20);
-				GridPane.setConstraints(throatDiamTField, 0, 15);
-				grid.getChildren().add(throatDiamText);
-				grid.getChildren().add(throatDiamTField);
-				
-				final Text entrenceDiamText = new Text(ENTRANCE_DIAMETER_PROMPT);
-				final TextField entrenceDiamTField = new TextField();
-				GridPane.setConstraints(entrenceDiamText, 0, 25);
-				entrenceDiamTField.setPrefColumnCount(20);
-				GridPane.setConstraints(entrenceDiamTField, 0, 35);
-				grid.getChildren().add(entrenceDiamText);
-				grid.getChildren().add(entrenceDiamTField);
-				
-				final Text exitDiamText = new Text(EXIT_DIAMETER_PROMPT);
-				final TextField exitDiamTField = new TextField();
-				GridPane.setConstraints(exitDiamText, 0, 45);
-				exitDiamTField.setPrefColumnCount(20);
-				GridPane.setConstraints(exitDiamTField, 0, 55);
-				grid.getChildren().add(exitDiamText);
-				grid.getChildren().add(exitDiamTField);
-				
-				final Text cftext = new Text(CF_PROMPT);
-				final TextField cftextField = new TextField();
-				GridPane.setConstraints(cftext, 0, 65);
-				exitDiamTField.setPrefColumnCount(20);
-				GridPane.setConstraints(cftextField, 0, 75);
-				grid.getChildren().add(cftext);
-				grid.getChildren().add(cftextField);
-				
-				final Text tdeltText = new Text(TIME_DELTA_PROMPT);
-				final TextField tdeltTField = new TextField();
-				GridPane.setConstraints(tdeltText, 0, 85);
-				tdeltTField.setPrefColumnCount(20);
-				GridPane.setConstraints(tdeltTField, 0, 95);
-				grid.getChildren().add(tdeltText);
-				grid.getChildren().add(tdeltTField);
-				
-
-				
-				
-		        s.show();
-		        
-		    }
-		});
+		caseInputs = new CaseInputView();
+		caseInputs.setTranslateX(CASE_INPUT_X);
+		caseInputs.setTranslateY(CASE_INPUT_Y);
+		frame.getChildren().add(caseInputs);
 		
-		/*
-		final TextField field8 = new TextField();
-		field8.setPromptText(THROAT_DIAMETER_PROMPT);
-		field8.setPrefColumnCount(10);
-		field8.getText();
-		GridPane.setConstraints(field8, 3, 3);
-		grid.getChildren().add(field8);
+		outputGraph = new GraphView(GraphView.THRUST_LABEL + GraphView.VERSUS_LABEL + GraphView.TIME_LABEL,
+				 					GraphView.TIME_LABEL,
+				 					GraphView.THRUST_LABEL);
+		outputGraph.getChart().setTranslateX(GRAPH_X);
+		outputGraph.getChart().setTranslateY(GRAPH_Y);
+		outputGraph.getChart().setPrefWidth(GRAPH_WIDTH);
+		outputGraph.getChart().setPrefHeight(GRAPH_HEIGHT);
+		frame.getChildren().add(outputGraph.getChart());
 		
-		final TextField field9 = new TextField();
-		field9.setPromptText(ENTRANCE_DIAMETER_PROMPT);
-		field9.setPrefColumnCount(10);
-		field9.getText();
-		GridPane.setConstraints(field9, 3, 6);
-		grid.getChildren().add(field9);
+		simButton = new Button(SIMULATE);
+		simButton.setTranslateX(20);
+		simButton.setTranslateY(850);
+		simButton.setPrefHeight(35);
+		simButton.setPrefWidth(100);
+		simButton.setDisable(false);
+		frame.getChildren().add(simButton);
 		
-		final TextField field10 = new TextField();
-		field10.setPromptText(EXIT_DIAMETER_PROMPT);
-		field10.setPrefColumnCount(10);
-		field10.getText();
-		System.out.print(field10.getText());
-		GridPane.setConstraints(field10, 3, 9);
-		grid.getChildren().add(field10);
+		csvButton = new Button(EXPORT_CSV);
+		csvButton.setTranslateX(200);
+		csvButton.setTranslateY(850);
+		csvButton.setPrefHeight(35);
+		csvButton.setPrefWidth(130);
+		csvButton.setDisable(false);
+		frame.getChildren().add(csvButton);
 		
-		final TextField field11 = new TextField();
-		field11.setPromptText(CF_PROMPT);
-		field11.setPrefColumnCount(10);
-		field11.getText();
-		GridPane.setConstraints(field11, 3, 12);
-		grid.getChildren().add(field11);
+		rseButton = new Button(EXPORT_RSE);
+		rseButton.setTranslateX(340);
+		rseButton.setTranslateY(850);
+		rseButton.setPrefHeight(35);
+		rseButton.setPrefWidth(130);
+		rseButton.setDisable(false);
+		frame.getChildren().add(rseButton);
 		
-		final TextField field12 = new TextField();
-		field12.setPromptText(TIME_DELTA_PROMPT);
-		field12.setPrefColumnCount(10);
-		field12.getText();
-		GridPane.setConstraints(field12, 3, 15);
-		grid.getChildren().add(field12);
-		*/
-		
-		//grid.getChildren().add(new GraphView("Pressure vs. Time", "Time", "Pressure").getChart());
-		
-    	
 		stage.show();
 	}
 
