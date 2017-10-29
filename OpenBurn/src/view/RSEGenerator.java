@@ -2,7 +2,7 @@
 package view;
 
 import model.Case;
-import model.calculations.ImpulseClassifier;
+import model.calculations.SimulationSummary;
 import model.calculations.SimulationResults;
 
 /**
@@ -19,7 +19,7 @@ public class RSEGenerator
 	 * Purpose: 
 	**/
 	
-	public RSEGenerator( String teamName, SimulationResults results, Case c, ImpulseClassifier classifier)
+	public RSEGenerator( String teamName, SimulationResults results, Case c, SimulationSummary classifier)
 	{
 		// list simresults object: mass, thrust, cg, time; nozzel object,case object: casemass, diameter, length, Classiferier: clasification, isp, mass_frac. string team name	
 		String classification = classifier.getClassification(); 

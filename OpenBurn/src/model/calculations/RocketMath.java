@@ -55,6 +55,7 @@ public class RocketMath
 			calculateLStar(grainList, currentTimeStep, theNozzle);
 			massAndCenterOfGravity(grainList, currentTimeStep, theCase);
 			calculateBurnout(grainList, currentTime);
+			calculateThrust(currentTimeStep,theNozzle);
 			
 			// Add final results to the result set
 			output.add(currentTimeStep);
