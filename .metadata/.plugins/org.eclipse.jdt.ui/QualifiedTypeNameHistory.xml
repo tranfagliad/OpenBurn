@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="javafx.scene.chart.XYChart"/>
 <fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.ScatterChart"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.NumberAxis"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.Axis"/>
 <fullyQualifiedTypeName name="javafx.scene.input.ScrollEvent"/>
@@ -15,10 +14,25 @@
 <fullyQualifiedTypeName name="javafx.scene.Node"/>
 <fullyQualifiedTypeName name="model.Grain"/>
 <fullyQualifiedTypeName name="model.SimulationResults"/>
-<fullyQualifiedTypeName name="model.Nozzle"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.XYChart.Data"/>
 <fullyQualifiedTypeName name="view.GrainInputView"/>
 <fullyQualifiedTypeName name="javafx.stage.Modality"/>
-<fullyQualifiedTypeName name="model.grains.CylindricalGrain"/>
 <fullyQualifiedTypeName name="javafx.beans.binding.IntegerBinding"/>
+<fullyQualifiedTypeName name="javafx.beans.binding.BooleanBinding"/>
+<fullyQualifiedTypeName name="java.lang.Double"/>
+<fullyQualifiedTypeName name="controller.GrainHandler"/>
+<fullyQualifiedTypeName name="javafx.scene.layout.Pane"/>
+<fullyQualifiedTypeName name="javafx.stage.Stage"/>
+<fullyQualifiedTypeName name="view.grain.input.AddGrainWindow"/>
+<fullyQualifiedTypeName name="view.grain.input.RemoveGrainWindow"/>
+<fullyQualifiedTypeName name="view.grain.input.EditGrainWindow"/>
+<fullyQualifiedTypeName name="view.grain.input.GrainInputView"/>
+<fullyQualifiedTypeName name="controller.GrainTableHandle"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="model.Nozzle"/>
+<fullyQualifiedTypeName name="model.Case"/>
+<fullyQualifiedTypeName name="model.calculations.SimulationResults"/>
+<fullyQualifiedTypeName name="model.calculations.RocketMath"/>
+<fullyQualifiedTypeName name="model.grains.CylindricalGrain"/>
+<fullyQualifiedTypeName name="model.grains.Grain"/>
 </qualifiedTypeNameHistroy>

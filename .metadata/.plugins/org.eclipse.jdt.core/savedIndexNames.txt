@@ -1,5 +1,4 @@
 INDEX VERSION 1.129+C:\Users\Daniel\Documents\College\CSc436\OpenBurn\.metadata\.plugins\org.eclipse.jdt.core
-765693859.index
 1956433851.index
 2470519452.index
 628019425.index
@@ -20,7 +19,6 @@ INDEX VERSION 1.129+C:\Users\Daniel\Documents\College\CSc436\OpenBurn\.metadata\
 194259052.index
 1477788888.index
 1918106398.index
-1244240631.index
 1484906476.index
 922380862.index
 4069650667.index
