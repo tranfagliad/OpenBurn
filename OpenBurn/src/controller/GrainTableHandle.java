@@ -35,6 +35,14 @@ public class GrainTableHandle
 	
 	
 	
+	
+	public GrainInputView getInputView ()
+	{
+		return inputView;
+	}
+	
+	
+	
 	/*
 	 * 
 	 */
@@ -102,4 +110,4 @@ public class GrainTableHandle
 			inputView.editRow(row, newGrain);
 	}
 	
-}
+} // class GrainTableHandle

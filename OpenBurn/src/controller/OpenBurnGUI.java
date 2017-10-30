@@ -16,6 +16,7 @@ import model.Case;
 import model.Nozzle;
 import model.calculations.RocketMath;
 import model.calculations.SimulationResults;
+import model.grains.CylindricalGrain;
 import model.grains.Grain;
 import view.CSVConverter;
 import view.CaseInputView;
@@ -40,13 +41,13 @@ public class OpenBurnGUI extends Application
 	private static final String EXPORT_RSE        = "Export to RSE";
 	private static final String ICON_FILE_PATH    = "./../images/OpenBurnLogo_1.png";
 	
-	private static final String TEMP_LEGEND_NAME = "Sim 1";
+	private static final String TEMP_LEGEND_NAME = "Sim1";
 	
 	
 	
 	// Constants
 	private static final int WINDOW_WIDTH   = 1200;
-	private static final int WINDOW_HEIGHT  = 900;
+	private static final int WINDOW_HEIGHT  = 820;
 	private static final int GRAIN_INPUT_X  = 230;
 	private static final int GRAIN_INPUT_Y  = 10;
 	private static final int NOZZLE_INPUT_X = 755;
@@ -56,7 +57,7 @@ public class OpenBurnGUI extends Application
 	private static final int GRAPH_WIDTH    = 1150;
 	private static final int GRAPH_HEIGHT   = 450;
 	private static final int GRAPH_X        = 20;
-	private static final int GRAPH_Y        = 380;
+	private static final int GRAPH_Y        = 330;
 	
 	
 	
@@ -308,35 +309,62 @@ public class OpenBurnGUI extends Application
 		// Initialize simulate button
 		simButton = new Button(SIMULATE);
 		simButton.setTranslateX(20);
-		simButton.setTranslateY(850);
+		simButton.setTranslateY(780);
 		simButton.setPrefHeight(35);
 		simButton.setPrefWidth(100);
 		simButton.setDisable(false);
 		frame.getChildren().add(simButton);
 		
-		//
+		// Run simulation on click
 		simButton.setOnAction(new EventHandler<ActionEvent> ()
 		{
 		    @Override public void handle (ActionEvent e)
 		    {
-		    	List<Grain> grainList = grainInputs.getTable().getItems();
-		    	double propDensity = Double.parseDouble(propDensityTextField.getText().toString());
-		    	double deltaTime = Double.parseDouble(timeDeltaTextField.getText().toString());
-		    	Nozzle theNozzle = new Nozzle(nozzleInputs.getThroatDiameterInput(),
-		    							   nozzleInputs.getEntranceDiameterInput(),
-		    							   nozzleInputs.getExitDiameterInput(),
-		    							   nozzleInputs.getCfInput(),
-		    							   grainInputs.getTable().getItems().size());
-		    	Case theCase = new Case(caseInputs.getMassInput(),
-		    							caseInputs.getDiameterInput(),
-		    							caseInputs.getLengthInput());
-		    	simResults = RocketMath.simulate(grainList, deltaTime, theNozzle, theCase);
-		    	
-		    	outputGraph.addThrustVsTimeDataSet(TEMP_LEGEND_NAME, simResults);
+		    	runSimulation();
 		    }
 		});
 	} // addSimulateButton()
 	
+	
+	
+	/**
+	 * runSimulation()
+	 * 
+	 * Purpose: Runs simulation once all fields are filled and
+	 * 		the simulation button is pressed.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void runSimulation ()
+	{
+		// Gather grain list
+		List<Grain> grainList = grainInputs.getTable().getItems();
+		
+		// Gather propellant density and change in time
+    	double propDensity = Double.parseDouble(propDensityTextField.getText().toString());
+    	double deltaTime = Double.parseDouble(timeDeltaTextField.getText().toString());
+    	
+    	// Use nozzle inputs to create nozzle
+    	Nozzle theNozzle = new Nozzle(nozzleInputs.getThroatDiameterInput(),
+    							   	  nozzleInputs.getEntranceDiameterInput(),
+    							   	  nozzleInputs.getExitDiameterInput(),
+    							   	  nozzleInputs.getCfInput(),
+    							   	  grainInputs.getTable().getItems().size());
+    	
+    	// Use case inputs to create case
+    	Case theCase = new Case(caseInputs.getMassInput(),
+    							caseInputs.getDiameterInput(),
+    							caseInputs.getLengthInput());
+    	
+    	// Run simulation, gather list of results
+    	simResults = RocketMath.simulate(grainList, deltaTime, theNozzle, theCase);
+    	
+    	// Add thrust vs. time data to the chart
+    	outputGraph.addThrustVsTimeDataSet(TEMP_LEGEND_NAME, simResults);
+	} // runSimulation()
 	
 	
 	
@@ -357,7 +385,7 @@ public class OpenBurnGUI extends Application
 		// Export to CSV button
 		csvButton = new Button(EXPORT_CSV);
 		csvButton.setTranslateX(200);
-		csvButton.setTranslateY(850);
+		csvButton.setTranslateY(780);
 		csvButton.setPrefHeight(35);
 		csvButton.setPrefWidth(130);
 		csvButton.setDisable(false);
@@ -374,15 +402,14 @@ public class OpenBurnGUI extends Application
 		// Export to RSE button
 		rseButton = new Button(EXPORT_RSE);
 		rseButton.setTranslateX(340);
-		rseButton.setTranslateY(850);
+		rseButton.setTranslateY(780);
 		rseButton.setPrefHeight(35);
 		rseButton.setPrefWidth(130);
 		rseButton.setDisable(false);
 		frame.getChildren().add(rseButton);
 		
-		//TEMPORARY: Disable buttons
+		// TEMPORARY: Disable buttons
 		rseButton.setDisable(true);
 	} // addExportButtons()
 	
 } // class OpenBurnGUI
-

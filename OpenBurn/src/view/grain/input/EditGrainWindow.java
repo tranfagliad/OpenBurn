@@ -118,7 +118,7 @@ public class EditGrainWindow extends Stage
     	frame.getChildren().add(lengthText);
     	
     	// Length input field
-    	lengthTextField = new TextField();
+    	lengthTextField = new TextField(String.valueOf(tableHandle.getInputView().getTable().getItems().get(row).getLength()));
     	lengthTextField.setTranslateX(25);
     	lengthTextField.setTranslateY(50);
 		frame.getChildren().add(lengthTextField);
@@ -152,7 +152,7 @@ public class EditGrainWindow extends Stage
 		frame.getChildren().add(outerDiameterText);
 		
 		// Outer Diameter input field
-		outerDiameterTextField = new TextField();
+		outerDiameterTextField = new TextField(String.valueOf(tableHandle.getInputView().getTable().getItems().get(row).getOuterDiameter()));
 		outerDiameterTextField.setTranslateX(25);
     	outerDiameterTextField.setTranslateY(140);
     	frame.getChildren().add(outerDiameterTextField);
@@ -186,7 +186,7 @@ public class EditGrainWindow extends Stage
 		frame.getChildren().add(burningEndsText);
 		
 		// Burning Ends input field
-		burningEndsTextField = new TextField();
+		burningEndsTextField = new TextField(String.valueOf(tableHandle.getInputView().getTable().getItems().get(row).getNumBurningEnds()));
 		burningEndsTextField.setTranslateX(235);
     	burningEndsTextField.setTranslateY(50);
 		frame.getChildren().add(burningEndsTextField);
@@ -220,7 +220,7 @@ public class EditGrainWindow extends Stage
 		frame.getChildren().add(innerDiameterText);
 		
 		// Inner Diameter input field
-		innerDiameterTextField = new TextField();
+		innerDiameterTextField = new TextField(String.valueOf(tableHandle.getInputView().getTable().getItems().get(row).getInnerDiameter()));
 		innerDiameterTextField.setTranslateX(235);
     	innerDiameterTextField.setTranslateY(140);
 		frame.getChildren().add(innerDiameterTextField);
