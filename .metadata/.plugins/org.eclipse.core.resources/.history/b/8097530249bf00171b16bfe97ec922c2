@@ -16,16 +16,16 @@ import javafx.stage.Stage;
 import model.grains.CylindricalGrain;
 
 /**
- * AddGrainWindow.java
+ * EditGrainWindow.java
  * 
- * Purpose: Contains all the components for grain adding
+ * Purpose: Contains all the components for grain editing
  * 		in the OpenBurn graphical user interface.
 **/
 
-public class AddGrainWindow extends Stage
+public class EditGrainWindow extends Stage
 {
 	// Labels
-	private static final String ADD_GRAIN_TITLE       = "Add a Grain";
+	private static final String EDIT_GRAIN_TITLE      = "Edit Grain #";
 	private static final String LENGTH_PROMPT         = "Enter Length";
 	private static final String OUTER_DIAMETER_PROMPT = "Enter Outer Diameter";
 	private static final String INNER_DIAMETER_PROMPT = "Enter Inner Diameter";
@@ -42,7 +42,7 @@ public class AddGrainWindow extends Stage
 	
 	
 	
-	// GUI Components
+	// Components
 	private Text lengthText;
 	private Text outerDiameterText;
 	private Text burningEndsText;
@@ -57,6 +57,7 @@ public class AddGrainWindow extends Stage
 	
 	// Fields
 	private GrainTableHandle tableHandle;
+	private int row;
 	private BooleanBinding lengthTextFieldNotValid;
 	private BooleanBinding outerDiameterTextFieldNotValid;
 	private BooleanBinding burningEndsTextFieldNotValid;
@@ -65,71 +66,70 @@ public class AddGrainWindow extends Stage
 	
 	
 	/**
-	 * AddGrainWindow Constructor
+	 * EditGrainWindow Constructor
 	 * 
-	 * Purpose: Creates and initializes the grain adding window.
+	 * Purpose: Creates and initializes the grain removing window.
 	**/
 	
-	public AddGrainWindow (GrainTableHandle tableHandle)
+	public EditGrainWindow (GrainTableHandle tableHandle, int row)
 	{
 		// Invoke Pane super constructor
 		super();
 		
-		// Set handle
+		// Set fields
 		this.tableHandle = tableHandle;
+		this.row = row;
 		
 		// Initialize window
 		this.getIcons().add(new Image(this.getClass().getResourceAsStream(ICON_FILE_PATH)));
-		this.setTitle(ADD_GRAIN_TITLE);
+		this.setTitle(EDIT_GRAIN_TITLE + (row+1));
 		this.setResizable(false);
-		Pane addPane = new Pane();
-        Scene addScene = new Scene(addPane, WINDOW_WIDTH, WINDOW_HEIGHT);
-        addScene.setRoot(addPane);
-        this.setScene(addScene);
-        
-        // Add components
-        addLengthInput(addPane);
-		addOuterDiameterInput(addPane);
-		addBurningEndsInput(addPane);
-		addInnerDiameterInput(addPane);
-		addSubmitButton(addPane);
+		Pane editPane = new Pane();
+        Scene editScene = new Scene(editPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+        editScene.setRoot(editPane);
+        this.setScene(editScene);
 		
-		// Cannot click back to main GUI until this window is closed
+        // Add components
+        addLengthInput(editPane);
+        addOuterDiameterInput(editPane);
+        addBurningEndsInput(editPane);
+		addInnerDiameterInput(editPane);
+		addSubmitButton(editPane);
+		
 		this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(tableHandle.getInputView().getScene().getWindow());
-	} // AddGrainWindow Constructor
+	} // EditGrainWindow Constructor
 	
 	
 	
 	/**
 	 * addLengthInput()
 	 * 
-	 * Purpose: Adds the length input field to the given Pane.
-	 * 		Sets the binding rule for if the field is empty.
+	 * Purpose: Adds the length input on the given Pane.
 	 * 
 	 * Parameters:
-	 * 		Pane frame -- The Pane to add the length input text
-	 * 			field to.
+	 * 		Pane frame -- The Pane to add the length input to.
 	 * 
 	 * Returns: void.
 	**/
 	
 	private void addLengthInput (Pane frame)
 	{
-		// Length input prompt
+		// Length prompt
 		lengthText = new Text(LENGTH_PROMPT);
     	lengthText.setTranslateX(25);
     	lengthText.setTranslateY(40);
     	frame.getChildren().add(lengthText);
     	
     	// Length input field
-    	lengthTextField = new TextField();
+    	lengthTextField = new TextField(String.valueOf(tableHandle.getInputView().getTable().getItems().get(row).getLength()));
     	lengthTextField.setTranslateX(25);
     	lengthTextField.setTranslateY(50);
 		frame.getChildren().add(lengthTextField);
 		
-		// Set binding rules on length input
-		lengthTextFieldNotValid = Bindings.createBooleanBinding(() -> {
+		// Set binding rule on length input
+		lengthTextFieldNotValid = Bindings.createBooleanBinding(() ->
+		{
     	    return lengthTextField.getText().equals(EMPTY);
     	}, lengthTextField.textProperty());
 	} // addLengthInput()
@@ -139,12 +139,10 @@ public class AddGrainWindow extends Stage
 	/**
 	 * addOuterDiameterInput()
 	 * 
-	 * Purpose: Adds the outer diameter input field to the given Pane.
-	 * 		Sets the binding rule for if the field is empty.
+	 * Purpose: Adds the outer diameter input on the given Pane.
 	 * 
 	 * Parameters:
-	 * 		Pane frame -- The Pane to add the outer diameter input
-	 * 			text field to.
+	 * 		Pane frame -- The Pane to add the length input to.
 	 * 
 	 * Returns: void.
 	**/
@@ -158,12 +156,12 @@ public class AddGrainWindow extends Stage
 		frame.getChildren().add(outerDiameterText);
 		
 		// Outer Diameter input field
-		outerDiameterTextField = new TextField();
+		outerDiameterTextField = new TextField(String.valueOf(tableHandle.getInputView().getTable().getItems().get(row).getOuterDiameter()));
 		outerDiameterTextField.setTranslateX(25);
     	outerDiameterTextField.setTranslateY(140);
-		frame.getChildren().add(outerDiameterTextField);
+    	frame.getChildren().add(outerDiameterTextField);
 		
-		// Set binding rules on outer diameter input
+    	// Set binding rule on outer diameter input
 		outerDiameterTextFieldNotValid = Bindings.createBooleanBinding(() ->
 		{
     	    return outerDiameterTextField.getText().equals(EMPTY);
@@ -175,12 +173,10 @@ public class AddGrainWindow extends Stage
 	/**
 	 * addBurningEndsInput()
 	 * 
-	 * Purpose: Adds the burning ends input field to the given Pane.
-	 * 		Sets the binding rule for if the field is empty.
+	 * Purpose: Adds the burning ends input on the given Pane.
 	 * 
 	 * Parameters:
-	 * 		Pane frame -- The Pane to add the burning ends
-	 * 			text field to.
+	 * 		Pane frame -- The Pane to add the burning ends input to.
 	 * 
 	 * Returns: void.
 	**/
@@ -194,7 +190,7 @@ public class AddGrainWindow extends Stage
 		frame.getChildren().add(burningEndsText);
 		
 		// Burning Ends input field
-		burningEndsTextField = new TextField();
+		burningEndsTextField = new TextField(String.valueOf(tableHandle.getInputView().getTable().getItems().get(row).getNumBurningEnds()));
 		burningEndsTextField.setTranslateX(235);
     	burningEndsTextField.setTranslateY(50);
 		frame.getChildren().add(burningEndsTextField);
@@ -211,12 +207,10 @@ public class AddGrainWindow extends Stage
 	/**
 	 * addInnerDiameterInput()
 	 * 
-	 * Purpose: Adds the inner diameter input field to the given Pane.
-	 * 		Sets the binding rule for if the field is empty.
+	 * Purpose: Adds the inner diameter input on the given Pane.
 	 * 
 	 * Parameters:
-	 * 		Pane frame -- The Pane to add the inner diameter
-	 * 			text field to.
+	 * 		Pane frame -- The Pane to add the inner diameter input to.
 	 * 
 	 * Returns: void.
 	**/
@@ -230,7 +224,7 @@ public class AddGrainWindow extends Stage
 		frame.getChildren().add(innerDiameterText);
 		
 		// Inner Diameter input field
-		innerDiameterTextField = new TextField();
+		innerDiameterTextField = new TextField(String.valueOf(tableHandle.getInputView().getTable().getItems().get(row).getInnerDiameter()));
 		innerDiameterTextField.setTranslateX(235);
     	innerDiameterTextField.setTranslateY(140);
 		frame.getChildren().add(innerDiameterTextField);
@@ -247,11 +241,11 @@ public class AddGrainWindow extends Stage
 	/**
 	 * addSubmitButton()
 	 * 
-	 * Purpose: Adds the submit button to the given Pane. Sets the
+	 * Purpose: Adds the submit button on the given Pane. Sets the
 	 * 		binding rule for when to disable the button.
 	 * 
 	 * Parameters:
-	 * 		Pane frame -- The Pane to add the button to.
+	 * 		Pane frame -- The Pane to add the submit button to.
 	 * 
 	 * Returns: void.
 	**/
@@ -266,8 +260,6 @@ public class AddGrainWindow extends Stage
     	submitButton.setPrefHeight(35);
     	frame.getChildren().add(submitButton);
     	
-    	// Set button binding rules
-    	submitButton.disableProperty().bind((lengthTextFieldNotValid.or(outerDiameterTextFieldNotValid).or(burningEndsTextFieldNotValid).or(innerDiameterTextFieldNotValid)));	
     	
     	// Add new grain to table on click
     	submitButton.setOnAction(new EventHandler<ActionEvent> ()
@@ -281,10 +273,13 @@ public class AddGrainWindow extends Stage
 		    	int numBurningEnds = Integer.parseInt(burningEndsTextField.getText());
 		    	
 		    	// Create grain, add it to the table, close the window
-		    	tableHandle.addGrainToTable(new CylindricalGrain(length, outerDiameter, innerDiameter, numBurningEnds));
+		    	tableHandle.editGrainInTable(row, new CylindricalGrain(length, outerDiameter, innerDiameter, numBurningEnds));
 		    	closeWindow();
 		    }
 		});
+    	
+    	// Set button binding rules
+    	submitButton.disableProperty().bind((lengthTextFieldNotValid.or(outerDiameterTextFieldNotValid).or(burningEndsTextFieldNotValid).or(innerDiameterTextFieldNotValid)));
 	} // addSubmitButton()
 	
 	
@@ -304,4 +299,4 @@ public class AddGrainWindow extends Stage
 		this.close();
 	} // closeWindow()
 	
-} // class AddGrainWindow
+} // class EditGrainWindow

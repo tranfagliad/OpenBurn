@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.grains.CylindricalGrain;
 
@@ -94,6 +95,10 @@ public class EditGrainWindow extends Stage
         addBurningEndsInput(editPane);
 		addInnerDiameterInput(editPane);
 		addSubmitButton(editPane);
+		
+		// Cannot click back to main GUI until this window is closed
+		this.initModality(Modality.WINDOW_MODAL);
+		this.initOwner(tableHandle.getInputView().getScene().getWindow());
 	} // EditGrainWindow Constructor
 	
 	

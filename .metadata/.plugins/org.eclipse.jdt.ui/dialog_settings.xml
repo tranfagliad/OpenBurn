@@ -27,10 +27,11 @@
 	<section name="FatJarPackageWizard">
 		<item value="C:\Users\Daniel\Documents\College\CSc436\OpenBurn" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
 		<item value="OpenBurnGUI (1) - OpenBurn" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="C:\Users\Daniel\Desktop\OpenBurn - Feature Release.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="C:\Users\Daniel\Desktop\OpenBurn-FeatureRelease.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="2" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\Daniel\Desktop\OpenBurn-FeatureRelease.jar"/>
 			<item value="C:\Users\Daniel\Desktop\OpenBurn - Feature Release.jar"/>
 		</list>
 		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">

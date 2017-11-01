@@ -94,7 +94,6 @@ public class AddGrainWindow extends Stage
 		addInnerDiameterInput(addPane);
 		addSubmitButton(addPane);
 		
-		// Cannot click back to main GUI until this window is closed
 		this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(tableHandle.getInputView().getScene().getWindow());
 	} // AddGrainWindow Constructor

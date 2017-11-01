@@ -77,7 +77,6 @@ public class RemoveGrainWindow extends Stage
     	addYesButton(removePane);
     	addNoButton(removePane);
     	
-    	// Cannot click back to main GUI until this window is closed
     	this.initModality(Modality.WINDOW_MODAL);
 		this.initOwner(tableHandle.getInputView().getScene().getWindow());
 	} // RemoveGrainWindow Constructor
