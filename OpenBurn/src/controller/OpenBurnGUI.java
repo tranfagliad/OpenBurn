@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -14,9 +15,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Case;
 import model.Nozzle;
+import model.NumberTextField;
 import model.calculations.RocketMath;
 import model.calculations.SimulationResults;
-import model.grains.CylindricalGrain;
 import model.grains.Grain;
 import view.CSVConverter;
 import view.CaseInputView;
@@ -64,8 +65,8 @@ public class OpenBurnGUI extends Application
 	// Components
 	private Text propDensityText;
 	private Text timeDeltaText;
-	private TextField propDensityTextField;
-	private TextField timeDeltaTextField;
+	private NumberTextField propDensityTextField;
+	private NumberTextField timeDeltaTextField;
 	private GrainInputView grainInputs;
 	private NozzleInputView nozzleInputs;
 	private CaseInputView caseInputs;
@@ -73,11 +74,6 @@ public class OpenBurnGUI extends Application
 	private Button simButton;
 	private Button csvButton;
 	private Button rseButton;
-	
-	
-	
-	// Fields
-	private List<SimulationResults> simResults;
 	
 	
 	
@@ -161,7 +157,7 @@ public class OpenBurnGUI extends Application
 		frame.getChildren().add(propDensityText);
 		
 		// Input field
-		propDensityTextField = new TextField();
+		propDensityTextField = new  NumberTextField();
 		propDensityTextField.setTranslateX(20);
 		propDensityTextField.setTranslateY(40);
 		frame.getChildren().add(propDensityTextField);
@@ -190,7 +186,7 @@ public class OpenBurnGUI extends Application
 		frame.getChildren().add(timeDeltaText);
 		
 		// Input field
-		timeDeltaTextField = new TextField();
+		timeDeltaTextField = new NumberTextField();
 		timeDeltaTextField.setTranslateX(20);
 		timeDeltaTextField.setTranslateY(120);
 		frame.getChildren().add(timeDeltaTextField);
@@ -284,11 +280,11 @@ public class OpenBurnGUI extends Application
 		outputGraph = new GraphView(GraphView.THRUST_LABEL + GraphView.VERSUS_LABEL + GraphView.TIME_LABEL,
 									GraphView.TIME_LABEL,
 									GraphView.THRUST_LABEL);
-		outputGraph.getChart().setTranslateX(GRAPH_X);
-		outputGraph.getChart().setTranslateY(GRAPH_Y);
+		outputGraph.setTranslateX(GRAPH_X);
+		outputGraph.setTranslateY(GRAPH_Y);
 		outputGraph.getChart().setPrefWidth(GRAPH_WIDTH);
 		outputGraph.getChart().setPrefHeight(GRAPH_HEIGHT);
-		frame.getChildren().add(outputGraph.getChart());
+		frame.getChildren().add(outputGraph);
 	} // addGraph()
 	
 	
@@ -360,10 +356,10 @@ public class OpenBurnGUI extends Application
     							caseInputs.getLengthInput());
     	
     	// Run simulation, gather list of results
-    	simResults = RocketMath.simulate(grainList, deltaTime, theNozzle, theCase);
+    	List<SimulationResults> simResults = RocketMath.simulate(grainList, deltaTime, theNozzle, theCase);
     	
     	// Add thrust vs. time data to the chart
-    	outputGraph.addThrustVsTimeDataSet(TEMP_LEGEND_NAME, simResults);
+    	outputGraph.addData(TEMP_LEGEND_NAME, simResults);
 	} // runSimulation()
 	
 	
@@ -395,10 +391,10 @@ public class OpenBurnGUI extends Application
 		{
 		    @Override public void handle (ActionEvent e)
 		    {
-		    	CSVConverter.writeResultsArr(simResults, TEMP_LEGEND_NAME + ".csv");
+		    	CSVConverter.writeResultsArr(outputGraph.getData(), TEMP_LEGEND_NAME + ".csv");
 		    }
 		});
-				
+		
 		// Export to RSE button
 		rseButton = new Button(EXPORT_RSE);
 		rseButton.setTranslateX(340);

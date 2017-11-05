@@ -1,8 +1,8 @@
 package view;
 
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import model.NumberTextField;
 
 /**
  * CaseInputView.java
@@ -22,11 +22,11 @@ public class CaseInputView extends Pane
 	
 	// Components
 	private Text massText;
-	private TextField massTextField;
 	private Text diameterText;
-	private TextField diameterTextField;
 	private Text lengthText;
-	private TextField lengthTextField;
+	private NumberTextField massTextField;
+	private NumberTextField diameterTextField;
+	private NumberTextField lengthTextField;
 	
 	
 	
@@ -68,7 +68,7 @@ public class CaseInputView extends Pane
 		this.getChildren().add(massText);
 		
 		// Mass input field
-		massTextField = new TextField();
+		massTextField = new NumberTextField();
 		massTextField.setTranslateX(20);
 		massTextField.setTranslateY(30);
 		this.getChildren().add(massTextField);
@@ -95,7 +95,7 @@ public class CaseInputView extends Pane
 		this.getChildren().add(diameterText);
 		
 		// Diameter input field
-		diameterTextField = new TextField();
+		diameterTextField = new NumberTextField();
 		diameterTextField.setTranslateX(20);
 		diameterTextField.setTranslateY(110);
 		this.getChildren().add(diameterTextField);
@@ -122,7 +122,7 @@ public class CaseInputView extends Pane
 		this.getChildren().add(lengthText);
 		
 		// Length input field
-		lengthTextField = new TextField();
+		lengthTextField = new NumberTextField();
 		lengthTextField.setTranslateX(20);
 		lengthTextField.setTranslateY(190);
 		this.getChildren().add(lengthTextField);
@@ -160,6 +160,5 @@ public class CaseInputView extends Pane
 	{
 		return Double.parseDouble(lengthTextField.getText().toString());
 	}
-	
 	
 } // class CaseInputView

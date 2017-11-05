@@ -3,16 +3,19 @@ package view.grain.input;
 import controller.GrainTableHandle;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.NumberTextField;
 import model.grains.CylindricalGrain;
 
 /**
@@ -31,6 +34,7 @@ public class AddGrainWindow extends Stage
 	private static final String INNER_DIAMETER_PROMPT = "Enter Inner Diameter";
 	private static final String BURNING_ENDS_PROMPT   = "Enter Number of Burning Ends";
 	private static final String SUBMIT_BUTTON_TEXT    = "Submit";
+	private static final String ERROR_TEXT            = "Inner diameter must be less than outer diameter!";
 	private static final String EMPTY                 = "";
 	private static final String ICON_FILE_PATH        = "./../../../images/OpenBurnLogo_1.png";
 	
@@ -47,10 +51,11 @@ public class AddGrainWindow extends Stage
 	private Text outerDiameterText;
 	private Text burningEndsText;
 	private Text innerDiameterText;
-	private TextField lengthTextField;
-	private TextField outerDiameterTextField;
-	private TextField burningEndsTextField;
-	private TextField innerDiameterTextField;
+	private Text errorText;
+	private NumberTextField lengthTextField;
+	private NumberTextField outerDiameterTextField;
+	private ComboBox<String> burningEndsSelection;
+	private NumberTextField innerDiameterTextField;
 	private Button submitButton;
 	
 	
@@ -59,7 +64,7 @@ public class AddGrainWindow extends Stage
 	private GrainTableHandle tableHandle;
 	private BooleanBinding lengthTextFieldNotValid;
 	private BooleanBinding outerDiameterTextFieldNotValid;
-	private BooleanBinding burningEndsTextFieldNotValid;
+	private BooleanBinding burningEndsSelectionNotValid;
 	private BooleanBinding innerDiameterTextFieldNotValid;
 	
 	
@@ -88,6 +93,7 @@ public class AddGrainWindow extends Stage
         this.setScene(addScene);
         
         // Add components
+        addErrorText(addPane);
         addLengthInput(addPane);
 		addOuterDiameterInput(addPane);
 		addBurningEndsInput(addPane);
@@ -123,13 +129,14 @@ public class AddGrainWindow extends Stage
     	frame.getChildren().add(lengthText);
     	
     	// Length input field
-    	lengthTextField = new TextField();
+    	lengthTextField = new NumberTextField();
     	lengthTextField.setTranslateX(25);
     	lengthTextField.setTranslateY(50);
 		frame.getChildren().add(lengthTextField);
 		
 		// Set binding rules on length input
-		lengthTextFieldNotValid = Bindings.createBooleanBinding(() -> {
+		lengthTextFieldNotValid = Bindings.createBooleanBinding(() ->
+		{
     	    return lengthTextField.getText().equals(EMPTY);
     	}, lengthTextField.textProperty());
 	} // addLengthInput()
@@ -158,7 +165,7 @@ public class AddGrainWindow extends Stage
 		frame.getChildren().add(outerDiameterText);
 		
 		// Outer Diameter input field
-		outerDiameterTextField = new TextField();
+		outerDiameterTextField = new NumberTextField();
 		outerDiameterTextField.setTranslateX(25);
     	outerDiameterTextField.setTranslateY(140);
 		frame.getChildren().add(outerDiameterTextField);
@@ -187,6 +194,8 @@ public class AddGrainWindow extends Stage
 	
 	private void addBurningEndsInput (Pane frame)
 	{
+		
+		
 		// Burning Ends prompt
 		burningEndsText = new Text(BURNING_ENDS_PROMPT);
 		burningEndsText.setTranslateX(235);
@@ -194,16 +203,19 @@ public class AddGrainWindow extends Stage
 		frame.getChildren().add(burningEndsText);
 		
 		// Burning Ends input field
-		burningEndsTextField = new TextField();
-		burningEndsTextField.setTranslateX(235);
-    	burningEndsTextField.setTranslateY(50);
-		frame.getChildren().add(burningEndsTextField);
+		ObservableList<String> options = FXCollections.observableArrayList("0", "1", "2");
+		burningEndsSelection = new ComboBox<String>(options);
+		burningEndsSelection.getSelectionModel().selectFirst();
+		burningEndsSelection.setPrefWidth(185);
+		burningEndsSelection.setTranslateX(235);
+    	burningEndsSelection.setTranslateY(50);
+		frame.getChildren().add(burningEndsSelection);
 		
 		// Set binding rule on burning ends input
-		burningEndsTextFieldNotValid = Bindings.createBooleanBinding(() ->
+		burningEndsSelectionNotValid = Bindings.createBooleanBinding(() ->
 		{
-    	    return burningEndsTextField.getText().equals(EMPTY);
-    	}, burningEndsTextField.textProperty());
+    	    return burningEndsSelection.getValue().equals(EMPTY);
+    	}, burningEndsSelection.valueProperty());
 	} // addBurningEndsInput()
 	
 	
@@ -230,7 +242,7 @@ public class AddGrainWindow extends Stage
 		frame.getChildren().add(innerDiameterText);
 		
 		// Inner Diameter input field
-		innerDiameterTextField = new TextField();
+		innerDiameterTextField = new NumberTextField();
 		innerDiameterTextField.setTranslateX(235);
     	innerDiameterTextField.setTranslateY(140);
 		frame.getChildren().add(innerDiameterTextField);
@@ -267,25 +279,58 @@ public class AddGrainWindow extends Stage
     	frame.getChildren().add(submitButton);
     	
     	// Set button binding rules
-    	submitButton.disableProperty().bind((lengthTextFieldNotValid.or(outerDiameterTextFieldNotValid).or(burningEndsTextFieldNotValid).or(innerDiameterTextFieldNotValid)));	
+    	submitButton.disableProperty().bind((lengthTextFieldNotValid.or(
+    										 outerDiameterTextFieldNotValid).or(
+    										 burningEndsSelectionNotValid.or(
+    										 innerDiameterTextFieldNotValid))));	
     	
     	// Add new grain to table on click
     	submitButton.setOnAction(new EventHandler<ActionEvent> ()
 		{
 		    @Override public void handle (ActionEvent e)
 		    {
-		    	// Gather grain data from input fields
-		    	double length = Double.parseDouble(lengthTextField.getText());
-		    	double outerDiameter = Double.parseDouble(outerDiameterTextField.getText());
-		    	double innerDiameter = Double.parseDouble(innerDiameterTextField.getText());
-		    	int numBurningEnds = Integer.parseInt(burningEndsTextField.getText());
-		    	
-		    	// Create grain, add it to the table, close the window
-		    	tableHandle.addGrainToTable(new CylindricalGrain(length, outerDiameter, innerDiameter, numBurningEnds));
-		    	closeWindow();
+		    	// Error check that inner diameter is less than outer diameter
+		    	if (Double.parseDouble(innerDiameterTextField.getText()) < Double.parseDouble(outerDiameterTextField.getText()))
+		    	{
+		    		errorText.setText(EMPTY);
+		    		
+		    		// Gather grain data from input fields
+		    		double length = Double.parseDouble(lengthTextField.getText());
+		    		double outerDiameter = Double.parseDouble(outerDiameterTextField.getText());
+		    		double innerDiameter = Double.parseDouble(innerDiameterTextField.getText());
+		    		int numBurningEnds = Integer.parseInt(burningEndsSelection.getValue());
+		    		
+		    		// Create grain, add it to the table, close the window
+		    		tableHandle.addGrainToTable(new CylindricalGrain(length, outerDiameter, innerDiameter, numBurningEnds));
+		    		closeWindow();
+		    	}
+		    	// Invalid inputs
+		    	else
+		    		errorText.setText(ERROR_TEXT);
 		    }
 		});
 	} // addSubmitButton()
+	
+	
+	
+	/**
+	 * addErrorText()
+	 * 
+	 * Purpose: Adds the error text to the given Pane.
+	 * 
+	 * Parameters:
+	 * 		Pane frame -- The Pane to add the text to.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addErrorText (Pane frame)
+	{
+		errorText = new Text();
+		errorText.setTranslateX(60);
+		errorText.setTranslateY(265);
+		frame.getChildren().add(errorText);
+	} // addErrorText()
 	
 	
 	

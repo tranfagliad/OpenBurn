@@ -1,8 +1,8 @@
 package view;
 
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import model.NumberTextField;
 
 /**
  * NozzleInputView.java
@@ -23,13 +23,13 @@ public class NozzleInputView extends Pane
 	
 	// Components
 	private Text throatDiameterText;
-	private TextField throatDiameterTextField;
 	private Text entranceDiameterText;
-	private TextField entranceDiameterTextField;
 	private Text exitDiameterText;
-	private TextField exitDiameterTextField;
 	private Text cfText;
-	private TextField cfTextField;
+	private NumberTextField throatDiameterTextField;
+	private NumberTextField entranceDiameterTextField;
+	private NumberTextField exitDiameterTextField;
+	private NumberTextField cfTextField;
 	
 	
 	
@@ -72,7 +72,7 @@ public class NozzleInputView extends Pane
 		this.getChildren().add(throatDiameterText);
 		
 		// Throat Diameter input field
-		throatDiameterTextField = new TextField();
+		throatDiameterTextField = new NumberTextField();
 		throatDiameterTextField.setTranslateX(20);
 		throatDiameterTextField.setTranslateY(30);
 		this.getChildren().add(throatDiameterTextField);
@@ -99,7 +99,7 @@ public class NozzleInputView extends Pane
 		this.getChildren().add(entranceDiameterText);
 		
 		// Entrance Diameter input field
-		entranceDiameterTextField = new TextField();
+		entranceDiameterTextField = new NumberTextField();
 		entranceDiameterTextField.setTranslateX(20);
 		entranceDiameterTextField.setTranslateY(110);
 		this.getChildren().add(entranceDiameterTextField);
@@ -126,7 +126,7 @@ public class NozzleInputView extends Pane
 		this.getChildren().add(exitDiameterText);
 		
 		// Exit Diameter input field
-		exitDiameterTextField = new TextField();
+		exitDiameterTextField = new NumberTextField();
 		exitDiameterTextField.setTranslateX(20);
 		exitDiameterTextField.setTranslateY(190);
 		this.getChildren().add(exitDiameterTextField);
@@ -153,7 +153,7 @@ public class NozzleInputView extends Pane
 		this.getChildren().add(cfText);
 		
 		// Cf input field
-		cfTextField = new TextField();
+		cfTextField = new NumberTextField();
 		cfTextField.setTranslateX(20);
 		cfTextField.setTranslateY(270);
 		this.getChildren().add(cfTextField);
