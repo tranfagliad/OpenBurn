@@ -205,10 +205,10 @@ public class GrainInputView extends Pane
 		upButton = new Button();
 		Image upImage = new Image(this.getClass().getResourceAsStream(UP_ARROW));
 		upButton.setGraphic(new ImageView(upImage));
-		upButton.setTranslateX(-55);
+		upButton.setTranslateX(-60);
 		upButton.setTranslateY(60);
 		upButton.setPrefHeight(95);
-		upButton.setPrefWidth(10);
+		upButton.setPrefWidth(20);
 		this.getChildren().add(upButton);
 		
 		// Disable the button when the table is empty or no item selected
@@ -231,10 +231,10 @@ public class GrainInputView extends Pane
 		downButton = new Button();
 		Image downImage = new Image(this.getClass().getResourceAsStream(DOWN_ARROW));
 		downButton.setGraphic(new ImageView(downImage));
-		downButton.setTranslateX(-55);
+		downButton.setTranslateX(-60);
 		downButton.setTranslateY(165);
 		downButton.setPrefHeight(95);
-		downButton.setPrefWidth(10);
+		downButton.setPrefWidth(20);
 		this.getChildren().add(downButton);
 		
 		// Disable the button when the table is empty or no item selected

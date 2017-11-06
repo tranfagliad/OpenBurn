@@ -205,7 +205,7 @@ public class GrainInputView extends Pane
 		upButton = new Button();
 		Image upImage = new Image(this.getClass().getResourceAsStream(UP_ARROW));
 		upButton.setGraphic(new ImageView(upImage));
-		upButton.setTranslateX(-55);
+		upButton.setTranslateX(-50);
 		upButton.setTranslateY(60);
 		upButton.setPrefHeight(95);
 		upButton.setPrefWidth(10);
@@ -231,7 +231,7 @@ public class GrainInputView extends Pane
 		downButton = new Button();
 		Image downImage = new Image(this.getClass().getResourceAsStream(DOWN_ARROW));
 		downButton.setGraphic(new ImageView(downImage));
-		downButton.setTranslateX(-55);
+		downButton.setTranslateX(-50);
 		downButton.setTranslateY(165);
 		downButton.setPrefHeight(95);
 		downButton.setPrefWidth(10);
