@@ -14,10 +14,10 @@ import model.NumberTextField;
 public class NozzleInputView extends Pane
 {
 	// Labels
-	private static final String THROAT_DIAMETER_PROMPT   = "Enter nozzle throat diameter";
-	private static final String ENTRANCE_DIAMETER_PROMPT = "Enter nozzle entrance diameter";
-	private static final String EXIT_DIAMETER_PROMPT     = "Enter nozzle exit diameter";
-	private static final String CF_PROMPT                = "Enter nozzle CF";
+	private static final String THROAT_DIAMETER_PROMPT   = "Nozzle Throat Diameter";
+	private static final String ENTRANCE_DIAMETER_PROMPT = "Nozzle Entrance Diameter";
+	private static final String EXIT_DIAMETER_PROMPT     = "Nozzle Exit Diameter";
+	private static final String CF_PROMPT                = "Nozzle CF";
 	
 	
 	

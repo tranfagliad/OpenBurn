@@ -4,11 +4,11 @@ import java.util.List;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -34,7 +34,7 @@ import view.grain.input.GrainInputView;
 public class OpenBurnGUI extends Application
 {
 	// Labels
-	private static final String WINDOW_TITLE      = "OpenBurn - Iteration 2";
+	private static final String WINDOW_TITLE      = "OpenBurn - Beta";
 	private static final String DENSITY_PROMPT    = "Enter propellant density";
 	private static final String TIME_DELTA_PROMPT = "Enter change in time";
 	private static final String SIMULATE          = "Simulate";
@@ -49,16 +49,17 @@ public class OpenBurnGUI extends Application
 	// Constants
 	private static final int WINDOW_WIDTH   = 1200;
 	private static final int WINDOW_HEIGHT  = 820;
-	private static final int GRAIN_INPUT_X  = 230;
+	private static final int GRAIN_INPUT_X  = 650;
 	private static final int GRAIN_INPUT_Y  = 10;
-	private static final int NOZZLE_INPUT_X = 755;
+	private static final int NOZZLE_INPUT_X = 25;
 	private static final int NOZZLE_INPUT_Y = 10;
-	private static final int CASE_INPUT_X   = 975;
+	private static final int CASE_INPUT_X   = 245;
 	private static final int CASE_INPUT_Y   = 10;
 	private static final int GRAPH_WIDTH    = 1150;
 	private static final int GRAPH_HEIGHT   = 450;
 	private static final int GRAPH_X        = 20;
 	private static final int GRAPH_Y        = 330;
+	private static final int EMPTY          = 0;
 	
 	
 	
@@ -153,13 +154,13 @@ public class OpenBurnGUI extends Application
 		// Prompt
 		propDensityText = new Text(DENSITY_PROMPT);
 		propDensityText.setTranslateX(20);
-		propDensityText.setTranslateY(30);
+		propDensityText.setTranslateY(330);
 		frame.getChildren().add(propDensityText);
 		
 		// Input field
 		propDensityTextField = new  NumberTextField();
 		propDensityTextField.setTranslateX(20);
-		propDensityTextField.setTranslateY(40);
+		propDensityTextField.setTranslateY(340);
 		frame.getChildren().add(propDensityTextField);
 	} // addPropDensityInput()
 	
@@ -181,14 +182,14 @@ public class OpenBurnGUI extends Application
 	{
 		// Prompt
 		timeDeltaText = new Text(TIME_DELTA_PROMPT);
-		timeDeltaText.setTranslateX(20);
-		timeDeltaText.setTranslateY(110);
+		timeDeltaText.setTranslateX(220);
+		timeDeltaText.setTranslateY(330);
 		frame.getChildren().add(timeDeltaText);
 		
 		// Input field
 		timeDeltaTextField = new NumberTextField();
-		timeDeltaTextField.setTranslateX(20);
-		timeDeltaTextField.setTranslateY(120);
+		timeDeltaTextField.setTranslateX(220);
+		timeDeltaTextField.setTranslateY(340);
 		frame.getChildren().add(timeDeltaTextField);
 	} // addTimeDeltaInput()
 	
@@ -376,6 +377,7 @@ public class OpenBurnGUI extends Application
 	 * Returns: void.
 	**/
 	
+	@SuppressWarnings("unchecked")
 	private void addExportButtons (Pane frame)
 	{
 		// Export to CSV button
@@ -394,6 +396,8 @@ public class OpenBurnGUI extends Application
 		    	CSVConverter.writeResultsArr(outputGraph.getData(), TEMP_LEGEND_NAME + ".csv");
 		    }
 		});
+		
+		csvButton.disableProperty().bind(Bindings.size(outputGraph.getChart().getData()).isEqualTo(EMPTY));
 		
 		// Export to RSE button
 		rseButton = new Button(EXPORT_RSE);

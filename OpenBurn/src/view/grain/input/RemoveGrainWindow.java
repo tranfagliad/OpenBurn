@@ -65,7 +65,7 @@ public class RemoveGrainWindow extends Stage
 		
 		// Initialize window
 		this.getIcons().add(new Image(this.getClass().getResourceAsStream(ICON_FILE_PATH)));
-		this.setTitle(REMOVE_GRAIN_TITLE + (row+1));
+		this.setTitle(REMOVE_GRAIN_TITLE + this.tableHandle.getInputView().getTable().getItems().get(row).getGrainID());
 		this.setResizable(false);
 		Pane removePane = new Pane();
         Scene removeScene = new Scene(removePane, WINDOW_WIDTH, WINDOW_HEIGHT);

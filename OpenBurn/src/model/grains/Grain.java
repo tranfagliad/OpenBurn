@@ -21,11 +21,6 @@ abstract public class Grain
 	
 	
 	
-	// Grain current ID
-	private static int currentGrainID = 0;
-	
-	
-	
 	// Fields
 	protected int grainID;
 	protected double propellantDensity;
@@ -73,7 +68,7 @@ abstract public class Grain
 			throw new IllegalArgumentException(BURNING_ENDS_ERR_MSG);
 		
 		// Set fields
-		this.grainID        = ++currentGrainID;
+		this.grainID        = 0;
 		this.outerDiameter  = outerDiameter;
 		this.length         = length;
 		this.innerDiameter  = innerDiameter;

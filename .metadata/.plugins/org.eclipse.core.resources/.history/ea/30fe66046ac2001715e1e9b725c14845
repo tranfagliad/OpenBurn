@@ -1,0 +1,159 @@
+package controller;
+
+import javafx.stage.Stage;
+import model.grains.Grain;
+import view.grain.input.AddGrainWindow;
+import view.grain.input.EditGrainWindow;
+import view.grain.input.GrainInputView;
+import view.grain.input.RemoveGrainWindow;
+
+/**
+ * GrainTableHandle.java
+ * 
+ * Purpose:
+**/
+
+public class GrainTableHandle
+{
+	// Fields
+	private GrainInputView inputView;
+	private Stage modeWindow;
+	
+	
+	
+	/**
+	 * GrainTableHandle Constructor
+	 * 
+	 * Purpose: 
+	**/
+	
+	public GrainTableHandle (GrainInputView inputView)
+	{
+		this.inputView = inputView;
+		this.modeWindow = null;
+	} // GrainTableHandle Constructor
+	
+	
+	
+	
+	public GrainInputView getInputView ()
+	{
+		return inputView;
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	public void setToAdd (AddGrainWindow addWindow)
+	{
+		this.modeWindow = addWindow;
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	public void setToRemove (RemoveGrainWindow removeWindow)
+	{
+		this.modeWindow = removeWindow;
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	public void setToEdit (EditGrainWindow editWindow)
+	{
+		this.modeWindow = editWindow;
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	public void addGrainToTable (Grain newGrain)
+	{
+		if (modeWindow instanceof AddGrainWindow)
+			inputView.addRow(newGrain);
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	public void removeGrainFromTable (int row)
+	{
+		if (modeWindow instanceof RemoveGrainWindow)
+			inputView.removeRow(row);
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	public void editGrainInTable (int row, Grain newGrain)
+	{
+		if (modeWindow instanceof EditGrainWindow)
+			inputView.editRow(row, newGrain);
+	}
+	
+	
+	
+	/**
+	 * getNextTableID()
+	 * 
+	 * Purpose: Searches the table in the input view for the next
+	 * 		available 
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: int. 
+	**/
+	
+	public int getNextTableID ()
+	{
+		int nextGrainID = 1;
+		boolean idFound = false;
+		
+		// Count up IDs indefinitely
+		while (true)
+		{
+			// Go through the list of grains
+			for (Grain curGrain : inputView.getTable().getItems())
+			{
+				// Match found, mark it
+				if (curGrain.getGrainID() == nextGrainID)
+				{
+					idFound = true;
+					break;
+				}
+			}
+			
+			// Match found, go to the next ID
+			if (idFound == true)
+			{
+				nextGrainID++;
+				idFound = false;
+				continue;
+			}
+			
+			break;   // ID was never found, return the ID
+		}
+		
+		return nextGrainID;
+	} // getNextTableID()
+	
+} // class GrainTableHandle

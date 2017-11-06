@@ -10,7 +10,9 @@ import view.grain.input.RemoveGrainWindow;
 /**
  * GrainTableHandle.java
  * 
- * Purpose:
+ * Purpose: Contains methods that assist with windows communicating
+ * 		between each other, particularly with the grain table
+ * 		operations.
 **/
 
 public class GrainTableHandle
@@ -24,7 +26,8 @@ public class GrainTableHandle
 	/**
 	 * GrainTableHandle Constructor
 	 * 
-	 * Purpose: 
+	 * Purpose: Initializes the table handle with the given grain
+	 * 		input view. The mode window is initialized to null.
 	**/
 	
 	public GrainTableHandle (GrainInputView inputView)
@@ -35,79 +38,185 @@ public class GrainTableHandle
 	
 	
 	
+	/**
+	 * getInputView()
+	 * 
+	 * Purpose: Returns the grain input view to help connect
+	 * 		the windows.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: GrainInputView. The grain input view.
+	**/
 	
 	public GrainInputView getInputView ()
 	{
 		return inputView;
-	}
+	} // getInputView()
 	
 	
 	
-	/*
+	/**
+	 * setToAdd()
 	 * 
-	 */
+	 * Purpose: Set the mode window to an add grain
+	 * 		window with the given opened window.
+	 * 
+	 * Parameters:
+	 * 		AddGrainWindow removeWindow -- The window
+	 * 			opened to add grains in the table.
+	 * 
+	 * Returns: void.
+	**/
 	
 	public void setToAdd (AddGrainWindow addWindow)
 	{
-		this.modeWindow = addWindow;
-	}
+		modeWindow = addWindow;
+	} // setToAdd()
 	
 	
 	
-	/*
+	/**
+	 * setToRemove()
 	 * 
-	 */
+	 * Purpose: Set the mode window to a remove grain
+	 * 		window with the given opened window.
+	 * 
+	 * Parameters:
+	 * 		RemoveGrainWindow removeWindow -- The window
+	 * 			opened to remove grains in the table.
+	 * 
+	 * Returns: void.
+	**/
 	
 	public void setToRemove (RemoveGrainWindow removeWindow)
 	{
-		this.modeWindow = removeWindow;
-	}
+		modeWindow = removeWindow;
+	} // setToRemove()
 	
 	
 	
-	/*
+	/**
+	 * setToEdit()
 	 * 
-	 */
+	 * Purpose: Set the mode window to an edit grain
+	 * 		window with the given opened window.
+	 * 
+	 * Parameters:
+	 * 		EditGrainWindow editWindow -- The window
+	 * 			opened to edit grains in the table.
+	 * 
+	 * Returns: void.
+	**/
 	
 	public void setToEdit (EditGrainWindow editWindow)
 	{
-		this.modeWindow = editWindow;
-	}
+		modeWindow = editWindow;
+	} // setToEdit()
 	
 	
 	
-	/*
+	/**
+	 * addGrainToTable()
 	 * 
-	 */
+	 * Purpose: Adds the given grain to the table.
+	 * 
+	 * Parameters:
+	 * 		Grain newGrain -- The grain to add.
+	 * 
+	 * Returns: void.
+	**/
 	
 	public void addGrainToTable (Grain newGrain)
 	{
 		if (modeWindow instanceof AddGrainWindow)
 			inputView.addRow(newGrain);
-	}
+	} // addGrainToTable()
 	
 	
 	
-	/*
+	/**
+	 * removeGrainFromTable()
 	 * 
-	 */
+	 * Purpose: Removes the given row from the table.
+	 * 
+	 * Parameters:
+	 * 		int row -- The row to remove.
+	 * 
+	 * Returns: void.
+	**/
 	
 	public void removeGrainFromTable (int row)
 	{
 		if (modeWindow instanceof RemoveGrainWindow)
 			inputView.removeRow(row);
-	}
+	} // removeGrainFromTable()
 	
 	
 	
-	/*
+	/**
+	 * editGrainInTable()
 	 * 
-	 */
+	 * Purpose: Takes the selected row in the grain table and
+	 * 		a replacement grain in order to edit an existing grain.
+	 * 
+	 * Parameters:
+	 * 		int row -- Row in the table to edit.
+	 * 		Grain newGrain -- Replacement grain.
+	 * 
+	 * Returns: void.
+	**/
 	
 	public void editGrainInTable (int row, Grain newGrain)
 	{
 		if (modeWindow instanceof EditGrainWindow)
 			inputView.editRow(row, newGrain);
-	}
+	} // editGrainInTable()
+	
+	
+	
+	/**
+	 * getNextTableID()
+	 * 
+	 * Purpose: Searches the table in the input view for the next
+	 * 		available grain ID.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: int. 
+	**/
+	
+	public int getNextTableID ()
+	{
+		int nextGrainID = 1;
+		boolean idFound = false;
+		
+		// Count up IDs indefinitely
+		while (true)
+		{
+			// Go through the list of grains
+			for (Grain curGrain : inputView.getTable().getItems())
+			{
+				// Match found, mark it
+				if (curGrain.getGrainID() == nextGrainID)
+				{
+					idFound = true;
+					break;
+				}
+			}
+			
+			// Match found, go to the next ID
+			if (idFound == true)
+			{
+				nextGrainID++;
+				idFound = false;
+				continue;
+			}
+			
+			break;   // ID was never found, return the ID
+		}
+		
+		return nextGrainID;
+	} // getNextTableID()
 	
 } // class GrainTableHandle

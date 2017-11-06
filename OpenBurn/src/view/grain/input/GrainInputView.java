@@ -1,5 +1,7 @@
 package view.grain.input;
 
+import java.util.Collections;
+
 import controller.GrainTableHandle;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -9,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import model.grains.Grain;
@@ -34,6 +38,8 @@ public class GrainInputView extends Pane
 	private static final String EDIT           = "Edit";
 	private static final String EMPTY_TEXT     = "No Grains";
 	private static final String CENTER_ALIGN   = "-fx-alignment: CENTER";
+	private static final String UP_ARROW       = "./../../../images/upArrow.png";
+	private static final String DOWN_ARROW     = "./../../../images/downArrow.png";
 	
 	
 	
@@ -57,6 +63,8 @@ public class GrainInputView extends Pane
 	
 	// Components
 	private Text grainText;
+	private Button upButton;
+	private Button downButton;
 	private TableView<Grain> table;
 	private Button addButton;
 	private Button removeButton;
@@ -87,6 +95,7 @@ public class GrainInputView extends Pane
 		// Add components
 		addTableTitle();
 		configureTable();
+		addSortButtons();
 		addAddButton();
         addRemoveButton();
         addEditButton();
@@ -176,6 +185,74 @@ public class GrainInputView extends Pane
 		grainText.setTranslateY(TITLE_Y);
 		this.getChildren().add(grainText);
 	} // addTableTitle()
+	
+	
+	
+	/**
+	 * addSortButtons()
+	 * 
+	 * Purpose: Adds the up and down buttons for rearranging
+	 * 		grains in the table.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addSortButtons ()
+	{
+		// Up button
+		upButton = new Button();
+		Image upImage = new Image(this.getClass().getResourceAsStream(UP_ARROW));
+		upButton.setGraphic(new ImageView(upImage));
+		upButton.setTranslateX(-60);
+		upButton.setTranslateY(60);
+		upButton.setPrefHeight(95);
+		//upButton.setPrefWidth(10);
+		this.getChildren().add(upButton);
+		
+		// Disable the button when the table is empty or no item selected
+		upButton.disableProperty().bind(Bindings.size(table.getItems()).isEqualTo(EMPTY).or(
+										Bindings.isEmpty(table.getSelectionModel().getSelectedItems())));
+		
+		// Move currently selected grain up on click
+		upButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+			@Override
+			public void handle (ActionEvent e)
+			{
+				int row = table.getItems().indexOf(table.getSelectionModel().getSelectedItem());
+				if (row != 0)
+					Collections.swap(table.getItems(), row, row-1);
+			}
+		});
+		
+		// Down button
+		downButton = new Button();
+		Image downImage = new Image(this.getClass().getResourceAsStream(DOWN_ARROW));
+		downButton.setGraphic(new ImageView(downImage));
+		downButton.setTranslateX(-60);
+		downButton.setTranslateY(165);
+		downButton.setPrefHeight(95);
+		//downButton.setPrefWidth(10);
+		this.getChildren().add(downButton);
+		
+		// Disable the button when the table is empty or no item selected
+		downButton.disableProperty().bind(Bindings.size(table.getItems()).isEqualTo(EMPTY).or(
+										  Bindings.isEmpty(table.getSelectionModel().getSelectedItems())));
+		
+		// Move currently selected grain up down click
+		downButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+			@Override
+			public void handle (ActionEvent e)
+			{
+				int row = table.getItems().indexOf(table.getSelectionModel().getSelectedItem());
+				if (row != table.getItems().size()-1)
+					Collections.swap(table.getItems(), row, row+1);
+			}
+		});
+	} // addSortButton()
 	
 	
 	

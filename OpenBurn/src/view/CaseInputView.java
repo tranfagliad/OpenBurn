@@ -14,9 +14,9 @@ import model.NumberTextField;
 public class CaseInputView extends Pane
 {
 	// Labels
-	private static final String CASE_MASS_PROMPT     = "Enter mass of the case";
-	private static final String CASE_DIAMETER_PROMPT = "Enter diameter of the case";
-	private static final String CASE_LENGTH_PROMPT   = "Enter length of the case";
+	private static final String CASE_MASS_PROMPT     = "Case Mass";
+	private static final String CASE_DIAMETER_PROMPT = "Case Diameter";
+	private static final String CASE_LENGTH_PROMPT   = "Case Length";
 	
 	
 	
