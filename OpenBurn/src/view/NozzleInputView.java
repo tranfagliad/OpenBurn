@@ -14,10 +14,20 @@ import model.NumberTextField;
 public class NozzleInputView extends Pane
 {
 	// Labels
-	private static final String THROAT_DIAMETER_PROMPT   = "Nozzle Throat Diameter";
-	private static final String ENTRANCE_DIAMETER_PROMPT = "Nozzle Entrance Diameter";
-	private static final String EXIT_DIAMETER_PROMPT     = "Nozzle Exit Diameter";
-	private static final String CF_PROMPT                = "Nozzle CF";
+	private static final String THROAT_DIAMETER_PROMPT   = "Throat Diameter";
+	private static final String ENTRANCE_DIAMETER_PROMPT = "Entrance Diameter";
+	private static final String EXIT_DIAMETER_PROMPT     = "Exit Diameter";
+	private static final String CF_PROMPT                = "CF";
+	
+	
+	
+	// Constants
+	private static final int FIRST_COL_X         = 20;
+	private static final int SECOND_COL_X        = 250;
+	private static final int FIRST_ROW_PROMPT_Y  = 30;
+	private static final int FIRST_ROW_FIELD_Y   = 40;
+	private static final int SECOND_ROW_PROMPT_Y = 110;
+	private static final int SECOND_ROW_FIELD_Y  = 120;
 	
 	
 	
@@ -54,33 +64,6 @@ public class NozzleInputView extends Pane
 	
 	
 	/**
-	 * addThroatDiameterInput()
-	 * 
-	 * Purpose: Adds the throat diameter input field.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: void.
-	**/
-	
-	private void addThroatDiameterInput ()
-	{
-		// Throat Diameter prompt
-		throatDiameterText = new Text(THROAT_DIAMETER_PROMPT);
-		throatDiameterText.setTranslateX(20);
-		throatDiameterText.setTranslateY(20);
-		this.getChildren().add(throatDiameterText);
-		
-		// Throat Diameter input field
-		throatDiameterTextField = new NumberTextField();
-		throatDiameterTextField.setTranslateX(20);
-		throatDiameterTextField.setTranslateY(30);
-		this.getChildren().add(throatDiameterTextField);
-	} // addThroatDiameterInput()
-	
-	
-	
-	/**
 	 * addEntranceDiameterInput()
 	 * 
 	 * Purpose: Adds the entrance diameter input field.
@@ -94,14 +77,14 @@ public class NozzleInputView extends Pane
 	{
 		// Entrance Diameter prompt
 		entranceDiameterText = new Text(ENTRANCE_DIAMETER_PROMPT);
-		entranceDiameterText.setTranslateX(20);
-		entranceDiameterText.setTranslateY(100);
+		entranceDiameterText.setTranslateX(FIRST_COL_X);
+		entranceDiameterText.setTranslateY(FIRST_ROW_PROMPT_Y);
 		this.getChildren().add(entranceDiameterText);
 		
 		// Entrance Diameter input field
 		entranceDiameterTextField = new NumberTextField();
-		entranceDiameterTextField.setTranslateX(20);
-		entranceDiameterTextField.setTranslateY(110);
+		entranceDiameterTextField.setTranslateX(FIRST_COL_X);
+		entranceDiameterTextField.setTranslateY(FIRST_ROW_FIELD_Y);
 		this.getChildren().add(entranceDiameterTextField);
 	} // addEntranceDiameterInput()
 	
@@ -121,16 +104,43 @@ public class NozzleInputView extends Pane
 	{
 		// Exit Diameter prompt
 		exitDiameterText = new Text(EXIT_DIAMETER_PROMPT);
-		exitDiameterText.setTranslateX(20);
-		exitDiameterText.setTranslateY(180);
+		exitDiameterText.setTranslateX(SECOND_COL_X);
+		exitDiameterText.setTranslateY(FIRST_ROW_PROMPT_Y);
 		this.getChildren().add(exitDiameterText);
 		
 		// Exit Diameter input field
 		exitDiameterTextField = new NumberTextField();
-		exitDiameterTextField.setTranslateX(20);
-		exitDiameterTextField.setTranslateY(190);
+		exitDiameterTextField.setTranslateX(SECOND_COL_X);
+		exitDiameterTextField.setTranslateY(FIRST_ROW_FIELD_Y);
 		this.getChildren().add(exitDiameterTextField);
 	} // addExitDiameterInput()
+	
+	
+	
+	/**
+	 * addThroatDiameterInput()
+	 * 
+	 * Purpose: Adds the throat diameter input field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addThroatDiameterInput ()
+	{
+		// Throat Diameter prompt
+		throatDiameterText = new Text(THROAT_DIAMETER_PROMPT);
+		throatDiameterText.setTranslateX(FIRST_COL_X);
+		throatDiameterText.setTranslateY(SECOND_ROW_PROMPT_Y);
+		this.getChildren().add(throatDiameterText);
+		
+		// Throat Diameter input field
+		throatDiameterTextField = new NumberTextField();
+		throatDiameterTextField.setTranslateX(FIRST_COL_X);
+		throatDiameterTextField.setTranslateY(SECOND_ROW_FIELD_Y);
+		this.getChildren().add(throatDiameterTextField);
+	} // addThroatDiameterInput()
 	
 	
 	
@@ -148,58 +158,83 @@ public class NozzleInputView extends Pane
 	{
 		// Cf prompt
 		cfText = new Text(CF_PROMPT);
-		cfText.setTranslateX(20);
-		cfText.setTranslateY(260);
+		cfText.setTranslateX(SECOND_COL_X);
+		cfText.setTranslateY(SECOND_ROW_PROMPT_Y);
 		this.getChildren().add(cfText);
 		
 		// Cf input field
 		cfTextField = new NumberTextField();
-		cfTextField.setTranslateX(20);
-		cfTextField.setTranslateY(270);
+		cfTextField.setTranslateX(SECOND_COL_X);
+		cfTextField.setTranslateY(SECOND_ROW_FIELD_Y);
 		this.getChildren().add(cfTextField);
 	} // addCfInput()
 	
 	
 	
 	/**
+	 * getEntranceDiameterInput()
 	 * 
-	**/
-	
-	public double getThroatDiameterInput ()
-	{
-		return Double.parseDouble(throatDiameterTextField.getText().toString());
-	}
-	
-	
-	/**
+	 * Purpose: Returns the value currently in the entrance diameter field.
 	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the entrance diameter field.
 	**/
 	
 	public double getEntranceDiameterInput ()
 	{
 		return Double.parseDouble(entranceDiameterTextField.getText().toString());
-	}
+	} // getEntranceDiameterInput()
 	
 	
 	
 	/**
+	 * getExitDiameterInput()
 	 * 
+	 * Purpose: Returns the value currently in the exit diameter field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the exit diameter field.
 	**/
 	
 	public double getExitDiameterInput ()
 	{
 		return Double.parseDouble(exitDiameterTextField.getText().toString());
-	}
+	} // getExitDiameterInput()
 	
 	
 	
 	/**
+	 * getThroatDiameterInput()
 	 * 
+	 * Purpose: Returns the value currently in the throat diameter field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the throat diameter field.
+	**/
+	
+	public double getThroatDiameterInput ()
+	{
+		return Double.parseDouble(throatDiameterTextField.getText().toString());
+	} // getThroatDiameterInput()
+	
+	
+	
+	/**
+	 * getCfInput()
+	 * 
+	 * Purpose: Returns the value currently in the Cf field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the Cf field.
 	**/
 	
 	public double getCfInput ()
 	{
 		return Double.parseDouble(cfTextField.getText().toString());
-	}
+	} // getCfInput()
 	
 } // class NozzleInputView

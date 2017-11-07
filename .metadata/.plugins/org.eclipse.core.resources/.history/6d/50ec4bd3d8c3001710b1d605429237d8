@@ -1,0 +1,214 @@
+package view;
+
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import model.NumberTextField;
+
+/**
+ * NozzleInputView.java
+ * 
+ * Purpose: Contains the input fields for a nozzle on the
+ * 		OpenBurn graphical user interface.
+**/
+
+public class NozzleInputView extends Pane
+{
+	// Labels
+	private static final String THROAT_DIAMETER_PROMPT   = "Throat Diameter";
+	private static final String ENTRANCE_DIAMETER_PROMPT = "Entrance Diameter";
+	private static final String EXIT_DIAMETER_PROMPT     = "Exit Diameter";
+	private static final String CF_PROMPT                = "CF";
+	
+	
+	
+	// Constants
+	private static final int FIRST_ROW_PROMPT_Y = 30;
+	private static final int FIRST_ROW_FIELD_Y  = 40;
+	private static final int SECOND_ROW_PROMPT_Y = 100;
+	private static final int SECOND_ROW_FIELD_Y  = 110;
+	
+	
+	
+	
+	// Components
+	private Text throatDiameterText;
+	private Text entranceDiameterText;
+	private Text exitDiameterText;
+	private Text cfText;
+	private NumberTextField throatDiameterTextField;
+	private NumberTextField entranceDiameterTextField;
+	private NumberTextField exitDiameterTextField;
+	private NumberTextField cfTextField;
+	
+	
+	
+	/**
+	 * NozzleInputView Constructor
+	 * 
+	 * Purpose: Creates and initializes the input fields for a nozzle.
+	**/
+	
+	public NozzleInputView ()
+	{
+		// Invoke Pane super constructor
+		super();
+		
+		// Add components
+		addThroatDiameterInput();
+		addEntranceDiameterInput();
+		addExitDiameterInput();
+		addCfInput();
+	} // NozzleInputView Constructor
+	
+	
+	
+	/**
+	 * addEntranceDiameterInput()
+	 * 
+	 * Purpose: Adds the entrance diameter input field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addEntranceDiameterInput ()
+	{
+		// Entrance Diameter prompt
+		entranceDiameterText = new Text(ENTRANCE_DIAMETER_PROMPT);
+		entranceDiameterText.setTranslateX(20);
+		entranceDiameterText.setTranslateY(FIRST_ROW_PROMPT_Y);
+		this.getChildren().add(entranceDiameterText);
+		
+		// Entrance Diameter input field
+		entranceDiameterTextField = new NumberTextField();
+		entranceDiameterTextField.setTranslateX(20);
+		entranceDiameterTextField.setTranslateY(FIRST_ROW_FIELD_Y);
+		this.getChildren().add(entranceDiameterTextField);
+	} // addEntranceDiameterInput()
+	
+	
+	
+	/**
+	 * addExitDiameterInput()
+	 * 
+	 * Purpose: Adds the exit diameter input field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addExitDiameterInput ()
+	{
+		// Exit Diameter prompt
+		exitDiameterText = new Text(EXIT_DIAMETER_PROMPT);
+		exitDiameterText.setTranslateX(250);
+		exitDiameterText.setTranslateY(30);
+		this.getChildren().add(exitDiameterText);
+		
+		// Exit Diameter input field
+		exitDiameterTextField = new NumberTextField();
+		exitDiameterTextField.setTranslateX(250);
+		exitDiameterTextField.setTranslateY(40);
+		this.getChildren().add(exitDiameterTextField);
+	} // addExitDiameterInput()
+	
+	
+	
+	/**
+	 * addThroatDiameterInput()
+	 * 
+	 * Purpose: Adds the throat diameter input field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addThroatDiameterInput ()
+	{
+		// Throat Diameter prompt
+		throatDiameterText = new Text(THROAT_DIAMETER_PROMPT);
+		throatDiameterText.setTranslateX(20);
+		throatDiameterText.setTranslateY(110);
+		this.getChildren().add(throatDiameterText);
+		
+		// Throat Diameter input field
+		throatDiameterTextField = new NumberTextField();
+		throatDiameterTextField.setTranslateX(20);
+		throatDiameterTextField.setTranslateY(120);
+		this.getChildren().add(throatDiameterTextField);
+	} // addThroatDiameterInput()
+	
+	
+	
+	/**
+	 * addCfInput()
+	 * 
+	 * Purpose: Adds the Cf input field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: void.
+	**/
+	
+	private void addCfInput ()
+	{
+		// Cf prompt
+		cfText = new Text(CF_PROMPT);
+		cfText.setTranslateX(250);
+		cfText.setTranslateY(110);
+		this.getChildren().add(cfText);
+		
+		// Cf input field
+		cfTextField = new NumberTextField();
+		cfTextField.setTranslateX(250);
+		cfTextField.setTranslateY(120);
+		this.getChildren().add(cfTextField);
+	} // addCfInput()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public double getThroatDiameterInput ()
+	{
+		return Double.parseDouble(throatDiameterTextField.getText().toString());
+	}
+	
+	
+	/**
+	 * 
+	**/
+	
+	public double getEntranceDiameterInput ()
+	{
+		return Double.parseDouble(entranceDiameterTextField.getText().toString());
+	}
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public double getExitDiameterInput ()
+	{
+		return Double.parseDouble(exitDiameterTextField.getText().toString());
+	}
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	public double getCfInput ()
+	{
+		return Double.parseDouble(cfTextField.getText().toString());
+	}
+	
+} // class NozzleInputView

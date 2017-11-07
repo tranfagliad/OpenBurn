@@ -14,9 +14,19 @@ import model.NumberTextField;
 public class CaseInputView extends Pane
 {
 	// Labels
-	private static final String CASE_MASS_PROMPT     = "Case Mass";
-	private static final String CASE_DIAMETER_PROMPT = "Case Diameter";
-	private static final String CASE_LENGTH_PROMPT   = "Case Length";
+	private static final String CASE_MASS_PROMPT     = "Mass";
+	private static final String CASE_DIAMETER_PROMPT = "Diameter";
+	private static final String CASE_LENGTH_PROMPT   = "Length";
+	
+	
+	
+	// Constants
+	private static final int FIRST_COL_X         = 20;
+	private static final int SECOND_COL_X        = 250;
+	private static final int FIRST_ROW_PROMPT_Y  = 30;
+	private static final int FIRST_ROW_FIELD_Y   = 40;
+	private static final int SECOND_ROW_PROMPT_Y = 110;
+	private static final int SECOND_ROW_FIELD_Y  = 120;
 	
 	
 	
@@ -63,14 +73,14 @@ public class CaseInputView extends Pane
 	{
 		// Mass prompt
 		massText = new Text(CASE_MASS_PROMPT);
-		massText.setTranslateX(20);
-		massText.setTranslateY(20);
+		massText.setTranslateX(FIRST_COL_X);
+		massText.setTranslateY(FIRST_ROW_PROMPT_Y);
 		this.getChildren().add(massText);
 		
 		// Mass input field
 		massTextField = new NumberTextField();
-		massTextField.setTranslateX(20);
-		massTextField.setTranslateY(30);
+		massTextField.setTranslateX(FIRST_COL_X);
+		massTextField.setTranslateY(FIRST_ROW_FIELD_Y);
 		this.getChildren().add(massTextField);
 	} // addMassInput()
 	
@@ -90,14 +100,14 @@ public class CaseInputView extends Pane
 	{
 		// Diameter prompt
 		diameterText = new Text(CASE_DIAMETER_PROMPT);
-		diameterText.setTranslateX(20);
-		diameterText.setTranslateY(100);
+		diameterText.setTranslateX(FIRST_COL_X);
+		diameterText.setTranslateY(SECOND_ROW_PROMPT_Y);
 		this.getChildren().add(diameterText);
 		
 		// Diameter input field
 		diameterTextField = new NumberTextField();
-		diameterTextField.setTranslateX(20);
-		diameterTextField.setTranslateY(110);
+		diameterTextField.setTranslateX(FIRST_COL_X);
+		diameterTextField.setTranslateY(SECOND_ROW_FIELD_Y);
 		this.getChildren().add(diameterTextField);
 	} // addDiameterInput()
 	
@@ -117,48 +127,66 @@ public class CaseInputView extends Pane
 	{
 		// Length prompt
 		lengthText = new Text(CASE_LENGTH_PROMPT);
-		lengthText.setTranslateX(20);
-		lengthText.setTranslateY(180);
+		lengthText.setTranslateX(SECOND_COL_X);
+		lengthText.setTranslateY(FIRST_ROW_PROMPT_Y);
 		this.getChildren().add(lengthText);
 		
 		// Length input field
 		lengthTextField = new NumberTextField();
-		lengthTextField.setTranslateX(20);
-		lengthTextField.setTranslateY(190);
+		lengthTextField.setTranslateX(SECOND_COL_X);
+		lengthTextField.setTranslateY(FIRST_ROW_FIELD_Y);
 		this.getChildren().add(lengthTextField);
 	} // addLengthInput()
 	
 	
 	
 	/**
+	 * getMassInput()
 	 * 
+	 * Purpose: Returns the value currently in the mass field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the mass field.
 	**/
 	
 	public double getMassInput ()
 	{
 		return Double.parseDouble(massTextField.getText().toString());
-	}
+	} // getMassInput()
 	
 	
 	
 	/**
+	 * getDiameterInput()
 	 * 
+	 * Purpose: Returns the value currently in the diameter field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the diameter field.
 	**/
 	
 	public double getDiameterInput ()
 	{
 		return Double.parseDouble(diameterTextField.getText().toString());
-	}
+	} // getDiameterInput()
 	
 	
 	
-	/*
+	/**
+	 * getLengthInput()
 	 * 
-	 */
+	 * Purpose: Returns the value currently in the length field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the length field.
+	**/
 	
 	public double getLengthInput ()
 	{
 		return Double.parseDouble(lengthTextField.getText().toString());
-	}
+	} // getLengthInput()
 	
 } // class CaseInputView
