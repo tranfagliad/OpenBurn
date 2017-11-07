@@ -91,15 +91,7 @@ public class GraphView extends Pane
 	
 	
 	/**
-	 * setImageVisible()
 	 * 
-	 * Purpose: Sets whether the logo in the chart background is
-	 * 		visible or not.
-	 * 
-	 * Parameters:
-	 * 		boolean isVisible -- The image will be visible or not.
-	 * 
-	 * Returns: void.
 	**/
 	
 	public void setImageVisible (boolean isVisible)

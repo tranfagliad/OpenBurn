@@ -29,7 +29,7 @@ public class GraphView extends Pane
 	public static final String PRESSURE_LABEL = "Pressure";
 	public static final String VERSUS_LABEL   = " vs. ";
 	
-	private static final String ICON_FILE_PATH = "./../images/OpenBurnLogo_Faded.png";
+	private static final String ICON_FILE_PATH = "./../images/OpenBurnLogo_1.png";
 	
 	
 	
@@ -81,34 +81,12 @@ public class GraphView extends Pane
 	    
 	    // Place logo in the background
 	    logo = new ImageView(new Image(this.getClass().getResourceAsStream(ICON_FILE_PATH)));
-	    logo.setTranslateX(450);
-	    logo.setTranslateY(75);
+	    logo.setTranslateX(400);
+	    logo.setTranslateY(80);
 	    this.getChildren().add(logo);
 	    
 	    addDataToggle();
 	} // GraphView Constructor (String, String, String)
-	
-	
-	
-	/**
-	 * setImageVisible()
-	 * 
-	 * Purpose: Sets whether the logo in the chart background is
-	 * 		visible or not.
-	 * 
-	 * Parameters:
-	 * 		boolean isVisible -- The image will be visible or not.
-	 * 
-	 * Returns: void.
-	**/
-	
-	public void setImageVisible (boolean isVisible)
-	{
-		if (!isVisible)
-			this.getChildren().remove(logo);
-		else
-			this.getChildren().add(logo);
-	} // setImageVisible()
 	
 	
 	

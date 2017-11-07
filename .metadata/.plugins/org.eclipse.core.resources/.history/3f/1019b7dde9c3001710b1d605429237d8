@@ -299,7 +299,6 @@ public class OpenBurnGUI extends Application
 		    {
 		    	if (!simulationRan)
 		    	{
-		    		outputGraph.setImageVisible(false);
 		    		runSimulation();
 		    		simulationRan = true;
 		    	}
