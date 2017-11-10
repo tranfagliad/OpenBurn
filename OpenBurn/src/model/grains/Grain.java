@@ -8,7 +8,7 @@ package model.grains;
  * grain to change over time.
 **/
 
-abstract public class Grain
+abstract public class Grain implements Cloneable
 {
 	// Error messages
 	protected static final String OUTER_DIAMETER_ERR_MSG  = "ERROR: Outer diameter must be positive!\n";
@@ -53,7 +53,7 @@ abstract public class Grain
 	 * 		NOTE: Grain is initialized to currently burning.
 	**/
 	
-	public Grain (double length, double outerDiameter, double innerDiameter, int numBurningEnds)
+	protected Grain (double length, double outerDiameter, double innerDiameter, int numBurningEnds)
 	{
 		// Error check all inputs
 		if (length <= 0)

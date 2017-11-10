@@ -1,0 +1,21 @@
+package model.grains;
+
+/**
+ * GrainFactory.java
+ * 
+ * Purpose: 
+**/
+
+public class GrainFactory
+{
+	/**
+	 * 
+	**/
+	
+	public static Grain createGrain ()
+	{
+		return null;
+	} // createGrain()
+	
+	
+} // class GrainFactory
