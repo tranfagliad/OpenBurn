@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import model.NumberTextField;
 import model.grains.CylindricalGrain;
 import model.grains.Grain;
+import model.grains.GrainFactory;
+import model.grains.GrainType;
 
 /**
  * AddGrainWindow.java
@@ -302,7 +304,7 @@ public class AddGrainWindow extends Stage
 		    		int numBurningEnds = Integer.parseInt(burningEndsSelection.getValue());
 		    		
 		    		// Create grain, add it to the table, close the window
-		    		Grain newGrain = new CylindricalGrain(length, outerDiameter, innerDiameter, numBurningEnds);
+		    		Grain newGrain = GrainFactory.createGrain(GrainType.Cylindrical, length, outerDiameter, innerDiameter, numBurningEnds);
 		    		newGrain.setGrainID(tableHandle.getNextTableID());
 		    		tableHandle.addGrainToTable(newGrain);
 		    		closeWindow();

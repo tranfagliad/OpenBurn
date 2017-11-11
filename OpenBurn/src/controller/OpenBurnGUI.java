@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
@@ -21,6 +22,7 @@ import model.NumberTextField;
 import model.calculations.RocketMath;
 import model.calculations.SimulationResults;
 import model.grains.Grain;
+import model.grains.GrainFactory;
 import view.CSVConverter;
 import view.CaseInputView;
 import view.GraphView;
@@ -153,7 +155,7 @@ public class OpenBurnGUI extends Application
 	
 	private void addInputTabs (Pane frame)
 	{
-		// Create tabs
+		// Create tabs, set them to not closable
 		Tab nozzleTab = new Tab(NOZZLE_TITLE, new NozzleInputView());
 		nozzleTab.setClosable(false);
 		
@@ -333,15 +335,21 @@ public class OpenBurnGUI extends Application
 	
 	private void runSimulation ()
 	{
-		// Gather grain list
-		List<Grain> grainList = grainInputs.getTable().getItems();
-		
 		// Gather propellant density and change in time
     	double propDensity = Double.parseDouble(propDensityTextField.getText().toString());
     	double deltaTime = Double.parseDouble(timeDeltaTextField.getText().toString());
     	
+    	// Gather grain list and prepare a copy for the simulation.
+    	// Since a simulation alters the properties of grains, the copy list
+    	// is necessary so that the original grains are untouched and can run
+    	// more simulations.
+    	List<Grain> grainList = grainInputs.getTable().getItems();
+    	List<Grain> simGrainList = new ArrayList<Grain>(EMPTY);
+    	for (Grain curGrain: grainList)
+    		simGrainList.add(GrainFactory.createClone(curGrain));
+    	
     	// Set propellant density on all grains
-    	for (Grain curGrain : grainList)
+    	for (Grain curGrain : simGrainList)
     		curGrain.setPropellantDensity(propDensity);
     	
     	// Use nozzle inputs to create nozzle
@@ -350,7 +358,7 @@ public class OpenBurnGUI extends Application
     							   	  nozzleInputs.getEntranceDiameterInput(),
     							   	  nozzleInputs.getExitDiameterInput(),
     							   	  nozzleInputs.getCfInput(),
-    							   	  grainInputs.getTable().getItems().size());
+    							   	  simGrainList.size());
     	
     	// Use case inputs to create case
     	CaseInputView caseInputs = (CaseInputView)(inputs.getTabs().get(1).getContent());
@@ -359,7 +367,7 @@ public class OpenBurnGUI extends Application
     							caseInputs.getLengthInput());
     	
     	// Run simulation, gather list of results
-    	List<SimulationResults> simResults = RocketMath.simulate(grainList, deltaTime, theNozzle, theCase);
+    	List<SimulationResults> simResults = RocketMath.simulate(simGrainList, deltaTime, theNozzle, theCase);
     	
     	// Add thrust vs. time data to the chart
     	outputGraph.addData(TEMP_LEGEND_NAME, simResults);

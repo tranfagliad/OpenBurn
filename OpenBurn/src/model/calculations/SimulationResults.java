@@ -35,6 +35,7 @@ public class SimulationResults
 	private double burnRate;
 	private double chamberPressure;
 	private double kn;
+	private double cg;
 	private double lStar;
 	private double systemMass;
 	private double systemCenterOfGravity;
@@ -447,7 +448,15 @@ public class SimulationResults
 	} // setKn()
 
 	
-	
+	public double getCg() {
+		return cg;
+	}
+
+
+
+	public void setCg(double cg) {
+		this.cg = cg;
+	}
 	/**
 	 * getLStar()
 	 * 

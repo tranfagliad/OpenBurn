@@ -8,7 +8,7 @@ package model.grains;
  * grain to change over time.
 **/
 
-abstract public class Grain
+abstract public class Grain implements Cloneable
 {
 	// Error messages
 	protected static final String OUTER_DIAMETER_ERR_MSG  = "ERROR: Outer diameter must be positive!\n";
@@ -22,6 +22,7 @@ abstract public class Grain
 	
 	
 	// Fields
+	protected GrainType type;
 	protected int grainID;
 	protected double propellantDensity;
 	protected double length;
@@ -53,7 +54,7 @@ abstract public class Grain
 	 * 		NOTE: Grain is initialized to currently burning.
 	**/
 	
-	public Grain (double length, double outerDiameter, double innerDiameter, int numBurningEnds)
+	protected Grain (GrainType type, double length, double outerDiameter, double innerDiameter, int numBurningEnds)
 	{
 		// Error check all inputs
 		if (length <= 0)
@@ -68,6 +69,7 @@ abstract public class Grain
 			throw new IllegalArgumentException(BURNING_ENDS_ERR_MSG);
 		
 		// Set fields
+		this.type           = type;
 		this.grainID        = 0;
 		this.outerDiameter  = outerDiameter;
 		this.length         = length;
@@ -79,6 +81,23 @@ abstract public class Grain
 		// Initialize burnout time to 0 seconds
 		setBurnoutTime(0.0);
 	} // Grain Constructor
+	
+	
+	
+	/**
+	 * getType()
+	 * 
+	 * Purpose: Returns the type of the grain.
+	 * 
+	 * Parameters:
+	 * 
+	 * Returns: GrainType. The type of the grain.
+	**/
+	
+	public GrainType getType ()
+	{
+		return type;
+	} // getType()
 	
 	
 	
@@ -462,6 +481,22 @@ abstract public class Grain
 	**/
 	
 	abstract public double getCurrentInnerFlowVolume();
+	
+	
+	
+	/**
+	 * clone()
+	 * 
+	 * Purpose: Fulfills the requirements of the clonable interface.
+	 * 		Returns a clone of the grain. Implementation and
+	 * 		specifications will differ for different grain types.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: Grain. A copy of the grain.
+	**/
+	
+	abstract public Grain clone();
 	
 	
 	

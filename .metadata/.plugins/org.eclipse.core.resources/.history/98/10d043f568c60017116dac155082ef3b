@@ -1,0 +1,15 @@
+package model.grains;
+
+/**
+ * 
+**/
+
+public enum GrainType
+{
+	// Grain Categories
+	Cylindrical,
+	Star;
+	
+	
+	
+} // enum GrainType

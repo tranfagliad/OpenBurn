@@ -85,8 +85,19 @@ public class SimulationSummary
 		return ISP;
 	} // ISP()
 	
-	
-	
+	/**
+	 * getImpulse()
+	 * 
+	 * Purpose:
+	 * 
+	 * Parameters:
+	 * 
+	 * Returns:
+	**/
+	public double getImpulse() {
+		return impulse;
+	}
+
 	/**
 	 * getMassFrac()
 	 * 
