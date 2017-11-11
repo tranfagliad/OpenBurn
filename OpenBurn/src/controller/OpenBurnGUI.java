@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -44,6 +45,8 @@ public class OpenBurnGUI extends Application
 	private static final String EXPORT_CSV        = "Export to CSV";
 	private static final String EXPORT_RSE        = "Export to RSE";
 	private static final String ICON_FILE_PATH    = "./../images/OpenBurnLogo_1.png";
+	private static final String CLEAR_GRAPH        = "Clear Graph";
+	private static final String RESET_FIELDS        = "Reset";
 	
 	private static final String TEMP_LEGEND_NAME = "Sim1";
 	
@@ -73,6 +76,8 @@ public class OpenBurnGUI extends Application
 	private Button simButton;
 	private Button csvButton;
 	private Button rseButton;
+	private Button clearGraphButton;
+	private Button resetButton;
 	
 	
 	
@@ -132,13 +137,16 @@ public class OpenBurnGUI extends Application
 		addGraph(frame);            // Initially Thrust vs. Time
 		addSimulateButton(frame);
 		addExportButtons(frame);    // CSV and RSE
+		addClearGraphButton(frame);
+		addResetButton(frame);
 		
 		// Display window
 		stage.show();
 	} // start()
 	
-	
-	
+
+
+
 	/**
 	 * 
 	**/
@@ -153,7 +161,7 @@ public class OpenBurnGUI extends Application
 		caseTab.setClosable(false);
 		
 		inputs = new TabPane(nozzleTab, caseTab);
-		inputs.setPrefHeight(300);
+		inputs.setPrefHeight(250);
 		inputs.setPrefWidth(500);
 		frame.getChildren().add(inputs);
 	} // 
@@ -177,13 +185,13 @@ public class OpenBurnGUI extends Application
 		// Prompt
 		propDensityText = new Text(DENSITY_PROMPT);
 		propDensityText.setTranslateX(250);
-		propDensityText.setTranslateY(290);
+		propDensityText.setTranslateY(230);
 		frame.getChildren().add(propDensityText);
 		
 		// Input field
 		propDensityTextField = new  NumberTextField();
 		propDensityTextField.setTranslateX(250);
-		propDensityTextField.setTranslateY(300);
+		propDensityTextField.setTranslateY(240);
 		frame.getChildren().add(propDensityTextField);
 	} // addPropDensityInput()
 	
@@ -206,13 +214,13 @@ public class OpenBurnGUI extends Application
 		// Prompt
 		timeDeltaText = new Text(TIME_DELTA_PROMPT);
 		timeDeltaText.setTranslateX(20);
-		timeDeltaText.setTranslateY(290);
+		timeDeltaText.setTranslateY(230);
 		frame.getChildren().add(timeDeltaText);
 		
 		// Input field
 		timeDeltaTextField = new NumberTextField();
 		timeDeltaTextField.setTranslateX(20);
-		timeDeltaTextField.setTranslateY(300);
+		timeDeltaTextField.setTranslateY(240);
 		frame.getChildren().add(timeDeltaTextField);
 	} // addTimeDeltaInput()
 	
@@ -407,5 +415,36 @@ public class OpenBurnGUI extends Application
 		// Disable button if there is no simulation data
 		rseButton.disableProperty().bind(Bindings.size(outputGraph.getChart().getData()).isEqualTo(EMPTY));
 	} // addExportButtons()
+	
+	
+	private void addResetButton(Pane frame) {
+		resetButton = new Button(RESET_FIELDS);
+		resetButton.setTranslateX(1090);
+		resetButton.setTranslateY(780);
+		resetButton.setPrefHeight(35);
+		resetButton.setPrefWidth(100);
+		resetButton.setDisable(false);
+		frame.getChildren().add(resetButton);
+	}
+
+
+//outputGraph.getChart().clear();
+	private void addClearGraphButton(Pane frame) {
+		clearGraphButton = new Button(CLEAR_GRAPH);
+		clearGraphButton.setTranslateX(800);
+		clearGraphButton.setTranslateY(780);
+		clearGraphButton.setPrefHeight(35);
+		clearGraphButton.setPrefWidth(130);
+		clearGraphButton.setDisable(false);
+		frame.getChildren().add(clearGraphButton);
+		clearGraphButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+		    @Override public void handle (ActionEvent e)
+		    {
+		    	outputGraph.getChart().getData().clear();
+		    }
+		});
+		
+	}
 	
 } // class OpenBurnGUI
