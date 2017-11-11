@@ -18,7 +18,7 @@ public class CylindricalGrain extends Grain
 	
 	public CylindricalGrain (double length, double outerDiameter, double innerDiameter, int numBurningEnds)
 	{
-		super(GrainType.Cylindrical, length, outerDiameter, innerDiameter, numBurningEnds);
+		super(length, outerDiameter, innerDiameter, numBurningEnds);
 	} // CylindricalGrain Constructor
 	
 	
@@ -161,23 +161,5 @@ public class CylindricalGrain extends Grain
 	{
 		return this.getCurrentInnerFlowArea() * this.length;
 	} // getCurrentInnerFlowVolume()
-	
-	
-	
-	/**
-	 * clone()
-	 * 
-	 * Purpose: Creates and returns a copy of this CylindricalGrain.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: Grain. A new CylindricalGrain object that represents a copy
-	 * 		of this CylindricalGrain.
-	**/
-	
-	public Grain clone ()
-	{
-		return new CylindricalGrain(this.length, this.outerDiameter, this.innerDiameter, this.numBurningEnds);
-	} // clone()
 	
 } // class CylindricalGrain

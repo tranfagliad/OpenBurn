@@ -42,7 +42,8 @@ public class GrainFactory
 	
 	public static Grain createClone (Grain originalGrain)
 	{
-		return originalGrain.clone();
+		if (originalGrain.getType() == GrainType.Cylindrical)
+			
 	} // createClone()
 	
 } // class GrainFactory

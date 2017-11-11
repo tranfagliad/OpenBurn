@@ -21,7 +21,6 @@ import model.NumberTextField;
 import model.calculations.RocketMath;
 import model.calculations.SimulationResults;
 import model.grains.Grain;
-import model.grains.GrainFactory;
 import view.CSVConverter;
 import view.CaseInputView;
 import view.GraphView;
@@ -331,17 +330,14 @@ public class OpenBurnGUI extends Application
     	double propDensity = Double.parseDouble(propDensityTextField.getText().toString());
     	double deltaTime = Double.parseDouble(timeDeltaTextField.getText().toString());
     	
-    	// Gather grain list and prepare a copy for the simulation.
-    	// Since a simulation alters the properties of grains, the copy list
-    	// is necessary so that the original grains are untouched and can run
-    	// more simulations.
-    	List<Grain> grainList = grainInputs.getTable().getItems();
-    	List<Grain> simGrainList = new ArrayList<Grain>(EMPTY);
-    	for (Grain curGrain: grainList)
-    		simGrainList.add(GrainFactory.createClone(curGrain));
+    	// Gather grain list
+    	List<Grain> tableList = grainInputs.getTable().getItems();
+    	List<Grain> grainList = new ArrayList<Grain>(0);
+    	
+    	for (Grain)
     	
     	// Set propellant density on all grains
-    	for (Grain curGrain : simGrainList)
+    	for (Grain curGrain : tableList)
     		curGrain.setPropellantDensity(propDensity);
     	
     	// Use nozzle inputs to create nozzle
@@ -350,7 +346,7 @@ public class OpenBurnGUI extends Application
     							   	  nozzleInputs.getEntranceDiameterInput(),
     							   	  nozzleInputs.getExitDiameterInput(),
     							   	  nozzleInputs.getCfInput(),
-    							   	  simGrainList.size());
+    							   	  grainInputs.getTable().getItems().size());
     	
     	// Use case inputs to create case
     	CaseInputView caseInputs = (CaseInputView)(inputs.getTabs().get(1).getContent());
@@ -359,7 +355,7 @@ public class OpenBurnGUI extends Application
     							caseInputs.getLengthInput());
     	
     	// Run simulation, gather list of results
-    	List<SimulationResults> simResults = RocketMath.simulate(simGrainList, deltaTime, theNozzle, theCase);
+    	List<SimulationResults> simResults = RocketMath.simulate(grainList, deltaTime, theNozzle, theCase);
     	
     	// Add thrust vs. time data to the chart
     	outputGraph.addData(TEMP_LEGEND_NAME, simResults);

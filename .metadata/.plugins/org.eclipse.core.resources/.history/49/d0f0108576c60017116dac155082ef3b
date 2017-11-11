@@ -162,22 +162,4 @@ public class CylindricalGrain extends Grain
 		return this.getCurrentInnerFlowArea() * this.length;
 	} // getCurrentInnerFlowVolume()
 	
-	
-	
-	/**
-	 * clone()
-	 * 
-	 * Purpose: Creates and returns a copy of this CylindricalGrain.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: Grain. A new CylindricalGrain object that represents a copy
-	 * 		of this CylindricalGrain.
-	**/
-	
-	public Grain clone ()
-	{
-		return new CylindricalGrain(this.length, this.outerDiameter, this.innerDiameter, this.numBurningEnds);
-	} // clone()
-	
 } // class CylindricalGrain

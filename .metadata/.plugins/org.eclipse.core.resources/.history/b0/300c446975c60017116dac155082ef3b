@@ -22,7 +22,6 @@ abstract public class Grain implements Cloneable
 	
 	
 	// Fields
-	protected GrainType type;
 	protected int grainID;
 	protected double propellantDensity;
 	protected double length;
@@ -54,7 +53,7 @@ abstract public class Grain implements Cloneable
 	 * 		NOTE: Grain is initialized to currently burning.
 	**/
 	
-	protected Grain (GrainType type, double length, double outerDiameter, double innerDiameter, int numBurningEnds)
+	protected Grain (double length, double outerDiameter, double innerDiameter, int numBurningEnds)
 	{
 		// Error check all inputs
 		if (length <= 0)
@@ -69,7 +68,6 @@ abstract public class Grain implements Cloneable
 			throw new IllegalArgumentException(BURNING_ENDS_ERR_MSG);
 		
 		// Set fields
-		this.type           = type;
 		this.grainID        = 0;
 		this.outerDiameter  = outerDiameter;
 		this.length         = length;
@@ -81,23 +79,6 @@ abstract public class Grain implements Cloneable
 		// Initialize burnout time to 0 seconds
 		setBurnoutTime(0.0);
 	} // Grain Constructor
-	
-	
-	
-	/**
-	 * getType()
-	 * 
-	 * Purpose: Returns the type of the grain.
-	 * 
-	 * Parameters:
-	 * 
-	 * Returns: GrainType. The type of the grain.
-	**/
-	
-	public GrainType getType ()
-	{
-		return type;
-	} // getType()
 	
 	
 	
@@ -481,22 +462,6 @@ abstract public class Grain implements Cloneable
 	**/
 	
 	abstract public double getCurrentInnerFlowVolume();
-	
-	
-	
-	/**
-	 * clone()
-	 * 
-	 * Purpose: Fulfills the requirements of the clonable interface.
-	 * 		Returns a clone of the grain. Implementation and
-	 * 		specifications will differ for different grain types.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: Grain. A copy of the grain.
-	**/
-	
-	abstract public Grain clone();
 	
 	
 	

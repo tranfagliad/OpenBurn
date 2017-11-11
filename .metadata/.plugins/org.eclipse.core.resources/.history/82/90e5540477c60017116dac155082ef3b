@@ -167,17 +167,14 @@ public class CylindricalGrain extends Grain
 	/**
 	 * clone()
 	 * 
-	 * Purpose: Creates and returns a copy of this CylindricalGrain.
+	 * Purpose:
 	 * 
 	 * Parameters: None.
-	 * 
-	 * Returns: Grain. A new CylindricalGrain object that represents a copy
-	 * 		of this CylindricalGrain.
 	**/
 	
 	public Grain clone ()
 	{
-		return new CylindricalGrain(this.length, this.outerDiameter, this.innerDiameter, this.numBurningEnds);
-	} // clone()
+		new CylindricalGrain(this.length, this.outerDiameter, this.innerDiameter, this.numBurningEnds);
+	}
 	
 } // class CylindricalGrain

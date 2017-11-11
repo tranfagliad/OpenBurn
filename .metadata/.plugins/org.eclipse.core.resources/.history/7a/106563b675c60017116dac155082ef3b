@@ -40,9 +40,9 @@ public class GrainFactory
 	 * Returns: 
 	**/
 	
-	public static Grain createClone (Grain originalGrain)
+	public static Grain createClone ()
 	{
-		return originalGrain.clone();
+		return null;
 	} // createClone()
 	
 } // class GrainFactory

@@ -42,7 +42,7 @@ public class GrainFactory
 	
 	public static Grain createClone (Grain originalGrain)
 	{
-		return originalGrain.clone();
+		return null;
 	} // createClone()
 	
 } // class GrainFactory

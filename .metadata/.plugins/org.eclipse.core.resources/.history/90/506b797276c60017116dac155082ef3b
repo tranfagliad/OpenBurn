@@ -485,22 +485,6 @@ abstract public class Grain implements Cloneable
 	
 	
 	/**
-	 * clone()
-	 * 
-	 * Purpose: Fulfills the requirements of the clonable interface.
-	 * 		Returns a clone of the grain. Implementation and
-	 * 		specifications will differ for different grain types.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: Grain. A copy of the grain.
-	**/
-	
-	abstract public Grain clone();
-	
-	
-	
-	/**
 	 * getLengthDifference()
 	 * 
 	 * Purpose: Compares the current length of the motor with the its

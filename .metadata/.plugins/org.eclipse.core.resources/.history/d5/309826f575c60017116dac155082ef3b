@@ -85,23 +85,6 @@ abstract public class Grain implements Cloneable
 	
 	
 	/**
-	 * getType()
-	 * 
-	 * Purpose: Returns the type of the grain.
-	 * 
-	 * Parameters:
-	 * 
-	 * Returns: GrainType. The type of the grain.
-	**/
-	
-	public GrainType getType ()
-	{
-		return type;
-	} // getType()
-	
-	
-	
-	/**
 	 * getGrainID()
 	 * 
 	 * Purpose: Returns the ID of the grain.
@@ -481,22 +464,6 @@ abstract public class Grain implements Cloneable
 	**/
 	
 	abstract public double getCurrentInnerFlowVolume();
-	
-	
-	
-	/**
-	 * clone()
-	 * 
-	 * Purpose: Fulfills the requirements of the clonable interface.
-	 * 		Returns a clone of the grain. Implementation and
-	 * 		specifications will differ for different grain types.
-	 * 
-	 * Parameters: None.
-	 * 
-	 * Returns: Grain. A copy of the grain.
-	**/
-	
-	abstract public Grain clone();
 	
 	
 	

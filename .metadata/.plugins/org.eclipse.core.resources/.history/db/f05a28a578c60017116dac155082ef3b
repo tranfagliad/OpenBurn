@@ -336,7 +336,8 @@ public class OpenBurnGUI extends Application
     	// is necessary so that the original grains are untouched and can run
     	// more simulations.
     	List<Grain> grainList = grainInputs.getTable().getItems();
-    	List<Grain> simGrainList = new ArrayList<Grain>(EMPTY);
+    	List<Grain> simGrainList = new ArrayList<Grain>(0);
+    	
     	for (Grain curGrain: grainList)
     		simGrainList.add(GrainFactory.createClone(curGrain));
     	
@@ -350,7 +351,7 @@ public class OpenBurnGUI extends Application
     							   	  nozzleInputs.getEntranceDiameterInput(),
     							   	  nozzleInputs.getExitDiameterInput(),
     							   	  nozzleInputs.getCfInput(),
-    							   	  simGrainList.size());
+    							   	  grainInputs.getTable().getItems().size());
     	
     	// Use case inputs to create case
     	CaseInputView caseInputs = (CaseInputView)(inputs.getTabs().get(1).getContent());
@@ -359,7 +360,7 @@ public class OpenBurnGUI extends Application
     							caseInputs.getLengthInput());
     	
     	// Run simulation, gather list of results
-    	List<SimulationResults> simResults = RocketMath.simulate(simGrainList, deltaTime, theNozzle, theCase);
+    	List<SimulationResults> simResults = RocketMath.simulate(grainList, deltaTime, theNozzle, theCase);
     	
     	// Add thrust vs. time data to the chart
     	outputGraph.addData(TEMP_LEGEND_NAME, simResults);
