@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import model.Case;
 import model.Nozzle;
 import model.NumberTextField;
+import model.calculations.Propellant;
 import model.calculations.RocketMath;
 import model.calculations.SimulationResults;
 import model.grains.Grain;
@@ -27,6 +28,7 @@ import view.CSVConverter;
 import view.CaseInputView;
 import view.GraphView;
 import view.NozzleInputView;
+import view.PropellantInputView;
 import view.grain.input.GrainInputView;
 
 /**
@@ -41,7 +43,7 @@ public class OpenBurnGUI extends Application
 	private static final String WINDOW_TITLE      = "OpenBurn - Beta";
 	private static final String NOZZLE_TITLE      = "Nozzle";
 	private static final String CASE_TITLE        = "Case";
-	private static final String DENSITY_PROMPT    = "Enter propellant density";
+	private static final String PROPELLANT_TITLE  = "Propellant";
 	private static final String TIME_DELTA_PROMPT = "Enter change in time";
 	private static final String SIMULATE          = "Simulate";
 	private static final String EXPORT_CSV        = "Export to CSV";
@@ -68,10 +70,10 @@ public class OpenBurnGUI extends Application
 	
 	
 	// Components
-	private Text propDensityText;
+//	private Text propDensityText;
 	private Text timeDeltaText;
 	private TabPane inputs;
-	private NumberTextField propDensityTextField;
+//	private NumberTextField propDensityTextField;
 	private NumberTextField timeDeltaTextField;
 	private GrainInputView grainInputs;
 	private GraphView outputGraph;
@@ -132,7 +134,7 @@ public class OpenBurnGUI extends Application
 		scene.setRoot(frame);
 		
 		// Initialize and set components
-		addPropDensityInput(frame);
+//		addPropDensityInput(frame);
 		addTimeDeltaInput(frame);
 		addInputTabs(frame);
 		addGrainTable(frame);
@@ -162,40 +164,46 @@ public class OpenBurnGUI extends Application
 		Tab caseTab   = new Tab(CASE_TITLE, new CaseInputView());
 		caseTab.setClosable(false);
 		
-		inputs = new TabPane(nozzleTab, caseTab);
-		inputs.setPrefHeight(250);
+		Tab propellantTab   = new Tab(PROPELLANT_TITLE, new PropellantInputView());
+		propellantTab.setClosable(false);
+		
+		inputs = new TabPane(nozzleTab, caseTab, propellantTab);
+		inputs.setPrefHeight(300);
+
 		inputs.setPrefWidth(500);
 		frame.getChildren().add(inputs);
 	} // 
 	
 	
 	
-	/**
-	 * addPropDensityInput()
-	 * 
-	 * Purpose: Adds the propellant density input fields to
-	 * 		to the given Pane.
-	 * 
-	 * Parameters:
-	 * 		Pane frame -- The Pane to add to.
-	 * 
-	 * Returns: void.
-	**/
-	
-	private void addPropDensityInput (Pane frame)
-	{
-		// Prompt
-		propDensityText = new Text(DENSITY_PROMPT);
-		propDensityText.setTranslateX(250);
-		propDensityText.setTranslateY(230);
-		frame.getChildren().add(propDensityText);
-		
-		// Input field
-		propDensityTextField = new  NumberTextField();
-		propDensityTextField.setTranslateX(250);
-		propDensityTextField.setTranslateY(240);
-		frame.getChildren().add(propDensityTextField);
-	} // addPropDensityInput()
+
+//	/**
+//	 * addPropDensityInput()
+//	 * 
+//	 * Purpose: Adds the propellant density input fields to
+//	 * 		to the given Pane.
+//	 * 
+//	 * Parameters:
+//	 * 		Pane frame -- The Pane to add to.
+//	 * 
+//	 * Returns: void.
+//	**/
+//	
+//	private void addPropDensityInput (Pane frame)
+//	{
+//		// Prompt
+//		propDensityText = new Text(DENSITY_PROMPT);
+//		propDensityText.setTranslateX(250);
+//		propDensityText.setTranslateY(290);
+//		frame.getChildren().add(propDensityText);
+//		
+//		// Input field
+//		propDensityTextField = new  NumberTextField();
+//		propDensityTextField.setTranslateX(250);
+//		propDensityTextField.setTranslateY(300);
+//		frame.getChildren().add(propDensityTextField);
+//	} // addPropDensityInput()
+
 	
 	
 	
@@ -334,7 +342,7 @@ public class OpenBurnGUI extends Application
 	private void runSimulation ()
 	{
 		// Gather propellant density and change in time
-    	double propDensity = Double.parseDouble(propDensityTextField.getText().toString());
+//    	double propDensity = Double.parseDouble(propDensityTextField.getText().toString());
     	double deltaTime = Double.parseDouble(timeDeltaTextField.getText().toString());
     	
     	// Gather grain list and prepare a copy for the simulation.
@@ -346,9 +354,9 @@ public class OpenBurnGUI extends Application
     	for (Grain curGrain: grainList)
     		simGrainList.add(GrainFactory.createClone(curGrain));
     	
-    	// Set propellant density on all grains
-    	for (Grain curGrain : simGrainList)
-    		curGrain.setPropellantDensity(propDensity);
+//    	// Set propellant density on all grains
+//    	for (Grain curGrain : simGrainList)
+//    		curGrain.setPropellantDensity(propDensity);
     	
     	// Use nozzle inputs to create nozzle
     	NozzleInputView nozzleInputs = (NozzleInputView)(inputs.getTabs().get(0).getContent());
@@ -364,8 +372,15 @@ public class OpenBurnGUI extends Application
     							caseInputs.getDiameterInput(),
     							caseInputs.getLengthInput());
     	
+    	// Use propellant inputs to create propellant
+    	PropellantInputView propellantInputs = (PropellantInputView)(inputs.getTabs().get(2).getContent());
+    	Propellant thePropellant = new Propellant(propellantInputs.getBurnRateCoefficientInput(),
+    											  propellantInputs.getBurnRateExponentInput(), 
+								    			  propellantInputs.getPropellantDensityInput(), 
+								    			  propellantInputs.getCstarInput());
+    	
     	// Run simulation, gather list of results
-    	List<SimulationResults> simResults = RocketMath.simulate(simGrainList, deltaTime, theNozzle, theCase);
+    	List<SimulationResults> simResults = RocketMath.simulate(simGrainList, deltaTime, theNozzle, theCase, thePropellant);
     	
     	// Add thrust vs. time data to the chart
     	outputGraph.addData(TEMP_LEGEND_NAME, simResults);
