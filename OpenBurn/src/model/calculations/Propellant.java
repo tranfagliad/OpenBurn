@@ -18,7 +18,7 @@ public class Propellant
 	public double pressureFromKn(double Kn)
 	{
 		//p = (Kn * a * rho * C* )^(1/(1-n))
-	    double exponent = 1.0f / (1.0f - burnRateExponent);
+	    double exponent = 1.0 / (1.0 - burnRateExponent);
 	    double p1 = Kn * burnRateCoefficient * density * Cstar;
 	    return Math.pow(p1, exponent);
 	}
@@ -27,5 +27,10 @@ public class Propellant
 	{
 		// r = a * p^n
 		return burnRateCoefficient * Math.pow(pressure, burnRateExponent);
+	}
+
+	public double getPropellantDensity()
+	{
+		return density;
 	}
 }

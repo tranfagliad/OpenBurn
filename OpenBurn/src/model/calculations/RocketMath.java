@@ -27,9 +27,10 @@ public class RocketMath
 	 * 		Nozzle theNozzle -- Nozzle of the rocket motor for the simulation.
 	 * 
 	 * Returns: List<SimulationResults>. A list of results from the burn simulation.
+	 * @param propellant TODO
 	**/
 	
-	public static List<SimulationResults> simulate (List<Grain> grainList, double deltaTime, Nozzle theNozzle, Case theCase)
+	public static List<SimulationResults> simulate (List<Grain> grainList, double deltaTime, Nozzle theNozzle, Case theCase, Propellant propellant)
 	{
 		// Initialize a list for results, and the time at zero
 		List<SimulationResults> output = new LinkedList<SimulationResults>();
@@ -47,13 +48,13 @@ public class RocketMath
 			currentTimeStep.setTime(currentTime);
 			
 			// Parts 1 through 8 in matlab file
-			generateGeometry(grainList, currentTimeStep, theNozzle);
-			regressGrains(grainList, currentTimeStep, deltaTime);
+			generateGeometry(grainList, currentTimeStep, theNozzle, propellant);
+			regressGrains(grainList, currentTimeStep, deltaTime, propellant);
 			double[] massFlow = generateMassFlow(grainList, currentTimeStep);
 			portToThroatRatio(grainList, currentTimeStep, theNozzle);
 			calculateMassFlowPerArea(grainList, currentTimeStep, massFlow, theNozzle);
 			calculateLStar(grainList, currentTimeStep, theNozzle);
-			massAndCenterOfGravity(grainList, currentTimeStep, theCase);
+			massAndCenterOfGravity(grainList, currentTimeStep, theCase, propellant);
 			calculateBurnout(grainList, currentTime);
 			calculateThrust(currentTimeStep,theNozzle);
 			
@@ -83,9 +84,10 @@ public class RocketMath
 	 * 		Nozzle theNozzle -- Nozzle of the rocket from the simulation.
 	 * 
 	 * Returns: void.
+	 * @param propellant TODO
 	**/
 	
-	public static void generateGeometry (List<Grain> theGrains, SimulationResults currentResult, Nozzle theNozzle)
+	public static void generateGeometry (List<Grain> theGrains, SimulationResults currentResult, Nozzle theNozzle, Propellant propellant)
 	{
 		// Gather the total burn area
 		double motorAvailableArea = 0;
@@ -94,8 +96,10 @@ public class RocketMath
 		
 		// Calculate geometry based field values
 		double currentKn = motorAvailableArea / theNozzle.getThroatArea();
-		double currentPressure = pressureFromKn(currentKn);
-		double currentBurnRate = burnRateFromKn(currentKn);
+		double currentPressure = propellant.pressureFromKn(currentKn);
+		double currentBurnRate = propellant.burnRateFromPressure(currentPressure);
+//		double currentPressure = pressureFromKn(currentKn);
+//		double currentBurnRate = burnRateFromKn(currentKn);
 		
 		// Set all geometry based fields
 		currentResult.setKn(currentKn);
@@ -119,9 +123,10 @@ public class RocketMath
 	 * 		double deltaTime -- Change in time increment during a simulation.
 	 * 
 	 * Returns: void.
+	 * @param propellant TODO
 	**/
 	
-	public static void regressGrains (List<Grain> theGrains, SimulationResults current, double deltaTime)
+	public static void regressGrains (List<Grain> theGrains, SimulationResults current, double deltaTime, Propellant propellant)
 	{
 		double massGenerated[] = new double[theGrains.size()];
 		double overallGenerated = 0;
@@ -130,7 +135,8 @@ public class RocketMath
 		for(int i = 0; i < theGrains.size(); i++)
 		{
 			double volumeChange = theGrains.get(i).updateGeometry(current.getBurnRate(), deltaTime);
-			massGenerated[i] = volumeChange * theGrains.get(i).getPropellantDensity();
+			massGenerated[i] = volumeChange * propellant.getPropellantDensity();
+//			massGenerated[i] = volumeChange * theGrains.get(i).getPropellantDensity();
 			overallGenerated += massGenerated[i];
 		}
 		
@@ -290,16 +296,17 @@ public class RocketMath
 	 * 		SimulationResults current -- Current results during a simulation.
 	 * 
 	 * Returns: void.
+	 * @param propellant TODO
 	**/
 	
-	public static void massAndCenterOfGravity (List<Grain> theGrains, SimulationResults current, Case theCase)
+	public static void massAndCenterOfGravity (List<Grain> theGrains, SimulationResults current, Case theCase, Propellant propellant)
 	{
 		double grainMass = 0;
 		double grainCg = 0;
 		for(int i = 0; i < theGrains.size(); i++)
 		{
 			Grain aGrain = theGrains.get(i);
-			grainMass += aGrain.getVolume() * aGrain.getPropellantDensity(); //line 166 in matlab
+			grainMass += aGrain.getVolume() * propellant.getPropellantDensity(); //line 166 in matlab
 			double centerpoint = (aGrain.getLength() * i) - (aGrain.getLength()/2); //line 38 in matLab
 			centerpoint += 1.9685; //line 41 in matlab.  TODO: make a variable, based off nozzle length?
 			grainCg += grainMass * centerpoint; //line 224 in matlab
@@ -355,42 +362,42 @@ public class RocketMath
 		current.setThrust(thrust);
 	}
 	
-	/**
-	 * pressureFromKn (double kn)
-	 * 
-	 * Purpose: Converts Kn to pressure. Based on the matlab file
-	 * 		motor_internal_balistics.m and Pc_via_kn.
-	 * 
-	 * Parameters:
-	 * 		double kn -- Ratio of the burn area of the propellant
-	 * 			to the area of the nozzle throat.
-	 * 
-	 * Returns: double. Pressure, converted from Kn.
-	**/
+//	/**
+//	 * pressureFromKn (double kn)
+//	 * 
+//	 * Purpose: Converts Kn to pressure. Based on the matlab file
+//	 * 		motor_internal_balistics.m and Pc_via_kn.
+//	 * 
+//	 * Parameters:
+//	 * 		double kn -- Ratio of the burn area of the propellant
+//	 * 			to the area of the nozzle throat.
+//	 * 
+//	 * Returns: double. Pressure, converted from Kn.
+//	**/
+//	
+//	public static double pressureFromKn (double kn)
+//	{
+//		return ((double)(2.725060 * kn - 236.099212));
+//	} // pressureFromKn()
 	
-	public static double pressureFromKn (double kn)
-	{
-		return ((double)(2.725060 * kn - 236.099212));
-	} // pressureFromKn()
 	
 	
-	
-	/**
-	 * burnRateFromKn()
-	 * 
-	 * Purpose: Converts Kn to burn rate. Based on the matlab file
-	 * 		motor_internal_balistics.m and Br_via_kn.
-	 * 
-	 * Parameters:
-	 * 		double kn -- Ratio of the burn area of the propellant
-	 * 			to the area of the nozzle throat.
-	 * 
-	 * Returns: double. Burn rate, converted from Kn.
-	**/
-	
-	public static double burnRateFromKn (double kn)
-	{
-		return ((double)((0.000366 * kn) + 0.083967));
-	} // burnRateFromKn()
+//	/**
+//	 * burnRateFromKn()
+//	 * 
+//	 * Purpose: Converts Kn to burn rate. Based on the matlab file
+//	 * 		motor_internal_balistics.m and Br_via_kn.
+//	 * 
+//	 * Parameters:
+//	 * 		double kn -- Ratio of the burn area of the propellant
+//	 * 			to the area of the nozzle throat.
+//	 * 
+//	 * Returns: double. Burn rate, converted from Kn.
+//	**/
+//	
+//	public static double burnRateFromKn (double kn)
+//	{
+//		return ((double)((0.000366 * kn) + 0.083967));
+//	} // burnRateFromKn()
 	
 } // class RocketMath
