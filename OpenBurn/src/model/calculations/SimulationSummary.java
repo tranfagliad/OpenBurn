@@ -20,6 +20,7 @@ public class SimulationSummary
 	private double averageThrust;
 	private double maxThrust;
 	private double maxPressure;
+	private double burnTime;
 	
 	public SimulationSummary(List<SimulationResults> results)
 	{
@@ -31,15 +32,18 @@ public class SimulationSummary
 		double averageThrustHelper = 0;
 		double count = 1;
 		double mass = prev.getSystemMass();
+		double m_prevThrust = prev.getThrust();//UnitConverter.convertForceFromInternal(prev.getThrust(),ForceUnits.NEWTONS);
 		while(iter.hasNext())
 		{
 			count++;
 			SimulationResults curr = iter.next();
-			double imp_calc = (curr.getTime() - prev.getTime()) + ((curr.getThrust() - prev.getThrust())/2);
+			double m_thrust = curr.getThrust();//UnitConverter.convertForceFromInternal(curr.getThrust(), ForceUnits.NEWTONS);
+			double imp_calc = (curr.getTime() - prev.getTime()) + ((m_thrust - m_prevThrust)/2);
 			impulseCalc += imp_calc;
 			averageThrustHelper += curr.getThrust();
 			maxThrust = Math.max(maxThrust, curr.getThrust());
 			maxPressure = Math.max(maxPressure, curr.getChamberPressure());
+			m_prevThrust = m_thrust;
 			prev = curr;
 		}
 		averageThrustHelper/=count;
@@ -49,6 +53,7 @@ public class SimulationSummary
 		this.maxPressure = maxPressure;
 		this.maxThrust = maxThrust;
 		this.massFrac = 65; // TODO: fix this!
+		this.burnTime = prev.getTime();
 	}
 	
 	
@@ -156,6 +161,21 @@ public class SimulationSummary
 	public double getmaxPressure ()
 	{
 		return maxPressure;
+	} // getmaxPressure()
+	
+	/**
+	 * getBurnTime()
+	 * 
+	 * Purpose:
+	 * 
+	 * Parameters:
+	 * 
+	 * Returns:
+	**/
+	
+	public double getBurnTime()
+	{
+		return burnTime;
 	} // getmaxPressure()
 	
 } // class ImpulseClassifier
