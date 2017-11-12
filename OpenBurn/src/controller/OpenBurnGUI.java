@@ -84,7 +84,7 @@ public class OpenBurnGUI extends Application
 	
 	
 	// Fields
-	private boolean simulationRan;
+	//private boolean simulationRan;
 	
 	
 	
@@ -300,19 +300,17 @@ public class OpenBurnGUI extends Application
 		frame.getChildren().add(simButton);
 		
 		// No simulations have run yet
-		simulationRan = false;
+	//	simulationRan = false;
 		
 		// Run simulation on click
 		simButton.setOnAction(new EventHandler<ActionEvent> ()
 		{
 		    @Override public void handle (ActionEvent e)
 		    {
-		    	if (!simulationRan)
-		    	{
-		    		outputGraph.setImageVisible(false);
-		    		runSimulation();
-		    		simulationRan = true;
-		    	}
+		    	outputGraph.setImageVisible(false);
+		    	runSimulation();
+		    	//simulationRan = true;
+
 		    }
 		});
 		
