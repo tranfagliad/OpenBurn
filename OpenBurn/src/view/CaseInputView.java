@@ -1,8 +1,16 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import model.NumberTextField;
+import model.unitConversion.LengthUnits;
+import model.unitConversion.MassUnits;
 
 /**
  * CaseInputView.java
@@ -37,6 +45,9 @@ public class CaseInputView extends Pane
 	private NumberTextField massTextField;
 	private NumberTextField diameterTextField;
 	private NumberTextField lengthTextField;
+	private ComboBox <String> caseDiamUnits;
+	private ComboBox <String> caseLengthUnits;
+	private ComboBox <String> caseMassUnits;
 	
 	
 	
@@ -81,7 +92,18 @@ public class CaseInputView extends Pane
 		massTextField = new NumberTextField();
 		massTextField.setTranslateX(FIRST_COL_X);
 		massTextField.setTranslateY(FIRST_ROW_FIELD_Y);
+		massTextField.setPrefWidth(FIRST_COL_X+100);
 		this.getChildren().add(massTextField);
+		
+		List<String> massUnits = new ArrayList<String>();
+		for (MassUnits units : MassUnits.values())
+			massUnits.add(units.getAbbr());
+		ObservableList<String> options = FXCollections.observableArrayList(massUnits);
+		caseMassUnits = new ComboBox<String>(options);
+		caseMassUnits.setTranslateX(FIRST_COL_X+100);
+		caseMassUnits.setTranslateY(FIRST_ROW_FIELD_Y);
+		caseMassUnits.getSelectionModel().selectFirst();
+		this.getChildren().add(caseMassUnits);
 	} // addMassInput()
 	
 	
@@ -108,7 +130,18 @@ public class CaseInputView extends Pane
 		diameterTextField = new NumberTextField();
 		diameterTextField.setTranslateX(FIRST_COL_X);
 		diameterTextField.setTranslateY(SECOND_ROW_FIELD_Y);
+		diameterTextField.setPrefWidth(100);
 		this.getChildren().add(diameterTextField);
+		
+		List<String> lengthUnits = new ArrayList<String>();
+		for (LengthUnits units : LengthUnits.values())
+			lengthUnits.add(units.getAbbr());
+		ObservableList<String> options = FXCollections.observableArrayList(lengthUnits);
+		caseDiamUnits = new ComboBox<String>(options);
+		caseDiamUnits.setTranslateX(FIRST_COL_X+100);
+		caseDiamUnits.setTranslateY(SECOND_ROW_FIELD_Y);
+		caseDiamUnits.getSelectionModel().selectFirst();
+		this.getChildren().add(caseDiamUnits);
 	} // addDiameterInput()
 	
 	
@@ -135,7 +168,18 @@ public class CaseInputView extends Pane
 		lengthTextField = new NumberTextField();
 		lengthTextField.setTranslateX(SECOND_COL_X);
 		lengthTextField.setTranslateY(FIRST_ROW_FIELD_Y);
+		lengthTextField.setPrefWidth(100);
 		this.getChildren().add(lengthTextField);
+		
+		List<String> lengthUnits = new ArrayList<String>();
+		for (LengthUnits units : LengthUnits.values())
+			lengthUnits.add(units.getAbbr());
+		ObservableList<String> options = FXCollections.observableArrayList(lengthUnits);
+		caseLengthUnits = new ComboBox<String>(options);
+		caseLengthUnits.setTranslateX(SECOND_COL_X+100);
+		caseLengthUnits.setTranslateY(FIRST_ROW_FIELD_Y);
+		caseLengthUnits.getSelectionModel().selectFirst();
+		this.getChildren().add(caseLengthUnits);
 	} // addLengthInput()
 	
 	

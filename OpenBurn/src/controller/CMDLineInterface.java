@@ -93,10 +93,10 @@ public class CMDLineInterface
 			listOfGrains.add(createGrain(input));
 		}
 		
-		// TEMP fix
-		for (int i = 0; i < listOfGrains.size(); i++){
-			listOfGrains.get(i).setPropellantDensity(density);
-		}
+//		// TEMP fix
+//		for (int i = 0; i < listOfGrains.size(); i++){
+//			listOfGrains.get(i).setPropellantDensity(density);
+//		}
 		
 		// Prompt the user for input to create a nozzle
 		Nozzle nozzle = createNozzle(input, numberOfGrains);
@@ -111,7 +111,7 @@ public class CMDLineInterface
 		Case theCase = new Case(caseMass, caseDiameter, caseLength);
 		
 		// Simulate the rocket motor using the given data
-		List<SimulationResults> theResults = RocketMath.simulate(listOfGrains, deltaTime, nozzle, theCase);
+		List<SimulationResults> theResults = RocketMath.simulate(listOfGrains, deltaTime, nozzle, theCase, null);
 		
 		// Prompt for CSV file name to send data
 		System.out.println(FILE_PROMPT);

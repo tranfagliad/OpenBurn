@@ -24,7 +24,7 @@ abstract public class Grain implements Cloneable
 	// Fields
 	protected GrainType type;
 	protected int grainID;
-	protected double propellantDensity;
+//	protected double propellantDensity;
 	protected double length;
 	protected double outerDiameter;
 	protected double innerDiameter; 
@@ -146,10 +146,10 @@ abstract public class Grain implements Cloneable
 	 * Returns: double. The propellant density.
 	**/
 	
-	public double getPropellantDensity ()
-	{
-		return propellantDensity;
-	} // getPropellantDensity()
+//	public double getPropellantDensity ()
+//	{
+//		return propellantDensity;
+//	} // getPropellantDensity()
 	
 	
 	
@@ -164,15 +164,15 @@ abstract public class Grain implements Cloneable
 	 * Returns: void.
 	**/
 	
-	public void setPropellantDensity (double density)
-	{
-		// Density must not be negative
-		if (density <= 0.0)
-			throw new IllegalArgumentException(PROP_DENSITY_ERR_MSG);
-				
-		// Set density
-		propellantDensity = density;
-	} // setPropellantDensity()
+//	public void setPropellantDensity (double density)
+//	{
+//		// Density must not be negative
+//		if (density <= 0.0)
+//			throw new IllegalArgumentException(PROP_DENSITY_ERR_MSG);
+//				
+//		// Set density
+//		propellantDensity = density;
+//	} // setPropellantDensity()
 
 	
 	

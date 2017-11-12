@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import model.Case;
 import model.Nozzle;
 import model.NumberTextField;
+import model.calculations.Propellant;
 import model.calculations.RocketMath;
 import model.calculations.SimulationResults;
 import model.grains.Grain;
@@ -26,6 +28,7 @@ import view.CSVConverter;
 import view.CaseInputView;
 import view.GraphView;
 import view.NozzleInputView;
+import view.PropellantInputView;
 import view.grain.input.GrainInputView;
 
 /**
@@ -40,12 +43,14 @@ public class OpenBurnGUI extends Application
 	private static final String WINDOW_TITLE      = "OpenBurn - Beta";
 	private static final String NOZZLE_TITLE      = "Nozzle";
 	private static final String CASE_TITLE        = "Case";
-	private static final String DENSITY_PROMPT    = "Enter propellant density";
+	private static final String PROPELLANT_TITLE  = "Propellant";
 	private static final String TIME_DELTA_PROMPT = "Enter change in time";
 	private static final String SIMULATE          = "Simulate";
 	private static final String EXPORT_CSV        = "Export to CSV";
 	private static final String EXPORT_RSE        = "Export to RSE";
 	private static final String ICON_FILE_PATH    = "./../images/OpenBurnLogo_1.png";
+	private static final String CLEAR_GRAPH        = "Clear Graph";
+	private static final String RESET_FIELDS        = "Reset";
 	
 	private static final String TEMP_LEGEND_NAME = "Sim1";
 	
@@ -65,21 +70,23 @@ public class OpenBurnGUI extends Application
 	
 	
 	// Components
-	private Text propDensityText;
+//	private Text propDensityText;
 	private Text timeDeltaText;
 	private TabPane inputs;
-	private NumberTextField propDensityTextField;
+//	private NumberTextField propDensityTextField;
 	private NumberTextField timeDeltaTextField;
 	private GrainInputView grainInputs;
 	private GraphView outputGraph;
 	private Button simButton;
 	private Button csvButton;
 	private Button rseButton;
+	private Button clearGraphButton;
+	private Button resetButton;
 	
 	
 	
 	// Fields
-	private boolean simulationRan;
+	//private boolean simulationRan;
 	
 	
 	
@@ -127,20 +134,23 @@ public class OpenBurnGUI extends Application
 		scene.setRoot(frame);
 		
 		// Initialize and set components
-		addPropDensityInput(frame);
+//		addPropDensityInput(frame);
 		addTimeDeltaInput(frame);
 		addInputTabs(frame);
 		addGrainTable(frame);
 		addGraph(frame);            // Initially Thrust vs. Time
 		addSimulateButton(frame);
 		addExportButtons(frame);    // CSV and RSE
+		addClearGraphButton(frame);
+		addResetButton(frame);
 		
 		// Display window
 		stage.show();
 	} // start()
 	
-	
-	
+
+
+
 	/**
 	 * 
 	**/
@@ -154,40 +164,46 @@ public class OpenBurnGUI extends Application
 		Tab caseTab   = new Tab(CASE_TITLE, new CaseInputView());
 		caseTab.setClosable(false);
 		
-		inputs = new TabPane(nozzleTab, caseTab);
+		Tab propellantTab   = new Tab(PROPELLANT_TITLE, new PropellantInputView());
+		propellantTab.setClosable(false);
+		
+		inputs = new TabPane(nozzleTab, caseTab, propellantTab);
 		inputs.setPrefHeight(300);
+
 		inputs.setPrefWidth(500);
 		frame.getChildren().add(inputs);
 	} // 
 	
 	
 	
-	/**
-	 * addPropDensityInput()
-	 * 
-	 * Purpose: Adds the propellant density input fields to
-	 * 		to the given Pane.
-	 * 
-	 * Parameters:
-	 * 		Pane frame -- The Pane to add to.
-	 * 
-	 * Returns: void.
-	**/
-	
-	private void addPropDensityInput (Pane frame)
-	{
-		// Prompt
-		propDensityText = new Text(DENSITY_PROMPT);
-		propDensityText.setTranslateX(250);
-		propDensityText.setTranslateY(290);
-		frame.getChildren().add(propDensityText);
-		
-		// Input field
-		propDensityTextField = new  NumberTextField();
-		propDensityTextField.setTranslateX(250);
-		propDensityTextField.setTranslateY(300);
-		frame.getChildren().add(propDensityTextField);
-	} // addPropDensityInput()
+
+//	/**
+//	 * addPropDensityInput()
+//	 * 
+//	 * Purpose: Adds the propellant density input fields to
+//	 * 		to the given Pane.
+//	 * 
+//	 * Parameters:
+//	 * 		Pane frame -- The Pane to add to.
+//	 * 
+//	 * Returns: void.
+//	**/
+//	
+//	private void addPropDensityInput (Pane frame)
+//	{
+//		// Prompt
+//		propDensityText = new Text(DENSITY_PROMPT);
+//		propDensityText.setTranslateX(250);
+//		propDensityText.setTranslateY(290);
+//		frame.getChildren().add(propDensityText);
+//		
+//		// Input field
+//		propDensityTextField = new  NumberTextField();
+//		propDensityTextField.setTranslateX(250);
+//		propDensityTextField.setTranslateY(300);
+//		frame.getChildren().add(propDensityTextField);
+//	} // addPropDensityInput()
+
 	
 	
 	
@@ -208,13 +224,13 @@ public class OpenBurnGUI extends Application
 		// Prompt
 		timeDeltaText = new Text(TIME_DELTA_PROMPT);
 		timeDeltaText.setTranslateX(20);
-		timeDeltaText.setTranslateY(290);
+		timeDeltaText.setTranslateY(230);
 		frame.getChildren().add(timeDeltaText);
 		
 		// Input field
 		timeDeltaTextField = new NumberTextField();
 		timeDeltaTextField.setTranslateX(20);
-		timeDeltaTextField.setTranslateY(300);
+		timeDeltaTextField.setTranslateY(240);
 		frame.getChildren().add(timeDeltaTextField);
 	} // addTimeDeltaInput()
 	
@@ -292,19 +308,17 @@ public class OpenBurnGUI extends Application
 		frame.getChildren().add(simButton);
 		
 		// No simulations have run yet
-		simulationRan = false;
+	//	simulationRan = false;
 		
 		// Run simulation on click
 		simButton.setOnAction(new EventHandler<ActionEvent> ()
 		{
 		    @Override public void handle (ActionEvent e)
 		    {
-		    	if (!simulationRan)
-		    	{
-		    		outputGraph.setImageVisible(false);
-		    		runSimulation();
-		    		simulationRan = true;
-		    	}
+		    	outputGraph.setImageVisible(false);
+		    	runSimulation();
+		    	//simulationRan = true;
+
 		    }
 		});
 		
@@ -328,7 +342,7 @@ public class OpenBurnGUI extends Application
 	private void runSimulation ()
 	{
 		// Gather propellant density and change in time
-    	double propDensity = Double.parseDouble(propDensityTextField.getText().toString());
+//    	double propDensity = Double.parseDouble(propDensityTextField.getText().toString());
     	double deltaTime = Double.parseDouble(timeDeltaTextField.getText().toString());
     	
     	// Gather grain list and prepare a copy for the simulation.
@@ -340,9 +354,9 @@ public class OpenBurnGUI extends Application
     	for (Grain curGrain: grainList)
     		simGrainList.add(GrainFactory.createClone(curGrain));
     	
-    	// Set propellant density on all grains
-    	for (Grain curGrain : simGrainList)
-    		curGrain.setPropellantDensity(propDensity);
+//    	// Set propellant density on all grains
+//    	for (Grain curGrain : simGrainList)
+//    		curGrain.setPropellantDensity(propDensity);
     	
     	// Use nozzle inputs to create nozzle
     	NozzleInputView nozzleInputs = (NozzleInputView)(inputs.getTabs().get(0).getContent());
@@ -358,8 +372,15 @@ public class OpenBurnGUI extends Application
     							caseInputs.getDiameterInput(),
     							caseInputs.getLengthInput());
     	
+    	// Use propellant inputs to create propellant
+    	PropellantInputView propellantInputs = (PropellantInputView)(inputs.getTabs().get(2).getContent());
+    	Propellant thePropellant = new Propellant(propellantInputs.getBurnRateCoefficientInput(),
+    											  propellantInputs.getBurnRateExponentInput(), 
+								    			  propellantInputs.getPropellantDensityInput(), 
+								    			  propellantInputs.getCstarInput());
+    	
     	// Run simulation, gather list of results
-    	List<SimulationResults> simResults = RocketMath.simulate(simGrainList, deltaTime, theNozzle, theCase);
+    	List<SimulationResults> simResults = RocketMath.simulate(simGrainList, deltaTime, theNozzle, theCase, thePropellant);
     	
     	// Add thrust vs. time data to the chart
     	outputGraph.addData(TEMP_LEGEND_NAME, simResults);
@@ -415,5 +436,36 @@ public class OpenBurnGUI extends Application
 		// Disable button if there is no simulation data
 		rseButton.disableProperty().bind(Bindings.size(outputGraph.getChart().getData()).isEqualTo(EMPTY));
 	} // addExportButtons()
+	
+	
+	private void addResetButton(Pane frame) {
+		resetButton = new Button(RESET_FIELDS);
+		resetButton.setTranslateX(1090);
+		resetButton.setTranslateY(780);
+		resetButton.setPrefHeight(35);
+		resetButton.setPrefWidth(100);
+		resetButton.setDisable(false);
+		frame.getChildren().add(resetButton);
+	}
+
+
+//outputGraph.getChart().clear();
+	private void addClearGraphButton(Pane frame) {
+		clearGraphButton = new Button(CLEAR_GRAPH);
+		clearGraphButton.setTranslateX(800);
+		clearGraphButton.setTranslateY(780);
+		clearGraphButton.setPrefHeight(35);
+		clearGraphButton.setPrefWidth(130);
+		clearGraphButton.setDisable(false);
+		frame.getChildren().add(clearGraphButton);
+		clearGraphButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+		    @Override public void handle (ActionEvent e)
+		    {
+		    	outputGraph.getChart().getData().clear();
+		    }
+		});
+		
+	}
 	
 } // class OpenBurnGUI

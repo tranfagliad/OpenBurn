@@ -29,14 +29,14 @@ public class GraphView extends Pane
 	public static final String PRESSURE_LABEL = "Pressure";
 	public static final String VERSUS_LABEL   = " vs. ";
 	
-	private static final String ICON_FILE_PATH = "./../images/OpenBurnLogo_Faded.png";
+	private static final String ICON_FILE_PATH = "./../images/OpenBurnLogo_faded.png";
 	
 	
 	
 	// Constants
-	private static final int THRUST_TOGGLE_X   = 750;
-	private static final int PRESSURE_TOGGLE_X = 850;
-	private static final int TOGGLE_Y          = 455;
+	private static final int THRUST_TOGGLE_X   = 150;
+	private static final int PRESSURE_TOGGLE_X = 250;
+	private static final int TOGGLE_Y          = 10;
 	
 	
 	
