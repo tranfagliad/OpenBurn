@@ -1,5 +1,5 @@
 package model.calculations;
-
+//TODO comments
 public class Propellant
 {
 	private double burnRateCoefficient; // a
