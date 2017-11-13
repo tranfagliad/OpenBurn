@@ -35,7 +35,7 @@ public class EditGrainWindow extends Stage
 	private static final String OUTER_DIAMETER_PROMPT = "Outer Diameter";
 	private static final String INNER_DIAMETER_PROMPT = "Inner Diameter";
 	private static final String BURNING_ENDS_PROMPT   = "Number of Burning Ends";
-	private static final String SUBMIT_BUTTON_TEXT    = "Submit";
+	private static final String SUBMIT_BUTTON_TEXT    = "Save Changes";
 	private static final String ERROR_TEXT            = "Inner diameter must be less than outer diameter!";
 	private static final String EMPTY                 = "";
 	private static final String ICON_FILE_PATH        = "./../../../images/OpenBurnLogo_1.png";

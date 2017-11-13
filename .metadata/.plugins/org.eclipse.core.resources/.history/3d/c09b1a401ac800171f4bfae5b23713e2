@@ -1,0 +1,65 @@
+package view;
+
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import model.NumberTextField;
+
+/**
+ * GeneralInputView.java
+ * 
+ * Purpose: 
+**/
+
+public class GeneralInputView extends Pane
+{
+	// Components
+	private Text timeDeltaText;
+	private NumberTextField timeDeltaTextField;
+	
+	
+	
+	/**
+	 * GeneralInputView Constructor
+	 * 
+	 * Purpose: 
+	**/
+	
+	public GeneralInputView ()
+	{
+		// Invoke Pane super constructor
+		super();
+		
+		// Add components
+		
+	} // GeneralInputView Constructor
+	
+	
+	
+	/**
+	 * addTimeDeltaInput()
+	 * 
+	 * Purpose: Adds the change in time input fields to
+	 * 		to the given Pane.
+	 * 
+	 * Parameters:
+	 * 		Pane frame -- The Pane to add to.
+	 * 
+	 * Returns: void.
+	**/
+	private void addTimeInput ()
+	{
+		// Prompt
+		timeDeltaText = new Text(TIME_DELTA_PROMPT);
+		timeDeltaText.setTranslateX(20);
+		timeDeltaText.setTranslateY(230);
+		this.getChildren().add(timeDeltaText);
+		
+		// Input field
+		timeDeltaTextField = new NumberTextField();
+		timeDeltaTextField.setTranslateX(20);
+		timeDeltaTextField.setTranslateY(240);
+		this.getChildren().add(timeDeltaTextField);
+	}
+	
+	
+} // class GeneralInputView

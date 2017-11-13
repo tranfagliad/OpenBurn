@@ -1,10 +1,7 @@
 package view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -50,9 +47,9 @@ public class NozzleInputView extends Pane
 	private NumberTextField entranceDiameterTextField;
 	private NumberTextField exitDiameterTextField;
 	private NumberTextField cfTextField;
-	private ComboBox <String> entDiameterUnits;
-	private ComboBox <String> exitDiameterUnits;
-	private ComboBox <String> throatDiameterUnits;
+	private ComboBox<String> entDiameterUnits;
+	private ComboBox<String> exitDiameterUnits;
+	private ComboBox<String> throatDiameterUnits;
 	
 	
 	
@@ -101,16 +98,19 @@ public class NozzleInputView extends Pane
 		entranceDiameterTextField.setPrefWidth(100);
 		this.getChildren().add(entranceDiameterTextField);
 		
-		List<String> lengthUnits = new ArrayList<String>();
+		// Gather units
+		List<String> lengthUnits = new LinkedList<String>();
 		for (LengthUnits units : LengthUnits.values())
 			lengthUnits.add(units.getAbbr());
 		ObservableList<String> options = FXCollections.observableArrayList(lengthUnits);
+		
+		// Unit selector
 		entDiameterUnits = new ComboBox<String>(options);
 		entDiameterUnits.setTranslateX(FIRST_COL_X+100);
 		entDiameterUnits.setTranslateY(FIRST_ROW_FIELD_Y);
+		entDiameterUnits.setPrefWidth(80);
 		entDiameterUnits.getSelectionModel().selectFirst();
 		this.getChildren().add(entDiameterUnits);
-		
 	} // addEntranceDiameterInput()
 	
 	
@@ -140,13 +140,17 @@ public class NozzleInputView extends Pane
 		exitDiameterTextField.setPrefWidth(100);
 		this.getChildren().add(exitDiameterTextField);
 		
-		List<String> lengthUnits = new ArrayList<String>();
+		// Gather units
+		List<String> lengthUnits = new LinkedList<String>();
 		for (LengthUnits units : LengthUnits.values())
 			lengthUnits.add(units.getAbbr());
 		ObservableList<String> options = FXCollections.observableArrayList(lengthUnits);
+		
+		// Unit selector
 		exitDiameterUnits = new ComboBox<String>(options);
 		exitDiameterUnits.setTranslateX(SECOND_COL_X+100);
 		exitDiameterUnits.setTranslateY(FIRST_ROW_FIELD_Y);
+		exitDiameterUnits.setPrefWidth(80);
 		exitDiameterUnits.getSelectionModel().selectFirst();
 		this.getChildren().add(exitDiameterUnits);
 	} // addExitDiameterInput()
@@ -175,15 +179,20 @@ public class NozzleInputView extends Pane
 		throatDiameterTextField = new NumberTextField();
 		throatDiameterTextField.setTranslateX(FIRST_COL_X);
 		throatDiameterTextField.setTranslateY(SECOND_ROW_FIELD_Y);
+		throatDiameterTextField.setPrefWidth(100);
 		this.getChildren().add(throatDiameterTextField);
 		
-		List<String> lengthUnits = new ArrayList<String>();
+		// Gather units
+		List<String> lengthUnits = new LinkedList<String>();
 		for (LengthUnits units : LengthUnits.values())
 			lengthUnits.add(units.getAbbr());
 		ObservableList<String> options = FXCollections.observableArrayList(lengthUnits);
+		
+		// Unit selector
 		throatDiameterUnits = new ComboBox<String>(options);
 		throatDiameterUnits.setTranslateX(FIRST_COL_X+100);
 		throatDiameterUnits.setTranslateY(SECOND_ROW_FIELD_Y);
+		throatDiameterUnits.setPrefWidth(80);
 		throatDiameterUnits.getSelectionModel().selectFirst();
 		this.getChildren().add(throatDiameterUnits);
 	} // addThroatDiameterInput()
@@ -212,7 +221,7 @@ public class NozzleInputView extends Pane
 		cfTextField = new NumberTextField();
 		cfTextField.setTranslateX(SECOND_COL_X);
 		cfTextField.setTranslateY(SECOND_ROW_FIELD_Y);
-		cfTextField.setPrefWidth(170);
+		cfTextField.setPrefWidth(180);
 		this.getChildren().add(cfTextField);
 	} // addCfInput()
 	

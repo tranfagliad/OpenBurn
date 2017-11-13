@@ -93,15 +93,20 @@ public class CaseInputView extends Pane
 		massTextField.setTranslateX(FIRST_COL_X);
 		massTextField.setTranslateY(FIRST_ROW_FIELD_Y);
 		massTextField.setPrefWidth(FIRST_COL_X+100);
+		massTextField.setPrefWidth(100);
 		this.getChildren().add(massTextField);
 		
+		// Gather units
 		List<String> massUnits = new ArrayList<String>();
 		for (MassUnits units : MassUnits.values())
 			massUnits.add(units.getAbbr());
 		ObservableList<String> options = FXCollections.observableArrayList(massUnits);
+		
+		// Add unit selector
 		caseMassUnits = new ComboBox<String>(options);
 		caseMassUnits.setTranslateX(FIRST_COL_X+100);
 		caseMassUnits.setTranslateY(FIRST_ROW_FIELD_Y);
+		caseMassUnits.setPrefWidth(80);
 		caseMassUnits.getSelectionModel().selectFirst();
 		this.getChildren().add(caseMassUnits);
 	} // addMassInput()
@@ -133,13 +138,17 @@ public class CaseInputView extends Pane
 		diameterTextField.setPrefWidth(100);
 		this.getChildren().add(diameterTextField);
 		
+		// Gather units
 		List<String> lengthUnits = new ArrayList<String>();
 		for (LengthUnits units : LengthUnits.values())
 			lengthUnits.add(units.getAbbr());
 		ObservableList<String> options = FXCollections.observableArrayList(lengthUnits);
+		
+		// Add unit selector
 		caseDiamUnits = new ComboBox<String>(options);
 		caseDiamUnits.setTranslateX(FIRST_COL_X+100);
 		caseDiamUnits.setTranslateY(SECOND_ROW_FIELD_Y);
+		caseDiamUnits.setPrefWidth(80);
 		caseDiamUnits.getSelectionModel().selectFirst();
 		this.getChildren().add(caseDiamUnits);
 	} // addDiameterInput()
@@ -171,13 +180,17 @@ public class CaseInputView extends Pane
 		lengthTextField.setPrefWidth(100);
 		this.getChildren().add(lengthTextField);
 		
+		// Gather units
 		List<String> lengthUnits = new ArrayList<String>();
 		for (LengthUnits units : LengthUnits.values())
 			lengthUnits.add(units.getAbbr());
 		ObservableList<String> options = FXCollections.observableArrayList(lengthUnits);
+		
+		// Add unit selector
 		caseLengthUnits = new ComboBox<String>(options);
 		caseLengthUnits.setTranslateX(SECOND_COL_X+100);
 		caseLengthUnits.setTranslateY(FIRST_ROW_FIELD_Y);
+		caseLengthUnits.setPrefWidth(80);
 		caseLengthUnits.getSelectionModel().selectFirst();
 		this.getChildren().add(caseLengthUnits);
 	} // addLengthInput()

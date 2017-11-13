@@ -34,9 +34,9 @@ public class GraphView extends Pane
 	
 	
 	// Constants
-	private static final int THRUST_TOGGLE_X   = 150;
-	private static final int PRESSURE_TOGGLE_X = 250;
-	private static final int TOGGLE_Y          = 10;
+	private static final int THRUST_TOGGLE_X   = 550;
+	private static final int PRESSURE_TOGGLE_X = 650;
+	private static final int TOGGLE_Y          = 460;
 	
 	
 	

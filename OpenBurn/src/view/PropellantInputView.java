@@ -4,7 +4,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import model.NumberTextField;
 
-
 /**
  * PropellantInputView.java
  * 
@@ -12,14 +11,15 @@ import model.NumberTextField;
  * 		OpenBurn graphical user interface.
 **/
 
-
 public class PropellantInputView extends Pane
 {
 	// Labels
-	private static final String BURN_RATE_COEFFICIENT_PROMPT    = "Enter Burn Rate Coefficient";
-	private static final String BURN_RATE_EXPONENT_PROMPT    = "Enter Burn Rate Exponent";
-	private static final String DENSITY_PROMPT    = "Enter Propellant density";
-	private static final String C_STAR_PROMPT    = "Enter C Star";
+	private static final String BURN_RATE_COEFFICIENT_PROMPT = "Burn Rate Coefficient";
+	private static final String BURN_RATE_EXPONENT_PROMPT    = "Burn Rate Exponent";
+	private static final String DENSITY_PROMPT               = "Propellant density";
+	private static final String C_STAR_PROMPT                = "Characteristic Velocity (c*)";
+	
+	
 	
 	// Constants
 	private static final int FIRST_COL_X         = 20;
@@ -28,6 +28,8 @@ public class PropellantInputView extends Pane
 	private static final int FIRST_ROW_FIELD_Y   = 40;
 	private static final int SECOND_ROW_PROMPT_Y = 110;
 	private static final int SECOND_ROW_FIELD_Y  = 120;
+	
+	
 	
 	// Components
 	private Text burnRateCoefficientText;
@@ -40,8 +42,9 @@ public class PropellantInputView extends Pane
 	private NumberTextField cStarTextField;
 	
 	
+	
 	/**
-	 * NPropellantInputView Constructor
+	 * PropellantInputView Constructor
 	 * 
 	 * Purpose: Creates and initializes the input fields for propellant.
 	**/
@@ -57,6 +60,12 @@ public class PropellantInputView extends Pane
 		addCstarInput();
 	}//PropellantInputView()
 	
+	
+	
+	/**
+	 * 
+	**/
+	
 	private void addBurnRateCoefficientInput()
 	{
 		// Burn Rate Coefficient prompt
@@ -70,7 +79,13 @@ public class PropellantInputView extends Pane
 		burnRateCoefficientTextField.setTranslateX(FIRST_COL_X);
 		burnRateCoefficientTextField.setTranslateY(FIRST_ROW_FIELD_Y);
 		this.getChildren().add(burnRateCoefficientTextField);
-	}//addBurnRateCoefficientInput()
+	} // addBurnRateCoefficientInput()
+	
+	
+	
+	/**
+	 * 
+	**/
 	
 	private void addBurnRateExponentInput()
 	{
@@ -85,8 +100,14 @@ public class PropellantInputView extends Pane
 		burnRateExponentTextField.setTranslateX(SECOND_COL_X);
 		burnRateExponentTextField.setTranslateY(FIRST_ROW_FIELD_Y);
 		this.getChildren().add(burnRateExponentTextField);
-	}//addBurnRateExponentInput()
-
+	} // addBurnRateExponentInput()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
 	private void addPropellantDensityInput()
 	{
 		// Propellant Density prompt
@@ -100,7 +121,13 @@ public class PropellantInputView extends Pane
 		propDensityTextField.setTranslateX(FIRST_COL_X);
 		propDensityTextField.setTranslateY(SECOND_ROW_FIELD_Y);
 		this.getChildren().add(propDensityTextField);
-	}//addPropellantDensityInput()
+	} // addPropellantDensityInput()
+	
+	
+	
+	/**
+	 * 
+	**/
 	
 	private void addCstarInput()
 	{
@@ -115,7 +142,9 @@ public class PropellantInputView extends Pane
 		cStarTextField.setTranslateX(SECOND_COL_X);
 		cStarTextField.setTranslateY(SECOND_ROW_FIELD_Y);
 		this.getChildren().add(cStarTextField);
-	}//addCstarInput()
+	} // addCstarInput()
+	
+	
 	
 	/**
 	 * getBurnRateCoefficientInput()
@@ -130,7 +159,9 @@ public class PropellantInputView extends Pane
 	public double getBurnRateCoefficientInput ()
 	{
 		return Double.parseDouble(burnRateCoefficientTextField.getText().toString());
-	}//getBurnRateCoefficientInput ()
+	} // getBurnRateCoefficientInput ()
+	
+	
 	
 	/**
 	 * getBurnRateExponentInput()
@@ -145,7 +176,9 @@ public class PropellantInputView extends Pane
 	public double getBurnRateExponentInput ()
 	{
 		return Double.parseDouble(burnRateExponentTextField.getText().toString());
-	}//getBurnRateExponentInput ()
+	} // getBurnRateExponentInput ()
+	
+	
 	
 	/**
 	 * getPropellantDensityInput()
@@ -160,7 +193,9 @@ public class PropellantInputView extends Pane
 	public double getPropellantDensityInput ()
 	{
 		return Double.parseDouble(propDensityTextField.getText().toString());
-	}//getPropellantDensityInput ()
+	} // getPropellantDensityInput ()
+	
+	
 	
 	/**
 	 * getCstarInput()
@@ -175,6 +210,6 @@ public class PropellantInputView extends Pane
 	public double getCstarInput ()
 	{
 		return Double.parseDouble(cStarTextField.getText().toString());
-	}//getCstarInput ()
+	} // getCstarInput ()
 	
-}//PropellantInputView
+} // class PropellantInputView
