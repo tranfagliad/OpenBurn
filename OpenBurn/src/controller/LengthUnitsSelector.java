@@ -50,6 +50,7 @@ public class LengthUnitsSelector extends ComboBox<String>
 				
 				this.valueField.setText(String.valueOf(UnitConverter.unitLengthConverter(Double.parseDouble(this.valueField.getText()), oldUnits, newUnits)));
 			}
+			this.setUnits(newValue);
 	    }); 
 	} // 
 	
