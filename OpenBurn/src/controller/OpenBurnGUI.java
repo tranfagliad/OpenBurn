@@ -16,11 +16,11 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Case;
 import model.Nozzle;
-import model.calculations.Propellant;
 import model.calculations.RocketMath;
 import model.calculations.SimulationResults;
 import model.grains.Grain;
 import model.grains.GrainFactory;
+import model.propellant.SteadyStatePropellant;
 import view.CSVConverter;
 import view.CaseInputView;
 import view.GeneralInputView;
@@ -307,7 +307,7 @@ public class OpenBurnGUI extends Application
     	
     	// Use propellant inputs to create propellant
     	PropellantInputView propellantInputs = (PropellantInputView)(inputs.getTabs().get(3).getContent());
-    	Propellant thePropellant = new Propellant(propellantInputs.getBurnRateCoefficientInput(),
+    	SteadyStatePropellant thePropellant = new SteadyStatePropellant(propellantInputs.getBurnRateCoefficientInput(),
     											  propellantInputs.getBurnRateExponentInput(), 
 								    			  propellantInputs.getPropellantDensityInput(), 
 								    			  propellantInputs.getCstarInput());

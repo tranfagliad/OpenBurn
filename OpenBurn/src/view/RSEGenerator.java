@@ -36,13 +36,13 @@ public class RSEGenerator
 		String classification = "Test";//classifier.getClassification(); // TODO
 		double isp = classifier.ISP();
 		double massFrac = classifier.getMassFrac();
-		double diameter = UnitConverter.convertLengthfromInternal(c.getDiameter(), LengthUnits.MILLIMETERS);
+		double diameter = UnitConverter.unitLengthConverter(c.getDiameter(),LengthUnits.INCHES,LengthUnits.MILLIMETERS);
 		double mass = UnitConverter.convertMassFromInternal(results.get(0).getSystemMass(), MassUnits.GRAMS);
 		double burnTime = classifier.getBurnTime();
-		double throatDiameter = UnitConverter.convertLengthfromInternal(no.getThroatDiameter(), LengthUnits.MILLIMETERS);
-		double exitDiameter = UnitConverter.convertLengthfromInternal(no.getExitDiameter(), LengthUnits.MILLIMETERS);
+		double throatDiameter = UnitConverter.unitLengthConverter(no.getThroatDiameter(),LengthUnits.INCHES, LengthUnits.MILLIMETERS);
+		double exitDiameter = UnitConverter.unitLengthConverter(no.getExitDiameter(),LengthUnits.INCHES, LengthUnits.MILLIMETERS);
 		double caseMass = UnitConverter.convertMassFromInternal(c.getCaseMass(), MassUnits.GRAMS);
-		double length = UnitConverter.convertLengthfromInternal(c.getLength(), LengthUnits.MILLIMETERS);
+		double length = UnitConverter.unitLengthConverter(c.getLength(),LengthUnits.INCHES, LengthUnits.MILLIMETERS);
 		double impulse = classifier.getImpulse();
 		double averageThrust = UnitConverter.convertForceFromInternal(classifier.getaverageThrust(), ForceUnits.NEWTONS);
 		//reloadable =0; //0;

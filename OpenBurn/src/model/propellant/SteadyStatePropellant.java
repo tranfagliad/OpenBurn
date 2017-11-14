@@ -1,17 +1,22 @@
-package model.calculations;
+package model.propellant;
 
 /**
  * Propellant.java
  * 
  * Purpose: Represents the Propellant of a rocket during simulations.
+ * 
+ * Based on saint roberts law and standard propellant reporting
 **/
 
-public class Propellant
+public class SteadyStatePropellant extends Propellant
 {
 	private double burnRateCoefficient; // a
 	private double burnRateExponent; // n
 	private double density; // rho
 	private double Cstar;
+	private double Kn;
+	private double pressure;
+	
 	
 	
 	/**
@@ -20,12 +25,15 @@ public class Propellant
 	 * Purpose: Creates and initializes a case for the rocket during
 	 * 		the simulation.
 	**/
-	public Propellant(double burnRateCoefficient, double burnRateExponent, double density, double Cstar)
+	public SteadyStatePropellant(double burnRateCoefficient, double burnRateExponent, double density, double Cstar)
 	{
 		this.burnRateCoefficient = burnRateCoefficient;
 		this.burnRateExponent = burnRateExponent;
 		this.density = density;
 		this.Cstar = Cstar;
+		//Prevent null pointer exceptions
+		this.Kn = 0;
+		this.pressure = 0;
 	}//Propellant Constructor
 	
 	/**
@@ -37,12 +45,13 @@ public class Propellant
 	 * 
 	 * Returns: double. The case pressure at one instant of time.
 	**/
-	public double pressureFromKn(double Kn)
+	public double getChamberPressure()
 	{
 		//p = (Kn * a * rho * C* )^(1/(1-n))
 	    double exponent = 1.0 / (1.0 - burnRateExponent);
 	    double p1 = Kn * burnRateCoefficient * density * Cstar;
-	    return Math.pow(p1, exponent);
+	    pressure =  Math.pow(p1, exponent);
+	    return pressure;
 	}//pressureFromKn()
 	
 	/**
@@ -54,7 +63,7 @@ public class Propellant
 	 * 
 	 * Returns: double. The burn rate at one instant of time.
 	**/
-	public double burnRateFromPressure(double pressure)
+	public double getBurnRate()
 	{
 		// r = a * p^n
 		return burnRateCoefficient * Math.pow(pressure, burnRateExponent);
@@ -74,5 +83,11 @@ public class Propellant
 	{
 		return density;
 	}//getPropellantDensity()
+
+	public void setKn(double Kn) 
+	{
+		this.Kn = Kn;
+		
+	}
 	
 }//Propellant

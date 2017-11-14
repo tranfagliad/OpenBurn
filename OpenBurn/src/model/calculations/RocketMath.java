@@ -4,6 +4,7 @@ import java.util.*;
 
 import model.*;
 import model.grains.*;
+import model.propellant.Propellant;
 
 /**
  * RocketMath.java
@@ -96,8 +97,9 @@ public class RocketMath
 		
 		// Calculate geometry based field values
 		double currentKn = motorAvailableArea / theNozzle.getThroatArea();
-		double currentPressure = propellant.pressureFromKn(currentKn);
-		double currentBurnRate = propellant.burnRateFromPressure(currentPressure);
+		propellant.setKn(currentKn);
+		double currentPressure = propellant.getChamberPressure();
+		double currentBurnRate = propellant.getBurnRate();
 //		double currentPressure = pressureFromKn(currentKn);
 //		double currentBurnRate = burnRateFromKn(currentKn);
 		

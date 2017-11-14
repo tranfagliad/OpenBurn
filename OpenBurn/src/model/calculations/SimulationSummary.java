@@ -3,6 +3,9 @@ package model.calculations;
 import java.util.Iterator;
 import java.util.List;
 
+import model.unitConversion.ForceUnits;
+import model.unitConversion.UnitConverter;
+
 
 /**
  * ImpulseClassifier.java
@@ -25,35 +28,43 @@ public class SimulationSummary
 	public SimulationSummary(List<SimulationResults> results)
 	{
 		Iterator<SimulationResults> iter = results.iterator();
-		SimulationResults prev = iter.next();
-		double impulseCalc = 0;
 		double maxThrust = 0;
 		double maxPressure = 0;
 		double averageThrustHelper = 0;
 		double count = 1;
-		double mass = prev.getSystemMass();
-		double m_prevThrust = prev.getThrust();//UnitConverter.convertForceFromInternal(prev.getThrust(),ForceUnits.NEWTONS);
+		double a = 0;
+		double b = 0;
+		double trap_integral_helper = 0;
 		while(iter.hasNext())
 		{
 			count++;
 			SimulationResults curr = iter.next();
-			double m_thrust = curr.getThrust();//UnitConverter.convertForceFromInternal(curr.getThrust(), ForceUnits.NEWTONS);
-			double imp_calc = (curr.getTime() - prev.getTime()) + ((m_thrust - m_prevThrust)/2);
-			impulseCalc += imp_calc;
+			if(count == 1)// First element
+			{
+				a = curr.getTime(); // Probably 0, but should be done this way
+				trap_integral_helper += curr.getThrust();
+			}else if(!iter.hasNext())//Last element
+			{
+				b = curr.getTime();
+				trap_integral_helper += curr.getThrust();
+			}else//Middle elements
+			{
+
+				trap_integral_helper += (2*curr.getThrust());
+			}
 			averageThrustHelper += curr.getThrust();
 			maxThrust = Math.max(maxThrust, curr.getThrust());
 			maxPressure = Math.max(maxPressure, curr.getChamberPressure());
-			m_prevThrust = m_thrust;
-			prev = curr;
 		}
 		averageThrustHelper/=count;
-		this.impulse = impulseCalc;
-		this.ISP = impulse/mass;
+		double delta_x = (b-a)/count;
+		this.impulse = trap_integral_helper * (delta_x/2);
+		this.ISP = impulse/results.get(0).getSystemMass();
 		this.averageThrust = averageThrustHelper;
 		this.maxPressure = maxPressure;
 		this.maxThrust = maxThrust;
 		this.massFrac = 65; // TODO: fix this!
-		this.burnTime = prev.getTime();
+		this.burnTime = b;
 	}
 	
 	
