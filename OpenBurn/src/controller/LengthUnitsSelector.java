@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import model.unitConversion.LengthUnits;
+import model.unitConversion.UnitConverter;
 
 /*
  * 
@@ -16,6 +17,7 @@ public class LengthUnitsSelector extends ComboBox<String>
 {
 	//
 	private LengthUnits units;
+	private NumberTextField valueField;
 	
 	
 	
@@ -23,10 +25,12 @@ public class LengthUnitsSelector extends ComboBox<String>
 	 * 
 	 */
 	
-	public LengthUnitsSelector ()
+	public LengthUnitsSelector (NumberTextField valueField)
 	{
 		//
 		super();
+		
+		this.valueField = valueField;
 		
 		//
 		for (LengthUnits units : LengthUnits.values())
@@ -38,7 +42,15 @@ public class LengthUnitsSelector extends ComboBox<String>
 		
 		this.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) ->
 		{
-			
+			if (!this.valueField.getText().equals(""))
+			{
+				LengthUnits oldUnits = units;
+				this.setUnits(newValue);
+				LengthUnits newUnits = units;
+				
+				this.valueField.setText(String.valueOf(UnitConverter.unitLengthConverter(Double.parseDouble(this.valueField.getText()), oldUnits, newUnits)));
+			}
+			this.setUnits(newValue);
 	    }); 
 	} // 
 	
@@ -48,9 +60,16 @@ public class LengthUnitsSelector extends ComboBox<String>
 	 * 
 	 */
 	
-	public void setUnits (LengthUnits newUnits)
+	private void setUnits (String newValue)
 	{
-		units = newUnits;
-	}
+		if (newValue.equals(LengthUnits.INCHES.getAbbr()))
+			units = LengthUnits.INCHES;
+		else if (newValue.equals(LengthUnits.FEET.getAbbr()))
+			units = LengthUnits.FEET;
+		else if (newValue.equals(LengthUnits.MILLIMETERS.getAbbr()))
+			units = LengthUnits.MILLIMETERS;
+		else if (newValue.equals(LengthUnits.CENTIMETERS.getAbbr()))
+			units = LengthUnits.CENTIMETERS;
+	} // 
 	
 } // 

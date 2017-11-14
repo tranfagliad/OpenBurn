@@ -140,7 +140,7 @@ public class CaseInputView extends Pane
 		this.getChildren().add(diameterTextField);
 		
 		// Add unit selector
-		caseDiamUnits = new LengthUnitsSelector();
+		caseDiamUnits = new LengthUnitsSelector(diameterTextField);
 		caseDiamUnits.setTranslateX(FIRST_COL_X+100);
 		caseDiamUnits.setTranslateY(SECOND_ROW_FIELD_Y);
 		caseDiamUnits.setPrefWidth(80);
@@ -175,7 +175,7 @@ public class CaseInputView extends Pane
 		this.getChildren().add(lengthTextField);
 		
 		// Add unit selector
-		caseLengthUnits = new LengthUnitsSelector();
+		caseLengthUnits = new LengthUnitsSelector(lengthTextField);
 		caseLengthUnits.setTranslateX(SECOND_COL_X+100);
 		caseLengthUnits.setTranslateY(FIRST_ROW_FIELD_Y);
 		caseLengthUnits.setPrefWidth(80);
