@@ -100,7 +100,7 @@ public class NozzleInputView extends Pane
 		this.getChildren().add(entranceDiameterTextField);
 		
 		// Unit selector
-		entDiameterUnits = new LengthUnitsSelector();
+		entDiameterUnits = new LengthUnitsSelector(entranceDiameterTextField);
 		entDiameterUnits.setTranslateX(FIRST_COL_X+100);
 		entDiameterUnits.setTranslateY(FIRST_ROW_FIELD_Y);
 		entDiameterUnits.setPrefWidth(80);
@@ -135,7 +135,7 @@ public class NozzleInputView extends Pane
 		this.getChildren().add(exitDiameterTextField);
 		
 		// Unit selector
-		exitDiameterUnits = new LengthUnitsSelector();
+		exitDiameterUnits = new LengthUnitsSelector(exitDiameterTextField);
 		exitDiameterUnits.setTranslateX(SECOND_COL_X+100);
 		exitDiameterUnits.setTranslateY(FIRST_ROW_FIELD_Y);
 		exitDiameterUnits.setPrefWidth(80);
@@ -170,7 +170,7 @@ public class NozzleInputView extends Pane
 		this.getChildren().add(throatDiameterTextField);
 		
 		// Unit selector
-		throatDiameterUnits = new LengthUnitsSelector();
+		throatDiameterUnits = new LengthUnitsSelector(throatDiameterTextField);
 		throatDiameterUnits.setTranslateX(FIRST_COL_X+100);
 		throatDiameterUnits.setTranslateY(SECOND_ROW_FIELD_Y);
 		throatDiameterUnits.setPrefWidth(80);

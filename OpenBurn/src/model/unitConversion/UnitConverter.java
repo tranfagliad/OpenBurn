@@ -1,5 +1,8 @@
 package model.unitConversion;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 /**
  * UnitConverter.java
  * 
@@ -95,10 +98,18 @@ public class UnitConverter
 	{
 		// Units are inches, convert to centimeters
 		if (units == LengthUnits.INCHES)
-			return value * 2.54;
+		{
+			BigDecimal decimal = new BigDecimal(value * 2.54);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
 		// Units are centimeters, convert to inches
 		else if (units == LengthUnits.CENTIMETERS)
-			return value * 0.393701;
+		{
+			BigDecimal decimal = new BigDecimal(value * 0.393701);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
 		
 		// Units are not inches or centimeters, do not convert
 		return value;
@@ -114,7 +125,7 @@ public class UnitConverter
 	{
 		// Units are inches, convert to feet
 		if (units == LengthUnits.INCHES)
-			return value * 0.0833333;
+			return value / 12;
 		// Units are feet, convert to inches
 		else if (units == LengthUnits.FEET)
 			return value * 12;
