@@ -14,12 +14,73 @@ public class UnitConverter
 	 * 
 	**/
 	
-	public static double convertLength (LengthUnits oldUnits, LengthUnits newUnits, double value)
-	{
-		if ((oldUnits == LengthUnits.INCHES && newUnits == LengthUnits.CENTIMETERS) ||
-			(oldUnits == LengthUnits.CENTIMETERS && newUnits == LengthUnits.INCHES))
-			return inchCmConversion(oldUnits, value);
-		
+	public static double unitLengthConverter(double val, LengthUnits oldUnits, LengthUnits newUnits){
+		if (oldUnits == LengthUnits.INCHES){
+			if(newUnits == LengthUnits.MILLIMETERS){
+				val = inchCmConversion(LengthUnits.INCHES, val);
+				val = cmMmConversion(LengthUnits.CENTIMETERS, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.CENTIMETERS){
+				val = inchCmConversion(LengthUnits.INCHES, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.FEET){
+				val = inchFeetConversion(LengthUnits.INCHES,val);
+				return val;
+				
+			}
+		}
+		if (oldUnits == LengthUnits.CENTIMETERS){
+			if(newUnits == LengthUnits.INCHES){
+				val = inchCmConversion(LengthUnits.CENTIMETERS, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.FEET){
+				val = inchCmConversion(LengthUnits.CENTIMETERS, val);
+				val = inchFeetConversion(LengthUnits.INCHES, val);
+				return val;
+				
+			}
+			if(newUnits == LengthUnits.MILLIMETERS){
+				val = cmMmConversion(LengthUnits.CENTIMETERS, val);
+				return val;
+			}
+		}
+		if (oldUnits == LengthUnits.FEET){
+			if(newUnits == LengthUnits.INCHES){
+				val = inchFeetConversion(LengthUnits.FEET, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.MILLIMETERS){
+				val = inchFeetConversion(LengthUnits.FEET, val);
+				val = inchCmConversion(LengthUnits.INCHES, val);
+				val = cmMmConversion(LengthUnits.CENTIMETERS, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.CENTIMETERS){
+				val = inchFeetConversion(LengthUnits.FEET, val);
+				val = inchCmConversion(LengthUnits.INCHES, val);
+				return val;
+			}
+		}
+		if (oldUnits == LengthUnits.MILLIMETERS){
+			if(newUnits == LengthUnits.INCHES){
+				val = cmMmConversion(LengthUnits.MILLIMETERS, val);
+				val = inchCmConversion(LengthUnits.CENTIMETERS, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.CENTIMETERS){
+				val = cmMmConversion(LengthUnits.MILLIMETERS, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.FEET){
+				val = cmMmConversion(LengthUnits.MILLIMETERS, val);
+				val = inchCmConversion(LengthUnits.CENTIMETERS, val);
+				val = inchFeetConversion(LengthUnits.INCHES, val);
+			}
+		}
+		return val;
 		
 	}
 	
