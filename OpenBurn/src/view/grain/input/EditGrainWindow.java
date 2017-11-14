@@ -1,6 +1,7 @@
 package view.grain.input;
 
 import controller.GrainTableHandle;
+import controller.NumberTextField;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
@@ -15,7 +16,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.NumberTextField;
 import model.grains.CylindricalGrain;
 import model.grains.GrainFactory;
 import model.grains.GrainType;

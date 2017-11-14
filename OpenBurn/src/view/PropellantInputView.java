@@ -1,8 +1,8 @@
 package view;
 
+import controller.NumberTextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import model.NumberTextField;
 
 /**
  * PropellantInputView.java

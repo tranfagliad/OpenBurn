@@ -3,12 +3,13 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.LengthUnitsSelector;
+import controller.NumberTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import model.NumberTextField;
 import model.unitConversion.LengthUnits;
 import model.unitConversion.MassUnits;
 
@@ -45,9 +46,9 @@ public class CaseInputView extends Pane
 	private NumberTextField massTextField;
 	private NumberTextField diameterTextField;
 	private NumberTextField lengthTextField;
-	private ComboBox <String> caseDiamUnits;
-	private ComboBox <String> caseLengthUnits;
 	private ComboBox <String> caseMassUnits;
+	private LengthUnitsSelector caseDiamUnits;
+	private LengthUnitsSelector caseLengthUnits;
 	
 	
 	
@@ -138,18 +139,11 @@ public class CaseInputView extends Pane
 		diameterTextField.setPrefWidth(100);
 		this.getChildren().add(diameterTextField);
 		
-		// Gather units
-		List<String> lengthUnits = new ArrayList<String>();
-		for (LengthUnits units : LengthUnits.values())
-			lengthUnits.add(units.getAbbr());
-		ObservableList<String> options = FXCollections.observableArrayList(lengthUnits);
-		
 		// Add unit selector
-		caseDiamUnits = new ComboBox<String>(options);
+		caseDiamUnits = new LengthUnitsSelector();
 		caseDiamUnits.setTranslateX(FIRST_COL_X+100);
 		caseDiamUnits.setTranslateY(SECOND_ROW_FIELD_Y);
 		caseDiamUnits.setPrefWidth(80);
-		caseDiamUnits.getSelectionModel().selectFirst();
 		this.getChildren().add(caseDiamUnits);
 	} // addDiameterInput()
 	
@@ -180,18 +174,11 @@ public class CaseInputView extends Pane
 		lengthTextField.setPrefWidth(100);
 		this.getChildren().add(lengthTextField);
 		
-		// Gather units
-		List<String> lengthUnits = new ArrayList<String>();
-		for (LengthUnits units : LengthUnits.values())
-			lengthUnits.add(units.getAbbr());
-		ObservableList<String> options = FXCollections.observableArrayList(lengthUnits);
-		
 		// Add unit selector
-		caseLengthUnits = new ComboBox<String>(options);
+		caseLengthUnits = new LengthUnitsSelector();
 		caseLengthUnits.setTranslateX(SECOND_COL_X+100);
 		caseLengthUnits.setTranslateY(FIRST_ROW_FIELD_Y);
 		caseLengthUnits.setPrefWidth(80);
-		caseLengthUnits.getSelectionModel().selectFirst();
 		this.getChildren().add(caseLengthUnits);
 	} // addLengthInput()
 	

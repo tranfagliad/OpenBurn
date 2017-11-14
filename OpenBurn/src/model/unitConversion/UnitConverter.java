@@ -11,72 +11,84 @@ package model.unitConversion;
 public class UnitConverter
 {
 	/**
-	 * convertLengthToInternal()
 	 * 
-	 * Purpose: Converts and returns length from one of several external units to internal units.
-	 * 
-	 * Parameters:
-	 * 		double input -- Length in inches, feet, centimeters or millimeters.
-	 * 		LengthUnits units -- what unit the input is in
-	 * 
-	 * Returns: double. Length in the units used by rest of model (inches)
 	**/
 	
-	public static double convertLengthToInternal (double input, LengthUnits units)
+	public static double convertLength (LengthUnits oldUnits, LengthUnits newUnits, double value)
 	{
-		if(units == LengthUnits.INCHES)
-		{
-			return input;
-		}
-		else if(units == LengthUnits.CENTIMETERS)
-		{
-			return (input / 2.54);
-		}
-		else if(units == LengthUnits.MILLIMETERS)
-		{
-			input *= 10;
-			return (input / 2.54);
-		}
-		else //if(units == LengthUnits.FEET)  compiler complains about last if statement because it thinks program could get past all if statements
-		{
-			return (input * 12);
-		}
-	} // convertLengthMtoI()
+		if ((oldUnits == LengthUnits.INCHES && newUnits == LengthUnits.CENTIMETERS) ||
+			(oldUnits == LengthUnits.CENTIMETERS && newUnits == LengthUnits.INCHES))
+			return inchCmConversion(oldUnits, value);
+		
+		
+	}
+	
 	
 	
 	
 	/**
-	 * convertLengthfromInternal()
 	 * 
-	 * Purpose: Converts and returns length from internal units to one of several external units.
-	 * 
-	 * Parameters:
-	 * 		double input -- Length in the units used by rest of model (inches)
-	 * 		LengthUnits units -- what unit the output is desired in
-	 * 
-	 * Returns: double. Length in inches, feet, centimeters or millimeters.
 	**/
 	
-	public static double convertLengthfromInternal (double input, LengthUnits units)
+	private static double inchCmConversion (LengthUnits units, double value)
 	{
-		if(units == LengthUnits.INCHES)
-		{
-			return input;
-		}
-		else if(units == LengthUnits.CENTIMETERS)
-		{
-			return (input * 2.54);
-		}
-		else if(units == LengthUnits.MILLIMETERS)
-		{
-			input /= 10;
-			return (input * 2.54);
-		}
-		else //if(units == LengthUnits.FEET)  compiler complains about last if statement because it thinks program could get past all if statements
-		{
-			return (input / 12);
-		}
-	} // convertLengthItoM()
+		// Units are inches, convert to centimeters
+		if (units == LengthUnits.INCHES)
+			return value * 2.54;
+		// Units are centimeters, convert to inches
+		else if (units == LengthUnits.CENTIMETERS)
+			return value * 0.393701;
+		
+		// Units are not inches or centimeters, do not convert
+		return value;
+	} // inchCmConversion()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	private static double inchFeetConversion (LengthUnits units, double value)
+	{
+		// Units are inches, convert to feet
+		if (units == LengthUnits.INCHES)
+			return value * 0.0833333;
+		// Units are feet, convert to inches
+		else if (units == LengthUnits.FEET)
+			return value * 12;
+		
+		// Units are not inches or feet, do not convert
+		return value;
+	} // inchFeetConversion()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	private static double cmMmConversion (LengthUnits units, double value)
+	{
+		// UNits are cm, convert to mm
+		if (units == LengthUnits.CENTIMETERS)
+			return value * 10;
+		// Units are mm, convert to cm
+		else if (units == LengthUnits.MILLIMETERS)
+			return value * 0.1;
+		
+		// Units are not cm or mm, do not convert
+		return value;
+	} // cmMmConversion()
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -30,6 +30,7 @@ public class GraphView extends Pane
 	public static final String VERSUS_LABEL   = " vs. ";
 	
 	private static final String ICON_FILE_PATH = "./../images/OpenBurnLogo_faded.png";
+	private static final String SECONDS        = "(seconds)";
 	
 	
 	
@@ -68,7 +69,7 @@ public class GraphView extends Pane
 	{
 		// Create and name the x-axis
 		NumberAxis xAxis = new NumberAxis();
-		xAxis.setLabel(xAxisName);
+		xAxis.setLabel(xAxisName + " " + SECONDS);
 		
 		// Create and name the y-axis
 		NumberAxis yAxis = new NumberAxis();
