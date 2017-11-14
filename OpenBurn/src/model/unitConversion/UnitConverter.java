@@ -144,10 +144,18 @@ public class UnitConverter
 	{
 		// UNits are cm, convert to mm
 		if (units == LengthUnits.CENTIMETERS)
-			return value * 10;
+		{
+			BigDecimal decimal = new BigDecimal(value * 10);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
 		// Units are mm, convert to cm
 		else if (units == LengthUnits.MILLIMETERS)
-			return value * 0.1;
+		{
+			BigDecimal decimal = new BigDecimal(value * 0.1);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
 		
 		// Units are not cm or mm, do not convert
 		return value;
