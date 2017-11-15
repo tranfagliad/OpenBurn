@@ -2,8 +2,8 @@ package model.unitConversion;
 
 public enum LengthUnits
 {
-	INCHES      ("in"),
-	FEET        ("ft"),
+	INCHES      ("in."),
+	FEET        ("ft."),
 	MILLIMETERS ("mm"),
 	CENTIMETERS ("cm");
 	

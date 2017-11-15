@@ -83,10 +83,6 @@ public class PropellantInputView extends Pane
 		addBurnRateExponentInput();
 		addCstarInput();
 		
-		//addPrInput();
-		//addBrInput();
-		
-		
 	}//PropellantInputView()
 	
 	
