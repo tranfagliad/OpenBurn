@@ -21,6 +21,7 @@ import model.Case;
 import model.Nozzle;
 import model.calculations.RocketMath;
 import model.calculations.SimulationResults;
+import model.calculations.SimulationSummary;
 import model.grains.Grain;
 import model.grains.GrainFactory;
 import model.propellant.SteadyStatePropellant;
@@ -53,7 +54,7 @@ public class OpenBurnGUI extends Application
 	private static final String CLEAR_GRAPH      = "Clear Graph";
 	private static final String RESET_FIELDS     = "Reset Inputs";
 	
-	private static final String TEMP_LEGEND_NAME = "Sim1";
+	private static String TEMP_LEGEND_NAME = "Sim1";
 	
 	
 	
@@ -317,6 +318,8 @@ public class OpenBurnGUI extends Application
     	
     	// Run simulation, gather list of results
     	List<SimulationResults> simResults = RocketMath.simulate(simGrainList, deltaTime, theNozzle, theCase, thePropellant);
+    	SimulationSummary summary = new SimulationSummary(simResults);
+    	TEMP_LEGEND_NAME = summary.getClassification();
     	
     	// Add thrust vs. time data to the chart
     	outputGraph.addData(TEMP_LEGEND_NAME, simResults);

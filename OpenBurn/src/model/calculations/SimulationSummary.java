@@ -77,7 +77,7 @@ public class SimulationSummary
 		}
 		char letter = (char) (64 + letter_code);
 		double metric_average_thrust = UnitConverter.convertForceFromInternal(averageThrust, ForceUnits.NEWTONS);
-		this.classification = String.format("%c%.0f-P", letter,metric_average_thrust);	
+		this.classification = String.format("%c%.0f", letter,metric_average_thrust);	
 	}
 	
 	
