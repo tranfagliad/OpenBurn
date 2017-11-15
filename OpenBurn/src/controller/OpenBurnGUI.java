@@ -41,7 +41,7 @@ import view.grain.input.GrainInputView;
 public class OpenBurnGUI extends Application
 {
 	// Labels
-	private static final String WINDOW_TITLE     = "OpenBurn - Beta";
+	private static final String WINDOW_TITLE     = "OpenBurn";
 	private static final String GENERAL_TITLE    = "General";
 	private static final String NOZZLE_TITLE     = "Nozzle";
 	private static final String CASE_TITLE       = "Case";
