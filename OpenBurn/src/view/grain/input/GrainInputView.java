@@ -38,8 +38,8 @@ public class GrainInputView extends Pane
 	private static final String EDIT           = "Edit";
 	private static final String EMPTY_TEXT     = "No Grains";
 	private static final String CENTER_ALIGN   = "-fx-alignment: CENTER";
-	private static final String UP_ARROW       = "./../../../images/upArrow.png";
-	private static final String DOWN_ARROW     = "./../../../images/downArrow.png";
+	private static final String UP_ARROW       = "/images/upArrow.png";
+	private static final String DOWN_ARROW     = "/images/downArrow.png";
 	
 	
 	

@@ -39,7 +39,7 @@ public class AddGrainWindow extends Stage
 	private static final String SUBMIT_BUTTON_TEXT    = "Add Grain";
 	private static final String ERROR_TEXT            = "Inner diameter must be less than outer diameter!";
 	private static final String EMPTY                 = "";
-	private static final String ICON_FILE_PATH        = "./../../../images/OpenBurnLogo_1.png";
+	private static final String ICON_FILE_PATH        = "/images/OpenBurnLogo_1.png";
 	
 	
 	

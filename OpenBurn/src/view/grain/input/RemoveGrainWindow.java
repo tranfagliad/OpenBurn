@@ -25,7 +25,7 @@ public class RemoveGrainWindow extends Stage
 	private static final String REMOVE_GRAIN_PROMPT = "Are you sure you want to remove this grain?";
 	private static final String YES                 = "Yes";
 	private static final String NO                  = "No";
-	private static final String ICON_FILE_PATH      = "./../../../images/OpenBurnLogo_1.png";
+	private static final String ICON_FILE_PATH      = "/images/OpenBurnLogo_1.png";
 	
 	
 	

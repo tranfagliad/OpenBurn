@@ -46,7 +46,7 @@ public class OpenBurnGUI extends Application
 	private static final String SIMULATE         = "Simulate";
 	private static final String EXPORT_CSV       = "Export to CSV";
 	private static final String EXPORT_RSE       = "Export to RSE";
-	private static final String ICON_FILE_PATH   = "./../images/OpenBurnLogo_1.png";
+	private static final String ICON_FILE_PATH   = "/images/OpenBurnLogo_1.png";
 	private static final String CLEAR_GRAPH      = "Clear Graph";
 	private static final String RESET_FIELDS     = "Reset Inputs";
 	
