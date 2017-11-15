@@ -209,6 +209,17 @@ public class GraphView extends Pane
 	
 	
 	
+	/*
+	 * 
+	 */
+	
+	public void setData (List<SimulationResults> newData)
+	{
+		simResults = newData;
+	} // 
+	
+	
+	
 	/**
 	 * addData()
 	 * 
