@@ -20,14 +20,14 @@ public class PropellantInputView extends Pane
 	private static final String DENSITY_PROMPT = "Propellant Density";
 	private static final String STEADY_STATE   = "Steady-State";
 	private static final String EMPERICAL      = "Emperical";
-	private static final String PR_TEXT        = "Pr =";
-	private static final String BR_TEXT        = "Br =";
-	private static final String KN_TEXT        = "Kn +";
+	private static final String PR_TEXT        = "Pr = (";
+	private static final String BR_TEXT        = "Br = (";
+	private static final String KN_TEXT        = "*Kn) +";
 	
 	
 	private static final String BURN_RATE_COEFFICIENT_PROMPT = "Burn Rate Coefficient";
 	private static final String BURN_RATE_EXPONENT_PROMPT    = "Burn Rate Exponent";
-	private static final String C_STAR_PROMPT                = "Characteristic Velocity (c*)";
+	private static final String C_STAR_PROMPT                = "Characteristic Velocity (C*)";
 	
 	
 	
