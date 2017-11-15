@@ -126,7 +126,7 @@ public class CMDLineInterface {
 		}
 		String fileName = input.next() + CSV_EXTENSION;
 
-		CSVConverter.writeResultsArr(theResults, fileName);
+		//CSVConverter.writeResultsArr(theResults, fileName);
 
 		input.close(); // Close keyboard input
 

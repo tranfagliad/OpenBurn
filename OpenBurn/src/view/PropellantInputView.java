@@ -297,22 +297,22 @@ public class PropellantInputView extends Pane
 	{
 		brText = new Text(BR_TEXT);
 		brText.setTranslateX(20);
-		brText.setTranslateY(230);
+		brText.setTranslateY(240);
 		this.getChildren().add(brText);
 		
 		brTextField = new NumberTextField();
 		brTextField.setTranslateX(55);
-		brTextField.setTranslateY(210);
+		brTextField.setTranslateY(220);
 		this.getChildren().add(brTextField);
 		
 		knTextbr = new Text(KN_TEXT);
 		knTextbr.setTranslateX(250);
-		knTextbr.setTranslateY(230);
+		knTextbr.setTranslateY(240);
 		this.getChildren().add(knTextbr);
 		
 		knTextFieldbr = new NumberTextField();
 		knTextFieldbr.setTranslateX(290);
-		knTextFieldbr.setTranslateY(210);
+		knTextFieldbr.setTranslateY(220);
 		this.getChildren().add(knTextFieldbr);
 	}
 	

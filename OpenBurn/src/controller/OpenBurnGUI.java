@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.Case;
 import model.Nozzle;
@@ -350,7 +353,15 @@ public class OpenBurnGUI extends Application
 		{
 		    @Override public void handle (ActionEvent e)
 		    {
-		    	CSVConverter.writeResultsArr(outputGraph.getData(), TEMP_LEGEND_NAME + ".csv");
+		    	FileChooser fileChooser = new FileChooser();
+		    	 fileChooser.setTitle("Save Simulation Data");
+		    	 fileChooser.setInitialFileName(TEMP_LEGEND_NAME);
+		    	 fileChooser.getExtensionFilters().addAll(
+		    	         new ExtensionFilter("CSV Files (.csv)", "*.csv"));
+		    	 File selectedFile = fileChooser.showSaveDialog(frame.getScene().getWindow());
+		    	 
+		    	 if (selectedFile != null)
+		    		 CSVConverter.writeResultsArr(outputGraph.getData(), selectedFile);
 		    }
 		});
 		

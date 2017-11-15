@@ -42,22 +42,19 @@ public class CSVConverter
 	 * Returns: void.
 	**/
 	
-	public static void writeResultsArr (List<SimulationResults> theResults, String filename)
+	public static void writeResultsArr (List<SimulationResults> theResults, File file)
 	{
-		// Check if given arguments are valid
-		errorCheckArgs(theResults, filename);
-		
 		// Create the directory to send the results file to
 		// Throw exception if directory was not created
-		File resultsDir = new File(RESULTS_DIRECTORY);
-		if (!resultsDir.exists())
-			if (resultsDir.mkdir() == false)
-				throw new RuntimeException(DIR_ERROR_MSG);
+		//File resultsDir = new File(RESULTS_DIRECTORY);
+		//if (!resultsDir.exists())
+		//	if (resultsDir.mkdir() == false)
+		//		throw new RuntimeException(DIR_ERROR_MSG);
 		
 		// Create the file writer
 		BufferedWriter fileWriter = null;
 		try {
-			fileWriter = new BufferedWriter(new FileWriter(RESULTS_DIRECTORY + filename));
+			fileWriter = new BufferedWriter(new FileWriter(file));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
