@@ -136,6 +136,7 @@ public class CMDLineInterface {
 		System.out.println("Max Thrust " + summary.getMaxThrust());
 		System.out.println("Average thrust " + summary.getaverageThrust());
 		System.out.format("Burntime %.2f\n", summary.getBurnTime());
+		System.out.format("Classification %s\n", summary.getClassification());
 		System.out.println(SIM_OVER);
 	} // main()
 

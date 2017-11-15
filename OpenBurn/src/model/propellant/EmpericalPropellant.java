@@ -24,14 +24,35 @@ public class EmpericalPropellant extends Propellant {
 		this.Kn = 0; // Prevent null pointer exceptions 
 	}
 	
+	/**
+	 * setKn(double Kn)
+	 * 
+	 * Purpose: Set the Kn to be used in the model
+	 */
 	public void setKn(double Kn){
 		this.Kn = Kn;
 	}
 	
+	/**
+	 * pressureFromKn()
+	 * 
+	 * Purpose: calculates and returns the case pressure at one instant of time.
+	 * 
+	 * Returns: double. The chamber pressure at one instant of time.
+	**/
 	public double getChamberPressure() {
 		return (p_slope*Kn) + p_intercept;
 	}
 
+	/**
+	 * burnRateFromPressure()
+	 * 
+	 * Purpose: calculates and returns the burn rate at one instant of time.
+	 * 
+	 * Parameters: double -- the pressure at one instant of time.
+	 * 
+	 * Returns: double. The burn rate at one instant of time.
+	**/
 	public double getBurnRate() {
 		return (br_slope*Kn) + br_intercept;
 	}

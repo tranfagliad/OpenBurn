@@ -56,15 +56,28 @@ public class SimulationSummary
 			maxThrust = Math.max(maxThrust, curr.getThrust());
 			maxPressure = Math.max(maxPressure, curr.getChamberPressure());
 		}
-		averageThrustHelper/=count;
 		double delta_x = (b-a)/count;
 		this.impulse = trap_integral_helper * (delta_x/2);
 		this.ISP = impulse/results.get(0).getSystemMass();
-		this.averageThrust = averageThrustHelper;
+		this.averageThrust = averageThrustHelper/count;
 		this.maxPressure = maxPressure;
 		this.maxThrust = maxThrust;
 		this.massFrac = 65; // TODO: fix this!
 		this.burnTime = b;
+		
+		double metric_impulse = UnitConverter.convertForceFromInternal(impulse, ForceUnits.NEWTONS);
+		
+		//Classification generation
+		int letter_code = 1;
+		double lower_bound = 1.25;
+		while (!((metric_impulse >= lower_bound) && (metric_impulse < (lower_bound * 2))))
+		{
+			letter_code++;
+			lower_bound*=2;
+		}
+		char letter = (char) (64 + letter_code);
+		double metric_average_thrust = UnitConverter.convertForceFromInternal(averageThrust, ForceUnits.NEWTONS);
+		this.classification = String.format("%c%.0f-P", letter,metric_average_thrust);	
 	}
 	
 	

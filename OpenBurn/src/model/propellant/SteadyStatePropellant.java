@@ -14,7 +14,6 @@ public class SteadyStatePropellant extends Propellant
 	private double burnRateExponent; // n
 	private double density; // rho
 	private double Cstar;
-	private double Kn;
 	private double pressure;
 	
 	
@@ -22,7 +21,7 @@ public class SteadyStatePropellant extends Propellant
 	/**
 	 * Propellant Constructor
 	 * 
-	 * Purpose: Creates and initializes a case for the rocket during
+	 * Purpose: Creates and initializes a propellant for the rocket during
 	 * 		the simulation.
 	**/
 	public SteadyStatePropellant(double burnRateCoefficient, double burnRateExponent, double density, double Cstar)
@@ -31,31 +30,24 @@ public class SteadyStatePropellant extends Propellant
 		this.burnRateExponent = burnRateExponent;
 		this.density = density;
 		this.Cstar = Cstar;
-		//Prevent null pointer exceptions
-		this.Kn = 0;
 		this.pressure = 0;
 	}//Propellant Constructor
 	
 	/**
-	 * pressureFromKn()
+	 * getChamberPressure()
 	 * 
 	 * Purpose: calculates and returns the case pressure at one instant of time.
 	 * 
-	 * Parameters: double -- the kn at one instant of time.
-	 * 
-	 * Returns: double. The case pressure at one instant of time.
+	 * Returns: double. The chamber pressure at one instant of time.
 	**/
 	public double getChamberPressure()
 	{
 		//p = (Kn * a * rho * C* )^(1/(1-n))
-	    double exponent = 1.0 / (1.0 - burnRateExponent);
-	    double p1 = Kn * burnRateCoefficient * density * Cstar;
-	    pressure =  Math.pow(p1, exponent);
 	    return pressure;
 	}//pressureFromKn()
 	
 	/**
-	 * burnRateFromPressure()
+	 * getBurnRate()
 	 * 
 	 * Purpose: calculates and returns the burn rate at one instant of time.
 	 * 
@@ -84,10 +76,22 @@ public class SteadyStatePropellant extends Propellant
 		return density;
 	}//getPropellantDensity()
 
+	/**
+	 * setKn(double Kn) 
+	 * 
+	 * Purpose: Sets the current Kn and calculates pressure
+	 * Pressure calculation is done here as the burn rate
+	 * depends on pressure.
+	 * 
+	 * Parameters: double -- the kn at one instant of time.
+	 * 
+	 * Returns: None
+	 */
 	public void setKn(double Kn) 
 	{
-		this.Kn = Kn;
-		
+	    double exponent = 1.0 / (1.0 - burnRateExponent);
+	    double p1 = Kn * burnRateCoefficient * density * Cstar;
+	    pressure =  Math.pow(p1, exponent);
 	}
 	
 }//Propellant
