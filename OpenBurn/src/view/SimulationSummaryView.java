@@ -1,5 +1,8 @@
 package view;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import model.calculations.SimulationSummary;
@@ -13,6 +16,7 @@ import model.calculations.SimulationSummary;
 public class SimulationSummaryView extends Pane
 {
 	//LABELS
+	private static final String SIMULATION_SUMMARY = "Simulation Summary";
 	private static final String CLASSIFICATION_TEXT = "Classification:\n";
 	private static final String ISP_TEXT = "ISP:\n";
 	private static final String MASS_FRAC_TEXT = "Mass Frac:\n";
@@ -23,6 +27,7 @@ public class SimulationSummaryView extends Pane
 	private static final String BURN_TIME_TEXT = "Burn Time:\n";
 	
 	//components
+	private Text simulationSummary;
 	private Text classification;
 	private Text ISP;
 	private Text massFrac;
@@ -34,11 +39,11 @@ public class SimulationSummaryView extends Pane
 	
 	// Constants
 	private static final int FIRST_COL_X = 20;
-	private static final int SECOND_COL_X = 250;
-	private static final int FIRST_ROW_Y  = 30;
-	private static final int SECOND_ROW_Y = 110;
-	private static final int THIRD_ROW_Y = 190;
-	private static final int FOURTH_ROW_Y = 270;
+	private static final int SECOND_COL_X = 200;
+	private static final int FIRST_ROW_Y  = 70;
+	private static final int SECOND_ROW_Y = 140;
+	private static final int THIRD_ROW_Y = 210;
+	private static final int FOURTH_ROW_Y = 280;
 	
 	/**
 	 * SimulationSummaryView Constructor
@@ -48,6 +53,11 @@ public class SimulationSummaryView extends Pane
 	public SimulationSummaryView()
 	{
 		super();
+		
+		simulationSummary = new Text(SIMULATION_SUMMARY);
+		simulationSummary.setTranslateX(FIRST_COL_X);
+		simulationSummary.setTranslateY(20);
+		this.getChildren().add(simulationSummary);
 		
 		classification = new Text(CLASSIFICATION_TEXT);
 		classification.setTranslateX(FIRST_COL_X);
@@ -103,13 +113,34 @@ public class SimulationSummaryView extends Pane
 	public void setSummary(SimulationSummary summary)
 	{
 		classification.setText(CLASSIFICATION_TEXT + summary.getClassification());
-		ISP.setText(ISP_TEXT + summary.ISP());
-		massFrac.setText(MASS_FRAC_TEXT + summary.getMassFrac());
-		impulse.setText(IMPULSE_TEXT + summary.getImpulse());
-		averageThrust.setText(AVERAGE_THRUST_TEXT + summary.getaverageThrust());
-		maxThrust.setText(MAX_THRUST_TEXT + summary.getMaxThrust());
-		maxPressure.setText(MAX_PRESSURE_TEXT + summary.getmaxPressure());
-		burnTime.setText(BURN_TIME_TEXT + summary.getBurnTime());
+		
+		BigDecimal roundedValue = new BigDecimal(summary.ISP());
+		roundedValue = roundedValue.round(new MathContext(6));
+		ISP.setText(ISP_TEXT + roundedValue);
+		
+		roundedValue = new BigDecimal(summary.getMassFrac());
+		roundedValue = roundedValue.round(new MathContext(6));
+		massFrac.setText(MASS_FRAC_TEXT + roundedValue);
+		
+		roundedValue = new BigDecimal(summary.getImpulse());
+		roundedValue = roundedValue.round(new MathContext(6));
+		impulse.setText(IMPULSE_TEXT + roundedValue);
+		
+		roundedValue = new BigDecimal(summary.getaverageThrust());
+		roundedValue = roundedValue.round(new MathContext(6));
+		averageThrust.setText(AVERAGE_THRUST_TEXT + roundedValue);
+		
+		roundedValue = new BigDecimal(summary.getMaxThrust());
+		roundedValue = roundedValue.round(new MathContext(6));
+		maxThrust.setText(MAX_THRUST_TEXT + roundedValue);
+		
+		roundedValue = new BigDecimal(summary.getmaxPressure());
+		roundedValue = roundedValue.round(new MathContext(6));
+		maxPressure.setText(MAX_PRESSURE_TEXT + roundedValue);
+		
+		roundedValue = new BigDecimal(summary.getBurnTime());
+		roundedValue = roundedValue.round(new MathContext(3));
+		burnTime.setText(BURN_TIME_TEXT + roundedValue);
 	}
 
 }

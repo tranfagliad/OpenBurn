@@ -55,24 +55,24 @@ public class OpenBurnGUI extends Application
 	private static final String CLEAR_GRAPH      = "Clear Graph";
 	private static final String RESET_FIELDS     = "Reset Inputs";
 	
-	private static String TEMP_LEGEND_NAME = "Sim1";
+	private static String TEMP_LEGEND_NAME;
 	
 	
 	
 	// Constants
-	private static final int WINDOW_WIDTH  = 1200;
-	private static final int WINDOW_HEIGHT = 820;
-	private static final int GRAIN_INPUT_X = 650;
-	private static final int GRAIN_INPUT_Y = 10;
-	private static final int GRAPH_WIDTH   = 750; //originally 1150
-	private static final int GRAPH_HEIGHT  = 450;
-	private static final int GRAPH_X       = 20;
-	private static final int GRAPH_Y       = 330;
-	private static final int EMPTY         = 0;
+	private static final int WINDOW_WIDTH    = 1200;
+	private static final int WINDOW_HEIGHT   = 820;
+	private static final int GRAIN_INPUT_X   = 650;
+	private static final int GRAIN_INPUT_Y   = 10;
+	private static final int GRAPH_WIDTH     = 750;
+	private static final int GRAPH_HEIGHT    = 450;
+	private static final int GRAPH_X         = 20;
+	private static final int GRAPH_Y         = 330;
+	private static final int EMPTY           = 0;
 	private static final int SUMMARY_WIDTH   = 350;
-	private static final int SUMMARY_HEIGHT  = 450;
+	private static final int SUMMARY_HEIGHT  = 350;
 	private static final int SUMMARY_X       = 800;
-	private static final int SUMMARY_Y       = 400;
+	private static final int SUMMARY_Y       = 375;
 	
 	
 	// Components
@@ -140,6 +140,7 @@ public class OpenBurnGUI extends Application
 		addClearGraphButton(frame);
 		addResetButton(frame);
 		addSummary(frame);
+		
 		// Display window
 		stage.show();
 	} // start()
@@ -327,7 +328,6 @@ public class OpenBurnGUI extends Application
     	TEMP_LEGEND_NAME = summary.getClassification();
     	summaryOutput.setSummary(summary);
     	
-    	
     	// Add thrust vs. time data to the chart
     	outputGraph.addData(TEMP_LEGEND_NAME, simResults);
 	} // runSimulation()
@@ -414,6 +414,7 @@ public class OpenBurnGUI extends Application
 		    @Override public void handle (ActionEvent e)
 		    {
 		    	outputGraph.getChart().getData().clear();
+		    	outputGraph.setImageVisible(true);
 		    }
 		});
 	} // addClearButton()

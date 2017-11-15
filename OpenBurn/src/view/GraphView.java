@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import model.calculations.SimulationResults;
+import model.calculations.SimulationSummary;
 
 /**
  * GraphView.java
@@ -53,7 +54,7 @@ public class GraphView extends Pane
 	// Fields
 	private String legendName;
 	private List<SimulationResults> simResults;
-	
+	private SimulationSummary summary;
 	
 	
 	
@@ -82,7 +83,7 @@ public class GraphView extends Pane
 	    
 	    // Place logo in the background
 	    logo = new ImageView(new Image(this.getClass().getResourceAsStream(ICON_FILE_PATH)));
-	    logo.setTranslateX(450);
+	    logo.setTranslateX(250);
 	    logo.setTranslateY(75);
 	    this.getChildren().add(logo);
 	    

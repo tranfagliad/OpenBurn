@@ -272,7 +272,7 @@ public class PropellantInputView extends Pane
 		this.getChildren().add(prText);
 		
 		prTextField = new NumberTextField();
-		prTextField.setTranslateX(55);
+		prTextField.setTranslateX(60);
 		prTextField.setTranslateY(160);
 		this.getChildren().add(prTextField);
 		
@@ -282,7 +282,7 @@ public class PropellantInputView extends Pane
 		this.getChildren().add(knTextpr);
 		
 		knTextFieldpr = new NumberTextField();
-		knTextFieldpr.setTranslateX(290);
+		knTextFieldpr.setTranslateX(300);
 		knTextFieldpr.setTranslateY(160);
 		this.getChildren().add(knTextFieldpr);
 	}
@@ -301,7 +301,7 @@ public class PropellantInputView extends Pane
 		this.getChildren().add(brText);
 		
 		brTextField = new NumberTextField();
-		brTextField.setTranslateX(55);
+		brTextField.setTranslateX(60);
 		brTextField.setTranslateY(220);
 		this.getChildren().add(brTextField);
 		
@@ -311,7 +311,7 @@ public class PropellantInputView extends Pane
 		this.getChildren().add(knTextbr);
 		
 		knTextFieldbr = new NumberTextField();
-		knTextFieldbr.setTranslateX(290);
+		knTextFieldbr.setTranslateX(300);
 		knTextFieldbr.setTranslateY(220);
 		this.getChildren().add(knTextFieldbr);
 	}
