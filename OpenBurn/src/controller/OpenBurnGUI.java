@@ -166,7 +166,7 @@ public class OpenBurnGUI extends Application
 		
 		// Complete tab pane and add to the window
 		inputs = new TabPane(generalTab, nozzleTab, caseTab, propellantTab);
-		inputs.setPrefHeight(250);
+		inputs.setPrefHeight(350);
 		inputs.setPrefWidth(500);
 		frame.getChildren().add(inputs);
 	} // addInputTabs()
