@@ -13,14 +13,14 @@ import model.calculations.SimulationSummary;
 public class SimulationSummaryView extends Pane
 {
 	//LABELS
-	private static final String CLASSIFICATION_TEXT = "Classification: ";
-	private static final String ISP_TEXT = "ISP: ";
-	private static final String MASS_FRAC_TEXT = "Mass Frac: ";
-	private static final String IMPULSE_TEXT = "Impulse: ";
-	private static final String AVERAGE_THRUST_TEXT = "Average Thrust: ";
-	private static final String MAX_THRUST_TEXT = "Max Thrust: ";
-	private static final String MAX_PRESSURE_TEXT = "Max Pressure: ";
-	private static final String BURN_TIME_TEXT = "Burn Time: ";
+	private static final String CLASSIFICATION_TEXT = "Classification:\n";
+	private static final String ISP_TEXT = "ISP:\n";
+	private static final String MASS_FRAC_TEXT = "Mass Frac:\n";
+	private static final String IMPULSE_TEXT = "Impulse:\n";
+	private static final String AVERAGE_THRUST_TEXT = "Average Thrust:\n";
+	private static final String MAX_THRUST_TEXT = "Max Thrust:\n";
+	private static final String MAX_PRESSURE_TEXT = "Max Pressure:\n";
+	private static final String BURN_TIME_TEXT = "Burn Time:\n";
 	
 	//components
 	private Text classification;
