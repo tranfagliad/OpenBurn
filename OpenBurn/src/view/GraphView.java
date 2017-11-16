@@ -48,6 +48,7 @@ public class GraphView extends Pane
 	private RadioButton thrustToggle;
 	private RadioButton pressureToggle;
 	private ImageView logo;
+	private static boolean clearSwitch;
 	
 	
 	
@@ -219,7 +220,15 @@ public class GraphView extends Pane
 		simResults = newData;
 	} // 
 	
-	
+	public static boolean isClearSwitch() {
+		return clearSwitch;
+	}
+
+
+
+	public static void setClearSwitch(boolean clearSwitch) {
+		GraphView.clearSwitch = clearSwitch;
+	}
 	
 	/**
 	 * addData()
@@ -279,6 +288,7 @@ public class GraphView extends Pane
 			dataSeries.getData().add(new XYChart.Data(currentResults.getTime(), currentResults.getThrust()));
 		
 		// Add the data series to the chart
+		if(clearSwitch==true)
 		chart.getData().addAll(dataSeries);
 	} // addThrustVsTimeDataSet()
 	
@@ -313,6 +323,7 @@ public class GraphView extends Pane
 			dataSeries.getData().add(new XYChart.Data(currentResults.getTime(), currentResults.getChamberPressure()));
 		
 		// Add the data series to the chart
+		if(clearSwitch==true)
 		chart.getData().addAll(dataSeries);
 	} // addPressureVsTimeDataSet()
 	

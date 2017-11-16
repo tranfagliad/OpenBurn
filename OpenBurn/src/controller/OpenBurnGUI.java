@@ -262,6 +262,7 @@ public class OpenBurnGUI extends Application
 		{
 		    @Override public void handle (ActionEvent e)
 		    {
+		    	outputGraph.setClearSwitch(true);
 		    	outputGraph.setImageVisible(false);
 		    	runSimulation();
 		    	//simulationRan = true;
@@ -414,6 +415,7 @@ public class OpenBurnGUI extends Application
 		    @Override public void handle (ActionEvent e)
 		    {
 		    	outputGraph.getChart().getData().clear();
+		    	outputGraph.setClearSwitch(false);
 		    	outputGraph.setImageVisible(true);
 		    }
 		});
