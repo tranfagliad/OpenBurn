@@ -20,6 +20,7 @@ import model.grains.CylindricalGrain;
 import model.grains.Grain;
 import model.grains.GrainFactory;
 import model.grains.GrainType;
+import controller.LengthUnitsSelector;
 
 /**
  * AddGrainWindow.java
@@ -137,6 +138,12 @@ public class AddGrainWindow extends Stage
     	lengthTextField.setTranslateY(50);
 		frame.getChildren().add(lengthTextField);
 		
+		LengthUnitsSelector units = new LengthUnitsSelector(lengthTextField);
+		units.setTranslateX(135);
+		units.setTranslateY(50);
+		lengthTextField.setPrefWidth(110);
+		frame.getChildren().add(units);
+		
 		// Set binding rules on length input
 		lengthTextFieldNotValid = Bindings.createBooleanBinding(() ->
 		{
@@ -172,6 +179,12 @@ public class AddGrainWindow extends Stage
 		outerDiameterTextField.setTranslateX(25);
     	outerDiameterTextField.setTranslateY(140);
 		frame.getChildren().add(outerDiameterTextField);
+		
+		LengthUnitsSelector units = new LengthUnitsSelector(outerDiameterTextField);
+		units.setTranslateX(135);
+		units.setTranslateY(140);
+		outerDiameterTextField.setPrefWidth(110);
+		frame.getChildren().add(units);
 		
 		// Set binding rules on outer diameter input
 		outerDiameterTextFieldNotValid = Bindings.createBooleanBinding(() ->
@@ -249,6 +262,12 @@ public class AddGrainWindow extends Stage
 		innerDiameterTextField.setTranslateX(235);
     	innerDiameterTextField.setTranslateY(140);
 		frame.getChildren().add(innerDiameterTextField);
+		
+		LengthUnitsSelector units = new LengthUnitsSelector(innerDiameterTextField);
+		units.setTranslateX(345);
+		units.setTranslateY(140);
+		innerDiameterTextField.setPrefWidth(110);
+		frame.getChildren().add(units);
 		
 		// Set binding rule on inner diameter input
 		innerDiameterTextFieldNotValid = Bindings.createBooleanBinding(() ->

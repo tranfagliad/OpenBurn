@@ -1,5 +1,7 @@
 package view;
 
+import controller.DensityUnitsSelector;
+import controller.LengthUnitsSelector;
 import controller.NumberTextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -104,6 +106,12 @@ public class PropellantInputView extends Pane
 		propDensityTextField.setTranslateX(FIRST_COL_X);
 		propDensityTextField.setTranslateY(FIRST_ROW_FIELD_Y);
 		this.getChildren().add(propDensityTextField);
+		
+		DensityUnitsSelector units = new DensityUnitsSelector(propDensityTextField);
+		units.setTranslateX(130);
+		units.setTranslateY(40);
+		propDensityTextField.setPrefWidth(110);
+		this.getChildren().add(units);
 	} // addPropellantDensityInput()
 	
 	
@@ -256,6 +264,8 @@ public class PropellantInputView extends Pane
 		cStarTextField.setTranslateX(FIRST_COL_X);
 		cStarTextField.setTranslateY(240);
 		this.getChildren().add(cStarTextField);
+		
+		
 	} // addCstarInput()
 	
 	

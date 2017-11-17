@@ -1,6 +1,7 @@
 package view.grain.input;
 
 import controller.GrainTableHandle;
+import controller.LengthUnitsSelector;
 import controller.NumberTextField;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -59,6 +60,7 @@ public class EditGrainWindow extends Stage
 	private ComboBox<String> burningEndsSelection;
 	private NumberTextField innerDiameterTextField;
 	private Button submitButton;
+	private LengthUnitsSelector lengthUnits;
 	
 	
 	
@@ -136,6 +138,14 @@ public class EditGrainWindow extends Stage
     	lengthTextField.setTranslateY(50);
 		frame.getChildren().add(lengthTextField);
 		
+		
+		LengthUnitsSelector units = new LengthUnitsSelector(lengthTextField);
+		units.setTranslateX(135);
+		units.setTranslateY(50);
+		lengthTextField.setPrefWidth(110);
+		frame.getChildren().add(units);
+		
+		
 		// Set binding rule on length input
 		lengthTextFieldNotValid = Bindings.createBooleanBinding(() ->
 		{
@@ -169,6 +179,12 @@ public class EditGrainWindow extends Stage
 		outerDiameterTextField.setTranslateX(25);
     	outerDiameterTextField.setTranslateY(140);
     	frame.getChildren().add(outerDiameterTextField);
+    	
+		LengthUnitsSelector units = new LengthUnitsSelector(outerDiameterTextField);
+		units.setTranslateX(135);
+		units.setTranslateY(140);
+		outerDiameterTextField.setPrefWidth(110);
+		frame.getChildren().add(units);
 		
     	// Set binding rule on outer diameter input
 		outerDiameterTextFieldNotValid = Bindings.createBooleanBinding(() ->
@@ -240,6 +256,13 @@ public class EditGrainWindow extends Stage
 		innerDiameterTextField.setTranslateX(235);
     	innerDiameterTextField.setTranslateY(140);
 		frame.getChildren().add(innerDiameterTextField);
+		
+		
+		LengthUnitsSelector units = new LengthUnitsSelector(innerDiameterTextField);
+		units.setTranslateX(345);
+		units.setTranslateY(140);
+		innerDiameterTextField.setPrefWidth(110);
+		frame.getChildren().add(units);
 		
 		// Set binding rule on inner diameter input
 		innerDiameterTextFieldNotValid = Bindings.createBooleanBinding(() ->
