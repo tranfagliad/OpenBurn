@@ -49,7 +49,7 @@ public class DensityUnitsSelector extends ComboBox<String>
 				this.setUnits(newValue);
 				DensityUnits newUnits = units;
 				
-				//this.valueField.setText(String.valueOf(UnitConverter.convertDensityToInternal(Double.parseDouble(valueField.getText()),units)));
+				this.valueField.setText(String.valueOf(UnitConverter.unitDensityConverter(Double.parseDouble(this.valueField.getText()), oldUnits, newUnits)));
 			}
 			this.setUnits(newValue);
 	    }); 

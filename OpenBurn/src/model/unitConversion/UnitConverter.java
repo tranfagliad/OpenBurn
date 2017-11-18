@@ -412,14 +412,14 @@ public class UnitConverter
 	{
 		if (units == DensityUnits.GRAMS_PER_CUBIC_CENTIMETER)
 		{
-			BigDecimal decimal = new BigDecimal(value / 2.54);
+			BigDecimal decimal = new BigDecimal(value * 2.54);
 			decimal = decimal.round(new MathContext(6));
 			return decimal.doubleValue();
 		}
 			
 		else if (units == DensityUnits.GRAMS_PER_CUBIC_INCH)
 		{
-			BigDecimal decimal = new BigDecimal(value * 2.54);
+			BigDecimal decimal = new BigDecimal(value / 2.54);
 			decimal = decimal.round(new MathContext(6));
 			return decimal.doubleValue();
 		}
