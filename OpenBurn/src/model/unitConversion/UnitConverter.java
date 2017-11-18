@@ -205,14 +205,14 @@ public class UnitConverter
 		// UNits are cm, convert to mm
 				if (units == MassUnits.GRAMS)
 				{
-					BigDecimal decimal = new BigDecimal(value * 1000);
+					BigDecimal decimal = new BigDecimal(value / 1000);
 					decimal = decimal.round(new MathContext(6));
 					return decimal.doubleValue();
 				}
 				// Units are mm, convert to cm
 				else if (units == MassUnits.KILOGRAMS)
 				{
-					BigDecimal decimal = new BigDecimal(value / 1000);
+					BigDecimal decimal = new BigDecimal(value * 1000);
 					decimal = decimal.round(new MathContext(6));
 					return decimal.doubleValue();
 				}
