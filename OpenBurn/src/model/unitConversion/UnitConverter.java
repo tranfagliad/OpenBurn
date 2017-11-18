@@ -126,6 +126,44 @@ public class UnitConverter
 		
 	}
 	
+	public static double unitDensityConverter(double val, DensityUnits oldUnits, DensityUnits newUnits){
+		if (oldUnits == DensityUnits.GRAMS_PER_CUBIC_CENTIMETER)
+		{
+			if(newUnits == DensityUnits.GRAMS_PER_CUBIC_INCH){
+				val = gramsCmGramsInConversion(DensityUnits.GRAMS_PER_CUBIC_CENTIMETER, val);
+				return val;
+			}
+			if(newUnits == DensityUnits.POUNDS_MASS_PER_CUBIC_INCH){
+				val = gramsCmPoundsInConversion(DensityUnits.GRAMS_PER_CUBIC_CENTIMETER,val);
+				return val;
+				
+			}
+		}
+		if (oldUnits == DensityUnits.GRAMS_PER_CUBIC_INCH)
+		{
+			if(newUnits == DensityUnits.GRAMS_PER_CUBIC_CENTIMETER){
+				val = gramsCmGramsInConversion(DensityUnits.GRAMS_PER_CUBIC_INCH, val);
+				return val;
+			}
+			if(newUnits == DensityUnits.POUNDS_MASS_PER_CUBIC_INCH){
+				val = poundsInGramsInConversion(DensityUnits.GRAMS_PER_CUBIC_INCH,val);
+				return val;
+			}
+		}
+		if (oldUnits == DensityUnits.POUNDS_MASS_PER_CUBIC_INCH)
+		{
+			if(newUnits == DensityUnits.GRAMS_PER_CUBIC_CENTIMETER){
+				val = gramsCmPoundsInConversion(DensityUnits.POUNDS_MASS_PER_CUBIC_INCH, val);
+				return val;
+			}
+			if(newUnits == DensityUnits.GRAMS_PER_CUBIC_INCH){
+				val = poundsInGramsInConversion(DensityUnits.POUNDS_MASS_PER_CUBIC_INCH,val);
+				return val;
+			}
+		}
+		return val;
+		
+	}
 	
 	/**
 	 * 
