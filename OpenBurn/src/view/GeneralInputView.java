@@ -14,7 +14,8 @@ import javafx.scene.text.Text;
 public class GeneralInputView extends Pane
 {
 	// Labels
-	private static final String TIME_DELTA_PROMPT = "Change in time (seconds)";
+	private static final String TIME_DELTA_PROMPT = "Change in time";
+	private static final String SECONDS = "seconds";
 	
 	
 	
@@ -27,6 +28,7 @@ public class GeneralInputView extends Pane
 	
 	// Components
 	private Text timeDeltaText;
+	private Text secondsText;
 	private NumberTextField timeDeltaTextField;
 	
 	
@@ -74,6 +76,12 @@ public class GeneralInputView extends Pane
 		timeDeltaTextField.setTranslateX(FIRST_COL_X);
 		timeDeltaTextField.setTranslateY(FIRST_ROW_FIELD_Y);
 		this.getChildren().add(timeDeltaTextField);
+		
+		// Units
+		secondsText = new Text(SECONDS);
+		secondsText.setTranslateX(220);
+		secondsText.setTranslateY(FIRST_ROW_FIELD_Y+20);
+		this.getChildren().add(secondsText);
 	} // addTimeInput()
 	
 	

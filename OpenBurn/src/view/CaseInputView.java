@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controller.LengthUnitsSelector;
+import controller.MassUnitsSelector;
 import controller.NumberTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,7 +47,7 @@ public class CaseInputView extends Pane
 	private NumberTextField massTextField;
 	private NumberTextField diameterTextField;
 	private NumberTextField lengthTextField;
-	private ComboBox <String> caseMassUnits;
+	private MassUnitsSelector caseMassUnits;
 	private LengthUnitsSelector caseDiamUnits;
 	private LengthUnitsSelector caseLengthUnits;
 	
@@ -97,14 +98,8 @@ public class CaseInputView extends Pane
 		massTextField.setPrefWidth(100);
 		this.getChildren().add(massTextField);
 		
-		// Gather units
-		List<String> massUnits = new ArrayList<String>();
-		for (MassUnits units : MassUnits.values())
-			massUnits.add(units.getAbbr());
-		ObservableList<String> options = FXCollections.observableArrayList(massUnits);
-		
 		// Add unit selector
-		caseMassUnits = new ComboBox<String>(options);
+		caseMassUnits = new MassUnitsSelector(massTextField);
 		caseMassUnits.setTranslateX(FIRST_COL_X+100);
 		caseMassUnits.setTranslateY(FIRST_ROW_FIELD_Y);
 		caseMassUnits.setPrefWidth(80);
