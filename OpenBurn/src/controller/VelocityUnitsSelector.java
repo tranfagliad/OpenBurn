@@ -24,7 +24,7 @@ public class VelocityUnitsSelector extends ComboBox<String>
 	/*
 	 * 
 	 */
-	
+	/*
 	public VelocityUnitsSelector (NumberTextField valueField)
 	{
 		//
@@ -54,7 +54,7 @@ public class VelocityUnitsSelector extends ComboBox<String>
 			this.setUnits(newValue);
 	    }); 
 	} // 
-	
+	*/
 	
 	
 	/*

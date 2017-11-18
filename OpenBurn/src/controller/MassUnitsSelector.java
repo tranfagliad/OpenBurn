@@ -48,8 +48,7 @@ public class MassUnitsSelector extends ComboBox<String>
 				this.setUnits(newValue);
 				MassUnits newUnits = units;
 				
-				System.out.println(newValue);
-				//this.valueField.setText(String.valueOf(UnitConverter.unitLengthConverter(Double.parseDouble(this.valueField.getText()), oldUnits, newUnits)));
+				this.valueField.setText(String.valueOf(UnitConverter.unitMassConverter(Double.parseDouble(this.valueField.getText()), oldUnits, newUnits)));
 			}
 			this.setUnits(newValue);
 	    }); 

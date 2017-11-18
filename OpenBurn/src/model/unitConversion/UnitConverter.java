@@ -318,6 +318,39 @@ public class UnitConverter
 	
 	
 	
+	/*
+	 * 
+	 */
+	
+	private static double gramsCmPoundsInConversion (DensityUnits units, double value)
+	{
+		return 0;
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	private static double poundsInGramsInConversion (DensityUnits units, double value)
+	{
+		return 0;
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	private static double gramsCmGramsInConversion (DensityUnits units, double value)
+	{
+		return 0;
+	}
+	
+	
+	
 	/**
 	 * convertForcetoInternal()
 	 * 
@@ -361,112 +394,25 @@ public class UnitConverter
 		return (input / 0.224809);
 	} // convertForceItoM()
 	
-	/**
-	 * convertDensityToInternal()
-	 * 
-	 * Purpose: Converts and returns density from one of several external units to internal units.
-	 * 
-	 * Parameters:
-	 * 		double input -- Density in 	g/cm3, lbm/ft3, lbm/in3, g/in3, kg/m3
-	 * 		DensityUnits units -- what unit the input is in
-	 * 
-	 * Returns: double. Density in the units used by rest of model (lbm/in3)
-	 * @param units TODO
-	**/
 	
-	public static double convertDensityToInternal (double input, DensityUnits units)
-	{
-		if(units == DensityUnits.POUNDS_MASS_PER_CUBIC_INCH)
-		{
-			return input;
-		}
-		
-		if(units == DensityUnits.POUNDS_MASS_PER_CUBIC_FOOT)
-		{
-			input *= 12 *12 *12;
-			return input;
-		}
-		
-		if(units == DensityUnits.GRAMS_PER_CUBIC_INCH)
-		{
-			return convertMassToInternal(input, MassUnits.GRAMS);
-		}
-		
-		if(units == DensityUnits.KILOGRAMS_PER_CUBIC_METER)
-		{
-			input *= 1000; //kg to gram
-			input /= 100; // per meter to per cm
-			input /= 100;
-			input /= 100; // cubed
-		} // unit is now g/cm3
-		
-		
-		//if(units == DensityUnits.GRAMS_PER_CUBIC_CENTIMETER)
-		
-		input = convertMassToInternal(input, MassUnits.GRAMS);
-		input *= 2.54 * 2.54 * 2.54;
-		return input;
-		
-	} // convertDesityMtoI()
 	
-	/**
-	 * convertDensityFromInternal()
-	 * 
-	 * Purpose: Converts and returns density from internal units to one of several external units.
-	 * 
-	 * Parameters:
-	 * 		double input -- Density in the units used by rest of model (lbm/in3)
-	 * 		DensityUnits units -- what unit the output is desired in
-	 * 
-	 * Returns: double. Density in 	g/cm3, lbm/ft3, lbm/in3, g/in3, kg/m3
-	 * @param units TODO
-	**/
 	
-	public static double convertDensityFromInternal (double input, DensityUnits units)
-	{
-		if(units == DensityUnits.POUNDS_MASS_PER_CUBIC_INCH)
-		{
-			return input;
-		}
-		
-		if(units == DensityUnits.POUNDS_MASS_PER_CUBIC_FOOT)
-		{
-			input /= 12 *12 *12;
-			return input;
-		}
-		
-		if(units == DensityUnits.GRAMS_PER_CUBIC_INCH)
-		{
-			return convertMassFromInternal(input, MassUnits.GRAMS);
-		}
-		
-		if(units == DensityUnits.KILOGRAMS_PER_CUBIC_METER)
-		{
-			input /= 1000; //gram to kg
-			input *= 100; // per cm to per meter
-			input *= 100;
-			input *= 100; // cubed
-		} // unit is now g/cm3
-		
-		
-		//if(units == DensityUnits.GRAMS_PER_CUBIC_CENTIMETER)
-		
-		input = convertMassFromInternal(input, MassUnits.GRAMS);
-		input /= 2.54 * 2.54 * 2.54;
-		return input;
-	} // convertDensityItoM()
 	
-	/**
-	 * convertFlowRateToInternal()
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	 * 
-	 * Purpose: Converts and returns mass flow rate from one of several external units to internal units.
-	 * 
-	 * Parameters:
-	 * 		double input -- Mass flow rate in pounds mass/ sec, kg/sec
-	 * 		MassFlowRateUnits units -- what unit the input is in
-	 * 
-	 * Returns: double. Mass flow rate in the units used by rest of model (pounds mass/ sec)
-	**/
+	 */
 	
 	public static double convertFlowRateToInternal (double input, MassFlowRateUnits units)
 	{

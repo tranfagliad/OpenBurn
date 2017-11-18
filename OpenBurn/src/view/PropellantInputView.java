@@ -60,6 +60,7 @@ public class PropellantInputView extends Pane
 	private NumberTextField brTextField;
 	private NumberTextField knTextFieldpr;
 	private NumberTextField knTextFieldbr;
+	private DensityUnitsSelector densityUnits;
 	private RadioButton steadyStateCheck;
 	private RadioButton empericalCheck;
 	
@@ -107,11 +108,11 @@ public class PropellantInputView extends Pane
 		propDensityTextField.setTranslateY(FIRST_ROW_FIELD_Y);
 		this.getChildren().add(propDensityTextField);
 		
-		DensityUnitsSelector units = new DensityUnitsSelector(propDensityTextField);
-		units.setTranslateX(130);
-		units.setTranslateY(40);
+		densityUnits = new DensityUnitsSelector(propDensityTextField);
+		densityUnits.setTranslateX(130);
+		densityUnits.setTranslateY(40);
 		propDensityTextField.setPrefWidth(110);
-		this.getChildren().add(units);
+		this.getChildren().add(densityUnits);
 	} // addPropellantDensityInput()
 	
 	
