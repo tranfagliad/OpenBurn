@@ -87,7 +87,44 @@ public class UnitConverter
 		
 	}
 	
-	
+	public static double unitMassConverter(double val, MassUnits oldUnits, MassUnits newUnits){
+		if (oldUnits == MassUnits.KILOGRAMS)
+		{
+			if(newUnits == MassUnits.GRAMS){
+				val = gramsKiloConversion(MassUnits.KILOGRAMS, val);
+				return val;
+			}
+			if(newUnits == MassUnits.POUNDS_MASS){
+				val = kilogramsPoundsConversion(MassUnits.KILOGRAMS,val);
+				return val;
+				
+			}
+		}
+		if (oldUnits == MassUnits.GRAMS)
+		{
+			if(newUnits == MassUnits.KILOGRAMS){
+				val = gramsKiloConversion(MassUnits.GRAMS, val);
+				return val;
+			}
+			if(newUnits == MassUnits.POUNDS_MASS){
+				val = gramsPoundsConversion(MassUnits.GRAMS,val);
+				return val;
+			}
+		}
+		if (oldUnits == MassUnits.POUNDS_MASS)
+		{
+			if(newUnits == MassUnits.KILOGRAMS){
+				val = kilogramsPoundsConversion(MassUnits.POUNDS_MASS, val);
+				return val;
+			}
+			if(newUnits == MassUnits.GRAMS){
+				val = gramsPoundsConversion(MassUnits.POUNDS_MASS,val);
+				return val;
+			}
+		}
+		return val;
+		
+	}
 	
 	
 	/**
@@ -162,13 +199,68 @@ public class UnitConverter
 	} // cmMmConversion()
 	
 	
+	private static double gramsKiloConversion (MassUnits units, double value)
+	{
+		
+		// UNits are cm, convert to mm
+				if (units == MassUnits.GRAMS)
+				{
+					BigDecimal decimal = new BigDecimal(value * 1000);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+				// Units are mm, convert to cm
+				else if (units == MassUnits.KILOGRAMS)
+				{
+					BigDecimal decimal = new BigDecimal(value / 1000);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+		return value;
 	
+	}
 	
+	private static double gramsPoundsConversion (MassUnits units, double value)
+	{
+		
+		// UNits are cm, convert to mm
+				if (units == MassUnits.GRAMS)
+				{
+					BigDecimal decimal = new BigDecimal(value / 453.592);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+				// Units are mm, convert to cm
+				else if (units == MassUnits.POUNDS_MASS)
+				{
+					BigDecimal decimal = new BigDecimal(value * 453.592);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+		return value;
 	
+	}
 	
+	private static double kilogramsPoundsConversion (MassUnits units, double value)
+	{
+		
+		// UNits are cm, convert to mm
+				if (units == MassUnits.KILOGRAMS)
+				{
+					BigDecimal decimal = new BigDecimal(value * 2.20462);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+				// Units are mm, convert to cm
+				else if (units == MassUnits.POUNDS_MASS)
+				{
+					BigDecimal decimal = new BigDecimal(value / 2.20462);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+		return value;
 	
-	
-	
+	}
 	
 	
 	

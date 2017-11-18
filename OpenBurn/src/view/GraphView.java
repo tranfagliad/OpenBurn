@@ -87,6 +87,7 @@ public class GraphView extends Pane
 	    logo.setTranslateX(250);
 	    logo.setTranslateY(75);
 	    this.getChildren().add(logo);
+	    clearSwitch = true;
 	    
 	    addDataToggle();
 	} // GraphView Constructor (String, String, String)
