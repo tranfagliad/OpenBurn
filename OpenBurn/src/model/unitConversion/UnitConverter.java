@@ -324,7 +324,19 @@ public class UnitConverter
 	
 	private static double gramsCmPoundsInConversion (DensityUnits units, double value)
 	{
-		return 0;
+		if (units == DensityUnits.GRAMS_PER_CUBIC_CENTIMETER)
+		{
+			double convertedValue = gramsCmGramsInConversion(units, value);
+			return poundsInGramsInConversion(DensityUnits.GRAMS_PER_CUBIC_INCH, convertedValue);
+		}
+		
+		else if (units == DensityUnits.POUNDS_MASS_PER_CUBIC_INCH)
+		{
+			double convertedValue = poundsInGramsInConversion(units, value);
+			return gramsCmGramsInConversion(DensityUnits.GRAMS_PER_CUBIC_INCH, convertedValue);
+		}
+		
+		return value;
 	}
 	
 	
@@ -335,7 +347,21 @@ public class UnitConverter
 	
 	private static double poundsInGramsInConversion (DensityUnits units, double value)
 	{
-		return 0;
+		if (units == DensityUnits.POUNDS_MASS_PER_CUBIC_INCH)
+		{
+			BigDecimal decimal = new BigDecimal(value * 453.592);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+			
+		else if (units == DensityUnits.GRAMS_PER_CUBIC_INCH)
+		{
+			BigDecimal decimal = new BigDecimal(value / 453.592);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+		
+		return value;
 	}
 	
 	
@@ -346,7 +372,21 @@ public class UnitConverter
 	
 	private static double gramsCmGramsInConversion (DensityUnits units, double value)
 	{
-		return 0;
+		if (units == DensityUnits.GRAMS_PER_CUBIC_CENTIMETER)
+		{
+			BigDecimal decimal = new BigDecimal(value / 2.54);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+			
+		else if (units == DensityUnits.GRAMS_PER_CUBIC_INCH)
+		{
+			BigDecimal decimal = new BigDecimal(value * 2.54);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+		
+		return value;
 	}
 	
 	
