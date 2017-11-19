@@ -31,7 +31,7 @@ public class RSEGenerator
 	// Other strings
 	private static final String RESULTS_DIRECTORY = "./../OpenBurn_results/";
 
-	public RSEGenerator(String teamName, List <SimulationResults> results, Case c, SimulationSummary classifier, Nozzle no)
+	public RSEGenerator(String teamName, List <SimulationResults> results, Case c, SimulationSummary classifier, Nozzle no,File file)
 	{
 		String classification = classifier.getClassification(); 
 		double isp = classifier.ISP();
@@ -46,14 +46,6 @@ public class RSEGenerator
 		double impulse = classifier.getImpulse();
 		double averageThrust = UnitConverter.convertForceFromInternal(classifier.getaverageThrust(), ForceUnits.NEWTONS);
 		//reloadable =0; //0;
-
-		File resultsDir = new File(RESULTS_DIRECTORY);
-		if (!resultsDir.exists())
-			if (resultsDir.mkdir() == false)
-				throw new RuntimeException(DIR_ERROR_MSG);
-
-		File file = new File(RESULTS_DIRECTORY+"results.rse");
-		//file.getParentFile().mkdirs();
 
 		try {
 			PrintWriter printWriter = new PrintWriter(file);
