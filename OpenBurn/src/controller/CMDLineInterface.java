@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.util.*;
 import model.*;
 import model.calculations.*;
@@ -139,7 +140,7 @@ public class CMDLineInterface {
 		System.out.format("Burntime %.2f\n", summary.getBurnTime());
 		System.out.format("Classification %s\n", summary.getClassification());
 		
-		new RSEGenerator("UAWR",theResults,theCase,summary,nozzle);
+		new RSEGenerator("UAWR",theResults,theCase,summary,nozzle, new File("./../OpenBurn_results/"));
 		System.out.println(SIM_OVER);
 	} // main()
 
