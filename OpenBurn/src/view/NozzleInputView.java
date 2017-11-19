@@ -273,4 +273,74 @@ public class NozzleInputView extends Pane
 		return Double.parseDouble(cfTextField.getText().toString());
 	} // getCfInput()
 	
+	/**
+	private NumberTextField entranceDiameterTextField;
+	private NumberTextField exitDiameterTextField;
+	private NumberTextField cfTextField;
+	 * 
+	 * getThroatDiameterTextField()
+	 * 
+	 * Purpose: Returns the value currently in the throatDiameter number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: NumberTextField.
+	**/
+	
+	public NumberTextField getThroatDiameterTextField ()
+	{
+		return throatDiameterTextField;
+	} // getthroatDiameterTextField()
+	
+	/**
+	private NumberTextField exitDiameterTextField;
+	private NumberTextField cfTextField;
+	 * 
+	 * getEntranceDiameterTextField()
+	 * 
+	 * Purpose: Returns the value currently in the entrance diameter number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: NumberTextField.
+	**/
+	
+	public NumberTextField getEntranceDiameterTextField ()
+	{
+		return entranceDiameterTextField;
+	} // getEntranceDiameterTextField()
+	
+	/**
+	private NumberTextField cfTextField;
+	 * 
+	 * getExitDiameterTextField()
+	 * 
+	 * Purpose: Returns the value currently in the exit diameter number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: NumberTextField.
+	**/
+	
+	public NumberTextField getExitDiameterTextField ()
+	{
+		return exitDiameterTextField;
+	} // getExitDiameterTextField()
+	
+	/**
+	 * 
+	 * getCfTextField()
+	 * 
+	 * Purpose: Returns the value currently in the cf number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: NumberTextField.
+	**/
+	
+	public NumberTextField getcfTextField ()
+	{
+		return cfTextField;
+	} // getExitDiameterTextField()
+	
 } // class NozzleInputView
