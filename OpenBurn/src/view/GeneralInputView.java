@@ -113,4 +113,21 @@ public class GeneralInputView extends Pane
 		return Double.parseDouble(timeDeltaTextField.getText().toString());
 	} // getTimeDeltaInput()
 	
+	/**
+	 * getTimeDeltaTextField()
+	 * 
+	 * Purpose: Returns the value currently in the time delta number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: NumberTextField.
+	**/
+	
+	public NumberTextField getTimeDeltaTextField ()
+	{
+		return timeDeltaTextField;
+	} // getTimeDeltaTextField()
+	
+	
+	
 } // class GeneralInputView

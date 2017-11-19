@@ -456,4 +456,127 @@ public class PropellantInputView extends Pane
 		return Double.parseDouble(cStarTextField.getText().toString());
 	} // getCstarInput ()
 	
+	
+	
+	/**
+	 * getPropDensityTextField()
+	 * 
+	 * Purpose: Returns the value currently in the propDensityTextField number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the propDensityTextField number text field.
+	**/
+	
+	public NumberTextField getPropDensityTextField ()
+	{
+		return propDensityTextField;
+	} // getPropDensityTextField ()
+	
+	/**
+	 * getBurnRateCoefficientTextField()
+	 * 
+	 * Purpose: Returns the value currently in the burnRateCoefficientTextField number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the propDensityTextField number text field.
+	**/
+	
+	public NumberTextField getBurnRateCoefficientTextField ()
+	{
+		return burnRateCoefficientTextField;
+	} // getBurnRateCoefficientTextField ()
+	
+	/**
+	 * getBurnRateExponentTextField()
+	 * 
+	 * Purpose: Returns the value currently in the burnRateExponentTextField number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the burnRateExponentTextField number text field.
+	**/
+	
+	public NumberTextField getBurnRateExponentTextField ()
+	{
+		return burnRateExponentTextField;
+	} // getBurnRateExponentTextField ()
+	
+	/**
+	 * getCStarTextField()
+	 * 
+	 * Purpose: Returns the value currently in the cStarTextField number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the cStarTextField number text field.
+	**/
+	
+	public NumberTextField getCStarTextField ()
+	{
+		return cStarTextField;
+	} // getCStarTextField ()
+	
+	/**
+	 * getPrTextField()
+	 * 
+	 * Purpose: Returns the value currently in the prTextField number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the prTextField number text field.
+	**/
+	
+	public NumberTextField getPrTextField ()
+	{
+		return prTextField;
+	} // getPrTextField ()
+	
+	/**
+	 * getBrTextField()
+	 * 
+	 * Purpose: Returns the value currently in the brTextField number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the brTextField number text field.
+	**/
+	
+	public NumberTextField getBrTextField ()
+	{
+		return brTextField;
+	} // getBrTextField ()
+	
+	/**
+	 * getKnTextFieldpr()
+	 * 
+	 * Purpose: Returns the value currently in the knTextFieldpr number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the knTextFieldpr number text field.
+	**/
+	
+	public NumberTextField getKnTextFieldpr ()
+	{
+		return knTextFieldpr;
+	} // getBrTextField ()
+	
+	/**
+	 * getKnTextFieldbr()
+	 * 
+	 * Purpose: Returns the value currently in the knTextFieldbr number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the knTextFieldbr number text field.
+	**/
+	
+	public NumberTextField getKnTextFieldbr ()
+	{
+		return knTextFieldbr;
+	} // getKnTextFieldbr ()
+
+	
 } // class PropellantInputView

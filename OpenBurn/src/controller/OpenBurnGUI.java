@@ -460,7 +460,33 @@ public class OpenBurnGUI extends Application
 		resetButton.setPrefWidth(120);
 		resetButton.setDisable(false);
 		frame.getChildren().add(resetButton);
-	} // 
+		
+		resetButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+		    @Override public void handle (ActionEvent e)
+		    {
+		    	((GeneralInputView) inputs.getTabs().get(0).getContent()).getTimeDeltaTextField().setText("");
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getThroatDiameterTextField().setText("");
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getEntranceDiameterTextField().setText("");
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getExitDiameterTextField().setText("");
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getcfTextField().setText("");
+		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getMassInputTextField().setText("");
+		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getDiameterTextField().setText("");
+		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getLengthTextField().setText("");
+		    	
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPropDensityTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBurnRateCoefficientTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBurnRateExponentTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getCStarTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPropDensityTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPrTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBrTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getKnTextFieldbr().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getKnTextFieldpr().setText("");
+		    	
+		    }
+		});
+	}  
 	
 	
 	/**

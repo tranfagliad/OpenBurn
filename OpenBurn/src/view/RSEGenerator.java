@@ -31,9 +31,9 @@ public class RSEGenerator
 	// Other strings
 	private static final String RESULTS_DIRECTORY = "./../OpenBurn_results/";
 
-	public RSEGenerator(String teamName, List <SimulationResults> results, Case c, SimulationSummary classifier, Nozzle no)
+	public RSEGenerator(String teamName, List <SimulationResults> results, Case c, SimulationSummary classifier, Nozzle no,File file)
 	{
-		String classification = "Test";//classifier.getClassification(); // TODO
+		String classification = classifier.getClassification(); 
 		double isp = classifier.ISP();
 		double massFrac = classifier.getMassFrac();
 		double diameter = UnitConverter.unitLengthConverter(c.getDiameter(),LengthUnits.INCHES,LengthUnits.MILLIMETERS);
@@ -46,14 +46,6 @@ public class RSEGenerator
 		double impulse = classifier.getImpulse();
 		double averageThrust = UnitConverter.convertForceFromInternal(classifier.getaverageThrust(), ForceUnits.NEWTONS);
 		//reloadable =0; //0;
-
-		File resultsDir = new File(RESULTS_DIRECTORY);
-		if (!resultsDir.exists())
-			if (resultsDir.mkdir() == false)
-				throw new RuntimeException(DIR_ERROR_MSG);
-
-		File file = new File(RESULTS_DIRECTORY+"results.rse");
-		//file.getParentFile().mkdirs();
 
 		try {
 			PrintWriter printWriter = new PrintWriter(file);
@@ -76,25 +68,22 @@ public class RSEGenerator
 			printWriter.format("avgThrust=\"%.2f\" ",averageThrust); //mean
 			printWriter.print("peakThrust=\""+results.get(0).getThrust()+"\" "); //max
 			printWriter.println("throatDia=\""+throatDiameter+"\"");
-			printWriter.print("exitDia=\""+exitDiameter+"\" ");
-			printWriter.print("Itot=\""+impulse+".\" "); // added null value
-			printWriter.print("burn-time=\""+burnTime+"\" "); //+time(length(time))+ original code
-			printWriter.print("massFrac=\""+massFrac+"\" ");
-			printWriter.println("Isp=\""+isp+"\"");
+			printWriter.format("exitDia=\"%.1f\" ",exitDiameter);
+			printWriter.format("Itot=\"%.0f.\" ",impulse);
+			printWriter.format("burn-time=\"%.2f\" ",burnTime); //+time(length(time))+ original code
+			printWriter.format("massFrac=\"%.2f\" ",massFrac);
+			printWriter.format("Isp=\"%.2f\" \n",isp);
 			printWriter.println("tDiv=\"20\" tStep=\"-1.\" tFix=\"1\" FDiv=\"20\" FStep=\"-1.\" FFix=\"1\" mDiv=\"10\""); // All hard coded values
 			printWriter.print("mStep=\"-1.\" mFix=\"1\" cgDiv=\"10\" cgStep=\"-1.\" cgFix=\"1\">"); 
 			printWriter.println("    <data>");
 
-			//Need to remove the case mass to get the propellant mass
-			mass = mass-caseMass;
-
 			//Time dependant data
 			for (int i = 0; i < burnTime;i++){ // length(time)
 				printWriter.print("      <eng-data  ");
-				printWriter.print("t=\""+results.get(i).getTime()+"\" ");
-				printWriter.print("f=\""+results.get(i).getThrust()+"\" ");
-				printWriter.print("m=\""+results.get(i).getSystemMass()+"\" ");
-				printWriter.println("cg=\""+results.get(i).getCg()+"\"/>"); //?
+				printWriter.format("t=\"%.3f\" ",results.get(i).getTime());
+				printWriter.format("f=\"%.2f\" ",UnitConverter.convertForceFromInternal(results.get(i).getThrust(), ForceUnits.NEWTONS));
+				printWriter.format("m=\"%.2f\" ",UnitConverter.convertMassFromInternal(results.get(i).getSystemMass() - c.getCaseMass(), MassUnits.GRAMS));
+				printWriter.format("cg=\"%.0f\"/>\n",UnitConverter.unitLengthConverter(results.get(i).getCg(), LengthUnits.INCHES, LengthUnits.MILLIMETERS));
 			}
 
 			//File close and cleanup

@@ -242,4 +242,56 @@ public class CaseInputView extends Pane
 		return Double.parseDouble(lengthTextField.getText().toString());
 	} // getLengthInput()
 	
+	/**
+	 * 
+	
+	 * getLengthMaxTextField()
+	 * 
+	 * Purpose: Returns the value currently in the mass number text field field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the length field.
+	**/
+	
+	public NumberTextField getMassInputTextField ()
+	{
+		return massTextField;
+	} // getLengthMaxTextField()
+	
+	/**
+	 * 
+	
+	 * getDiameterTextField()
+	 * 
+	 * Purpose: Returns the value currently in the diameter number text field field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the diameter text field.
+	**/
+	
+	public NumberTextField getDiameterTextField ()
+	{
+		return diameterTextField;
+	} // getLengthInput()
+	
+	/**
+	 * 
+	private NumberTextField lengthTextField;
+	
+	 * getLengthTextField()
+	 * 
+	 * Purpose: Returns the value currently in the length number text field field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the length field.
+	**/
+	
+	public NumberTextField getLengthTextField ()
+	{
+		return lengthTextField;
+	} // getLengthInput()
+	
 } // class CaseInputView
