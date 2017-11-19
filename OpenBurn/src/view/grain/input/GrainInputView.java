@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import controller.GrainTableHandle;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -69,7 +70,7 @@ public class GrainInputView extends Pane
 	private Button addButton;
 	private Button removeButton;
 	private Button editButton;
-	
+	private BooleanBinding grainsNotValid;
 	
 	
 	// Fields
@@ -99,9 +100,17 @@ public class GrainInputView extends Pane
 		addAddButton();
         addRemoveButton();
         addEditButton();
+        
+        grainsNotValid = Bindings.createBooleanBinding(() ->
+		{
+			return table.getItems().isEmpty();
+		}, table.getItems());
 	} // GrainInputView Constructor
 	
-	
+	public BooleanBinding getBindingIsNotValid()
+	{
+		return grainsNotValid;
+	}
 	
 	/**
 	 * getTable()

@@ -3,6 +3,8 @@ package view;
 import controller.DensityUnitsSelector;
 import controller.LengthUnitsSelector;
 import controller.NumberTextField;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.RadioButton;
@@ -30,7 +32,7 @@ public class PropellantInputView extends Pane
 	private static final String BURN_RATE_COEFFICIENT_PROMPT = "Burn Rate Coefficient";
 	private static final String BURN_RATE_EXPONENT_PROMPT    = "Burn Rate Exponent";
 	private static final String C_STAR_PROMPT                = "Characteristic Velocity (C*)";
-	
+	private static final String EMPTY                 		 = "";
 	
 	
 	// Constants
@@ -63,7 +65,7 @@ public class PropellantInputView extends Pane
 	private DensityUnitsSelector densityUnits;
 	private RadioButton steadyStateCheck;
 	private RadioButton empericalCheck;
-	
+	private BooleanBinding propellantFieldsNotValid;
 	
 	
 	/**
@@ -86,8 +88,48 @@ public class PropellantInputView extends Pane
 		addBurnRateExponentInput();
 		addCstarInput();
 		
+//		propellantFieldsNotValid = Bindings.createBooleanBinding(() ->
+//		{
+//			boolean density = propDensityTextField.getText().equals(EMPTY);
+//			
+//			return density;
+//		}, propDensityTextField.textProperty());
+		
+    	addPrInput();
+		addBrInput();
+		
+		propellantFieldsNotValid = Bindings.createBooleanBinding(() ->
+		{
+			boolean density = propDensityTextField.getText().equals(EMPTY);
+			boolean inner;
+			if(steadyStateCheck.isSelected())
+			{
+				boolean coe = burnRateCoefficientTextField.getText().equals(EMPTY);
+				boolean exp = burnRateExponentTextField.getText().equals(EMPTY);
+				boolean star = cStarTextField.getText().equals(EMPTY);
+				inner = coe || exp || star;
+			}
+			else
+			{
+				boolean pr = prTextField.getText().equals(EMPTY);
+				boolean br = brTextField.getText().equals(EMPTY);
+				boolean knpr = knTextFieldpr.getText().equals(EMPTY);
+				boolean knbr = knTextFieldbr.getText().equals(EMPTY);
+				inner = pr || br || knpr || knbr;
+			}
+			
+			return density || inner;
+		}, propDensityTextField.textProperty(), steadyStateCheck.selectedProperty(), burnRateCoefficientTextField.textProperty(), 
+		burnRateExponentTextField.textProperty(), cStarTextField.textProperty(), prTextField.textProperty(), 
+		brTextField.textProperty(), knTextFieldpr.textProperty(), knTextFieldbr.textProperty());
+		
+		
 	}//PropellantInputView()
 	
+	public BooleanBinding getBindingIsNotValid()
+	{
+		return propellantFieldsNotValid;
+	}
 	
 	
 	/**
@@ -153,9 +195,17 @@ public class PropellantInputView extends Pane
 		    	getChildren().remove(knTextbr);
 		    	getChildren().remove(knTextFieldbr);
 		    	
-		    	addBurnRateCoefficientInput();
-				addBurnRateExponentInput();
-				addCstarInput();
+//		    	addBurnRateCoefficientInput();
+		    	getChildren().add(burnRateCoefficientText);
+		    	getChildren().add(burnRateCoefficientTextField);
+		    	
+//				addBurnRateExponentInput();
+		    	getChildren().add(burnRateExponentText);
+		    	getChildren().add(burnRateExponentTextField);
+		    	
+//				addCstarInput();
+		    	getChildren().add(cStarText);
+		    	getChildren().add(cStarTextField);
 		    }
 		});
 	}
@@ -198,8 +248,18 @@ public class PropellantInputView extends Pane
 		    	getChildren().remove(knTextbr);
 		    	getChildren().remove(knTextFieldbr);
 		    	
-		    	addPrInput();
-				addBrInput();
+//		    	addPrInput();
+//				addBrInput();
+		    	
+		    	getChildren().add(prText);
+		    	getChildren().add(prTextField);
+		    	getChildren().add(knTextpr);
+		    	getChildren().add(knTextFieldpr);
+		    	
+		    	getChildren().add(brText);
+		    	getChildren().add(brTextField);
+		    	getChildren().add(knTextbr);
+		    	getChildren().add(knTextFieldbr);
 		    }
 		});
 	}
@@ -280,22 +340,22 @@ public class PropellantInputView extends Pane
 		prText = new Text(PR_TEXT);
 		prText.setTranslateX(20);
 		prText.setTranslateY(180);
-		this.getChildren().add(prText);
+//		this.getChildren().add(prText);
 		
 		prTextField = new NumberTextField();
 		prTextField.setTranslateX(60);
 		prTextField.setTranslateY(160);
-		this.getChildren().add(prTextField);
+//		this.getChildren().add(prTextField);
 		
 		knTextpr = new Text(KN_TEXT);
 		knTextpr.setTranslateX(250);
 		knTextpr.setTranslateY(180);
-		this.getChildren().add(knTextpr);
+//		this.getChildren().add(knTextpr);
 		
 		knTextFieldpr = new NumberTextField();
 		knTextFieldpr.setTranslateX(300);
 		knTextFieldpr.setTranslateY(160);
-		this.getChildren().add(knTextFieldpr);
+//		this.getChildren().add(knTextFieldpr);
 	}
 	
 	
@@ -309,22 +369,22 @@ public class PropellantInputView extends Pane
 		brText = new Text(BR_TEXT);
 		brText.setTranslateX(20);
 		brText.setTranslateY(240);
-		this.getChildren().add(brText);
+//		this.getChildren().add(brText);
 		
 		brTextField = new NumberTextField();
 		brTextField.setTranslateX(60);
 		brTextField.setTranslateY(220);
-		this.getChildren().add(brTextField);
+//		this.getChildren().add(brTextField);
 		
 		knTextbr = new Text(KN_TEXT);
 		knTextbr.setTranslateX(250);
 		knTextbr.setTranslateY(240);
-		this.getChildren().add(knTextbr);
+//		this.getChildren().add(knTextbr);
 		
 		knTextFieldbr = new NumberTextField();
 		knTextFieldbr.setTranslateX(300);
 		knTextFieldbr.setTranslateY(220);
-		this.getChildren().add(knTextFieldbr);
+//		this.getChildren().add(knTextFieldbr);
 	}
 	
 	

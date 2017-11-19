@@ -139,7 +139,6 @@ public class CMDLineInterface {
 		System.out.format("Burntime %.2f\n", summary.getBurnTime());
 		System.out.format("Classification %s\n", summary.getClassification());
 		
-		new RSEGenerator("UAWR",theResults,theCase,summary,nozzle);
 		System.out.println(SIM_OVER);
 	} // main()
 

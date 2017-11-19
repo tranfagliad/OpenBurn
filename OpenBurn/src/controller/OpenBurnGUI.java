@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -31,6 +32,7 @@ import view.GeneralInputView;
 import view.GraphView;
 import view.NozzleInputView;
 import view.PropellantInputView;
+import view.RSEGenerator;
 import view.SimulationSummaryView;
 import view.grain.input.GrainInputView;
 
@@ -85,6 +87,7 @@ public class OpenBurnGUI extends Application
 	private Button clearGraphButton;
 	private Button resetButton;
 	private SimulationSummaryView summaryOutput;
+	private RSEGenerator rsegenerator;
 	
 	
 	
@@ -257,6 +260,22 @@ public class OpenBurnGUI extends Application
 		// No simulations have run yet
 		//	simulationRan = false;
 		
+		GeneralInputView generalInputs = (GeneralInputView)(inputs.getTabs().get(0).getContent());
+		BooleanBinding general = generalInputs.getBindingIsNotValid();
+		
+		NozzleInputView nozzleInputs = (NozzleInputView)(inputs.getTabs().get(1).getContent());
+		BooleanBinding nozzle = nozzleInputs.getBindingIsNotValid();
+		
+		CaseInputView caseInputs = (CaseInputView)(inputs.getTabs().get(2).getContent());
+		BooleanBinding rocketCase = caseInputs.getBindingIsNotValid();
+		
+		PropellantInputView propellantInputs = (PropellantInputView)(inputs.getTabs().get(3).getContent());
+		BooleanBinding propellant = propellantInputs.getBindingIsNotValid();
+		
+		BooleanBinding grains = grainInputs.getBindingIsNotValid();
+		
+		simButton.disableProperty().bind(general.or(nozzle.or(rocketCase.or(propellant.or(grains)))));
+		
 		// Run simulation on click
 		simButton.setOnAction(new EventHandler<ActionEvent> ()
 		{
@@ -331,6 +350,10 @@ public class OpenBurnGUI extends Application
     	
     	// Add thrust vs. time data to the chart
     	outputGraph.addData(TEMP_LEGEND_NAME, simResults);
+    	
+    	String teamName = "UAWR";
+    	
+    	this.rsegenerator = new RSEGenerator(teamName,simResults,theCase, summary, theNozzle);
 	} // runSimulation()
 	
 	
@@ -387,6 +410,23 @@ public class OpenBurnGUI extends Application
 		rseButton.setPrefWidth(130);
 		rseButton.setDisable(false);
 		frame.getChildren().add(rseButton);
+		
+		rseButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+		    @Override public void handle (ActionEvent e)
+		    {
+		    	FileChooser fileChooser = new FileChooser();
+		    	 fileChooser.setTitle("Save Simulation Data");
+		    	 fileChooser.setInitialFileName(TEMP_LEGEND_NAME);
+		    	 fileChooser.getExtensionFilters().addAll(
+		    	         new ExtensionFilter("RSE Files (.rse)", "*.rse"));
+		    	 File selectedFile = fileChooser.showSaveDialog(frame.getScene().getWindow());
+		    	 
+		    	 if (selectedFile != null){
+		    		 rsegenerator.generateRSEToFile(selectedFile);
+		    	 }
+		    }
+		});
 		
 		// Disable button if there is no simulation data
 		rseButton.disableProperty().bind(Bindings.size(outputGraph.getChart().getData()).isEqualTo(EMPTY));
