@@ -5,6 +5,8 @@ import java.util.List;
 
 import controller.LengthUnitsSelector;
 import controller.NumberTextField;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -26,7 +28,7 @@ public class NozzleInputView extends Pane
 	private static final String ENTRANCE_DIAMETER_PROMPT = "Entrance Diameter";
 	private static final String EXIT_DIAMETER_PROMPT     = "Exit Diameter";
 	private static final String CF_PROMPT                = "CF (Thrust Coefficient)";
-	
+	private static final String EMPTY                 	 = "";
 	
 	
 	// Constants
@@ -52,7 +54,7 @@ public class NozzleInputView extends Pane
 	private LengthUnitsSelector exitDiameterUnits;
 	private LengthUnitsSelector throatDiameterUnits;
 	
-	
+	private BooleanBinding nozzleFieldsNotValid;
 	
 	/**
 	 * NozzleInputView Constructor
@@ -70,9 +72,22 @@ public class NozzleInputView extends Pane
 		addEntranceDiameterInput();
 		addExitDiameterInput();
 		addCfInput();
+		
+		nozzleFieldsNotValid = Bindings.createBooleanBinding(() ->
+		{
+			boolean throat = throatDiameterTextField.getText().equals(EMPTY);
+			boolean entrance = entranceDiameterTextField.getText().equals(EMPTY);
+			boolean exit = exitDiameterTextField.getText().equals(EMPTY);
+			boolean cf = cfTextField.getText().equals(EMPTY);
+			
+			return throat || entrance || exit || cf;
+		}, throatDiameterTextField.textProperty(), entranceDiameterTextField.textProperty(), exitDiameterTextField.textProperty(), cfTextField.textProperty());
 	} // NozzleInputView Constructor
 	
-	
+	public BooleanBinding getBindingIsNotValid()
+	{
+		return nozzleFieldsNotValid;
+	}
 	
 	/**
 	 * addEntranceDiameterInput()
@@ -272,5 +287,75 @@ public class NozzleInputView extends Pane
 	{
 		return Double.parseDouble(cfTextField.getText().toString());
 	} // getCfInput()
+	
+	/**
+	private NumberTextField entranceDiameterTextField;
+	private NumberTextField exitDiameterTextField;
+	private NumberTextField cfTextField;
+	 * 
+	 * getThroatDiameterTextField()
+	 * 
+	 * Purpose: Returns the value currently in the throatDiameter number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: NumberTextField.
+	**/
+	
+	public NumberTextField getThroatDiameterTextField ()
+	{
+		return throatDiameterTextField;
+	} // getthroatDiameterTextField()
+	
+	/**
+	private NumberTextField exitDiameterTextField;
+	private NumberTextField cfTextField;
+	 * 
+	 * getEntranceDiameterTextField()
+	 * 
+	 * Purpose: Returns the value currently in the entrance diameter number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: NumberTextField.
+	**/
+	
+	public NumberTextField getEntranceDiameterTextField ()
+	{
+		return entranceDiameterTextField;
+	} // getEntranceDiameterTextField()
+	
+	/**
+	private NumberTextField cfTextField;
+	 * 
+	 * getExitDiameterTextField()
+	 * 
+	 * Purpose: Returns the value currently in the exit diameter number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: NumberTextField.
+	**/
+	
+	public NumberTextField getExitDiameterTextField ()
+	{
+		return exitDiameterTextField;
+	} // getExitDiameterTextField()
+	
+	/**
+	 * 
+	 * getCfTextField()
+	 * 
+	 * Purpose: Returns the value currently in the cf number text field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: NumberTextField.
+	**/
+	
+	public NumberTextField getcfTextField ()
+	{
+		return cfTextField;
+	} // getExitDiameterTextField()
 	
 } // class NozzleInputView

@@ -6,6 +6,8 @@ import java.util.List;
 import controller.LengthUnitsSelector;
 import controller.MassUnitsSelector;
 import controller.NumberTextField;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -27,7 +29,7 @@ public class CaseInputView extends Pane
 	private static final String CASE_MASS_PROMPT     = "Mass";
 	private static final String CASE_DIAMETER_PROMPT = "Diameter";
 	private static final String CASE_LENGTH_PROMPT   = "Length";
-	
+	private static final String EMPTY                = "";
 	
 	
 	// Constants
@@ -50,7 +52,7 @@ public class CaseInputView extends Pane
 	private MassUnitsSelector caseMassUnits;
 	private LengthUnitsSelector caseDiamUnits;
 	private LengthUnitsSelector caseLengthUnits;
-	
+	private BooleanBinding caseFieldsNotValid;
 	
 	
 	/**
@@ -68,9 +70,21 @@ public class CaseInputView extends Pane
 		addMassInput();
 		addDiameterInput();
 		addLengthInput();
+		
+		caseFieldsNotValid = Bindings.createBooleanBinding(() ->
+		{
+			boolean mass = massTextField.getText().equals(EMPTY);
+			boolean diameter = diameterTextField.getText().equals(EMPTY);
+			boolean length = lengthTextField.getText().equals(EMPTY);
+			
+			return mass || diameter || length;
+		}, massTextField.textProperty(), diameterTextField.textProperty(), lengthTextField.textProperty());
 	} // CaseInputView Constructor
 	
-	
+	public BooleanBinding getBindingIsNotValid()
+	{
+		return caseFieldsNotValid;
+	}
 	
 	/**
 	 * addMassInput()
@@ -226,6 +240,58 @@ public class CaseInputView extends Pane
 	public double getLengthInput ()
 	{
 		return Double.parseDouble(lengthTextField.getText().toString());
+	} // getLengthInput()
+	
+	/**
+	 * 
+	
+	 * getLengthMaxTextField()
+	 * 
+	 * Purpose: Returns the value currently in the mass number text field field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the length field.
+	**/
+	
+	public NumberTextField getMassInputTextField ()
+	{
+		return massTextField;
+	} // getLengthMaxTextField()
+	
+	/**
+	 * 
+	
+	 * getDiameterTextField()
+	 * 
+	 * Purpose: Returns the value currently in the diameter number text field field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the diameter text field.
+	**/
+	
+	public NumberTextField getDiameterTextField ()
+	{
+		return diameterTextField;
+	} // getLengthInput()
+	
+	/**
+	 * 
+	private NumberTextField lengthTextField;
+	
+	 * getLengthTextField()
+	 * 
+	 * Purpose: Returns the value currently in the length number text field field.
+	 * 
+	 * Parameters: None.
+	 * 
+	 * Returns: double. The value currently in the length field.
+	**/
+	
+	public NumberTextField getLengthTextField ()
+	{
+		return lengthTextField;
 	} // getLengthInput()
 	
 } // class CaseInputView

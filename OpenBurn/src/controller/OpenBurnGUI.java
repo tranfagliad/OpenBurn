@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -259,6 +260,22 @@ public class OpenBurnGUI extends Application
 		// No simulations have run yet
 		//	simulationRan = false;
 		
+		GeneralInputView generalInputs = (GeneralInputView)(inputs.getTabs().get(0).getContent());
+		BooleanBinding general = generalInputs.getBindingIsNotValid();
+		
+		NozzleInputView nozzleInputs = (NozzleInputView)(inputs.getTabs().get(1).getContent());
+		BooleanBinding nozzle = nozzleInputs.getBindingIsNotValid();
+		
+		CaseInputView caseInputs = (CaseInputView)(inputs.getTabs().get(2).getContent());
+		BooleanBinding rocketCase = caseInputs.getBindingIsNotValid();
+		
+		PropellantInputView propellantInputs = (PropellantInputView)(inputs.getTabs().get(3).getContent());
+		BooleanBinding propellant = propellantInputs.getBindingIsNotValid();
+		
+		BooleanBinding grains = grainInputs.getBindingIsNotValid();
+		
+		simButton.disableProperty().bind(general.or(nozzle.or(rocketCase.or(propellant.or(grains)))));
+		
 		// Run simulation on click
 		simButton.setOnAction(new EventHandler<ActionEvent> ()
 		{
@@ -466,7 +483,33 @@ public class OpenBurnGUI extends Application
 		resetButton.setPrefWidth(120);
 		resetButton.setDisable(false);
 		frame.getChildren().add(resetButton);
-	} // 
+		
+		resetButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+		    @Override public void handle (ActionEvent e)
+		    {
+		    	((GeneralInputView) inputs.getTabs().get(0).getContent()).getTimeDeltaTextField().setText("");
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getThroatDiameterTextField().setText("");
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getEntranceDiameterTextField().setText("");
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getExitDiameterTextField().setText("");
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getcfTextField().setText("");
+		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getMassInputTextField().setText("");
+		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getDiameterTextField().setText("");
+		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getLengthTextField().setText("");
+		    	
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPropDensityTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBurnRateCoefficientTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBurnRateExponentTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getCStarTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPropDensityTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPrTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBrTextField().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getKnTextFieldbr().setText("");
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getKnTextFieldpr().setText("");
+		    	
+		    }
+		});
+	}  
 	
 	
 	/**
