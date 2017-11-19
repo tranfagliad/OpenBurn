@@ -37,6 +37,12 @@ public class RocketMath
 		List<SimulationResults> output = new LinkedList<SimulationResults>();
 		double currentTime = 0;
 		
+		
+		//First data point, adds a zero thrust and force value, with the actual motor force
+		SimulationResults currentTimeStep = new SimulationResults();
+		
+		
+		
 		// Begin simulation loop
 		boolean simRunning = true;
 		while (simRunning)
@@ -45,7 +51,7 @@ public class RocketMath
 			currentTime += deltaTime;
 			
 			// Set up a set of results and enter in the updated time.
-			SimulationResults currentTimeStep = new SimulationResults();
+			currentTimeStep = new SimulationResults();
 			currentTimeStep.setTime(currentTime);
 			
 			// Parts 1 through 8 in matlab file
@@ -58,7 +64,7 @@ public class RocketMath
 			massAndCenterOfGravity(grainList, currentTimeStep, theCase, propellant);
 			calculateBurnout(grainList, currentTime);
 			calculateThrust(currentTimeStep,theNozzle);
-			
+
 			// Add final results to the result set
 			output.add(currentTimeStep);
 
