@@ -1,6 +1,8 @@
 package view;
 
 import controller.NumberTextField;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -14,9 +16,9 @@ import javafx.scene.text.Text;
 public class GeneralInputView extends Pane
 {
 	// Labels
-	private static final String TIME_DELTA_PROMPT = "Change in time";
-	private static final String SECONDS = "seconds";
-	
+	private static final String TIME_DELTA_PROMPT 	= "Change in time";
+	private static final String SECONDS 			= "seconds";
+	private static final String EMPTY               = "";
 	
 	
 	// Constants
@@ -30,7 +32,7 @@ public class GeneralInputView extends Pane
 	private Text timeDeltaText;
 	private Text secondsText;
 	private NumberTextField timeDeltaTextField;
-	
+	private BooleanBinding timeFieldsNotValid;
 	
 	
 	/**
@@ -47,9 +49,19 @@ public class GeneralInputView extends Pane
 		
 		// Add components
 		addTimeInput();
+		
+		timeFieldsNotValid = Bindings.createBooleanBinding(() ->
+		{
+			boolean time = timeDeltaTextField.getText().equals(EMPTY);
+			
+			return time;
+		}, timeDeltaTextField.textProperty());
 	} // GeneralInputView Constructor
 	
-	
+	public BooleanBinding getBindingIsNotValid()
+	{
+		return timeFieldsNotValid;
+	}
 	
 	/**
 	 * addTimeDeltaInput()

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -256,6 +257,22 @@ public class OpenBurnGUI extends Application
 		
 		// No simulations have run yet
 		//	simulationRan = false;
+		
+		GeneralInputView generalInputs = (GeneralInputView)(inputs.getTabs().get(0).getContent());
+		BooleanBinding general = generalInputs.getBindingIsNotValid();
+		
+		NozzleInputView nozzleInputs = (NozzleInputView)(inputs.getTabs().get(1).getContent());
+		BooleanBinding nozzle = nozzleInputs.getBindingIsNotValid();
+		
+		CaseInputView caseInputs = (CaseInputView)(inputs.getTabs().get(2).getContent());
+		BooleanBinding rocketCase = caseInputs.getBindingIsNotValid();
+		
+		PropellantInputView propellantInputs = (PropellantInputView)(inputs.getTabs().get(3).getContent());
+		BooleanBinding propellant = propellantInputs.getBindingIsNotValid();
+		
+		BooleanBinding grains = grainInputs.getBindingIsNotValid();
+		
+		simButton.disableProperty().bind(general.or(nozzle.or(rocketCase.or(propellant.or(grains)))));
 		
 		// Run simulation on click
 		simButton.setOnAction(new EventHandler<ActionEvent> ()
