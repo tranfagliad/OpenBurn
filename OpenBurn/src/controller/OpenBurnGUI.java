@@ -467,6 +467,8 @@ public class OpenBurnGUI extends Application
 		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getKnTextFieldbr().setText("");
 		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getKnTextFieldpr().setText("");
 		    	
+		    	grainInputs.getTable().getItems().clear();
+		    	
 		    }
 		});
 	}  
