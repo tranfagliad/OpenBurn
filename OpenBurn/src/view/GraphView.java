@@ -108,10 +108,7 @@ public class GraphView extends Pane
 	
 	public void setImageVisible (boolean isVisible)
 	{
-		if (!isVisible)
-			this.getChildren().remove(logo);
-		else
-			this.getChildren().add(logo);
+		logo.setVisible(isVisible);
 	} // setImageVisible()
 	
 	
