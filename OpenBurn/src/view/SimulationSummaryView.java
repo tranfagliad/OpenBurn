@@ -18,13 +18,13 @@ public class SimulationSummaryView extends Pane
 	//LABELS
 	private static final String SIMULATION_SUMMARY = "Simulation Summary";
 	private static final String CLASSIFICATION_TEXT = "Classification:\n";
-	private static final String ISP_TEXT = "ISP:\n";
-	private static final String MASS_FRAC_TEXT = "Mass Frac:\n";
-	private static final String IMPULSE_TEXT = "Impulse:\n";
-	private static final String AVERAGE_THRUST_TEXT = "Average Thrust:\n";
-	private static final String MAX_THRUST_TEXT = "Max Thrust:\n";
-	private static final String MAX_PRESSURE_TEXT = "Max Pressure:\n";
-	private static final String BURN_TIME_TEXT = "Burn Time:\n";
+	private static final String ISP_TEXT = "ISP (seconds):\n";
+	private static final String MASS_FRAC_TEXT = "Mass Frac (lbm):\n";
+	private static final String IMPULSE_TEXT = "Impulse (lbf * seconds):\n";
+	private static final String AVERAGE_THRUST_TEXT = "Average Thrust (lbf):\n";
+	private static final String MAX_THRUST_TEXT = "Max Thrust (lbf):\n";
+	private static final String MAX_PRESSURE_TEXT = "Max Pressure (psi):\n";
+	private static final String BURN_TIME_TEXT = "Burn Time (seconds):\n";
 	
 	//components
 	private Text simulationSummary;

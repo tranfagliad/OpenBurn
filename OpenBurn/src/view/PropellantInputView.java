@@ -27,6 +27,7 @@ public class PropellantInputView extends Pane
 	private static final String PR_TEXT        = "Pr = (";
 	private static final String BR_TEXT        = "Br = (";
 	private static final String KN_TEXT        = "*Kn) +";
+	private static final String METERS_PER_S   = "m/s";
 	
 	
 	private static final String BURN_RATE_COEFFICIENT_PROMPT = "Burn Rate Coefficient";
@@ -54,6 +55,7 @@ public class PropellantInputView extends Pane
 	private Text brText;
 	private Text knTextbr;
 	private Text knTextpr;
+	private Text velocityText;
 	private NumberTextField propDensityTextField;
 	private NumberTextField burnRateCoefficientTextField;
 	private NumberTextField burnRateExponentTextField;
@@ -68,11 +70,13 @@ public class PropellantInputView extends Pane
 	private BooleanBinding propellantFieldsNotValid;
 	
 	
+	
 	/**
 	 * PropellantInputView Constructor
 	 * 
 	 * Purpose: Creates and initializes the input fields for propellant.
 	**/
+	
 	public PropellantInputView()
 	{
 		// Invoke Pane super constructor
@@ -206,6 +210,8 @@ public class PropellantInputView extends Pane
 //				addCstarInput();
 		    	getChildren().add(cStarText);
 		    	getChildren().add(cStarTextField);
+		    	
+		    	getChildren().add(velocityText);
 		    }
 		});
 	}
@@ -238,6 +244,7 @@ public class PropellantInputView extends Pane
 		    	getChildren().remove(burnRateExponentTextField);
 		    	getChildren().remove(cStarText);
 		    	getChildren().remove(cStarTextField);
+		    	getChildren().remove(velocityText);
 		    	
 		    	getChildren().remove(prText);
 		    	getChildren().remove(prTextField);
@@ -326,7 +333,10 @@ public class PropellantInputView extends Pane
 		cStarTextField.setTranslateY(240);
 		this.getChildren().add(cStarTextField);
 		
-		
+		velocityText = new Text(METERS_PER_S);
+		velocityText.setTranslateX(220);
+		velocityText.setTranslateY(260);
+		this.getChildren().add(velocityText);
 	} // addCstarInput()
 	
 	
@@ -387,6 +397,27 @@ public class PropellantInputView extends Pane
 //		this.getChildren().add(knTextFieldbr);
 	}
 	
+	
+	
+	/*
+	 * 
+	 */
+	
+	public boolean getSteadyStateStatus ()
+	{
+		return steadyStateCheck.isSelected();
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	public boolean getEmpericalStatus ()
+	{
+		return empericalCheck.isSelected();
+	}
 	
 	
 	
