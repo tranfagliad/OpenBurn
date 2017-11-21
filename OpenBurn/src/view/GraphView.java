@@ -32,6 +32,8 @@ public class GraphView extends Pane
 	
 	private static final String ICON_FILE_PATH = "/images/OpenBurnLogo_faded.png";
 	private static final String SECONDS        = "(seconds)";
+	private static final String POUNDS_FORCE   = "(lbf)";
+	private static final String LBS_SQUARE_IN  = "(psi)";
 	
 	
 	
@@ -75,7 +77,7 @@ public class GraphView extends Pane
 		
 		// Create and name the y-axis
 		NumberAxis yAxis = new NumberAxis();
-		yAxis.setLabel(yAxisName);
+		yAxis.setLabel(yAxisName + " " + POUNDS_FORCE);
 		
 		// Create and name the ScatterChart
 		chart = new ScatterChart(xAxis, yAxis);
@@ -140,7 +142,7 @@ public class GraphView extends Pane
 		    	thrustToggle.setSelected(true);
 		    	pressureToggle.setSelected(false);
 		    	chart.setTitle(THRUST_LABEL + VERSUS_LABEL + TIME_LABEL);
-		    	chart.getYAxis().setLabel(THRUST_LABEL);
+		    	chart.getYAxis().setLabel(THRUST_LABEL + " " + POUNDS_FORCE);
 		    	
 		    	// Clear current data in the graph and add new data
 		    	if (simResults != null)
@@ -166,7 +168,7 @@ public class GraphView extends Pane
 		    	thrustToggle.setSelected(false);
 		    	pressureToggle.setSelected(true);
 		    	chart.setTitle(PRESSURE_LABEL + VERSUS_LABEL + TIME_LABEL);
-		    	chart.getYAxis().setLabel(PRESSURE_LABEL);
+		    	chart.getYAxis().setLabel(PRESSURE_LABEL + " " + LBS_SQUARE_IN);
 		    	
 		    	// Clear current data in the graph and add new data
 		    	if (simResults != null)

@@ -286,7 +286,7 @@ public class UnitConverter
 				if (units == MassUnits.KILOGRAMS)
 				{
 					BigDecimal decimal = new BigDecimal(value * 2.20462);
-					decimal = decimal.round(new MathContext(6));
+					decimal = decimal.round(new MathContext(5));
 					return decimal.doubleValue();
 				}
 				// Units are mm, convert to cm
@@ -426,6 +426,22 @@ public class UnitConverter
 		
 		return value;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

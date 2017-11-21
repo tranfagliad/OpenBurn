@@ -42,6 +42,26 @@ public class SimulationResults
 	private double thrust;
 	
 	
+	/**
+	 * equals()
+	 * 
+	 * Purpose: allows two simulation results to be compared
+	 * 
+	 * Parameters: Object -- the object to be compared to.  must be of type object because inheritance.
+	 * 
+	 * Returns: boolean reflecting the equality of two objects
+	**/
+	@Override
+	public boolean equals(Object other)
+	{
+		if(other.getClass() == SimulationResults.class)
+		{
+			SimulationResults o = (SimulationResults) other;
+			return (this.time == o.time) && (this.thrust == o.thrust) && (this.chamberPressure == o.chamberPressure);
+		}
+		
+		return false; // if other is not a simulation result, than they are definitely not equal
+	}
 	
 	/**
 	 * getLabels()

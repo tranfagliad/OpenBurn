@@ -25,6 +25,8 @@ import model.calculations.SimulationResults;
 import model.calculations.SimulationSummary;
 import model.grains.Grain;
 import model.grains.GrainFactory;
+import model.propellant.EmpericalPropellant;
+import model.propellant.Propellant;
 import model.propellant.SteadyStatePropellant;
 import view.CSVConverter;
 import view.CaseInputView;
@@ -32,6 +34,7 @@ import view.GeneralInputView;
 import view.GraphView;
 import view.NozzleInputView;
 import view.PropellantInputView;
+import view.RSEGenerator;
 import view.SimulationSummaryView;
 import view.grain.input.GrainInputView;
 
@@ -55,6 +58,7 @@ public class OpenBurnGUI extends Application
 	private static final String ICON_FILE_PATH   = "/images/OpenBurnLogo_1.png";
 	private static final String CLEAR_GRAPH      = "Clear Graph";
 	private static final String RESET_FIELDS     = "Reset Inputs";
+	private static final String EMPTY_STRING     = "";
 	
 	private static String TEMP_LEGEND_NAME;
 	
@@ -86,6 +90,7 @@ public class OpenBurnGUI extends Application
 	private Button clearGraphButton;
 	private Button resetButton;
 	private SimulationSummaryView summaryOutput;
+	private RSEGenerator rsegenerator;
 	
 	
 	
@@ -335,10 +340,23 @@ public class OpenBurnGUI extends Application
     	
     	// Use propellant inputs to create propellant
     	PropellantInputView propellantInputs = (PropellantInputView)(inputs.getTabs().get(3).getContent());
-    	SteadyStatePropellant thePropellant = new SteadyStatePropellant(propellantInputs.getBurnRateCoefficientInput(),
+    	Propellant thePropellant = null;
+    	if (propellantInputs.getSteadyStateStatus() == true)
+    	{
+    		thePropellant = new SteadyStatePropellant(propellantInputs.getBurnRateCoefficientInput(),
     											  propellantInputs.getBurnRateExponentInput(), 
 								    			  propellantInputs.getPropellantDensityInput(), 
 								    			  propellantInputs.getCstarInput());
+    	}
+    	
+    	else if (propellantInputs.getEmpericalStatus() == true)
+    	{
+    		thePropellant = new EmpericalPropellant(Double.parseDouble(propellantInputs.getPrTextField().getText().toString()),
+    												Double.parseDouble(propellantInputs.getKnTextFieldpr().getText().toString()),
+    												Double.parseDouble(propellantInputs.getBrTextField().getText().toString()), 
+    												Double.parseDouble(propellantInputs.getKnTextFieldbr().getText().toString()), 
+    												propellantInputs.getPropellantDensityInput());
+    	}
     	
     	// Run simulation, gather list of results
     	List<SimulationResults> simResults = RocketMath.simulate(simGrainList, deltaTime, theNozzle, theCase, thePropellant);
@@ -347,7 +365,15 @@ public class OpenBurnGUI extends Application
     	summaryOutput.setSummary(summary);
     	
     	// Add thrust vs. time data to the chart
-    	outputGraph.addData(TEMP_LEGEND_NAME, simResults);
+    	List<SimulationResults> alreadyExists = outputGraph.getData();
+    	if(simResults.equals(alreadyExists) == false) // prevents adding duplicate results to the graph
+    	{
+    		outputGraph.addData(TEMP_LEGEND_NAME, simResults);
+    	}
+    	
+    	String teamName = "UAWR";
+    	
+    	this.rsegenerator = new RSEGenerator(teamName,simResults,theCase, summary, theNozzle);
 	} // runSimulation()
 	
 	
@@ -404,6 +430,23 @@ public class OpenBurnGUI extends Application
 		rseButton.setPrefWidth(130);
 		rseButton.setDisable(false);
 		frame.getChildren().add(rseButton);
+		
+		rseButton.setOnAction(new EventHandler<ActionEvent> ()
+		{
+		    @Override public void handle (ActionEvent e)
+		    {
+		    	FileChooser fileChooser = new FileChooser();
+		    	 fileChooser.setTitle("Save Simulation Data");
+		    	 fileChooser.setInitialFileName(TEMP_LEGEND_NAME);
+		    	 fileChooser.getExtensionFilters().addAll(
+		    	         new ExtensionFilter("RSE Files (.rse)", "*.rse"));
+		    	 File selectedFile = fileChooser.showSaveDialog(frame.getScene().getWindow());
+		    	 
+		    	 if (selectedFile != null){
+		    		 rsegenerator.generateRSEToFile(selectedFile);
+		    	 }
+		    }
+		});
 		
 		// Disable button if there is no simulation data
 		rseButton.disableProperty().bind(Bindings.size(outputGraph.getChart().getData()).isEqualTo(EMPTY));
@@ -465,28 +508,33 @@ public class OpenBurnGUI extends Application
 		{
 		    @Override public void handle (ActionEvent e)
 		    {
-		    	((GeneralInputView) inputs.getTabs().get(0).getContent()).getTimeDeltaTextField().setText("");
-		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getThroatDiameterTextField().setText("");
-		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getEntranceDiameterTextField().setText("");
-		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getExitDiameterTextField().setText("");
-		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getcfTextField().setText("");
-		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getMassInputTextField().setText("");
-		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getDiameterTextField().setText("");
-		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getLengthTextField().setText("");
+		    	((GeneralInputView) inputs.getTabs().get(0).getContent()).getTimeDeltaTextField().setText(EMPTY_STRING);
 		    	
-		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPropDensityTextField().setText("");
-		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBurnRateCoefficientTextField().setText("");
-		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBurnRateExponentTextField().setText("");
-		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getCStarTextField().setText("");
-		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPropDensityTextField().setText("");
-		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPrTextField().setText("");
-		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBrTextField().setText("");
-		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getKnTextFieldbr().setText("");
-		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getKnTextFieldpr().setText("");
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getThroatDiameterTextField().setText(EMPTY_STRING);
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getEntranceDiameterTextField().setText(EMPTY_STRING);
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getExitDiameterTextField().setText(EMPTY_STRING);
+		    	((NozzleInputView) inputs.getTabs().get(1).getContent()).getcfTextField().setText(EMPTY_STRING);
+		    	
+		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getMassInputTextField().setText(EMPTY_STRING);
+		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getDiameterTextField().setText(EMPTY_STRING);
+		    	((CaseInputView) inputs.getTabs().get(2).getContent()).getLengthTextField().setText(EMPTY_STRING);
+		    	
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPropDensityTextField().setText(EMPTY_STRING);
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBurnRateCoefficientTextField().setText(EMPTY_STRING);
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBurnRateExponentTextField().setText(EMPTY_STRING);
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getCStarTextField().setText(EMPTY_STRING);
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPropDensityTextField().setText(EMPTY_STRING);
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getPrTextField().setText(EMPTY_STRING);
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getBrTextField().setText(EMPTY_STRING);
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getKnTextFieldbr().setText(EMPTY_STRING);
+		    	((PropellantInputView) inputs.getTabs().get(3).getContent()).getKnTextFieldpr().setText(EMPTY_STRING);
+		    	
+		    	grainInputs.getTable().getItems().clear();
 		    	
 		    }
 		});
 	}  
+	
 	
 	
 	/**
