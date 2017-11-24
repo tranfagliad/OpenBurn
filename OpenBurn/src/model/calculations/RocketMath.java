@@ -40,8 +40,26 @@ public class RocketMath
 		
 		//First data point, adds a zero thrust and force value, with the actual motor force
 		SimulationResults currentTimeStep = new SimulationResults();
-		
-		
+		currentTimeStep.setTime(0);
+		currentTimeStep.setMassGeneratedOverall(0);
+		currentTimeStep.setBurnRate(0);
+		currentTimeStep.setChamberPressure(0);
+		currentTimeStep.setThrust(0);
+		currentTimeStep.setMassFlowPerAreaGrain(new double[grainList.size()]);
+		currentTimeStep.setMassGeneratedPerGrain(new double[grainList.size()]);
+		double motorAvailableArea = 0;
+		for(Grain oneGrain: grainList)
+		{
+			motorAvailableArea += oneGrain.getBurnArea();
+		}
+		// Calculate geometry based field values
+		double currentKn = motorAvailableArea / theNozzle.getThroatArea();
+		currentTimeStep.setBurnArea(motorAvailableArea);
+		currentTimeStep.setKn(currentKn);
+		calculateLStar(grainList, currentTimeStep, theNozzle);
+		massAndCenterOfGravity(grainList, currentTimeStep, theCase, propellant);
+		portToThroatRatio(grainList, currentTimeStep, theNozzle);
+		output.add(currentTimeStep);
 		
 		// Begin simulation loop
 		boolean simRunning = true;
@@ -70,7 +88,9 @@ public class RocketMath
 
 			simRunning = false;
 			for (int i = 0; i < grainList.size(); i++)
+			{
 				simRunning |= grainList.get(i).isBurning();
+			}
 		} // End simulation loop
 		
 		return output;
