@@ -73,8 +73,8 @@ public class RSEGenerator {
 			printWriter.format("    <engine  mfg=\"%s\" ", teamName);
 			printWriter.format("code=\"%s\" ", classification);
 			printWriter.print("Type=\"reloadable\" "); // Hard coded
-			printWriter.format("dia=\"%.1f.\" ", diameter);
-			printWriter.format("len=\"%.1f.\"\n", length);
+			printWriter.format("dia=\"%.1f\" ", diameter);
+			printWriter.format("len=\"%.1f\"\n", length);
 			printWriter.format("initWt=\"%.1f\" ", mass);
 			printWriter.format("propWt=\"%.2f\" ", mass - caseMass);
 			printWriter.println("delays=\"" + 1000 + "\" auto-calc-mass=\"1\"");// Defaults
