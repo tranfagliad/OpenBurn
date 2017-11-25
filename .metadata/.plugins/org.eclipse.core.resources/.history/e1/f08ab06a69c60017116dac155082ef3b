@@ -1,7 +1,0 @@
-package model.grains;
-
-
-
-public class GrainFactory {
-
-}

@@ -1,0 +1,523 @@
+package model.unitConversion;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+/**
+ * UnitConverter.java
+ * 
+ * Purpose: Contains static methods that are used to convert between
+ * 		Imperial and Metric units. This will allow the user to use
+ * 		the application in any measurement system.
+ */
+
+public class UnitConverter
+{
+	/**
+	 * 
+	**/
+	
+	public static double unitLengthConverter(double val, LengthUnits oldUnits, LengthUnits newUnits){
+		if (oldUnits == LengthUnits.INCHES){
+			if(newUnits == LengthUnits.MILLIMETERS){
+				val = inchCmConversion(LengthUnits.INCHES, val);
+				val = cmMmConversion(LengthUnits.CENTIMETERS, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.CENTIMETERS){
+				val = inchCmConversion(LengthUnits.INCHES, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.FEET){
+				val = inchFeetConversion(LengthUnits.INCHES,val);
+				return val;
+				
+			}
+		}
+		if (oldUnits == LengthUnits.CENTIMETERS){
+			if(newUnits == LengthUnits.INCHES){
+				val = inchCmConversion(LengthUnits.CENTIMETERS, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.FEET){
+				val = inchCmConversion(LengthUnits.CENTIMETERS, val);
+				val = inchFeetConversion(LengthUnits.INCHES, val);
+				return val;
+				
+			}
+			if(newUnits == LengthUnits.MILLIMETERS){
+				val = cmMmConversion(LengthUnits.CENTIMETERS, val);
+				return val;
+			}
+		}
+		if (oldUnits == LengthUnits.FEET){
+			if(newUnits == LengthUnits.INCHES){
+				val = inchFeetConversion(LengthUnits.FEET, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.MILLIMETERS){
+				val = inchFeetConversion(LengthUnits.FEET, val);
+				val = inchCmConversion(LengthUnits.INCHES, val);
+				val = cmMmConversion(LengthUnits.CENTIMETERS, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.CENTIMETERS){
+				val = inchFeetConversion(LengthUnits.FEET, val);
+				val = inchCmConversion(LengthUnits.INCHES, val);
+				return val;
+			}
+		}
+		if (oldUnits == LengthUnits.MILLIMETERS){
+			if(newUnits == LengthUnits.INCHES){
+				val = cmMmConversion(LengthUnits.MILLIMETERS, val);
+				val = inchCmConversion(LengthUnits.CENTIMETERS, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.CENTIMETERS){
+				val = cmMmConversion(LengthUnits.MILLIMETERS, val);
+				return val;
+			}
+			if(newUnits == LengthUnits.FEET){
+				val = cmMmConversion(LengthUnits.MILLIMETERS, val);
+				val = inchCmConversion(LengthUnits.CENTIMETERS, val);
+				val = inchFeetConversion(LengthUnits.INCHES, val);
+			}
+		}
+		return val;
+		
+	}
+	
+	public static double unitMassConverter(double val, MassUnits oldUnits, MassUnits newUnits){
+		if (oldUnits == MassUnits.KILOGRAMS)
+		{
+			if(newUnits == MassUnits.GRAMS){
+				val = gramsKiloConversion(MassUnits.KILOGRAMS, val);
+				return val;
+			}
+			if(newUnits == MassUnits.POUNDS_MASS){
+				val = kilogramsPoundsConversion(MassUnits.KILOGRAMS,val);
+				return val;
+				
+			}
+		}
+		if (oldUnits == MassUnits.GRAMS)
+		{
+			if(newUnits == MassUnits.KILOGRAMS){
+				val = gramsKiloConversion(MassUnits.GRAMS, val);
+				return val;
+			}
+			if(newUnits == MassUnits.POUNDS_MASS){
+				val = gramsPoundsConversion(MassUnits.GRAMS,val);
+				return val;
+			}
+		}
+		if (oldUnits == MassUnits.POUNDS_MASS)
+		{
+			if(newUnits == MassUnits.KILOGRAMS){
+				val = kilogramsPoundsConversion(MassUnits.POUNDS_MASS, val);
+				return val;
+			}
+			if(newUnits == MassUnits.GRAMS){
+				val = gramsPoundsConversion(MassUnits.POUNDS_MASS,val);
+				return val;
+			}
+		}
+		return val;
+		
+	}
+	
+	
+	/**
+	 * 
+	**/
+	
+	private static double inchCmConversion (LengthUnits units, double value)
+	{
+		// Units are inches, convert to centimeters
+		if (units == LengthUnits.INCHES)
+		{
+			BigDecimal decimal = new BigDecimal(value * 2.54);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+		// Units are centimeters, convert to inches
+		else if (units == LengthUnits.CENTIMETERS)
+		{
+			BigDecimal decimal = new BigDecimal(value * 0.393701);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+		
+		// Units are not inches or centimeters, do not convert
+		return value;
+	} // inchCmConversion()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	private static double inchFeetConversion (LengthUnits units, double value)
+	{
+		// Units are inches, convert to feet
+		if (units == LengthUnits.INCHES)
+			return value / 12;
+		// Units are feet, convert to inches
+		else if (units == LengthUnits.FEET)
+			return value * 12;
+		
+		// Units are not inches or feet, do not convert
+		return value;
+	} // inchFeetConversion()
+	
+	
+	
+	/**
+	 * 
+	**/
+	
+	private static double cmMmConversion (LengthUnits units, double value)
+	{
+		// UNits are cm, convert to mm
+		if (units == LengthUnits.CENTIMETERS)
+		{
+			BigDecimal decimal = new BigDecimal(value * 10);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+		// Units are mm, convert to cm
+		else if (units == LengthUnits.MILLIMETERS)
+		{
+			BigDecimal decimal = new BigDecimal(value * 0.1);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+		
+		// Units are not cm or mm, do not convert
+		return value;
+	} // cmMmConversion()
+	
+	
+	private static double gramsKiloConversion (MassUnits units, double value)
+	{
+		
+		// UNits are cm, convert to mm
+				if (units == MassUnits.GRAMS)
+				{
+					BigDecimal decimal = new BigDecimal(value / 1000);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+				// Units are mm, convert to cm
+				else if (units == MassUnits.KILOGRAMS)
+				{
+					BigDecimal decimal = new BigDecimal(value * 1000);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+		return value;
+	
+	}
+	
+	private static double gramsPoundsConversion (MassUnits units, double value)
+	{
+		
+		// UNits are cm, convert to mm
+				if (units == MassUnits.GRAMS)
+				{
+					BigDecimal decimal = new BigDecimal(value / 453.592);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+				// Units are mm, convert to cm
+				else if (units == MassUnits.POUNDS_MASS)
+				{
+					BigDecimal decimal = new BigDecimal(value * 453.592);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+		return value;
+	
+	}
+	
+	private static double kilogramsPoundsConversion (MassUnits units, double value)
+	{
+		
+		// UNits are cm, convert to mm
+				if (units == MassUnits.KILOGRAMS)
+				{
+					BigDecimal decimal = new BigDecimal(value * 2.20462);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+				// Units are mm, convert to cm
+				else if (units == MassUnits.POUNDS_MASS)
+				{
+					BigDecimal decimal = new BigDecimal(value / 2.20462);
+					decimal = decimal.round(new MathContext(6));
+					return decimal.doubleValue();
+				}
+		return value;
+	
+	}
+	
+	
+	
+	/**
+	 * convertMassToInternal()
+	 * 
+	 * Purpose: Converts and returns mass from one of several external units to internal units.
+	 * 
+	 * Parameters:
+	 * 		double input -- Mass in pounds, grams, or kilograms.
+	 * 		MassUnits units -- what unit the input is in
+	 * 
+	 * Returns: double. Mass in the units used by rest of model (pounds mass)
+	**/
+	
+	public static double convertMassToInternal (double input, MassUnits units)
+	{
+		if(units == MassUnits.POUNDS_MASS)
+		{
+			return input;
+		}
+		if(units == MassUnits.KILOGRAMS)
+		{
+			input *= 1000;
+		}
+		return (input * 0.00220462);		
+	} // convertMassMtoI()
+	
+	
+	
+	/**
+	 * convertMassFromInternal()
+	 * 
+	 * Purpose: Converts and returns mass from internal units to one of several external units.
+	 * 
+	 * Parameters:
+	 * 		double input -- Mass in the units used by rest of model (pounds mass)
+	 * 		MassUnits units -- what unit the output is desired in
+	 * 
+	 * Returns: double. Mass in pounds, grams, or kilograms.
+	**/
+	
+	public static double convertMassFromInternal (double input, MassUnits units)
+	{
+		if(units == MassUnits.POUNDS_MASS)
+		{
+			return input;
+		}
+		if(units == MassUnits.KILOGRAMS)
+		{
+			input /= 1000;
+		}
+		return (input / 0.00220462);		
+	} // convertMassItoM()
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	private static double gramsCmPoundsInConversion (DensityUnits units, double value)
+	{
+		if (units == DensityUnits.GRAMS_PER_CUBIC_CENTIMETER)
+		{
+			BigDecimal decimal = new BigDecimal(value);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+		
+		else if (units == DensityUnits.POUNDS_MASS_PER_CUBIC_INCH)
+		{
+			BigDecimal decimal = new BigDecimal(value);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+		
+		return value;
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	private static double poundsInGramsInConversion (DensityUnits units, double value)
+	{
+		if (units == DensityUnits.POUNDS_MASS_PER_CUBIC_INCH)
+		{
+			BigDecimal decimal = new BigDecimal(value * 453.592);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+			
+		else if (units == DensityUnits.GRAMS_PER_CUBIC_INCH)
+		{
+			BigDecimal decimal = new BigDecimal(value / 453.592);
+			decimal = decimal.round(new MathContext(6));
+			return decimal.doubleValue();
+		}
+		
+		return value;
+	}
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	private static double gramsCmGramsInConversion (DensityUnits units, double value)
+	{
+		return 0;
+	}
+	
+	
+	
+	/**
+	 * convertForcetoInternal()
+	 * 
+	 * Purpose: Converts and returns force from one of several external units to internal units.
+	 * 
+	 * Parameters:
+	 * 		double input -- Force in pounds, or newtons.
+	 * 		ForceUnits units -- what unit the input is in
+	 * 
+	 * Returns: double. force in the units used by rest of model (pounds)
+	**/
+	
+	public static double convertForcetoInternal (double input, ForceUnits units)
+	{
+		if(units == ForceUnits.POUND_FORCE)
+		{
+			return input;
+		}
+		return (input * 0.224809);
+	} // convertForceMtoI()
+	
+	/**
+	 * convertForceFromInternal()
+	 * 
+	 * Purpose: Converts and returns force from internal units to one of several external units.
+	 * 
+	 * Parameters:
+	 * 		double input -- Force in the units used by rest of model (pounds)
+	 * 		ForceUnits units -- what unit the output is desired in
+	 * 
+	 * Returns: double. Force in pounds, or newtons.
+	 * @param units TODO
+	**/
+	
+	public static double convertForceFromInternal (double input, ForceUnits units)
+	{
+		if(units == ForceUnits.POUND_FORCE)
+		{
+			return input;
+		}
+		return (input / 0.224809);
+	} // convertForceItoM()
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * 
+	 */
+	
+	public static double convertFlowRateToInternal (double input, MassFlowRateUnits units)
+	{
+		if(units == MassFlowRateUnits.POUNDS_MASS_PER_SECOND)
+		{
+			return input;
+		}
+		
+		return convertMassToInternal(input, MassUnits.KILOGRAMS);
+	} // convertAreaItoM()
+	
+	/**
+	 * convertFlowRateFromInternal()
+	 * 
+	 * Purpose: Converts and returns mass flow rate from internal units to one of several external units.
+	 * 
+	 * Parameters:
+	 * 		double input -- Mass flow rate in the units used by rest of model (pounds mass/ sec)
+	 * 		PressureUnits units -- what unit the output is desired in
+	 * 
+	 * Returns: double. Mass flow rate in pounds mass/ sec, kg/sec
+	**/
+	
+	public static double convertFlowRateFromInternal (double input, MassFlowRateUnits units)
+	{
+		if(units == MassFlowRateUnits.POUNDS_MASS_PER_SECOND)
+		{
+			return input;
+		}
+		
+		return convertMassFromInternal(input, MassUnits.KILOGRAMS);
+	} // convertAreaItoM()
+	
+	/**
+	 * convertPressureToInternal()
+	 * 
+	 * Purpose: Converts and returns Pressure from one of several external units to internal units.
+	 * 
+	 * Parameters:
+	 * 		double input -- pressure in psi, pascal
+	 * 		PressureUnits units -- what unit the input is in
+	 * 
+	 * Returns: double. Pressure in the units used by rest of model (psi)
+	 * @param units TODO
+	**/
+	
+	public static double convertPressureToInternal (double input, PressureUnits units)
+	{
+		if(units == PressureUnits.PSI)
+		{
+			return input;
+		}
+		return (input * 0.000145038);
+	} // convertPressureMtoI()	
+	
+	
+	
+	/**
+	 * convertPressureFromInternal()
+	 * 
+	 * Purpose: Converts and returns pressure from internal units to one of several external units.
+	 * 
+	 * Parameters:
+	 * 		double input -- Pressure in the units used by rest of model (psi)
+	 * 		PressureUnits units -- what unit the output is desired in
+	 * 
+	 * Returns: double. Pressure in psi, pascal
+	 * @param units TODO
+	**/
+	
+	public static double convertPressureFromInternal (double input, PressureUnits units)
+	{
+		if(units == PressureUnits.PSI)
+		{
+			return input;
+		}
+		return (input / 0.000145038);
+	} // convertPressureItoM()
+	
+} // class UnitConverter

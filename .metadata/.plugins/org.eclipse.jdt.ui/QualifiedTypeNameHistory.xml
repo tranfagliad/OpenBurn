@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javafx.event.ActionEvent"/>
-<fullyQualifiedTypeName name="javafx.scene.chart.CategoryAxis"/>
-<fullyQualifiedTypeName name="javafx.scene.chart.XYChart.Series"/>
-<fullyQualifiedTypeName name="javafx.scene.chart.XYChart"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.ScatterChart"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.NumberAxis"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.Axis"/>
@@ -23,7 +19,6 @@
 <fullyQualifiedTypeName name="view.grain.input.EditGrainWindow"/>
 <fullyQualifiedTypeName name="view.grain.input.GrainInputView"/>
 <fullyQualifiedTypeName name="controller.GrainTableHandle"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="model.Nozzle"/>
 <fullyQualifiedTypeName name="model.Case"/>
 <fullyQualifiedTypeName name="model.calculations.SimulationResults"/>
@@ -33,20 +28,36 @@
 <fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
 <fullyQualifiedTypeName name="javafx.beans.value.ObservableValue"/>
 <fullyQualifiedTypeName name="model.NumberTextField"/>
-<fullyQualifiedTypeName name="javafx.scene.control.RadioButton"/>
-<fullyQualifiedTypeName name="javafx.scene.layout.Pane"/>
 <fullyQualifiedTypeName name="javafx.beans.binding.BooleanBinding"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
 <fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
-<fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
 <fullyQualifiedTypeName name="model.grains.Grain"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
-<fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TabPane"/>
 <fullyQualifiedTypeName name="javafx.scene.control.Tab"/>
 <fullyQualifiedTypeName name="javafx.scene.Node"/>
 <fullyQualifiedTypeName name="javafx.scene.image.Image"/>
 <fullyQualifiedTypeName name="javafx.scene.image.ImageView"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="javafx.scene.layout.Pane"/>
+<fullyQualifiedTypeName name="view.GeneralInputView"/>
+<fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
+<fullyQualifiedTypeName name="controller.LengthUnitsSelector"/>
+<fullyQualifiedTypeName name="model.unitConversion.LengthUnits"/>
+<fullyQualifiedTypeName name="model.unitConversion.UnitConverter"/>
+<fullyQualifiedTypeName name="java.math.BigDecimal"/>
+<fullyQualifiedTypeName name="java.math.MathContext"/>
+<fullyQualifiedTypeName name="javafx.scene.control.CheckBox"/>
+<fullyQualifiedTypeName name="javafx.scene.control.RadioButton"/>
+<fullyQualifiedTypeName name="javafx.stage.FileChooser"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="javafx.stage.FileChooser.ExtensionFilter"/>
+<fullyQualifiedTypeName name="model.calculations.SimulationSummary"/>
+<fullyQualifiedTypeName name="model.unitConversion.MassUnits"/>
+<fullyQualifiedTypeName name="controller.MassUnitsSelector"/>
+<fullyQualifiedTypeName name="model.propellant.Propellant"/>
+<fullyQualifiedTypeName name="model.propellant.EmpericalPropellant"/>
 </qualifiedTypeNameHistroy>
