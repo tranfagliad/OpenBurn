@@ -359,7 +359,7 @@ public class OpenBurnGUI extends Application
     	
     	// Run simulation, gather list of results
     	List<SimulationResults> simResults = RocketMath.simulate(simGrainList, deltaTime, theNozzle, theCase, thePropellant);
-    	SimulationSummary summary = new SimulationSummary(simResults);
+    	SimulationSummary summary = new SimulationSummary(simResults,theCase);
     	TEMP_LEGEND_NAME = summary.getClassification();
     	summaryOutput.setSummary(summary);
     	

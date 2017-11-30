@@ -132,13 +132,6 @@ public class CMDLineInterface {
 
 		input.close(); // Close keyboard input
 
-		SimulationSummary summary = new SimulationSummary(theResults);
-		System.out.println("\nImpulse " + summary.getImpulse());
-		System.out.println("Max pressure " + summary.getmaxPressure());
-		System.out.println("Max Thrust " + summary.getMaxThrust());
-		System.out.println("Average thrust " + summary.getaverageThrust());
-		System.out.format("Burntime %.2f\n", summary.getBurnTime());
-		System.out.format("Classification %s\n", summary.getClassification());
 		
 		System.out.println(SIM_OVER);
 	} // main()

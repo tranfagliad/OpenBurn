@@ -3,6 +3,7 @@ package model.calculations;
 import java.util.Iterator;
 import java.util.List;
 
+import model.Case;
 import model.unitConversion.ForceUnits;
 import model.unitConversion.UnitConverter;
 
@@ -25,7 +26,7 @@ public class SimulationSummary
 	private double maxPressure;
 	private double burnTime;
 	
-	public SimulationSummary(List<SimulationResults> results)
+	public SimulationSummary(List<SimulationResults> results, Case c)
 	{
 		Iterator<SimulationResults> iter = results.iterator();
 		double maxThrust = 0;
@@ -58,7 +59,7 @@ public class SimulationSummary
 		}
 		double delta_x = (b-a)/count;
 		this.impulse = trap_integral_helper * (delta_x/2);
-		this.ISP = impulse/results.get(0).getSystemMass();
+		this.ISP = impulse/(results.get(0).getSystemMass() - c.getCaseMass());
 		this.averageThrust = averageThrustHelper/count;
 		this.maxPressure = maxPressure;
 		this.maxThrust = maxThrust;
