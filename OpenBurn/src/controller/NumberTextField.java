@@ -28,7 +28,7 @@ public class NumberTextField extends TextField
 			@Override
 			public void changed (ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				if (!strIsNumeric(newValue) || numOccurrences(newValue, '.') == 2)
+				if (!strIsNumeric(newValue) || numOccurrences(newValue, '.') == 2 || numOccurrences(newValue, '-') == 2)
 					setText(oldValue);
 			}
 		});
@@ -107,7 +107,9 @@ public class NumberTextField extends TextField
         for (int i = 0; i < s.length(); i++)
         {
         	charCode = (int)(s.charAt(i));
-        	if (!((charCode < 58 && charCode > 47) || charCode == 46))
+        	if (!((charCode < 58 && charCode > 47) || charCode == 46 || charCode == 45))
+        		return false;
+        	if (charCode == 45 && i != 0)
         		return false;
         }
 		

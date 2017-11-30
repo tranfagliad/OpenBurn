@@ -92,7 +92,7 @@ public class OpenBurnGUI extends Application
 	private SimulationSummaryView summaryOutput;
 	private RSEGenerator rsegenerator;
 	
-	
+	private boolean cleared;
 	
 	/**
 	 * main()
@@ -284,7 +284,6 @@ public class OpenBurnGUI extends Application
 		{
 		    @Override public void handle (ActionEvent e)
 		    {
-		    	outputGraph.setClearSwitch(true);
 		    	outputGraph.setImageVisible(false);
 		    	runSimulation();
 		    	//simulationRan = true;
@@ -366,9 +365,10 @@ public class OpenBurnGUI extends Application
     	
     	// Add thrust vs. time data to the chart
     	List<SimulationResults> alreadyExists = outputGraph.getData();
-    	if(simResults.equals(alreadyExists) == false) // prevents adding duplicate results to the graph
+    	if(simResults.equals(alreadyExists) == false || cleared) // prevents adding duplicate results to the graph
     	{
     		outputGraph.addData(TEMP_LEGEND_NAME, simResults);
+    		cleared = false;
     	}
     	
     	String teamName = "UAWR";
@@ -475,8 +475,8 @@ public class OpenBurnGUI extends Application
 		    @Override public void handle (ActionEvent e)
 		    {
 		    	outputGraph.getChart().getData().clear();
-		    	outputGraph.setClearSwitch(false);
 		    	outputGraph.setImageVisible(true);
+		    	cleared = true;
 		    }
 		});
 	} // addClearButton()
